@@ -45,6 +45,7 @@ sework-front app
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Storybook](https://storybook.js.org/)
 - [Yarn Berry](https://yarnpkg.com/)
 - [Jest](https://jestjs.io/)
