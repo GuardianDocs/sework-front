@@ -2,23 +2,16 @@
 
 import '@/app/globals.css';
 import { Inter } from 'next/font/google';
-import { Metadata } from 'next';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const metadata: Metadata = {
-	title: 'Next.js Template',
-	description: 'Next.js template for fast development',
-};
-
 const navigation = [
-	{ name: 'Dashboard', href: '#', current: true },
+	{ name: 'About', href: '#', current: true },
 	{ name: 'Team', href: '#', current: false },
-	{ name: 'Projects', href: '#', current: false },
-	{ name: 'Calendar', href: '#', current: false },
+	{ name: 'Contact', href: '#', current: false },
 ];
 
 const classNames = (...classes: any[]) => {
@@ -209,4 +202,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 	</html>
 );
 
-export { metadata, RootLayout as default };
+export { RootLayout as default };

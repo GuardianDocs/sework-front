@@ -3,14 +3,6 @@ import Image from 'next/image';
 export default function Page() {
 	return (
 		<>
-			{/*
-			This example requires updating your template:
-	
-			```
-			<html class="h-full bg-white">
-			<body class="h-full">
-			```
-		  */}
 			<div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<img
@@ -82,16 +74,6 @@ export default function Page() {
 							</button>
 						</div>
 					</form>
-
-					<p className="mt-10 text-sm text-center text-gray-500">
-						Not a member?{' '}
-						<a
-							href="#"
-							className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-						>
-							Start a 14 day free trial
-						</a>
-					</p>
 				</div>
 			</div>
 		</>
