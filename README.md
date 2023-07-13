@@ -2,6 +2,8 @@
 
 sework-front app
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e60bf404-a5f1-4ab3-9273-12f2a842279e/deploy-status)](https://app.netlify.com/sites/sework/deploys)
+
 ## Table of Contents
 
 - Getting Started
