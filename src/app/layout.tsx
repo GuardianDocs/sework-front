@@ -1,7 +1,6 @@
-import '@/app/globals.css';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
 import { PropsWithChildren } from 'react';
+import Navbar from '@/components/Navbar';
+import '@/app/globals.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
@@ -9,7 +8,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Navbar />
 				<main>{children}</main>
-				<Footer />
 			</body>
 		</html>
 	);

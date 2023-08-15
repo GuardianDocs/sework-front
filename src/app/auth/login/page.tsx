@@ -1,20 +1,9 @@
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Page() {
 	return (
 		<>
 			<div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
-				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
-						className="w-auto h-10 mx-auto"
-						src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-						alt="Your Company"
-					/>
-					<h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">
-						Sign in to your account
-					</h2>
-				</div>
-
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 					<form className="space-y-6" action="#" method="POST">
 						<div>
@@ -22,7 +11,7 @@ export default function Page() {
 								htmlFor="email"
 								className="block text-sm font-medium leading-6 text-gray-900"
 							>
-								Email address
+								이메일 주소
 							</label>
 							<div className="mt-2">
 								<input
@@ -42,15 +31,15 @@ export default function Page() {
 									htmlFor="password"
 									className="block text-sm font-medium leading-6 text-gray-900"
 								>
-									Password
+									비밀번호
 								</label>
 								<div className="text-sm">
-									<a
+									<Link
 										href="#"
 										className="font-semibold text-indigo-600 hover:text-indigo-500"
 									>
-										Forgot password?
-									</a>
+										비밀번호를 잊으셨나요?
+									</Link>
 								</div>
 							</div>
 							<div className="mt-2">
@@ -70,8 +59,16 @@ export default function Page() {
 								type="submit"
 								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>
-								Sign in
+								로그인
 							</button>
+						</div>
+						<div className="mt-4 text-center">
+							<Link
+								href="/auth/join"
+								className="font-semibold text-indigo-600 hover:text-indigo-500"
+							>
+								회원가입
+							</Link>
 						</div>
 					</form>
 				</div>

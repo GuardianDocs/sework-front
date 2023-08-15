@@ -32,16 +32,12 @@ const Navbar = () => {
 		<div className="bg-blue-400">
 			<nav className="flex items-center justify-between w-full p-5">
 				<div className="flex items-center h-8">
-					<NavbarLink href="/">
-						<Image
-							src="/favicon.ico"
-							alt="logo"
-							width={32}
-							height={32}
-							className="rounded-full"
-							loading="lazy"
-						/>
-					</NavbarLink>
+					<Link
+						href="/"
+						className="text-xl font-semibold text-white hover:text-green-200 cursor-pointer"
+					>
+						I-RAS
+					</Link>
 				</div>
 				<div className="md:hidden">
 					<button onClick={() => setMenuOpen(!menuOpen)}>
