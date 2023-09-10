@@ -4,23 +4,18 @@ import React, { useState } from 'react';
 
 const RegisterPage: React.FC = () => {
 	const [formData, setFormData] = useState({
-		baddress: '서울특별시 송파구',
 		bsector: '음식업',
-		btype: '한식 및 케이터링',
 		businessName: '더베스트 케이터링',
 		businessNumber: '8973400618',
-		companyName: '더베스트 케이터링',
-		corpNumber: 'string',
-		detailAddress: '지하1층 104호',
-		email: 'test@example.com',
-		employeeNumber: 7,
+		companyName: '테스트',
+		email: 'test@email.com',
+		employeeNumber: 10,
 		ownerName: '고금주',
-		ownerName2: '',
-		password: 'asd123',
-		passwordConfirm: 'asd123',
-		postNumber: '05561',
-		roadAddress: '백제고분로 75',
-		startDate: '2019-09-05T11:32:20.579Z',
+		password: 'qwer1234',
+		postNumber: '1234',
+		roadAddress: '12314',
+		detailAddress: '123',
+		startDate: '2019-09-05T12:24:38.157Z',
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +26,18 @@ const RegisterPage: React.FC = () => {
 		});
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log(formData);
+		const response = await fetch('/api/auth/join', {
+			method: 'POST',
+			headers: {
+				Accept: '*/*',
+				'X-SEWORK-PID': '1',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formData),
+		});
+		console.log(response.json());
 	};
 
 	return (
