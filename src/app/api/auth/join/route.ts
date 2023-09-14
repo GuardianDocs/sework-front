@@ -20,7 +20,8 @@ export async function POST(request: Request) {
 		console.log('response', response);
 		console.log('response.json()', await response.json());
 
-		return NextResponse.json(response);
+		// return NextResponse.json(response);
+		return response.json();
 	} catch (error) {
 		console.error(error);
 	}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 const RegisterPage: React.FC = () => {
 	const [formData, setFormData] = useState({
@@ -13,9 +14,16 @@ const RegisterPage: React.FC = () => {
 		ownerName: '고금주',
 		password: 'qwer1234',
 		postNumber: '1234',
-		roadAddress: '12314',
-		detailAddress: '123',
+		roadAddress: '12314', // 도로명주소 @deprecated
+		detailAddress: '',
 		startDate: '2019-09-05T12:24:38.157Z',
+		// 이 위는 필수정보
+		// 이 아래는 선택정보
+		btype: '한식',
+		corpNumber: '123123123',
+		ownerName2: '',
+		passwordConfirm: 'qwer1234',
+		baddress: '123123', // 기본 주소
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +46,23 @@ const RegisterPage: React.FC = () => {
 			body: JSON.stringify(formData),
 		});
 		console.log(response.json());
+	};
+
+	const openDaumPostCodePopup = useDaumPostcodePopup();
+
+	const handleAddressComplete = (data: any) => {
+		const { zonecode, roadAddress } = data;
+
+		setFormData({
+			...formData,
+			postNumber: zonecode,
+			roadAddress: roadAddress,
+			baddress: roadAddress,
+		});
+	};
+
+	const handleAddressClick = () => {
+		openDaumPostCodePopup({ onComplete: handleAddressComplete });
 	};
 
 	return (
@@ -244,6 +269,15 @@ const RegisterPage: React.FC = () => {
 						onChange={handleChange}
 					/>
 				</div>
+
+				{/* 다음 주소찾기 클릭 */}
+				<button
+					type="button"
+					className="w-full py-2 text-white bg-blue-500 rounded"
+					onClick={handleAddressClick}
+				>
+					주소찾기
+				</button>
 
 				<div className="mb-4">
 					<label className="block mb-2" htmlFor="roadAddress">
