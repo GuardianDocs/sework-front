@@ -17,11 +17,8 @@ export async function POST(request: Request) {
 			},
 		);
 
-		console.log('response', response);
-		console.log('response.json()', await response.json());
-
-		// return NextResponse.json(response);
-		return response.json();
+		const data = await response.json();
+		return NextResponse.json({ data });
 	} catch (error) {
 		console.error(error);
 	}

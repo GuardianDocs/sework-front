@@ -14,16 +14,8 @@ const RegisterPage: React.FC = () => {
 		ownerName: '고금주',
 		password: 'qwer1234',
 		postNumber: '1234',
-		roadAddress: '12314', // 도로명주소 @deprecated
-		detailAddress: '',
+		detailAddress: '123',
 		startDate: '2019-09-05T12:24:38.157Z',
-		// 이 위는 필수정보
-		// 이 아래는 선택정보
-		btype: '한식',
-		corpNumber: '123123123',
-		ownerName2: '',
-		passwordConfirm: 'qwer1234',
-		baddress: '123123', // 기본 주소
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +37,11 @@ const RegisterPage: React.FC = () => {
 			},
 			body: JSON.stringify(formData),
 		});
-		console.log(response.json());
+
+		const data = await response.json();
+		const { code, message } = data.data;
+
+		alert(message);
 	};
 
 	const openDaumPostCodePopup = useDaumPostcodePopup();
