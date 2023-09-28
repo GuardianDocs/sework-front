@@ -6,15 +6,19 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 const RegisterPage: React.FC = () => {
 	const [formData, setFormData] = useState({
 		bsector: '음식업',
+		btype: '한식',
 		businessName: '더베스트 케이터링',
 		businessNumber: '8973400618',
+		corpNumber: '',
 		companyName: '테스트',
 		email: 'test@email.com',
 		employeeNumber: 10,
 		ownerName: '고금주',
+		ownerName2: '',
 		password: 'qwer1234',
-		postNumber: '1234',
-		detailAddress: '123',
+		postNumber: '',
+		baddress: '',
+		detailAddress: '',
 		startDate: '2019-09-05T12:24:38.157Z',
 	});
 
@@ -28,17 +32,25 @@ const RegisterPage: React.FC = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const response = await fetch('/api/auth/join', {
-			method: 'POST',
-			headers: {
-				Accept: '*/*',
-				'X-SEWORK-PID': '1',
-				'Content-Type': 'application/json',
+
+		const response = await fetch(
+			// TODO: CORS 문제 해결
+			// 'https://api-dev.iras.kr/api/account/v1/company/register',
+			'/api/auth/join',
+			{
+				method: 'POST',
+				headers: {
+					Accept: '*/*',
+					'Access-Control-Allow-Origin': '*',
+					'X-SEWORK-PID': '1',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
 			},
-			body: JSON.stringify(formData),
-		});
+		);
 
 		const data = await response.json();
+
 		const { code, message } = data.data;
 
 		alert(message);
@@ -52,7 +64,6 @@ const RegisterPage: React.FC = () => {
 		setFormData({
 			...formData,
 			postNumber: zonecode,
-			roadAddress: roadAddress,
 			baddress: roadAddress,
 		});
 	};
@@ -68,6 +79,8 @@ const RegisterPage: React.FC = () => {
 				className="w-1/2 p-6 bg-white rounded-lg shadow-md"
 			>
 				<h2 className="mb-6 text-2xl text-center">회원가입</h2>
+
+				<h3 className="mb-4 text-lg">로그인 정보</h3>
 
 				<div className="mb-4">
 					<label className="block mb-2" htmlFor="email">
@@ -97,7 +110,7 @@ const RegisterPage: React.FC = () => {
 					/>
 				</div>
 
-				<div className="mb-4">
+				{/* <div className="mb-4">
 					<label className="block mb-2" htmlFor="passwordConfirm">
 						비밀번호 확인
 					</label>
@@ -109,7 +122,9 @@ const RegisterPage: React.FC = () => {
 						value={formData.passwordConfirm}
 						onChange={handleChange}
 					/>
-				</div>
+				</div> */}
+
+				<h3 className="mb-4 text-lg">사업자 정보</h3>
 
 				<div className="mb-4">
 					<label className="block mb-2" htmlFor="companyName">
@@ -121,20 +136,6 @@ const RegisterPage: React.FC = () => {
 						id="companyName"
 						className="w-full p-2 border rounded"
 						value={formData.companyName}
-						onChange={handleChange}
-					/>
-				</div>
-
-				<div className="mb-4">
-					<label className="block mb-2" htmlFor="corpNumber">
-						법인 등록 번호
-					</label>
-					<input
-						type="text"
-						name="corpNumber"
-						id="corpNumber"
-						className="w-full p-2 border rounded"
-						value={formData.corpNumber}
 						onChange={handleChange}
 					/>
 				</div>
@@ -163,6 +164,20 @@ const RegisterPage: React.FC = () => {
 						id="businessNumber"
 						className="w-full p-2 border rounded"
 						value={formData.businessNumber}
+						onChange={handleChange}
+					/>
+				</div>
+
+				<div className="mb-4">
+					<label className="block mb-2" htmlFor="corpNumber">
+						법인 등록 번호
+					</label>
+					<input
+						type="text"
+						name="corpNumber"
+						id="corpNumber"
+						className="w-full p-2 border rounded"
+						value={formData.corpNumber}
 						onChange={handleChange}
 					/>
 				</div>
@@ -253,38 +268,41 @@ const RegisterPage: React.FC = () => {
 				</div>
 
 				<div className="mb-4">
+					<label className="block mb-2" htmlFor="postNumber">
+						우편번호
+					</label>
+					<div className="flex flex-row">
+						<input
+							readOnly
+							type="text"
+							name="postNumber"
+							id="postNumber"
+							className="w-full p-2 border rounded"
+							value={formData.postNumber}
+							onChange={handleChange}
+						/>
+						<button
+							type="button"
+							className="w-24 py-2 ml-2 text-white bg-blue-500 rounded"
+							onClick={handleAddressClick}
+							style={{ height: '100%' }}
+						>
+							검색
+						</button>
+					</div>
+				</div>
+
+				<div className="mb-4">
 					<label className="block mb-2" htmlFor="baddress">
-						사업장의 기본 주소
+						사업장의 기본 주소 (도로명 주소)
 					</label>
 					<input
+						readOnly
 						type="text"
 						name="baddress"
 						id="baddress"
 						className="w-full p-2 border rounded"
 						value={formData.baddress}
-						onChange={handleChange}
-					/>
-				</div>
-
-				{/* 다음 주소찾기 클릭 */}
-				<button
-					type="button"
-					className="w-full py-2 text-white bg-blue-500 rounded"
-					onClick={handleAddressClick}
-				>
-					주소찾기
-				</button>
-
-				<div className="mb-4">
-					<label className="block mb-2" htmlFor="roadAddress">
-						도로명 주소
-					</label>
-					<input
-						type="text"
-						name="roadAddress"
-						id="roadAddress"
-						className="w-full p-2 border rounded"
-						value={formData.roadAddress}
 						onChange={handleChange}
 					/>
 				</div>
@@ -299,20 +317,6 @@ const RegisterPage: React.FC = () => {
 						id="detailAddress"
 						className="w-full p-2 border rounded"
 						value={formData.detailAddress}
-						onChange={handleChange}
-					/>
-				</div>
-
-				<div className="mb-4">
-					<label className="block mb-2" htmlFor="postNumber">
-						우편번호
-					</label>
-					<input
-						type="text"
-						name="postNumber"
-						id="postNumber"
-						className="w-full p-2 border rounded"
-						value={formData.postNumber}
 						onChange={handleChange}
 					/>
 				</div>

@@ -1,11 +1,51 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Page() {
+	const [formData, setFormData] = useState({
+		id: 'test@email.com',
+		password: 'qwer1234',
+	});
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData({
+			...formData,
+			[name]: value,
+		});
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		const response = await fetch(
+			// 'https://api-dev.iras.kr/api/account/v1/company/login',
+			'/api/auth/login',
+			{
+				method: 'POST',
+				headers: {
+					Accept: '*/*',
+					'X-SEWORK-PID': '1',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			},
+		);
+
+		const data = await response.json();
+
+		const { code, message } = data.data;
+
+		alert(message);
+	};
+
 	return (
 		<>
 			<div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form className="space-y-6" action="#" method="POST">
+					<form className="space-y-6" onSubmit={handleSubmit}>
 						<div>
 							<label
 								htmlFor="email"
@@ -21,6 +61,8 @@ export default function Page() {
 									autoComplete="email"
 									required
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={formData.id}
+									onChange={handleChange}
 								/>
 							</div>
 						</div>
@@ -50,6 +92,8 @@ export default function Page() {
 									autoComplete="current-password"
 									required
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+									value={formData.password}
+									onChange={handleChange}
 								/>
 							</div>
 						</div>
