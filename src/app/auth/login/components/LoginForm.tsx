@@ -49,7 +49,7 @@ export default function LoginForm() {
 					htmlFor="id"
 					className="block text-sm font-medium leading-6 text-gray-900"
 				>
-					ID (사업자등록번호)
+					ID (사업자등록번호 10자리)
 				</label>
 				<div className="mt-2">
 					<input
