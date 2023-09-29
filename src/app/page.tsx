@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import Features from '@/components/Features';
 import CTASection from '@/components/CTASection';
+
+export const metadata: Metadata = {
+	title: 'IRAS : Intelligent Risk Assurance System',
+};
 
 export default function Home() {
 	return (

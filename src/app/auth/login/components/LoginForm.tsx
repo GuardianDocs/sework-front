@@ -27,11 +27,19 @@ export default function LoginForm() {
 			body: JSON.stringify(getAllState()),
 		});
 
-		const data = await response.json();
+		const responseData = await response.json();
 
-		const { code, message } = data.data;
+		const { code, message, data } = responseData.data;
 
+		console.log('code', code);
 		alert(message);
+		console.log('data', data);
+
+		localStorage.setItem('accessToken', data.accessToken);
+		localStorage.setItem('id', data.id);
+		localStorage.setItem('businessNumber', data.businessNumber);
+		localStorage.setItem('companyName', data.companyName);
+		localStorage.setItem('ownerName', data.ownerName);
 	};
 
 	return (
