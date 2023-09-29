@@ -1,13 +1,16 @@
 import { PropsWithChildren } from 'react';
 import Navbar from '@/components/Navbar';
+import { Providers } from './Providers';
 import '@/app/globals.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en">
+		<html lang="en" className="light">
 			<body>
-				<Navbar />
-				<main>{children}</main>
+				<Providers>
+					<Navbar />
+					<main>{children}</main>
+				</Providers>
 			</body>
 		</html>
 	);

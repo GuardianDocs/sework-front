@@ -1,3 +1,5 @@
+import { nextui } from "@nextui-org/react";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
@@ -5,17 +7,14 @@ module.exports = {
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/stories/**/*.{js,ts,jsx,tsx,mdx}',
+		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {
-			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic':
-					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-			},
-		},
+		extend: {},
 	},
+	darkMode: 'class',
 	plugins: [
-		require('@tailwindcss/forms')
+		require('@tailwindcss/forms'),
+		nextui(),
 	],
 };

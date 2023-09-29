@@ -6,25 +6,9 @@ describe('Home', () => {
 		render(<Home />);
 	});
 
-	test('renders Home component', () => {
-		expect(screen.getByText('Next.js + Storybook')).toBeInTheDocument();
-	});
-
-	test('renders Vercel Logo', () => {
-		expect(screen.getByAltText('Vercel Logo')).toBeInTheDocument();
-	});
-
-	test('renders Vercel Logo with width 72', () => {
-		expect(screen.getByAltText('Vercel Logo')).toHaveAttribute(
-			'width',
-			'72',
-		);
-	});
-
-	test('renders Vercel Logo with height 16', () => {
-		expect(screen.getByAltText('Vercel Logo')).toHaveAttribute(
-			'height',
-			'16',
-		);
+	test('renders HeroSection component', () => {
+		expect(
+			screen.getByText('Intelligent Risk Assurance System'),
+		).toBeInTheDocument();
 	});
 });
