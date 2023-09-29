@@ -53,8 +53,6 @@ const Navbar = () => {
 							</NavbarLink>
 						);
 					})}
-					{localStorage.getItem('accessToken') &&
-						localStorage.getItem('companyName')}
 				</div>
 			</nav>
 			{menuOpen && (
