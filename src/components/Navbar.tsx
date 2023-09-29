@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 
 type NavbarLinkProps = {
@@ -12,7 +11,7 @@ type NavbarLinkProps = {
 const NavbarLink: React.FC<NavbarLinkProps> = ({ href, children }) => (
 	<Link
 		href={href}
-		className="text-ml font-semibold text-white hover:text-green-200 cursor-pointer"
+		className="font-semibold text-white cursor-pointer text-ml hover:text-green-200"
 	>
 		{children}
 	</Link>
@@ -34,7 +33,7 @@ const Navbar = () => {
 				<div className="flex items-center h-8">
 					<Link
 						href="/"
-						className="text-xl font-semibold text-white hover:text-green-200 cursor-pointer"
+						className="text-xl font-semibold text-white cursor-pointer hover:text-green-200"
 					>
 						I-RAS
 					</Link>
@@ -46,16 +45,20 @@ const Navbar = () => {
 						<span className="block w-6 h-1 bg-white"></span>
 					</button>
 				</div>
-				<div className="hidden md:flex space-x-4">
-					{links.map(link => (
-						<NavbarLink key={link.href} href={link.href}>
-							{link.label}
-						</NavbarLink>
-					))}
+				<div className="hidden space-x-4 md:flex">
+					{links.map(link => {
+						return (
+							<NavbarLink key={link.href} href={link.href}>
+								{link.label}
+							</NavbarLink>
+						);
+					})}
+					{localStorage.getItem('accessToken') &&
+						localStorage.getItem('companyName')}
 				</div>
 			</nav>
 			{menuOpen && (
-				<div className="flex flex-col space-y-2 text-center py-4 md:hidden">
+				<div className="flex flex-col py-4 space-y-2 text-center md:hidden">
 					{links.map(link => (
 						<NavbarLink key={link.href} href={link.href}>
 							{link.label}

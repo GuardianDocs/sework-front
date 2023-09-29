@@ -4,7 +4,7 @@ export async function POST(request: Request) {
 	try {
 		const requestBody = await request.json();
 
-		const response = await fetch(
+		const responseData = await fetch(
 			'https://api-dev.iras.kr/api/account/v1/company/login',
 			{
 				method: 'POST',
@@ -17,9 +17,25 @@ export async function POST(request: Request) {
 			},
 		);
 
-		const data = await response.json();
-		return NextResponse.json({ data });
+		const tokens = responseData.headers.getSetCookie();
+
+		const data = await responseData.json();
+
+		if (!responseData.ok) {
+			return NextResponse.error();
+		}
+
+		const response = NextResponse.json({ data });
+
+		if (tokens && Array.isArray(tokens)) {
+			tokens.forEach(token => {
+				response.headers.append('Set-Cookie', token);
+			});
+		}
+
+		return response;
 	} catch (error) {
 		console.error(error);
+		return NextResponse.error();
 	}
 }
