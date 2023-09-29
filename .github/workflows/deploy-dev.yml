@@ -2,6 +2,15 @@ name: Deploy to Amplify Console (dev) 🚀
 
 on:
     workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Branch to deploy'
+                required: true
+                default: 'develop'
+                type: choice
+                options:
+                    - master
+                    - develop
 jobs:
     amplify-webhook:
         runs-on: ubuntu-latest
