@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function Page() {
 	const [formData, setFormData] = useState({
-		id: 'test@email.com',
+		id: '8973400618',
 		password: 'qwer1234',
 	});
 
@@ -48,17 +48,17 @@ export default function Page() {
 					<form className="space-y-6" onSubmit={handleSubmit}>
 						<div>
 							<label
-								htmlFor="email"
+								htmlFor="id"
 								className="block text-sm font-medium leading-6 text-gray-900"
 							>
-								이메일 주소
+								ID (사업자등록번호)
 							</label>
 							<div className="mt-2">
 								<input
-									id="email"
-									name="email"
-									type="email"
-									autoComplete="email"
+									id="id"
+									name="id"
+									type="id"
+									autoComplete="id"
 									required
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									value={formData.id}
