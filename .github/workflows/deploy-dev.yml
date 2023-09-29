@@ -7,9 +7,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-              env:
-                  AMPLIFY_WEBHOOK_URL_DEV:
-                      ${{ secrets.AMPLIFY_WEBHOOK_URL_DEV }}
-            - run:
-                  curl -X POST -d {} $AMPLIFY_WEBHOOK_URL_DEV -H
+            - run: |
+                  curl -X POST -d {} ${{ secrets.AMPLIFY_WEBHOOK_URL_DEV }} -H
                   "Content-Type:application/json"
