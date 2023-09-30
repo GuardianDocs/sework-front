@@ -135,6 +135,7 @@ export default function Page() {
 							<p className="mb-2">업종선택</p>
 							{/* 스타일링 : https://stackoverflow.com/questions/68137362/using-tailwind-forms-plugin-with-react-select */}
 							<Select
+								instanceId={'btype1'}
 								options={btype1}
 								defaultValue={btype1[0]}
 								isSearchable={true}
@@ -157,6 +158,7 @@ export default function Page() {
 						<div className="flex-1">
 							<p className="mb-2">공정선택</p>
 							<Select
+								instanceId={'btype2'}
 								options={btype2}
 								defaultValue={btype1[2]}
 								isSearchable={true}
