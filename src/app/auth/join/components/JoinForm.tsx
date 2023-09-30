@@ -1,5 +1,6 @@
 'use client';
 
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import useJoinFormStore from '../hooks/useJoinFormStore';
 import AddressInfoInputGroup from './AddressInfoInputGroup';
 import BusinessInfoInputGroup from './BusinessInfoInputGroup';
@@ -9,6 +10,20 @@ export default function JoinForm() {
 	const { getAllState, setDummyState } = useJoinFormStore(state => ({
 		getAllState: state.actions.getAllState,
 		setDummyState: state.actions.setDummyState,
+	}));
+
+	const {
+		setLoggedInId,
+		setBusinessNumber,
+		setCompanyName,
+		setOwnerName,
+		setAccessToken,
+	} = useLoginInfoStore(state => ({
+		setLoggedInId: state.actions.setId,
+		setBusinessNumber: state.actions.setBusinessNumber,
+		setCompanyName: state.actions.setCompanyName,
+		setOwnerName: state.actions.setOwnerName,
+		setAccessToken: state.actions.setAccessToken,
 	}));
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -33,11 +48,13 @@ export default function JoinForm() {
 		alert(message);
 		console.log('data', data);
 
-		localStorage.setItem('accessToken', data.accessToken);
-		localStorage.setItem('id', data.id);
-		localStorage.setItem('businessNumber', data.businessNumber);
-		localStorage.setItem('companyName', data.companyName);
-		localStorage.setItem('ownerName', data.ownerName);
+		if (code === '0001') {
+			setLoggedInId(data.id);
+			setBusinessNumber(data.businessNumber);
+			setCompanyName(data.companyName);
+			setOwnerName(data.ownerName);
+			setAccessToken(data.accessToken);
+		}
 	};
 	return (
 		<form
