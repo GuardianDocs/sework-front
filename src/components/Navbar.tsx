@@ -1,5 +1,6 @@
 'use client';
 
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -25,8 +26,12 @@ const Navbar = () => {
 		{ href: '/pricing', label: '가격' },
 		{ href: '/about', label: '소개' },
 		{ href: '/contact', label: '문의하기' },
-		{ href: '/auth/login', label: '로그인' },
 	];
+
+	const { getCompanyName, reset } = useLoginInfoStore(state => ({
+		getCompanyName: state.actions.getCompanyName,
+		reset: state.actions.reset,
+	}));
 
 	return (
 		<div className="bg-blue-400">
@@ -54,6 +59,22 @@ const Navbar = () => {
 							</NavbarLink>
 						);
 					})}
+					{getCompanyName() ? (
+						<>
+							<span className="font-semibold text-slate-700">
+								{getCompanyName()}님
+							</span>
+							{/* TODO: 로그아웃 기능 구현 */}
+							<span
+								className="font-semibold text-slate-700"
+								onClick={reset}
+							>
+								로그아웃
+							</span>
+						</>
+					) : (
+						<NavbarLink href="/auth/login">로그인</NavbarLink>
+					)}
 				</div>
 			</nav>
 			{menuOpen && (
