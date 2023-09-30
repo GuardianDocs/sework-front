@@ -3,10 +3,15 @@
 import { useQuery } from 'react-query';
 import SelectWithLabel from './SelectWithLabel';
 import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 export default function Setup1SelectGroup() {
 	const { setSectorId } = useCompanyInfoFormStore(state => ({
 		setSectorId: state.actions.setSectorId,
+	}));
+
+	const { accessToken } = useLoginInfoStore(state => ({
+		accessToken: state.accessToken,
 	}));
 
 	const fetchSectors = async () => {
@@ -14,6 +19,9 @@ export default function Setup1SelectGroup() {
 			'/api/company-info/sector?page=0&size=999',
 			{
 				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
 			},
 		);
 		if (!response.ok) {

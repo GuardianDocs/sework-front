@@ -1,10 +1,15 @@
 'use client';
 
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
 
 export default function SaveButton() {
 	const { getAllState } = useCompanyInfoFormStore(state => ({
 		getAllState: state.actions.getAllState,
+	}));
+
+	const { accessToken } = useLoginInfoStore(state => ({
+		accessToken: state.accessToken,
 	}));
 
 	const handleButtonClick = async () => {
@@ -13,6 +18,7 @@ export default function SaveButton() {
 			headers: {
 				Accept: '*/*',
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${accessToken}`,
 			},
 			body: JSON.stringify(getAllState()),
 		});

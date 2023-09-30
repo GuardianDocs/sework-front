@@ -11,6 +11,7 @@ import {
 } from '@nextui-org/react';
 import { useQuery } from 'react-query';
 import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 export default function Setup3Table() {
 	const { getSectorId, processList, setProcessList, getAllState } =
@@ -21,11 +22,18 @@ export default function Setup3Table() {
 			getAllState: state.actions.getAllState,
 		}));
 
+	const { accessToken } = useLoginInfoStore(state => ({
+		accessToken: state.accessToken,
+	}));
+
 	const fetchProcessList = async () => {
 		const response = await fetch(
 			`/api/company-info/process?sectorId=${getSectorId()}`,
 			{
 				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
 			},
 		);
 		if (!response.ok) {

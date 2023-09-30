@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server';
+// import { useSearchParams } from 'next/navigation';
 
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<any> {
 	try {
 		const { searchParams } = new URL(request.url);
 		const sectorId = searchParams.get('sectorId');
+
+		const authorizationBearer = request.headers.get('Authorization');
+
+		// TODO: useSearchParams 사용하는 방법도 있다
+		// const searchParams = useSearchParams();
+		// const sectorId = searchParams.get('sectorId');
 
 		// TODO: accessToken을 어떻게 받아올지 고민
 		const accessToken =
@@ -16,7 +23,7 @@ export async function GET(request: Request) {
 				headers: {
 					Accept: '*/*',
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${accessToken}`,
+					Authorization: `${authorizationBearer}`,
 				},
 			},
 		);
@@ -24,12 +31,18 @@ export async function GET(request: Request) {
 		const data = await responseData.json();
 
 		if (!responseData.ok) {
-			return NextResponse.error();
+			return NextResponse.json(
+				{ error: 'Internal Server Error' },
+				{ status: 500 },
+			);
 		}
 
-		const response = NextResponse.json({ data });
-		return response;
+		return NextResponse.json({ data });
 	} catch (error) {
 		console.error(error);
+		return NextResponse.json(
+			{ error: 'Internal Server Error' },
+			{ status: 500 },
+		);
 	}
 }
