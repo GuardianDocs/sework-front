@@ -21,6 +21,7 @@ const Navbar = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	const links = [
+		{ href: '/company-info', label: '진단' },
 		{ href: '/pricing', label: '가격' },
 		{ href: '/about', label: '소개' },
 		{ href: '/contact', label: '문의하기' },
