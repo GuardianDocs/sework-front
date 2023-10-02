@@ -8,6 +8,7 @@ export type JoinFormState = {
 	companyName: string;
 	detailAddress: string;
 	email: string;
+	// TODO: to be deprecated, delete after api update
 	employeeNumber: number;
 	ownerName: string;
 	password: string;

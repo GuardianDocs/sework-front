@@ -1,24 +1,11 @@
-// import { useSearchParams } from 'next/navigation';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request): Promise<any> {
 	try {
-		const { searchParams } = new URL(request.url);
-		const page = searchParams.get('page');
-		const size = searchParams.get('size');
-
 		const authorizationBearer = request.headers.get('Authorization');
 
-		// TODO: useSearchParams 사용하는 방법도 있다
-		// const searchParams = useSearchParams();
-		// const page = searchParams.get('page');
-		// const size = searchParams.get('size');
-
-		// TODO: 필요없을 것 같은데 확인 필요
-		// const title = searchParams.get('title');
-
 		const responseData = await fetch(
-			`https://api-dev.iras.kr/api/company/v1/sector?page=${page}&size=${size}`,
+			`https://api-dev.iras.kr/api/company/v1/additional-info/answer`,
 			{
 				method: 'GET',
 				headers: {

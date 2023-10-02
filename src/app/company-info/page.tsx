@@ -11,10 +11,14 @@ export default function CompanyInfoPage() {
 			<div className="flex flex-col items-start justify-center flex-1 p-10">
 				<h1 className="mb-4 text-3xl font-bold">안녕하세요!</h1>
 				<p className="mb-6 text-lg">
-					대충 귀하의 회사를 알고싶다는 내용
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+					do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua.
 				</p>
 				<p className="mb-6 text-lg">
-					알려주시면 우리가 잘 할 수 있따는 멋진 내용
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+					do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua.
 				</p>
 				<Link href="/company-info/setup-1">
 					<button className="px-6 py-3 text-white bg-blue-500 rounded-full">

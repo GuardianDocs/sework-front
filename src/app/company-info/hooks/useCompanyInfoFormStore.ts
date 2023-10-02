@@ -3,25 +3,17 @@ import { devtools } from 'zustand/middleware';
 
 export type CompanyInfoFormState = {
 	sectorId: number;
-	processList: {
-		description: string;
-		id: number;
-		ogId: number;
-		title: string;
-	};
+	processList: any[];
 };
 
 type CompanyInfoFormAction = {
 	setSectorId: (sectorId: number) => void;
-	setProcessList: (processList: CompanyInfoFormState['processList']) => void;
+	setProcessList: (
+		processList: CompanyInfoFormState['processList'] | any,
+	) => void;
 	getSectorId: () => CompanyInfoFormState['sectorId'];
 	getProcessList: () => CompanyInfoFormState['processList'];
-	// TODO: API 오타 수정되면 아래 코드로 변경
-	// getAllState: () => CompanyInfoFormState;
-	getAllState: () => {
-		sectorId: number;
-		processLit: CompanyInfoFormState['processList'];
-	};
+	getAllState: () => CompanyInfoFormState;
 };
 
 type CompanyInfoFormStore = CompanyInfoFormState & {
@@ -30,12 +22,7 @@ type CompanyInfoFormStore = CompanyInfoFormState & {
 
 const initialState: CompanyInfoFormState = {
 	sectorId: 0,
-	processList: {
-		description: '',
-		id: 0,
-		ogId: 0,
-		title: '',
-	},
+	processList: [],
 };
 
 const useCompanyInfoFormStore = create(
@@ -48,9 +35,7 @@ const useCompanyInfoFormStore = create(
 			getProcessList: () => get().processList,
 			getAllState: () => {
 				const { sectorId, processList } = get();
-				// TODO: API 오타 수정되면 아래 코드로 변경
-				// return { sectorId, processList };
-				return { sectorId, processLit: processList };
+				return { sectorId, processList };
 			},
 		},
 	})),
