@@ -48,57 +48,34 @@ export default function Setup3Table() {
 		error,
 		isLoading,
 		refetch,
-	} = useQuery('processList', fetchProcessList, {
-		enabled: false,
-	});
-
-	const handleButtonClick = async () => {
-		try {
-			const { data } = await refetch();
-
-			if (data) {
-				const formattedData = data.map((item: any) => ({
-					...item,
-					ogId: item.id,
-				}));
-				setProcessList(formattedData);
-			}
-		} catch (error) {
-			console.error('Error fetching process list:', error);
-		}
-	};
+	} = useQuery('processList', fetchProcessList);
 
 	if (error) return <span>Error loading data</span>;
 
 	return (
-		<>
-			<Button color="secondary" onClick={handleButtonClick}>
-				IRAS 추천
-			</Button>
-			<Table aria-label="세부작업 추가">
-				<TableHeader>
-					<TableColumn>sectorName</TableColumn>
-					<TableColumn>processTitle</TableColumn>
-					<TableColumn>processDescription</TableColumn>
-					<TableColumn>
-						<Button color="primary">+</Button>
-					</TableColumn>
-				</TableHeader>
-				<TableBody>
-					{processListData && !isLoading
-						? processListData.map((process: any, index: any) => (
-								<TableRow key={index}>
-									<TableCell>sectorName</TableCell>
-									<TableCell>{process.title}</TableCell>
-									<TableCell>{process.description}</TableCell>
-									<TableCell>
-										<Button color="danger">-</Button>
-									</TableCell>
-								</TableRow>
-						  ))
-						: null}
-				</TableBody>
-			</Table>
-		</>
+		<Table aria-label="세부작업 추가">
+			<TableHeader>
+				<TableColumn>sectorName</TableColumn>
+				<TableColumn>processTitle</TableColumn>
+				<TableColumn>processDescription</TableColumn>
+				<TableColumn>
+					<Button color="primary">+</Button>
+				</TableColumn>
+			</TableHeader>
+			<TableBody>
+				{processListData && !isLoading
+					? processListData.map((process: any, index: any) => (
+							<TableRow key={index}>
+								<TableCell>sectorName</TableCell>
+								<TableCell>{process.title}</TableCell>
+								<TableCell>{process.description}</TableCell>
+								<TableCell>
+									<Button color="danger">-</Button>
+								</TableCell>
+							</TableRow>
+					  ))
+					: null}
+			</TableBody>
+		</Table>
 	);
 }
