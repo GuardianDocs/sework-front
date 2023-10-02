@@ -38,7 +38,6 @@ const NavbarLinks = () => {
 };
 
 const UserStatus = () => {
-	// hydrate persisted store after on mount
 	useEffect(() => {
 		useLoginInfoStore.persist.rehydrate();
 	}, []);

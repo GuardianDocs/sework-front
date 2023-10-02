@@ -9,17 +9,17 @@ import {
 	TableHeader,
 	TableRow,
 } from '@nextui-org/react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 export default function Setup3Table() {
-	const { getSectorId, processList, setProcessList, getAllState } =
+	const { getSectorId, processList, setProcessList } =
 		useCompanyInfoFormStore(state => ({
 			getSectorId: state.actions.getSectorId,
 			processList: state.processList,
 			setProcessList: state.actions.setProcessList,
-			getAllState: state.actions.getAllState,
 		}));
 
 	const { accessToken } = useLoginInfoStore(state => ({
@@ -44,37 +44,104 @@ export default function Setup3Table() {
 	};
 
 	const {
-		data: processListData,
+		data: fetchedProcessList,
 		error,
 		isLoading,
-		refetch,
 	} = useQuery('processList', fetchProcessList);
 
+	useEffect(() => {
+		if (fetchedProcessList) {
+			setProcessList(
+				fetchedProcessList.map((item: any) => ({
+					...item,
+					ogId: item.id,
+				})),
+			);
+		}
+	}, [fetchedProcessList, setProcessList]);
+
 	if (error) return <span>Error loading data</span>;
+	if (isLoading) return <span>Loading...</span>;
+
+	const handleRemoveRow = (index: number) => {
+		// index 번째 row를 삭제
+		const newProcessList = [...processList];
+		newProcessList.splice(index, 1);
+		setProcessList(newProcessList);
+	};
+
+	const handleAddRow = () => {
+		const newId = null;
+
+		setProcessList([
+			...processList,
+			{ id: newId, ogId: newId, title: '', description: '' },
+		]);
+	};
+
+	const handleChange = (index: number, field: string, value: string) => {
+		const newProcessList = [...processList];
+		newProcessList[index][field] = value;
+
+		if (field === 'description') {
+			newProcessList[index].id = null;
+		}
+		if (field === 'title') {
+			newProcessList[index].id = null;
+			newProcessList[index].ogId = null;
+		}
+
+		setProcessList(newProcessList);
+	};
 
 	return (
-		<Table aria-label="세부작업 추가">
+		<Table aria-label="공정 추가">
 			<TableHeader>
-				<TableColumn>sectorName</TableColumn>
-				<TableColumn>processTitle</TableColumn>
-				<TableColumn>processDescription</TableColumn>
+				<TableColumn>공정명</TableColumn>
+				<TableColumn>공정설명</TableColumn>
 				<TableColumn>
-					<Button color="primary">+</Button>
+					<Button color="primary" onClick={handleAddRow}>
+						+
+					</Button>
 				</TableColumn>
 			</TableHeader>
 			<TableBody>
-				{processListData && !isLoading
-					? processListData.map((process: any, index: any) => (
-							<TableRow key={index}>
-								<TableCell>sectorName</TableCell>
-								<TableCell>{process.title}</TableCell>
-								<TableCell>{process.description}</TableCell>
-								<TableCell>
-									<Button color="danger">-</Button>
-								</TableCell>
-							</TableRow>
-					  ))
-					: null}
+				{processList.map((process: any, index: any) => (
+					<TableRow key={index}>
+						<TableCell>
+							<input
+								type="text"
+								id={`title-${index}`}
+								value={process.title}
+								onChange={e =>
+									handleChange(index, 'title', e.target.value)
+								}
+							/>
+						</TableCell>
+						<TableCell>
+							<input
+								type="text"
+								id={`description-${index}`}
+								value={process.description}
+								onChange={e =>
+									handleChange(
+										index,
+										'description',
+										e.target.value,
+									)
+								}
+							/>
+						</TableCell>
+						<TableCell>
+							<Button
+								color="danger"
+								onClick={() => handleRemoveRow(index)}
+							>
+								-
+							</Button>
+						</TableCell>
+					</TableRow>
+				))}
 			</TableBody>
 		</Table>
 	);

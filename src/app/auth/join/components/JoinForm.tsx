@@ -5,7 +5,7 @@ import useJoinFormStore from '../hooks/useJoinFormStore';
 import AddressInfoInputGroup from './AddressInfoInputGroup';
 import BusinessInfoInputGroup from './BusinessInfoInputGroup';
 import LoginInfoInputGroup from './LoginInfoInputGroup';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function JoinForm() {
 	const { getAllState, setDummyState } = useJoinFormStore(state => ({
@@ -30,6 +30,8 @@ export default function JoinForm() {
 		setAccessToken: state.setAccessToken,
 		setRefreshTokenExpiredAt: state.setRefreshTokenExpiredAt,
 	}));
+
+	const router = useRouter();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
