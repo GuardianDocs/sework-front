@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 type NavbarLinkProps = {
@@ -38,15 +38,20 @@ const NavbarLinks = () => {
 };
 
 const UserStatus = () => {
-	const { getCompanyName, reset } = useLoginInfoStore(state => ({
-		getCompanyName: state.actions.getCompanyName,
-		reset: state.actions.reset,
+	// hydrate persisted store after on mount
+	useEffect(() => {
+		useLoginInfoStore.persist.rehydrate();
+	}, []);
+
+	const { companyName, reset } = useLoginInfoStore(state => ({
+		companyName: state.companyName,
+		reset: state.reset,
 	}));
 
-	return getCompanyName() ? (
+	return companyName ? (
 		<>
 			<span className="font-semibold text-slate-700">
-				{getCompanyName()}님
+				{companyName}님
 			</span>
 			<span className="font-semibold text-slate-700" onClick={reset}>
 				로그아웃

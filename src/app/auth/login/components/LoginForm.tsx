@@ -25,13 +25,13 @@ export default function LoginForm() {
 		setAccessToken,
 		setRefreshTokenExpiredAt,
 	} = useLoginInfoStore(state => ({
-		setLoggedInId: state.actions.setId,
-		setBusinessNumber: state.actions.setBusinessNumber,
-		setCompanyId: state.actions.setCompanyId,
-		setCompanyName: state.actions.setCompanyName,
-		setOwnerName: state.actions.setOwnerName,
-		setAccessToken: state.actions.setAccessToken,
-		setRefreshTokenExpiredAt: state.actions.setRefreshTokenExpiredAt,
+		setLoggedInId: state.setId,
+		setBusinessNumber: state.setBusinessNumber,
+		setCompanyId: state.setCompanyId,
+		setCompanyName: state.setCompanyName,
+		setOwnerName: state.setOwnerName,
+		setAccessToken: state.setAccessToken,
+		setRefreshTokenExpiredAt: state.setRefreshTokenExpiredAt,
 	}));
 
 	const router = useRouter();

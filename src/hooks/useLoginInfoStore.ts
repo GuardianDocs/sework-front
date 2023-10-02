@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 export type LoginInfoState = {
 	id: number;
@@ -32,9 +32,7 @@ type LoginInfoAction = {
 	reset: () => void;
 };
 
-type LoginInfoStore = LoginInfoState & {
-	actions: LoginInfoAction;
-};
+type LoginInfoStore = LoginInfoState & LoginInfoAction;
 
 const initialState: LoginInfoState = {
 	id: 0,
@@ -48,9 +46,9 @@ const initialState: LoginInfoState = {
 
 // TODO: persist로 보존시켜야할지?
 const useLoginInfoStore = create(
-	devtools<LoginInfoStore>((set, get) => ({
-		...initialState,
-		actions: {
+	persist(
+		devtools<LoginInfoStore>((set, get) => ({
+			...initialState,
 			setId: (id: number) => set({ id }),
 			setBusinessNumber: (businessNumber: string) =>
 				set({ businessNumber }),
@@ -73,8 +71,12 @@ const useLoginInfoStore = create(
 			getAllState: () => get(),
 
 			reset: () => set({ ...initialState }),
+		})),
+		{
+			name: 'loginInfo',
+			skipHydration: true,
 		},
-	})),
+	),
 );
 
 export default useLoginInfoStore;
