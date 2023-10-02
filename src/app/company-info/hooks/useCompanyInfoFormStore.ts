@@ -16,12 +16,7 @@ type CompanyInfoFormAction = {
 	setProcessList: (processList: CompanyInfoFormState['processList']) => void;
 	getSectorId: () => CompanyInfoFormState['sectorId'];
 	getProcessList: () => CompanyInfoFormState['processList'];
-	// TODO: API 오타 수정되면 아래 코드로 변경
-	// getAllState: () => CompanyInfoFormState;
-	getAllState: () => {
-		sectorId: number;
-		processLit: CompanyInfoFormState['processList'];
-	};
+	getAllState: () => CompanyInfoFormState;
 };
 
 type CompanyInfoFormStore = CompanyInfoFormState & {
@@ -48,9 +43,7 @@ const useCompanyInfoFormStore = create(
 			getProcessList: () => get().processList,
 			getAllState: () => {
 				const { sectorId, processList } = get();
-				// TODO: API 오타 수정되면 아래 코드로 변경
-				// return { sectorId, processList };
-				return { sectorId, processLit: processList };
+				return { sectorId, processList };
 			},
 		},
 	})),
