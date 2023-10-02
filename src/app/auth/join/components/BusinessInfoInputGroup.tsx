@@ -7,23 +7,19 @@ export default function BusinessInfoInputGroup() {
 		businessNumber,
 		ownerName,
 		startDate,
-		employeeNumber,
 		setCompanyName,
 		setBusinessNumber,
 		setOwnerName,
 		setStartDate,
-		setEmployeeNumber,
 	} = useJoinFormStore(state => ({
 		companyName: state.companyName,
 		businessNumber: state.businessNumber,
 		ownerName: state.ownerName,
 		startDate: state.startDate,
-		employeeNumber: state.employeeNumber,
 		setCompanyName: state.actions.setCompanyName,
 		setBusinessNumber: state.actions.setBusinessNumber,
 		setOwnerName: state.actions.setOwnerName,
 		setStartDate: state.actions.setStartDate,
-		setEmployeeNumber: state.actions.setEmployeeNumber,
 	}));
 
 	return (
@@ -83,20 +79,6 @@ export default function BusinessInfoInputGroup() {
 					className="w-full p-2 border rounded"
 					value={convertZonedDateTimeToDate(startDate)}
 					onChange={e => setStartDate(e.target.value)}
-				/>
-			</div>
-
-			<div className="mb-4">
-				<label className="block mb-2" htmlFor="employeeNumber">
-					직원 수
-				</label>
-				<input
-					type="number"
-					name="employeeNumber"
-					id="employeeNumber"
-					className="w-full p-2 border rounded"
-					value={employeeNumber}
-					onChange={e => setEmployeeNumber(Number(e.target.value))}
 				/>
 			</div>
 		</>
