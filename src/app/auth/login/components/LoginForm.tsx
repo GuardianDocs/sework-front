@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import useLoginFormStore from '../hooks/useLoginFormStore';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
 	const { id, password, setId, setPassword, getAllState, setDummyState } =
@@ -18,16 +19,22 @@ export default function LoginForm() {
 	const {
 		setLoggedInId,
 		setBusinessNumber,
+		setCompanyId,
 		setCompanyName,
 		setOwnerName,
 		setAccessToken,
+		setRefreshTokenExpiredAt,
 	} = useLoginInfoStore(state => ({
 		setLoggedInId: state.actions.setId,
 		setBusinessNumber: state.actions.setBusinessNumber,
+		setCompanyId: state.actions.setCompanyId,
 		setCompanyName: state.actions.setCompanyName,
 		setOwnerName: state.actions.setOwnerName,
 		setAccessToken: state.actions.setAccessToken,
+		setRefreshTokenExpiredAt: state.actions.setRefreshTokenExpiredAt,
 	}));
+
+	const router = useRouter();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -46,16 +53,18 @@ export default function LoginForm() {
 
 		const { code, message, data } = responseData.data;
 
-		console.log('code', code);
-		alert(message);
-		console.log('data', data);
-
 		if (code === '0001') {
 			setLoggedInId(data.id);
 			setBusinessNumber(data.businessNumber);
+			setCompanyId(data.companyId);
 			setCompanyName(data.companyName);
 			setOwnerName(data.ownerName);
 			setAccessToken(data.accessToken);
+			setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
+
+			router.push('/');
+		} else {
+			alert(message);
 		}
 	};
 
