@@ -1,15 +1,37 @@
 'use client';
 
+import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import useJoinFormStore from '../hooks/useJoinFormStore';
 import AddressInfoInputGroup from './AddressInfoInputGroup';
 import BusinessInfoInputGroup from './BusinessInfoInputGroup';
 import LoginInfoInputGroup from './LoginInfoInputGroup';
+import { useRouter } from 'next/navigation';
 
 export default function JoinForm() {
 	const { getAllState, setDummyState } = useJoinFormStore(state => ({
 		getAllState: state.actions.getAllState,
 		setDummyState: state.actions.setDummyState,
 	}));
+
+	const {
+		setLoggedInId,
+		setBusinessNumber,
+		setCompanyId,
+		setCompanyName,
+		setOwnerName,
+		setAccessToken,
+		setRefreshTokenExpiredAt,
+	} = useLoginInfoStore(state => ({
+		setLoggedInId: state.setId,
+		setBusinessNumber: state.setBusinessNumber,
+		setCompanyId: state.setCompanyId,
+		setCompanyName: state.setCompanyName,
+		setOwnerName: state.setOwnerName,
+		setAccessToken: state.setAccessToken,
+		setRefreshTokenExpiredAt: state.setRefreshTokenExpiredAt,
+	}));
+
+	const router = useRouter();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -29,15 +51,19 @@ export default function JoinForm() {
 
 		const { code, message, data } = responseData.data;
 
-		console.log('code', code);
-		alert(message);
-		console.log('data', data);
+		if (code === '0001') {
+			setLoggedInId(data.id);
+			setBusinessNumber(data.businessNumber);
+			setCompanyId(data.companyId);
+			setCompanyName(data.companyName);
+			setOwnerName(data.ownerName);
+			setAccessToken(data.accessToken);
+			setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
 
-		localStorage.setItem('accessToken', data.accessToken);
-		localStorage.setItem('id', data.id);
-		localStorage.setItem('businessNumber', data.businessNumber);
-		localStorage.setItem('companyName', data.companyName);
-		localStorage.setItem('ownerName', data.ownerName);
+			router.push('/company-info');
+		} else {
+			alert(message);
+		}
 	};
 	return (
 		<form
