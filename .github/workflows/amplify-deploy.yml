@@ -1,0 +1,38 @@
+name: Deploy to AWS Amplify
+
+on:
+    push:
+        branches:
+            - master
+            - develop
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ap-northeast-2
+
+            - name: Deploy to Amplify based on branch
+              run: |
+                  if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+                    # Deploy to Amplify app for master branch
+                    # Use the Amplify CLI commands for the master branch environment
+                    # For instance, you can target a specific Amplify app or backend environment
+                    # amplify init --app <AmplifyAppIdForMasterBranch> --yes
+                    echo "Deploying to master environment : (Not yet configured)"  # Placeholder
+                  elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+                    # Deploy to Amplify app for develop branch
+                    # Use the Amplify CLI commands for the develop branch environment
+                    amplify init --app ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
+                    echo "Deploying to develop environment"  # Placeholder
+                  fi
+                    amplify push --yes  # Uncomment this if you're ready to push
