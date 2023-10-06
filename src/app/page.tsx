@@ -4,7 +4,7 @@ import Features from '@/components/Features';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-	title: 'IRAS : Intelligent Risk Assurance System',
+	title: 'IRAS',
 };
 
 export default function Home() {
