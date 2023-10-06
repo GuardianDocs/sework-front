@@ -31,12 +31,12 @@ jobs:
                     # Deploy to Amplify app for master branch
                     # Use the Amplify CLI commands for the master branch environment
                     # For instance, you can target a specific Amplify app or backend environment
-                    # amplify init --app <AmplifyAppIdForMasterBranch> --yes
+                    # amplify init --appId <AmplifyAppIdForMasterBranch> --yes
                     echo "Deploying to master environment : (Not yet configured)"  # Placeholder
                   elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
                     # Deploy to Amplify app for develop branch
                     # Use the Amplify CLI commands for the develop branch environment
-                    amplify init --app ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
+                    amplify init --appId ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
                     echo "Deploying to develop environment"  # Placeholder
                   fi
                     amplify push --yes  # Uncomment this if you're ready to push
