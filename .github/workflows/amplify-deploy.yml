@@ -39,4 +39,4 @@ jobs:
                     amplify init --appId ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
                     echo "Deploying to develop environment"  # Placeholder
                   fi
-                    amplify push --yes  # Uncomment this if you're ready to push
+                    amplify publish --yes
