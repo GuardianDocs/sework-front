@@ -36,7 +36,7 @@ jobs:
                   elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
                     # Deploy to Amplify app for develop branch
                     # Use the Amplify CLI commands for the develop branch environment
-                    amplify init --appId ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
+                    # amplify init --appId ${{ secrets.AMPLIFY_DEVELOP_APP_ID }} --yes
                     echo "Deploying to develop environment"  # Placeholder
                   fi
                     amplify publish --yes
