@@ -17,9 +17,9 @@ import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 export default function Setup3Table() {
 	const { getSectorId, processList, setProcessList } =
 		useCompanyInfoFormStore(state => ({
-			getSectorId: state.actions.getSectorId,
+			getSectorId: state.getSectorId,
 			processList: state.processList,
-			setProcessList: state.actions.setProcessList,
+			setProcessList: state.setProcessList,
 		}));
 
 	const { accessToken } = useLoginInfoStore(state => ({
