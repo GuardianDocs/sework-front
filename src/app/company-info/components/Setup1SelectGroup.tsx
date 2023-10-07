@@ -7,7 +7,7 @@ import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 export default function Setup1SelectGroup() {
 	const { setSectorId } = useCompanyInfoFormStore(state => ({
-		setSectorId: state.actions.setSectorId,
+		setSectorId: state.setSectorId,
 	}));
 
 	const { accessToken } = useLoginInfoStore(state => ({

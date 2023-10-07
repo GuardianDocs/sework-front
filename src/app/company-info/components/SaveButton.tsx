@@ -5,7 +5,7 @@ import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
 
 export default function SaveButton() {
 	const { getAllState } = useCompanyInfoFormStore(state => ({
-		getAllState: state.actions.getAllState,
+		getAllState: state.getAllState,
 	}));
 
 	const { accessToken } = useLoginInfoStore(state => ({
