@@ -27,7 +27,6 @@ export default function SaveButton() {
 
 		const { code, message } = responseData.data;
 
-		console.log('code', code);
 		alert(message);
 	};
 
