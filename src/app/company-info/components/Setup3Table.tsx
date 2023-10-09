@@ -47,7 +47,9 @@ export default function Setup3Table() {
 		data: fetchedProcessList,
 		error,
 		isLoading,
-	} = useQuery('processList', fetchProcessList);
+	} = useQuery('processList', fetchProcessList, {
+		enabled: !!accessToken, // accessToken이 있을 경우에만 API 호출
+	});
 
 	useEffect(() => {
 		if (fetchedProcessList) {

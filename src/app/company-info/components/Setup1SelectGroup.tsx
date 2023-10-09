@@ -6,7 +6,8 @@ import useCompanyInfoFormStore from '../hooks/useCompanyInfoFormStore';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 
 export default function Setup1SelectGroup() {
-	const { setSectorId } = useCompanyInfoFormStore(state => ({
+	const { sectorId, setSectorId } = useCompanyInfoFormStore(state => ({
+		sectorId: state.sectorId,
 		setSectorId: state.setSectorId,
 	}));
 
@@ -35,7 +36,9 @@ export default function Setup1SelectGroup() {
 		data: sectors,
 		error,
 		isLoading,
-	} = useQuery('sectors', fetchSectors);
+	} = useQuery('sectors', fetchSectors, {
+		enabled: !!accessToken, // accessToken이 있을 경우에만 API 호출
+	});
 
 	if (error) return <span>Error loading data</span>;
 
@@ -51,6 +54,7 @@ export default function Setup1SelectGroup() {
 					  }))
 					: []
 			}
+			defaultSelectedOptionId={sectorId}
 			isLoading={isLoading}
 			onChange={selectedOption => setSectorId(selectedOption?.value)}
 		/>

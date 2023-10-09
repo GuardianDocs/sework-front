@@ -21,6 +21,7 @@ const NavbarLink: React.FC<NavbarLinkProps> = ({ href, children }) => (
 const NavbarLinks = () => {
 	const links = [
 		{ href: '/company-info', label: '기업정보 기입' },
+		{ href: '/assessment/start', label: '위험성평가 시작' },
 		{ href: '/pricing', label: '가격' },
 		{ href: '/about', label: '소개' },
 		{ href: '/contact', label: '문의하기' },

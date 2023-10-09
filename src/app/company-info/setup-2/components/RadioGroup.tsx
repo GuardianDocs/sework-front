@@ -37,14 +37,14 @@ export default function RadioGroup() {
 		data: answers,
 		error,
 		isLoading,
-	} = useQuery('answers', fetchAnswers);
+	} = useQuery('answers', fetchAnswers, {
+		enabled: !!accessToken, // accessToken이 있을 경우에만 API 호출
+	});
 
 	const handleInputChange = (
 		type: keyof CompanyInfoFormState['additionalInfo'],
 		event: React.ChangeEvent<HTMLInputElement>,
 	) => {
-		console.log('handleInputChange', type, event.target.value);
-
 		const value = event.target.value;
 
 		if (event.target.type === 'checkbox') {

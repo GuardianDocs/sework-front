@@ -7,6 +7,7 @@ interface SelectWithLabelProps {
 	label: string;
 	placeholder?: string;
 	options: { label: string; value: string }[];
+	defaultSelectedOptionId?: number;
 	isLoading: boolean;
 	onChange: (selectedOption: any) => void;
 }
@@ -16,6 +17,7 @@ export default function SelectWithLabel({
 	label,
 	placeholder = '- Option -',
 	options,
+	defaultSelectedOptionId = 0,
 	isLoading,
 	onChange,
 }: SelectWithLabelProps) {
@@ -26,6 +28,7 @@ export default function SelectWithLabel({
 			<Select
 				instanceId={id}
 				options={options}
+				defaultValue={options[defaultSelectedOptionId - 1]}
 				placeholder={placeholder}
 				isSearchable={true}
 				// name="btype1"
