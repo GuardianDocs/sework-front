@@ -8,6 +8,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* TODO: NextUI 제거 */}
       <NextUIProvider>{children}</NextUIProvider>
     </QueryClientProvider>
   );
