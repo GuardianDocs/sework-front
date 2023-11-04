@@ -1,4 +1,5 @@
 import Headline from '@/components/typography/Headline/Headline';
+import ActionButton from '../ui/ActionButton/ActionButton';
 
 interface Feature {
   title: string;
@@ -15,6 +16,11 @@ const Features = ({ features }: FeaturesProps) => (
       <Headline size="m" color="red300">
         주요기능
       </Headline>
+    </div>
+    <div className="flex justify-center">
+      <ActionButton variant="tonal-blue" size="l" isFullWidth>
+        더보기
+      </ActionButton>
     </div>
     <div className="flex flex-wrap justify-around">
       {features.map((feature, index) => (

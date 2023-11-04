@@ -1,36 +1,56 @@
+@mixin label-l {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+@mixin label-m {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin label-s {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@mixin label-xs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+@mixin label-xxs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 .label {
   &.l {
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
+    @include label-l;
   }
 
   &.m {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
+    @include label-m;
   }
 
   &.s {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
+    @include label-s;
   }
 
   &.xs {
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
+    @include label-xs;
   }
 
   &.xxs {
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
+    @include label-xxs;
   }
 }

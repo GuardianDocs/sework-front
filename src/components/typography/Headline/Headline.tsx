@@ -9,8 +9,8 @@ type HeadlineProps = {
 
 export default function Headline({ size = 'm', color = 'black', children }: HeadlineProps) {
   return (
-    <h1 className={`${styles.headline} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
+    <span className={`${styles.headline} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
       {children}
-    </h1>
+    </span>
   );
 }

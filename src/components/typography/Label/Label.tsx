@@ -9,8 +9,8 @@ type BodyProps = {
 
 export default function Label({ size = 'm', color = 'black', children }: BodyProps) {
   return (
-    <p className={`${styles.label} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
+    <span className={`${styles.label} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
       {children}
-    </p>
+    </span>
   );
 }

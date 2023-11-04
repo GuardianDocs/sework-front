@@ -1,29 +1,45 @@
+@mixin headline-xl {
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 72px;
+}
+
+@mixin headline-l {
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 64px;
+}
+
+@mixin headline-m {
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54px;
+}
+
+@mixin headline-s {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+}
+
 .headline {
   &.xl {
-    font-size: 56px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 72px;
+    @include headline-xl;
   }
 
   &.l {
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 64px;
+    @include headline-l;
   }
 
   &.m {
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 54px;
+    @include headline-m;
   }
 
   &.s {
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 42px;
+    @include headline-s;
   }
 }
