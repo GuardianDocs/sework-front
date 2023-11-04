@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import localFont from 'next/font/local';
-import RootProvider from '@/components/providers/RootProvider';
+import RootProvider from '@/components/Providers/RootProvider';
 import Navbar from '@/components/legacy/Navbar';
 import '@/app/globals.css';
 import { type NextFont } from 'next/dist/compiled/@next/font';

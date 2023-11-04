@@ -1,0 +1,29 @@
+.headline {
+  &.xl {
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 72px;
+  }
+
+  &.l {
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 64px;
+  }
+
+  &.m {
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 54px;
+  }
+
+  &.s {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 42px;
+  }
+}
