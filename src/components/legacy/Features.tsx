@@ -12,7 +12,9 @@ interface FeaturesProps {
 const Features = ({ features }: FeaturesProps) => (
   <section className="p-10">
     <div className="flex justify-center">
-      <Headline size="m">주요기능</Headline>
+      <Headline size="m" color="red300">
+        주요기능
+      </Headline>
     </div>
     <div className="flex flex-wrap justify-around">
       {features.map((feature, index) => (
