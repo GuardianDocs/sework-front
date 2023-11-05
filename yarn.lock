@@ -8741,6 +8741,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chromatic@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "chromatic@npm:7.6.0"
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 5f473385cc2c152b43487646803a213f0dc3fcf9f7755a051040e31b5f8e67486b8a80fff3bbe0752bdb0e41851ff965b587f122938b35acf5c5eba1d3d1b9e4
+  languageName: node
+  linkType: hard
+
 "chrome-trace-event@npm:^1.0.2":
   version: 1.0.3
   resolution: "chrome-trace-event@npm:1.0.3"
@@ -16690,6 +16701,7 @@ __metadata:
     "@types/react": 18.2.23
     "@types/react-dom": 18.2.8
     autoprefixer: 10.4.14
+    chromatic: ^7.6.0
     eslint: 8.43.0
     eslint-config-next: 13.4.7
     eslint-config-prettier: ^8.8.0
