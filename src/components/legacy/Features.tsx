@@ -1,5 +1,8 @@
+'use client';
+
 import Headline from '@/components/typography/Headline/Headline';
-import ActionButton from '../ui/ActionButton/ActionButton';
+import ActionButton from '@/components/ui/ActionButton/ActionButton';
+import TextField from '@/components/ui/TextField/TextField';
 
 interface Feature {
   title: string;
@@ -16,6 +19,12 @@ const Features = ({ features }: FeaturesProps) => (
       <Headline size="m" color="red300">
         주요기능
       </Headline>
+    </div>
+    <div className="flex justify-center">
+      <TextField.Single placeholder="검색어를 입력하세요" isFullWidth />
+    </div>
+    <div className="flex justify-center">
+      <TextField.Multi placeholder="검색어를 입력하세요" isFullWidth />
     </div>
     <div className="flex justify-center">
       <ActionButton variant="tonal-blue" size="l" isFullWidth>

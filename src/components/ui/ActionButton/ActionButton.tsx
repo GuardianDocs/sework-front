@@ -1,7 +1,7 @@
 'use client';
 
-import styles from './ActionButton.module.scss';
 import React from 'react';
+import styles from './ActionButton.module.scss';
 
 type ButtonType = 'filled' | 'tonal-blue' | 'tonal-gray' | 'tonal-red';
 type ButtonSize = 'l' | 'm' | 's';
