@@ -1,0 +1,31 @@
+@use '../../typography/Label/Label.module.scss' as label;
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  background: var(--gray-50, #f8f9fa);
+
+  @include label.label-m;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--gray-600, #666d7b);
+
+  // TODO: 스타일 아직 없음
+  padding: 0.75rem 1rem;
+
+  .required {
+    color: var(--red-300, #ff8585);
+  }
+}
+
+.td {
+  border-bottom: 1px solid #e2e2e2;
+
+  // TODO: 스타일 아직 없음
+  padding: 0.75rem 1rem;
+}
