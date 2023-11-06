@@ -1,6 +1,10 @@
+'use client';
+
 import Body from '../typography/Body/Body';
 import Title from '../typography/Title/Title';
 import ActionButton from '../ui/ActionButton/ActionButton';
+import ProgressBox from '../ui/ProgressBox/ProgressBox';
+import ProgressBoxV2 from '../ui/ProgressBox/v2/ProgressBox';
 
 export default function Step1Page() {
   return (
@@ -9,7 +13,8 @@ export default function Step1Page() {
         평가대상 세부작업을 선택 또는 직접 입력해주세요
       </Title>
       {/* TODO: 과정 단계 */}
-      <div>TODO: 과정 단계</div>
+      <ProgressBox />
+      <ProgressBoxV2 />
       <Title size="l" color="gray800">
         업종
       </Title>

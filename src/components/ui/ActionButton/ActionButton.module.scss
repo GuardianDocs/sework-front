@@ -74,13 +74,13 @@
     padding: 8px 16px;
     border-radius: 8px;
 
-    @include label.label-s;
+    @include label.label-m;
   }
 
   &.s {
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 6px;
 
-    @include label.label-xs;
+    @include label.label-s;
   }
 }
