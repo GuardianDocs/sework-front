@@ -2,11 +2,9 @@
 @use '../../typography/Label/Label.module.scss' as label;
 
 .actionButton {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-
-  align-self: flex-start;
 
   &.fullWidth {
     width: 100%;
