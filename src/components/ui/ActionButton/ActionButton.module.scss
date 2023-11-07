@@ -30,8 +30,8 @@
       background: var(--blue-100, #e1e3f2);
     }
     &:disabled {
-      background: var(--gray-100, #eff0f2);
-      color: var(--gray-300, #c3c6cd);
+      background: var(--blue-50, #edeffa);
+      color: var(--blue-200, #afb9ea);
     }
   }
 
@@ -56,8 +56,8 @@
       background: var(--red-100, #ffdadb);
     }
     &:disabled {
-      background: var(--gray-100, #eff0f2);
-      color: var(--gray-300, #c3c6cd);
+      background: var(--red-50, #fdeded);
+      color: var(--red-200, #ffbfbf);
     }
   }
 
