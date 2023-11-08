@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import CircleHelpIcon from '../assets/CircleHelpIcon';
 import InfoIcon from '../assets/InfoIcon';
 import Body from '../typography/Body/Body';
@@ -11,6 +12,8 @@ import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 
 export default function Step1Page() {
+  const router = useRouter();
+
   const dummyData = {
     data: [
       {
@@ -46,6 +49,10 @@ export default function Step1Page() {
 
   const handleDrop = (e: any) => {
     e.preventDefault();
+  };
+
+  const handleClickNextStepButton = () => {
+    router.push('/dashboard/step2');
   };
 
   return (
@@ -152,7 +159,7 @@ export default function Step1Page() {
       </div>
       {/* 4. 버튼 */}
       <div className="flex flex-col items-center self-stretch justify-center pt-12 pb-16">
-        <ActionButton variant="filled" size="l">
+        <ActionButton variant="filled" size="l" onClick={handleClickNextStepButton}>
           저장 후 다음 단계
         </ActionButton>
       </div>
