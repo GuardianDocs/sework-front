@@ -3,6 +3,7 @@
 import Headline from '@/components/typography/Headline/Headline';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import TextField from '@/components/ui/TextField/TextField';
+import Icon from '../ui/Icon/Icon';
 
 interface Feature {
   title: string;
@@ -27,9 +28,10 @@ const Features = ({ features }: FeaturesProps) => (
       <TextField.Multi placeholder="검색어를 입력하세요" isFullWidth />
     </div>
     <div className="flex justify-center">
-      <ActionButton variant="tonal-blue" size="l" isFullWidth>
+      <ActionButton variant="tonal-gray" size="m" showIcon="left" icon={<Icon icon="line-add" />}>
         더보기
       </ActionButton>
+      <Icon icon="line-add" color="red100" />
     </div>
     <div className="flex flex-wrap justify-around">
       {features.map((feature, index) => (

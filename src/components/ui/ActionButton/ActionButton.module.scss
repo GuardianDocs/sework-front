@@ -13,18 +13,31 @@
   &.filled {
     background: var(--blue-500, #004dbc);
     color: var(--white, #fff);
+    // 아이콘 fill
+    svg {
+      fill: var(--white, #fff);
+    }
 
     &:hover {
       background: var(--blue-600, #0040a3);
     }
     &:disabled {
       background: var(--gray-200, #e1e2e5);
+      color: var(--white, #fff);
+      // 아이콘 fill
+      svg {
+        fill: var(--white, #fff);
+      }
     }
   }
 
   &.tonal-blue {
     background: var(--blue-50, #edeffa);
     color: var(--blue-600, #0042a0);
+    // 아이콘 fill
+    svg {
+      fill: var(--blue-600, #0042a0);
+    }
 
     &:hover {
       background: var(--blue-100, #e1e3f2);
@@ -32,12 +45,20 @@
     &:disabled {
       background: var(--blue-50, #edeffa);
       color: var(--blue-200, #afb9ea);
+      // 아이콘 fill
+      svg {
+        fill: var(--blue-200, #afb9ea);
+      }
     }
   }
 
   &.tonal-gray {
     background: var(--gray-100, #eff0f2);
     color: var(--gray-600, #666d7b);
+    // 아이콘 fill
+    svg {
+      fill: var(--gray-600, #666d7b);
+    }
 
     &:hover {
       background: var(--gray-200, #e1e2e5);
@@ -45,12 +66,20 @@
     &:disabled {
       background: var(--gray-100, #eff0f2);
       color: var(--gray-300, #c3c6cd);
+      // 아이콘 fill
+      svg {
+        fill: var(--gray-300, #c3c6cd);
+      }
     }
   }
 
   &.tonal-red {
     background: var(--red-50, #fdeded);
     color: var(--red-600, #da120d);
+    // 아이콘 fill
+    svg {
+      fill: var(--red-600, #da120d);
+    }
 
     &:hover {
       background: var(--red-100, #ffdadb);
@@ -58,6 +87,10 @@
     &:disabled {
       background: var(--red-50, #fdeded);
       color: var(--red-200, #ffbfbf);
+      // 아이콘 fill
+      svg {
+        fill: var(--red-200, #ffbfbf);
+      }
     }
   }
 
@@ -66,6 +99,12 @@
     border-radius: 8px;
 
     @include title.title-m;
+
+    // 아이콘 width, height
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   &.m {
@@ -73,6 +112,12 @@
     border-radius: 8px;
 
     @include label.label-m;
+
+    // 아이콘 width, height
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   &.s {
@@ -80,5 +125,11 @@
     border-radius: 6px;
 
     @include label.label-s;
+
+    // 아이콘 width, height
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }

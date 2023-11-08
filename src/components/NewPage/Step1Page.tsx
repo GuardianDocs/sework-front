@@ -10,6 +10,7 @@ import ActionButton from '../ui/ActionButton/ActionButton';
 import ProgressBox from '../ui/ProgressBox/ProgressBox';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
+import Icon from '../ui/Icon/Icon';
 
 export default function Step1Page() {
   const router = useRouter();
@@ -96,6 +97,7 @@ export default function Step1Page() {
                 세부작업 확정
               </Title>
             </div>
+            <Icon />
             <ActionButton variant="tonal-gray" size="s">
               직접 추가
             </ActionButton>
