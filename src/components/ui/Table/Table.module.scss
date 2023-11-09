@@ -25,6 +25,7 @@
 
 .td {
   border-bottom: 1px solid #e2e2e2;
+  background-color: var(--white, #fff); // td 배경색 지정 : drag and drop 시 배경색이 없어서 지정
 
   // TODO: 스타일 아직 없음
   padding: 0.75rem 1rem;
