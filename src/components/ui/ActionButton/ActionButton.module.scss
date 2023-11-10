@@ -98,7 +98,7 @@
   }
 
   &.l {
-    padding: 12px 24px;
+    padding: 12px 32px;
     border-radius: 8px;
 
     @include title.title-m;
@@ -111,7 +111,7 @@
   }
 
   &.m {
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 8px;
 
     @include label.label-m;
