@@ -1,5 +1,5 @@
 
-Chromatic CLI v7.6.0
+Chromatic CLI v8.0.0
 https://www.chromatic.com/docs/cli
 
 Authenticating with Chromatic
@@ -8,17 +8,17 @@ Authenticated with Chromatic
     → Using project token '****************f14e'
 Retrieving git information
 Retrieved git information
-    → Commit '13c0485' on branch 'develop'; found 1 parent build
+    → Commit '399a691' on branch 'develop'; found 1 parent build
 Collecting Storybook metadata
 Collected Storybook metadata
-    → Storybook 7.5.2 for React; using the @storybook/nextjs builder (7.5.2); supported addons found: Links, Essentials, Interactions
+    → Storybook 7.5.3 for React; using the @storybook/nextjs builder (7.5.3); supported addons found: Links, Essentials, Interactions
 Initializing build
 Initialized build
-    → Build 3 initialized
+    → Build 7 initialized
 Building your Storybook
-    → Running command: yarn run build-storybook --output-dir C:\Users\0420s\AppData\Local\Temp\chromatic--9728-kajEpDaSNwY3
-Storybook built in 23 seconds
-    → View build log at C:\Users\0420s\GitHub\sework-front\build-storybook.log
+    → Running command: yarn run build-storybook --output-dir /var/folders/_7/h7670t613p97dp__qh88fzqm0000gn/T/chromatic--67324-0qhYBFpusc08
+Storybook built in 10 seconds
+    → View build log at /Users/wanny.sim/GitHub/sework-front/build-storybook.log
 Publish your built Storybook
     → Validating Storybook files
 Publishing your built Storybook
@@ -26,64 +26,81 @@ Publishing your built Storybook
     → Starting publish
     → [                    ] 0%
     → [==                  ] 9%
+    → [===                 ] 14%
     → [===                 ] 17%
+    → [====                ] 19%
     → [====                ] 20%
     → [====                ] 21%
-    → [=====               ] 24%
+    → [=====               ] 25%
+    → [=====               ] 26%
+    → [======              ] 28%
+    → [======              ] 29%
+    → [=======             ] 34%
+    → [=======             ] 37%
+    → [========            ] 38%
     → [========            ] 39%
-    → [=========           ] 46%
+    → [========            ] 42%
+    → [=========           ] 45%
     → [=========           ] 47%
-    → [==========          ] 49%
+    → [==========          ] 48%
     → [==========          ] 50%
     → [==========          ] 51%
-    → [==========          ] 52%
     → [===========         ] 53%
-    → [===========         ] 55%
+    → [===========         ] 54%
     → [===========         ] 56%
+    → [===========         ] 57%
     → [============        ] 58%
     → [============        ] 59%
+    → [============        ] 60%
     → [============        ] 61%
-    → [============        ] 62%
-    → [=============       ] 63%
+    → [=============       ] 64%
+    → [=============       ] 65%
     → [=============       ] 66%
     → [==============      ] 68%
     → [==============      ] 71%
     → [===============     ] 73%
-    → [===============     ] 75%
-    → [===============     ] 77%
-    → [================    ] 80%
-    → [=================   ] 85%
+    → [===============     ] 76%
+    → [================    ] 78%
+    → [================    ] 79%
+    → [================    ] 81%
+    → [=================   ] 86%
+    → [=================   ] 87%
+    → [==================  ] 88%
+    → [==================  ] 90%
     → [==================  ] 91%
     → [=================== ] 93%
     → [=================== ] 94%
+    → [=================== ] 95%
+    → [=================== ] 96%
     → [=================== ] 97%
+    → [====================] 98%
     → [====================] 99%
     → [====================] 100%
-Publish complete in 7 seconds
-    → View your Storybook at https://6546744ba5fe9015a3cf191e-kuqddpnkti.chromatic.com
+Publish complete in 13 seconds
+    → View your Storybook at https://6546744ba5fe9015a3cf191e-pqvecvjzhv.chromatic.com
 Verifying your Storybook
     → This may take a few minutes
-Started build 3
-    → View build details at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=3
-Running 18 tests
+Started build 7
+    → View build details at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=7
+Running 20 tests
     → This may take a few minutes
-i Speed up Continuous Integration
+ℹ Speed up Continuous Integration
 Your project is linked to GitHub so Chromatic will report results there.
 This means you can pass the --exit-once-uploaded flag to skip waiting for build results.
 Read more here: https://www.chromatic.com/docs/cli#chromatic-options
-    → [=                   ] 1/18  Button › Primary 
-    → [======              ] 5/18  Header › Logged In 
-    → [=========           ] 8/18  Page › Logged In 
-    → [============        ] 11/18  Label › Default 
-    → [=============       ] 12/18  Title › Default 
-    → [=================   ] 15/18  ActionButton › Tonal Gray 
-    → [====================] 18/18  TextField.Single › Text Field Single 
-× Found 2 visual changes: Review the changes at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=3
+    → [=                   ] 1/20  Button › Primary 
+    → [==                  ] 2/20  Button › Secondary 
+    → [===                 ] 3/20  Button › Large 
+    → [=====               ] 5/20  Header › Logged In 
+    → [=========           ] 9/20  Body › Default 
+    → [==========          ] 10/20  Headline › Default 
+    → [==============      ] 14/20  ActionButton › Tonal Blue 
+    → [================    ] 16/20  ActionButton › Tonal Red 
+    → [=================   ] 17/20  Icon › Line Add 
+    → [=================== ] 19/20  TextField.Multi › Text Field Single 
+    → [====================] 21/20  
+✖ Found 2 visual changes: Review the changes at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=7
 
-i For CI/CD use cases, this command failed with exit code 1
+ℹ For CI/CD use cases, this command failed with exit code 1
 Pass --exit-zero-on-changes to succeed this command regardless of changes.
 Pass --auto-accept-changes to succeed and automatically accept any changes.
-Build 3 completed
-    → Tested 18 stories across 10 components; captured 18 snapshots in 18 seconds
-
-

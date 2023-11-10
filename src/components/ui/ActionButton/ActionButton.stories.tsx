@@ -1,11 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ActionButton from './ActionButton';
+import Icon from '@/components/ui/Icon/Icon';
+import { iconKeys } from '@/components/ui/Icon/Icon';
+
+const iconOptions = iconKeys;
+const iconMapping = iconKeys.reduce((acc, cur) => {
+  acc[cur] = <Icon icon={cur} />;
+  return acc;
+}, {} as Record<string, React.ReactNode>);
 
 const meta: Meta<typeof ActionButton> = {
   title: 'Design System/UI/ActionButton',
   component: ActionButton,
   tags: ['autodocs'],
+  argTypes: {
+    icon: {
+      options: iconOptions,
+      mapping: iconMapping,
+    },
+  },
 };
 
 export default meta;

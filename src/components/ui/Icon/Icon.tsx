@@ -13,6 +13,7 @@ const svgIconMapper = {
 };
 
 type IconKey = keyof typeof svgIconMapper;
+export const iconKeys = Object.keys(svgIconMapper) as IconKey[];
 
 export interface IconProps {
   icon: IconKey;
