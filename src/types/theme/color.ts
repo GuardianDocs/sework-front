@@ -55,10 +55,3 @@ export const getTailwindColorClassSuffix = (color: Color) => {
   const colorClass = color.replace('--', '-');
   return colorClass;
 };
-export const TailwindColorClass = {
-  getTextColorClass: (colorKey: ColorKey) => {
-    const color = getColor(colorKey);
-    const colorClass = getTailwindColorClassSuffix(color);
-    return `text${colorClass}`;
-  },
-};
