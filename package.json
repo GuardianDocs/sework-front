@@ -13,7 +13,8 @@
     "build-storybook": "storybook build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "chromatic": "npx chromatic --project-token chpt_de3ff51f7f7f14e"
+    "chromatic": "npx chromatic --project-token chpt_de3ff51f7f7f14e",
+    "openapi": "openapi-generator-cli generate -i https://api-dev.iras.kr/api/v3/api-docs -g typescript-axios -o ./src/services -c ./openapi.json --skip-validate-spec"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -40,6 +41,7 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",
     "@storybook/addon-links": "^7.5.3",
