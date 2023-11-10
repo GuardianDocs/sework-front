@@ -28,10 +28,17 @@ const Features = ({ features }: FeaturesProps) => (
       <TextField.Multi placeholder="검색어를 입력하세요" isFullWidth />
     </div>
     <div className="flex justify-center">
+      <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+        더보기
+      </ActionButton>
       <ActionButton variant="tonal-gray" size="m" showIcon="left" icon={<Icon icon="line-add" />}>
         더보기
       </ActionButton>
-      <Icon icon="line-add" color="red100" />
+
+      <ActionButton variant="tonal-gray" size="l" showIcon="left" icon={<Icon icon="line-add" />}>
+        더보기
+      </ActionButton>
+      <Icon icon="line-add" color="green500" size={50} />
     </div>
     <div className="flex flex-wrap justify-around">
       {features.map((feature, index) => (
