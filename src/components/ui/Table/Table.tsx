@@ -1,14 +1,15 @@
 import styles from './Table.module.scss';
 
-interface TableProps {
+interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;
 }
 
-interface TableHeadProps {
+interface TableHeadProps extends React.HTMLAttributes<HTMLTableHeaderCellElement> {
+  children: React.ReactNode;
   required?: boolean;
 }
 
-interface TableRowProps {
+interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   draggable?: boolean;
   onDragStart?: React.DragEventHandler<HTMLTableRowElement>;
   onDragOver?: React.DragEventHandler<HTMLTableRowElement>;
@@ -19,15 +20,24 @@ const Table = ({ children }: TableProps) => {
   return <table className={styles.table}>{children}</table>;
 };
 
-const TableHead = ({ children }: TableProps) => {
+const TableHead = ({ children }: React.HTMLAttributes<HTMLTableSectionElement>) => {
   return <thead className={styles.thead}>{children}</thead>;
 };
 
-const TableBody = ({ children }: TableProps) => {
+const TableHeader = ({ children, required, ...props }: TableHeadProps) => {
+  return (
+    <th className={styles.th} {...props}>
+      {children}
+      {required && <span className={styles.required}>*</span>}
+    </th>
+  );
+};
+
+const TableBody = ({ children }: React.HTMLAttributes<HTMLTableSectionElement>) => {
   return <tbody className={styles.tbody}>{children}</tbody>;
 };
 
-const TableRow = ({ children, draggable, onDragStart, onDragOver, onDrop }: TableProps & TableRowProps) => {
+const TableRow = ({ children, draggable, onDragStart, onDragOver, onDrop }: TableRowProps) => {
   return (
     <tr className={styles.tr} draggable={draggable} onDragStart={onDragStart} onDragOver={onDragOver} onDrop={onDrop}>
       {children}
@@ -35,17 +45,12 @@ const TableRow = ({ children, draggable, onDragStart, onDragOver, onDrop }: Tabl
   );
 };
 
-const TableHeader = ({ children, required }: TableProps & TableHeadProps) => {
+const TableCell = ({ children, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => {
   return (
-    <th className={styles.th}>
+    <td className={styles.td} {...props}>
       {children}
-      {required && <span className={styles.required}>*</span>}
-    </th>
+    </td>
   );
-};
-
-const TableCell = ({ children }: TableProps) => {
-  return <td className={styles.td}>{children}</td>;
 };
 
 Table.Head = TableHead;

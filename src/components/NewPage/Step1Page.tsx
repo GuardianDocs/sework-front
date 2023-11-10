@@ -107,7 +107,7 @@ export default function Step1Page() {
           <Table>
             <Table.Head>
               <Table.Row>
-                <Table.Header>단계</Table.Header>
+                <Table.Header style={{ width: '36px', textAlign: 'center' }}>단계</Table.Header>
                 <Table.Header required>세부작업</Table.Header>
                 <Table.Header required>평가대상</Table.Header>
                 <Table.Header>평가대상</Table.Header>
@@ -124,24 +124,24 @@ export default function Step1Page() {
                   onDrop={handleDrop}
                 >
                   <Table.Cell>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center w-9">
                       <Body size="m" color="gray800">
                         {index + 1}
                       </Body>
                     </div>
                   </Table.Cell>
                   <Table.Cell>
-                    <TextField.Single defaultValue={item.detailJob} {...(item.id && { disabled: true })} />
+                    <TextField.Single defaultValue={item.detailJob} {...(item.id && { disabled: true })} isFullWidth />
                   </Table.Cell>
                   <Table.Cell>
-                    <TextField.Single defaultValue={item.target} />
+                    <TextField.Single defaultValue={item.target} isFullWidth />
                   </Table.Cell>
                   <Table.Cell>
-                    <TextField.Single defaultValue={item.target2} />
+                    <TextField.Single defaultValue={item.target2} isFullWidth />
                   </Table.Cell>
                   <Table.Cell>
                     <div className="flex flex-row">
-                      <TextField.Single defaultValue={item.target3} />
+                      <TextField.Single defaultValue={item.target3} isFullWidth />
                       <button>::</button>
                     </div>
                   </Table.Cell>
