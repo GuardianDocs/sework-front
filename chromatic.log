@@ -8,15 +8,15 @@ Authenticated with Chromatic
     → Using project token '****************f14e'
 Retrieving git information
 Retrieved git information
-    → Commit '399a691' on branch 'develop'; found 1 parent build
+    → Commit '7e7e9d3' on branch 'features/IRAS-69'; found 1 parent build
 Collecting Storybook metadata
 Collected Storybook metadata
     → Storybook 7.5.3 for React; using the @storybook/nextjs builder (7.5.3); supported addons found: Links, Essentials, Interactions
 Initializing build
 Initialized build
-    → Build 7 initialized
+    → Build 8 initialized
 Building your Storybook
-    → Running command: yarn run build-storybook --output-dir /var/folders/_7/h7670t613p97dp__qh88fzqm0000gn/T/chromatic--67324-0qhYBFpusc08
+    → Running command: yarn run build-storybook --output-dir /var/folders/_7/h7670t613p97dp__qh88fzqm0000gn/T/chromatic--72494-Z75xGIWoqH0A
 Storybook built in 10 seconds
     → View build log at /Users/wanny.sim/GitHub/sework-front/build-storybook.log
 Publish your built Storybook
@@ -27,61 +27,56 @@ Publishing your built Storybook
     → [                    ] 0%
     → [==                  ] 9%
     → [===                 ] 14%
-    → [===                 ] 17%
-    → [====                ] 19%
+    → [====                ] 18%
     → [====                ] 20%
     → [====                ] 21%
-    → [=====               ] 25%
+    → [=====               ] 23%
     → [=====               ] 26%
-    → [======              ] 28%
+    → [=====               ] 27%
     → [======              ] 29%
-    → [=======             ] 34%
-    → [=======             ] 37%
+    → [======              ] 32%
+    → [=======             ] 33%
     → [========            ] 38%
-    → [========            ] 39%
+    → [========            ] 40%
     → [========            ] 42%
-    → [=========           ] 45%
+    → [=========           ] 43%
+    → [=========           ] 46%
     → [=========           ] 47%
     → [==========          ] 48%
+    → [==========          ] 49%
     → [==========          ] 50%
     → [==========          ] 51%
     → [===========         ] 53%
     → [===========         ] 54%
-    → [===========         ] 56%
+    → [===========         ] 55%
     → [===========         ] 57%
     → [============        ] 58%
     → [============        ] 59%
-    → [============        ] 60%
     → [============        ] 61%
-    → [=============       ] 64%
+    → [=============       ] 63%
     → [=============       ] 65%
-    → [=============       ] 66%
     → [==============      ] 68%
     → [==============      ] 71%
     → [===============     ] 73%
-    → [===============     ] 76%
     → [================    ] 78%
-    → [================    ] 79%
-    → [================    ] 81%
-    → [=================   ] 86%
+    → [=================   ] 83%
+    → [=================   ] 85%
     → [=================   ] 87%
-    → [==================  ] 88%
-    → [==================  ] 90%
-    → [==================  ] 91%
+    → [==================  ] 89%
+    → [==================  ] 92%
     → [=================== ] 93%
     → [=================== ] 94%
     → [=================== ] 95%
     → [=================== ] 96%
-    → [=================== ] 97%
     → [====================] 98%
     → [====================] 99%
     → [====================] 100%
 Publish complete in 13 seconds
-    → View your Storybook at https://6546744ba5fe9015a3cf191e-pqvecvjzhv.chromatic.com
+    → View your Storybook at https://6546744ba5fe9015a3cf191e-fnqbxosmxs.chromatic.com
 Verifying your Storybook
     → This may take a few minutes
-Started build 7
-    → View build details at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=7
+Started build 8
+    → View build details at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=8
 Running 20 tests
     → This may take a few minutes
 ℹ Speed up Continuous Integration
@@ -90,16 +85,11 @@ This means you can pass the --exit-once-uploaded flag to skip waiting for build 
 Read more here: https://www.chromatic.com/docs/cli#chromatic-options
     → [=                   ] 1/20  Button › Primary 
     → [==                  ] 2/20  Button › Secondary 
-    → [===                 ] 3/20  Button › Large 
     → [=====               ] 5/20  Header › Logged In 
     → [=========           ] 9/20  Body › Default 
-    → [==========          ] 10/20  Headline › Default 
-    → [==============      ] 14/20  ActionButton › Tonal Blue 
-    → [================    ] 16/20  ActionButton › Tonal Red 
+    → [=============       ] 13/20  ActionButton › Filled 
     → [=================   ] 17/20  Icon › Line Add 
-    → [=================== ] 19/20  TextField.Multi › Text Field Single 
-    → [====================] 21/20  
-✖ Found 2 visual changes: Review the changes at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=7
+✖ Found 2 visual changes: Review the changes at https://www.chromatic.com/build?appId=6546744ba5fe9015a3cf191e&number=8
 
 ℹ For CI/CD use cases, this command failed with exit code 1
 Pass --exit-zero-on-changes to succeed this command regardless of changes.
