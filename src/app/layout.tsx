@@ -16,7 +16,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         <RootProvider>
           <Navbar />
-          <main className="flex flex-col items-center justify-center">{children}</main>
+          <main>{children}</main>
         </RootProvider>
       </body>
     </html>

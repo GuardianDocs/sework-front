@@ -11,6 +11,7 @@ import ProgressBox from '../ui/ProgressBox/ProgressBox';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import Icon from '../ui/Icon/Icon';
+import IconButton from '../ui/IconButton/IconButton';
 
 export default function Step1Page() {
   const router = useRouter();
@@ -97,10 +98,10 @@ export default function Step1Page() {
                 세부작업 확정
               </Title>
             </div>
-            <ActionButton variant="tonal-gray" size="s">
+            <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
               직접 추가
             </ActionButton>
-            <ActionButton variant="filled" size="s">
+            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />} disabled>
               자동 추천 추가
             </ActionButton>
           </div>
@@ -140,8 +141,10 @@ export default function Step1Page() {
                     <TextField.Single defaultValue={item.target2} isFullWidth />
                   </Table.Cell>
                   <Table.Cell>
-                    <div className="flex flex-row">
+                    <div className="flex flex-row gap-2">
                       <TextField.Single defaultValue={item.target3} isFullWidth />
+                      <IconButton variant="outline" size="m" icon="save" onClick={() => console.log('save')} />
+                      <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
                       <button>::</button>
                     </div>
                   </Table.Cell>
