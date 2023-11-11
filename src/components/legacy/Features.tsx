@@ -1,9 +1,8 @@
 'use client';
 
 import Headline from '@/components/typography/Headline/Headline';
-import ActionButton from '@/components/ui/ActionButton/ActionButton';
-import TextField from '@/components/ui/TextField/TextField';
-import Icon from '../ui/Icon/Icon';
+import DropdownButton, { DropdownOption } from '../ui/DropdownButton/DropdownButton';
+import { useEffect, useState } from 'react';
 
 interface Feature {
   title: string;
@@ -14,41 +13,50 @@ interface FeaturesProps {
   features: Feature[];
 }
 
-const Features = ({ features }: FeaturesProps) => (
-  <section className="p-10">
-    <div className="flex justify-center">
-      <Headline size="m" color="red300">
-        주요기능
-      </Headline>
-    </div>
-    <div className="flex justify-center">
-      <TextField.Single placeholder="검색어를 입력하세요" isFullWidth />
-    </div>
-    <div className="flex justify-center">
-      <TextField.Multi placeholder="검색어를 입력하세요" isFullWidth />
-    </div>
-    <div className="flex justify-center">
-      <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
-        더보기
-      </ActionButton>
-      <ActionButton variant="tonal-gray" size="m" showIcon="left" icon={<Icon icon="line-add" />}>
-        더보기
-      </ActionButton>
+const Features = ({ features }: FeaturesProps) => {
+  //TODO: 테스트 후 삭제
+  const dummyData = [
+    {
+      value: '1',
+      label: '1',
+    },
+    {
+      value: '2',
+      label: '2',
+      completed: true,
+    },
+    {
+      value: '3',
+      label: '3',
+    },
+  ];
+  const [optionList, setOptionList] = useState<DropdownOption[]>([]);
 
-      <ActionButton variant="tonal-gray" size="l" showIcon="left" icon={<Icon icon="line-add" />}>
-        더보기
-      </ActionButton>
-      <Icon icon="line-add" color="green500" size={50} />
-    </div>
-    <div className="flex flex-wrap justify-around">
-      {features.map((feature, index) => (
-        <div key={index} className="flex-1 p-4">
-          <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
-          <p>{feature.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+  useEffect(() => {
+    // 2초 후에 setOptionList에 dummyData를 할당
+    setTimeout(() => {
+      setOptionList(dummyData);
+    }, 2);
+  });
+
+  return (
+    <section className="p-10">
+      <div className="flex justify-center">
+        <Headline size="m" color="red300">
+          주요기능
+        </Headline>
+        <DropdownButton options={optionList} onSelected={() => {}} />
+      </div>
+      <div className="flex flex-wrap justify-around">
+        {features.map((feature, index) => (
+          <div key={index} className="flex-1 p-4">
+            <h3 className="mb-2 text-xl font-semibold">{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default Features;

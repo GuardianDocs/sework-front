@@ -10,7 +10,7 @@ const meta: Meta<typeof TextField.Multi> = {
 export default meta;
 type Story = StoryObj<typeof TextField.Multi>;
 
-export const TextFieldSingle: Story = {
+export const TextFieldMulti: Story = {
   args: {
     sizeVariant: 's',
     placeholder: '텍스트를 입력해주세요',

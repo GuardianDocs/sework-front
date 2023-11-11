@@ -1,6 +1,7 @@
 import { ColorKey, colors } from '@/types/theme/color';
 import styles from './Title.module.scss';
 
+// TODO: Body처럼 확장
 type BodyProps = {
   size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
   color?: ColorKey;

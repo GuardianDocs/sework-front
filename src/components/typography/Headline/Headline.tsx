@@ -1,6 +1,7 @@
 import { ColorKey, colors } from '@/types/theme/color';
 import styles from './Headline.module.scss';
 
+// TODO: Body처럼 확장
 type HeadlineProps = {
   size?: 's' | 'm' | 'l' | 'xl';
   color?: ColorKey;

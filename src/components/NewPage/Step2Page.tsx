@@ -9,6 +9,7 @@ import ActionButton from '../ui/ActionButton/ActionButton';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import InfoIcon from '../assets/InfoIcon';
+import DropdownButton from '../ui/DropdownButton/DropdownButton';
 
 export default function Step2Page() {
   const router = useRouter();
@@ -96,7 +97,24 @@ export default function Step2Page() {
           </div>
           <div className="flex items-center w-full gap-4 p-6 rounded-lg bg-gray-50">
             {/* TODO: Dropdown */}
-            <div className="flex">TODO: Dropdown</div>
+            <DropdownButton
+              options={[
+                {
+                  value: '1',
+                  label: '1',
+                },
+                {
+                  value: '2',
+                  label: '2',
+                  completed: true,
+                },
+                {
+                  value: '3',
+                  label: '3',
+                },
+              ]}
+              onSelected={() => {}}
+            />
             <div className="flex items-center gap-2">
               <ActionButton variant="tonal-gray" size="m" disabled>
                 이전

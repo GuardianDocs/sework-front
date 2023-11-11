@@ -1,0 +1,71 @@
+@use '../../typography/Body/Body.module.scss' as body;
+
+.dropdownContainer {
+  display: flex;
+  position: relative; /* 컨테이너에 대한 상대적 위치 설정 */
+}
+
+.dropdownButton {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  padding: 8px 10px 8px 12px;
+  align-items: center;
+  gap: 4px;
+
+  border-radius: 4px;
+  border: 1px solid var(--gray-200, #e1e2e5);
+  background: var(--white, #fff);
+
+  @include body.body-m;
+
+  &:hover {
+    border: 1px solid var(--gray-300, #c3c6cd);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    border: 1px solid var(--gray-200, #e1e2e5);
+    background: var(--gray-50, #f8f9fa);
+  }
+}
+
+.dropdownList {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%; /* 드롭다운 리스트의 너비를 컨테이너의 100%로 설정 */
+  position: absolute;
+  top: 100%; /* 버튼 바로 아래 위치하도록 설정 */
+  left: 0;
+
+  margin-top: 4px;
+
+  padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+
+  border-radius: 4px;
+  border: 1px solid var(--gray-200, #e1e2e5);
+  background: var(--white, #fff);
+}
+
+.dropdownOption {
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  border-radius: 4px;
+  background: var(--white, #fff);
+
+  &:hover {
+    background: var(--gray-50, #f8f9fa);
+  }
+}
