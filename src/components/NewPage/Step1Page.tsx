@@ -110,9 +110,9 @@ export default function Step1Page() {
               <Table.Row>
                 <Table.Header style={{ width: '36px', textAlign: 'center' }}>단계</Table.Header>
                 <Table.Header required>세부작업</Table.Header>
-                <Table.Header required>평가대상</Table.Header>
-                <Table.Header>평가대상</Table.Header>
-                <Table.Header>평가대상</Table.Header>
+                <Table.Header required>세부작업 설명</Table.Header>
+                <Table.Header>설비 및 장비</Table.Header>
+                <Table.Header>유해 인자</Table.Header>
               </Table.Row>
             </Table.Head>
             <Table.Body>

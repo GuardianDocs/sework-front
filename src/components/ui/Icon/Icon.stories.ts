@@ -11,7 +11,6 @@ const iconMapping = iconOptions.reduce((acc: Record<string, string>, key) => {
 const meta: Meta<typeof Icon> = {
   title: 'Design System/UI/Icon',
   component: Icon,
-  tags: ['autodocs'],
   argTypes: {
     icon: {
       options: iconOptions,
@@ -24,18 +23,10 @@ const meta: Meta<typeof Icon> = {
 export default meta;
 type Story = StoryObj<typeof Icon>;
 
-export const LineAdd: Story = {
+export const Default: Story = {
   args: {
     icon: 'line-add',
-    size: 20,
-    color: 'black',
-  },
-};
-
-export const ChevronDownS: Story = {
-  args: {
-    icon: 'chevron-down-s',
-    size: 20,
-    color: 'black',
+    size: 50,
+    color: 'blue500',
   },
 };
