@@ -145,7 +145,6 @@ export default function Step1Page() {
                   <Table.Cell>
                     <div className="flex flex-row gap-2">
                       <TextField.Single defaultValue={item.target3} isFullWidth />
-                      <IconButton variant="outline" size="m" icon="save" onClick={() => console.log('save')} />
                       <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
                       <button>
                         <EtcIcon icon="drag-and-drop" />
@@ -164,6 +163,9 @@ export default function Step1Page() {
         <Body size="s" color="gray600">
           내용을 수정한 후 ‘저장' 버튼을 클릭해 저장을 완료해주세요.
         </Body>
+        <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
+          저장하기
+        </ActionButton>
       </div>
       {/* 4. 버튼 */}
       <div className="flex flex-col items-center self-stretch justify-center pt-12 pb-16">
