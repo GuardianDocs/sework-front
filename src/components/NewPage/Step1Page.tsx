@@ -12,7 +12,6 @@ import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import Icon from '../ui/Icon/Icon';
 import IconButton from '../ui/IconButton/IconButton';
-import DragAndDropIcon from '../ui/Icon/EtcIcon/DragAndDropIcon';
 import EtcIcon from '../ui/Icon/EtcIcon/EtcIcon';
 
 export default function Step1Page() {
@@ -60,7 +59,7 @@ export default function Step1Page() {
   };
 
   return (
-    <div className="flex flex-col items-start w-[1200px]">
+    <>
       {/* 1. 작성 가이드 버튼 */}
       <div className="flex py-4 flex-col items-end gap-2.5 w-full">
         <div className="flex items-start gap-1">
@@ -173,6 +172,6 @@ export default function Step1Page() {
           저장 후 다음 단계
         </ActionButton>
       </div>
-    </div>
+    </>
   );
 }

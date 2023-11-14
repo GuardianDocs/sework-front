@@ -12,7 +12,7 @@ import InfoIcon from '../assets/InfoIcon';
 import DropdownButton from '../ui/DropdownButton/DropdownButton';
 import Icon from '../ui/Icon/Icon';
 
-export default function Step2Page() {
+export default function Step3Page() {
   const router = useRouter();
 
   const dummyData = {
@@ -49,7 +49,7 @@ export default function Step2Page() {
   };
 
   return (
-    <div className="flex flex-col items-start w-[1200px]">
+    <>
       {/* 1. 작성 가이드 버튼 */}
       <div className="flex py-4 flex-col items-end gap-2.5 w-full">
         <div className="flex items-start gap-1">
@@ -186,6 +186,6 @@ export default function Step2Page() {
           다음 단계
         </ActionButton>
       </div>
-    </div>
+    </>
   );
 }
