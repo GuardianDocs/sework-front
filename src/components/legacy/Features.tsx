@@ -14,38 +14,12 @@ interface FeaturesProps {
 }
 
 const Features = ({ features }: FeaturesProps) => {
-  //TODO: 테스트 후 삭제
-  const dummyData = [
-    {
-      value: '1',
-      label: '1',
-    },
-    {
-      value: '2',
-      label: '2',
-      completed: true,
-    },
-    {
-      value: '3',
-      label: '3',
-    },
-  ];
-  const [optionList, setOptionList] = useState<DropdownOption[]>([]);
-
-  useEffect(() => {
-    // 2초 후에 setOptionList에 dummyData를 할당
-    setTimeout(() => {
-      setOptionList(dummyData);
-    }, 2);
-  });
-
   return (
     <section className="p-10">
       <div className="flex justify-center">
         <Headline size="m" color="red300">
           주요기능
         </Headline>
-        <DropdownButton options={optionList} onSelected={() => {}} />
       </div>
       <div className="flex flex-wrap justify-around">
         {features.map((feature, index) => (
