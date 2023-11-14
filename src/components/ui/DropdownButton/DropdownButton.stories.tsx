@@ -54,7 +54,7 @@ const step2OptionList = [
 ];
 
 const meta: Meta<typeof DropdownButton> = {
-  title: 'Design System/UI/DropdownButton',
+  title: 'Design System/UI/Button/DropdownButton',
   component: DropdownButton,
 };
 

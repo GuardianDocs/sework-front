@@ -10,7 +10,7 @@ const iconMapping = iconOptions.reduce((acc: Record<string, string>, key) => {
 }, {});
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Design System/UI/IconButton',
+  title: 'Design System/UI/Button/IconButton',
   component: IconButton,
   tags: ['autodocs'],
   argTypes: {

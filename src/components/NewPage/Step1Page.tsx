@@ -12,6 +12,8 @@ import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import Icon from '../ui/Icon/Icon';
 import IconButton from '../ui/IconButton/IconButton';
+import DragAndDropIcon from '../ui/Icon/EtcIcon/DragAndDropIcon';
+import EtcIcon from '../ui/Icon/EtcIcon/EtcIcon';
 
 export default function Step1Page() {
   const router = useRouter();
@@ -145,7 +147,9 @@ export default function Step1Page() {
                       <TextField.Single defaultValue={item.target3} isFullWidth />
                       <IconButton variant="outline" size="m" icon="save" onClick={() => console.log('save')} />
                       <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
-                      <button>::</button>
+                      <button>
+                        <EtcIcon icon="drag-and-drop" />
+                      </button>
                     </div>
                   </Table.Cell>
                 </Table.Row>
