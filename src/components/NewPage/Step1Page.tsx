@@ -77,8 +77,7 @@ export default function Step1Page() {
             평가대상 세부작업을 선택 또는 직접 입력해주세요
           </Title>
           {/* TODO: 과정 단계 */}
-          {/* <ProgressBox /> */}
-          <div>TODO: 과정 단계</div>
+          <ProgressBox />
         </div>
         {/* 2.2 업종 */}
         <div className="flex flex-col items-start w-full gap-3">
