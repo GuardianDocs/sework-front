@@ -10,6 +10,8 @@ import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import InfoIcon from '../assets/InfoIcon';
 import DropdownButton from '../ui/DropdownButton/DropdownButton';
+import Icon from '../ui/Icon/Icon';
+import IconButton from '../ui/IconButton/IconButton';
 
 export default function Step2Page() {
   const router = useRouter();
@@ -39,20 +41,12 @@ export default function Step2Page() {
     ],
   };
 
-  const handleDragStart = (e: any) => {
-    e.dataTransfer.setData('text/plain', e.target.id);
-  };
-
-  const handleDragOver = (e: any) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: any) => {
-    e.preventDefault();
-  };
-
   const handleClickPreviousStepButton = () => {
     router.push('/dashboard/step1');
+  };
+
+  const handleClickNextStepButton = () => {
+    router.push('/dashboard/step3');
   };
 
   return (
@@ -96,25 +90,28 @@ export default function Step2Page() {
             </div>
           </div>
           <div className="flex items-center w-full gap-4 p-6 rounded-lg bg-gray-50">
-            {/* TODO: Dropdown */}
-            <DropdownButton
-              options={[
-                {
-                  value: '1',
-                  label: '1',
-                },
-                {
-                  value: '2',
-                  label: '2',
-                  completed: true,
-                },
-                {
-                  value: '3',
-                  label: '3',
-                },
-              ]}
-              onSelected={() => {}}
-            />
+            <div className="flex flex-grow">
+              {/* TODO: Dropdown */}
+              <DropdownButton
+                options={[
+                  {
+                    value: '1',
+                    label: '1',
+                  },
+                  {
+                    value: '2',
+                    label: '2',
+                    completed: true,
+                  },
+                  {
+                    value: '3',
+                    label: '3',
+                  },
+                ]}
+                onSelected={() => {}}
+                isFullWidth
+              />
+            </div>
             <div className="flex items-center gap-2">
               <ActionButton variant="tonal-gray" size="m" disabled>
                 이전
@@ -130,42 +127,28 @@ export default function Step2Page() {
           <div className="flex items-center w-full gap-2">
             <div className="flex flex-grow">
               <Title size="l" color="gray800">
-                세부작업 선택
+                유해 위험요인 파악
               </Title>
             </div>
-            <ActionButton variant="tonal-gray" size="s">
+            <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
               직접 추가
             </ActionButton>
-            <ActionButton variant="filled" size="s">
+            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />} disabled>
               자동 추천 추가
             </ActionButton>
           </div>
           <Table>
             <Table.Head>
               <Table.Row>
-                <Table.Header>단계</Table.Header>
-                <Table.Header required>세부작업</Table.Header>
-                <Table.Header required>평가대상</Table.Header>
-                <Table.Header>평가대상</Table.Header>
-                <Table.Header>평가대상</Table.Header>
+                <Table.Header required>위험분류</Table.Header>
+                <Table.Header required>위험원인</Table.Header>
+                <Table.Header required>유해 위험원인</Table.Header>
+                <Table.Header>관련근거(법적근거)</Table.Header>
               </Table.Row>
             </Table.Head>
             <Table.Body>
               {dummyData.data.map((item, index) => (
-                <Table.Row
-                  key={index}
-                  draggable
-                  onDragStart={handleDragStart}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop}
-                >
-                  <Table.Cell>
-                    <div className="flex justify-center">
-                      <Body size="m" color="gray800">
-                        {index + 1}
-                      </Body>
-                    </div>
-                  </Table.Cell>
+                <Table.Row key={index}>
                   <Table.Cell>
                     <TextField.Single defaultValue={item.detailJob} {...(item.id && { disabled: true })} />
                   </Table.Cell>
@@ -176,9 +159,9 @@ export default function Step2Page() {
                     <TextField.Single defaultValue={item.target2} />
                   </Table.Cell>
                   <Table.Cell>
-                    <div className="flex flex-row">
-                      <TextField.Single defaultValue={item.target3} />
-                      <button>::</button>
+                    <div className="flex flex-row gap-2">
+                      <TextField.Single defaultValue={item.target3} isFullWidth />
+                      <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
                     </div>
                   </Table.Cell>
                 </Table.Row>
@@ -199,7 +182,7 @@ export default function Step2Page() {
         <ActionButton variant="tonal-gray" size="l" onClick={handleClickPreviousStepButton}>
           이전 단계
         </ActionButton>
-        <ActionButton variant="filled" size="l" disabled>
+        <ActionButton variant="filled" size="l" onClick={handleClickNextStepButton}>
           다음 단계
         </ActionButton>
       </div>

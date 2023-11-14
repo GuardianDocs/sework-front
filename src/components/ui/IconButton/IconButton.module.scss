@@ -8,6 +8,7 @@
 
   border-radius: 4px;
 
+  // 1. variant
   &.outline {
     background: var(--white, #fff);
     border: 1px solid var(--gray-200, #e1e2e5);
@@ -20,6 +21,7 @@
     }
   }
 
+  // 2. size
   &.m {
     padding: 8px;
 
@@ -27,6 +29,25 @@
     svg {
       width: 24px;
       height: 24px;
+    }
+  }
+
+  // 3. style by icon
+
+  // default : same as save style
+  svg {
+    fill: var(--gray-600);
+  }
+
+  &:hover {
+    svg {
+      fill: var(--gray-600);
+    }
+  }
+
+  &:disabled {
+    svg {
+      fill: var(--gray-300);
     }
   }
 

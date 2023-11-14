@@ -12,6 +12,8 @@ import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
 import Icon from '../ui/Icon/Icon';
 import IconButton from '../ui/IconButton/IconButton';
+import DragAndDropIcon from '../ui/Icon/EtcIcon/DragAndDropIcon';
+import EtcIcon from '../ui/Icon/EtcIcon/EtcIcon';
 
 export default function Step1Page() {
   const router = useRouter();
@@ -143,9 +145,10 @@ export default function Step1Page() {
                   <Table.Cell>
                     <div className="flex flex-row gap-2">
                       <TextField.Single defaultValue={item.target3} isFullWidth />
-                      <IconButton variant="outline" size="m" icon="save" onClick={() => console.log('save')} />
                       <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
-                      <button>::</button>
+                      <button>
+                        <EtcIcon icon="drag-and-drop" />
+                      </button>
                     </div>
                   </Table.Cell>
                 </Table.Row>
@@ -160,6 +163,9 @@ export default function Step1Page() {
         <Body size="s" color="gray600">
           내용을 수정한 후 ‘저장' 버튼을 클릭해 저장을 완료해주세요.
         </Body>
+        <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
+          저장하기
+        </ActionButton>
       </div>
       {/* 4. 버튼 */}
       <div className="flex flex-col items-center self-stretch justify-center pt-12 pb-16">

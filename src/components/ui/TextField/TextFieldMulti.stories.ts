@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import TextField from './TextField';
 
 const meta: Meta<typeof TextField.Multi> = {
-  title: 'Design System/UI/TextField.Multi',
+  title: 'Design System/UI/TextField/TextField.Multi',
   component: TextField.Multi,
   tags: ['autodocs'],
 };

@@ -13,7 +13,7 @@
     "build-storybook": "storybook build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "chromatic": "npx chromatic --project-token chpt_de3ff51f7f7f14e",
+    "chromatic": "npx chromatic --project-token chpt_de3ff51f7f7f14e --auto-accept-changes",
     "openapi": "openapi-generator-cli generate -i https://api-dev.iras.kr/api/v3/api-docs -g typescript-axios -o ./src/services -c ./openapi.json --skip-validate-spec"
   },
   "dependencies": {

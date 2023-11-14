@@ -11,7 +11,7 @@ const iconMapping = iconKeys.reduce((acc, cur) => {
 }, {} as Record<string, React.ReactNode>);
 
 const meta: Meta<typeof ActionButton> = {
-  title: 'Design System/UI/ActionButton',
+  title: 'Design System/UI/Button/ActionButton',
   component: ActionButton,
   tags: ['autodocs'],
   argTypes: {

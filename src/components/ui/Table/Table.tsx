@@ -1,3 +1,4 @@
+import EtcIcon from '../Icon/EtcIcon/EtcIcon';
 import styles from './Table.module.scss';
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -27,8 +28,10 @@ const TableHead = ({ children }: React.HTMLAttributes<HTMLTableSectionElement>) 
 const TableHeader = ({ children, required, ...props }: TableHeadProps) => {
   return (
     <th className={styles.th} {...props}>
-      {children}
-      {required && <span className={styles.required}>*</span>}
+      <div className="flex">
+        {children}
+        {required && <EtcIcon icon="essential-mark" />}
+      </div>
     </th>
   );
 };
