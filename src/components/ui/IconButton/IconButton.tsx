@@ -2,11 +2,11 @@
 
 import React from 'react';
 import styles from './IconButton.module.scss';
-import Icon from '../Icon/Icon';
+import Icon, { type IconKey } from '../Icon/Icon';
 
 type ButtonType = 'outline';
 type ButtonSize = 'm';
-type ButtonIcon = 'save' | 'trash';
+type ButtonIcon = IconKey;
 
 interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonType;

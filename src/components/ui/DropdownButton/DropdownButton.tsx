@@ -52,7 +52,7 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
           {selectedOption ? selectedOption.label : '선택해주세요'}
         </Body>
         {isOpen ? (
-          <Icon icon="chevron-up-m" size={24} color="gray800" />
+          <Icon icon="chevron-up-s" size={24} color="gray800" />
         ) : (
           <Icon icon="chevron-down-s" size={24} color="gray800" />
         )}
