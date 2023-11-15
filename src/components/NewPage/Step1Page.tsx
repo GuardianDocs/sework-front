@@ -1,8 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CircleHelpIcon from '../assets/CircleHelpIcon';
-import InfoIcon from '../assets/InfoIcon';
 import Body from '../typography/Body/Body';
 import Label from '../typography/Label/Label';
 import Title from '../typography/Title/Title';
@@ -13,6 +11,7 @@ import TextField from '../ui/TextField/TextField';
 import Icon from '../ui/Icon/Icon';
 import IconButton from '../ui/IconButton/IconButton';
 import EtcIcon from '../ui/Icon/EtcIcon/EtcIcon';
+import Headline from '../typography/Headline/Headline';
 
 export default function Step1Page() {
   const router = useRouter();
@@ -70,7 +69,7 @@ export default function Step1Page() {
       {/* 1. 작성 가이드 버튼 */}
       <div className="flex py-4 flex-col items-end gap-2.5 w-full">
         <div className="flex items-start gap-1">
-          <CircleHelpIcon />
+          <Icon icon="circle-help" color="blue500" />
           <Label size="s" color="blue500">
             위험성평가 작성 가이드
           </Label>
@@ -80,9 +79,12 @@ export default function Step1Page() {
       <div className="flex flex-col items-center w-full gap-12">
         {/* 2.1 상단 */}
         <div className="flex flex-col items-center gap-8">
-          <Title size="xxl" color="gray800">
-            평가대상 세부작업을 선택 또는 직접 입력해주세요
-          </Title>
+          <Headline size="s" color="gray800">
+            위험성평가
+          </Headline>
+          <Label size="l" color="gray600">
+            1단계 : 위험성평가를 시작하기 위해 자동 추천된 세부작업을 선택 또는 직접 입력해주세요
+          </Label>
           {/* TODO: 과정 단계 */}
           <ProgressBox steps={steps} />
         </div>
@@ -100,15 +102,18 @@ export default function Step1Page() {
         {/* 2.3 세부작업 */}
         <div className="flex flex-col items-start w-full gap-3">
           <div className="flex items-center w-full gap-2">
-            <div className="flex flex-grow">
+            <div className="flex items-center flex-grow gap-3">
               <Title size="l" color="gray800">
                 세부작업 확정
               </Title>
+              <Body size="s" color="gray600">
+                IRAS에서 각 업종에 맞는 세부작업을 자동으로 추천해 보여드립니다.
+              </Body>
             </div>
             <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
               직접 추가
             </ActionButton>
-            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />} disabled>
+            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
               자동 추천 추가
             </ActionButton>
           </div>
@@ -164,10 +169,6 @@ export default function Step1Page() {
       </div>
       {/* 3. 저장 안내 */}
       <div className="flex items-center self-stretch justify-end gap-1 pt-3">
-        <InfoIcon />
-        <Body size="s" color="gray600">
-          내용을 수정한 후 ‘저장' 버튼을 클릭해 저장을 완료해주세요.
-        </Body>
         <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
           저장하기
         </ActionButton>
