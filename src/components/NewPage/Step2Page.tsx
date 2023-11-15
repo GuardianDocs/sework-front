@@ -1,14 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CircleHelpIcon from '../assets/CircleHelpIcon';
-import Body from '../typography/Body/Body';
 import Label from '../typography/Label/Label';
 import Title from '../typography/Title/Title';
 import ActionButton from '../ui/ActionButton/ActionButton';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
-import InfoIcon from '../assets/InfoIcon';
 import DropdownButton from '../ui/DropdownButton/DropdownButton';
 import Icon from '../ui/Icon/Icon';
 import IconButton from '../ui/IconButton/IconButton';
@@ -101,7 +98,6 @@ export default function Step2Page() {
           </div>
           <div className="flex items-center w-full gap-4 rounded-lg ">
             <div className="flex flex-grow">
-              {/* TODO: Dropdown */}
               <DropdownButton
                 options={[
                   {

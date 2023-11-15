@@ -86,7 +86,6 @@ export default function Step4Page() {
           </div>
           <div className="flex items-center w-full gap-4 p-6 rounded-lg bg-gray-50">
             <div className="flex flex-grow">
-              {/* TODO: Dropdown */}
               <DropdownButton
                 options={[
                   {
