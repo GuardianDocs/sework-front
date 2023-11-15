@@ -42,6 +42,13 @@ export default function Step1Page() {
     ],
   };
 
+  const steps = [
+    { number: 1, label: '사전준비', active: true, selected: true },
+    { number: 2, label: '유해 위험요인 파악', active: false, selected: false },
+    { number: 3, label: '위험성 수준 판단', active: false, selected: false },
+    { number: 4, label: '감소대책 수립', active: false, selected: false },
+  ];
+
   const handleDragStart = (e: any) => {
     e.dataTransfer.setData('text/plain', e.target.id);
   };
@@ -77,7 +84,7 @@ export default function Step1Page() {
             평가대상 세부작업을 선택 또는 직접 입력해주세요
           </Title>
           {/* TODO: 과정 단계 */}
-          <ProgressBox />
+          <ProgressBox steps={steps} />
         </div>
         {/* 2.2 업종 */}
         <div className="flex flex-col items-start w-full gap-3">
