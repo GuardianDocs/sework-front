@@ -1,59 +1,72 @@
-export default function ProgressBox() {
+import Title from '@/components/typography/Title/Title';
+
+interface StepProps {
+  number: number;
+  label: string;
+  active: boolean;
+  selected: boolean;
+}
+
+const FIRST_STEP = 1;
+const LAST_STEP = 4;
+
+const Step: React.FC<StepProps> = ({ number, label, active, selected }) => {
+  const baseBgColor = active ? 'bg-white' : 'bg-gray-50';
+  const bgColor = selected ? 'bg-blue-500' : 'bg-gray-100';
+  const textColor = selected ? 'white' : 'gray400';
+  const stepBorderColor = selected ? 'bg-blue-500' : 'bg-blue-200';
+  const labelColor = selected ? 'gray800' : 'gray400';
+  const marginLeft = number === FIRST_STEP ? '' : '-ml-px';
+
+  let borderRound = '';
+  if (number === FIRST_STEP) borderRound = 'rounded-[8px_0px_0px_0px]';
+  else if (number === LAST_STEP) borderRound = 'rounded-[0px_8px_0px_0px]';
+
   return (
-    <div className="relative flex flex-col items-start w-full">
-      <div
-        id="Bg"
-        className="w-[307px] h-20 bg-[url(https://file.rendit.io/n/0T2z8xh8FCx0pwQwl4mO.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-[894px] flex flex-col items-start"
-      >
-        <div
-          id="Stroke"
-          className="bg-[url(https://file.rendit.io/n/hs6s5CLU3Bwe0Q9OwxNC.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-center pl-8 w-[307px] h-20 shrink-0 items-start"
-        >
-          <div className="text-sm font-['Pretendard'] font-bold leading-[20px] text-[#a4a9b2]">4단계</div>
-          <div className="font-['Pretendard'] font-bold leading-[24px] text-[#a4a9b2]">감소대책 수립</div>
+    <div
+      className={`flex w-[300px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound}`}
+    >
+      <div className={`relative w-[32px] h-[32px] ${bgColor} rounded-[16px]`}>
+        <div className={`absolute top-[6px] left-[12px] whitespace-nowrap `}>
+          <Title size="s" color={textColor}>
+            {number}
+          </Title>
         </div>
       </div>
-      <div
-        id="Bg1"
-        className="w-[314px] h-20 bg-[url(https://file.rendit.io/n/1epq1GkR9wSsf4RcRUDx.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-[594px] flex flex-col items-start"
-      >
-        <div
-          id="Stroke1"
-          className="bg-[url(https://file.rendit.io/n/CHNpAgtkXAJcgNo3PGlN.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-center pl-8 w-[314px] h-20 shrink-0 items-start"
-        >
-          <div className="text-sm font-['Pretendard'] font-bold leading-[20px] text-[#a4a9b2]">3단계</div>
-          <div className="font-['Pretendard'] font-bold leading-[24px] text-[#a4a9b2]">위험성 수준 판단</div>
+      <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
+        <div className={`relative w-fit mt-[-1.00px] whitespace-nowrap`}>
+          <Title size="m" color={labelColor}>
+            {label}
+          </Title>
         </div>
       </div>
-      <div
-        id="Bg2"
-        className="w-[314px] h-20 bg-[url(https://file.rendit.io/n/1epq1GkR9wSsf4RcRUDx.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat absolute top-0 left-[294px] flex flex-col items-start"
-      >
+      {active ? (
         <div
-          id="Stroke2"
-          className="bg-[url(https://file.rendit.io/n/CHNpAgtkXAJcgNo3PGlN.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-center pl-8 w-[314px] h-20 shrink-0 items-start"
-        >
-          <div className="text-sm font-['Pretendard'] font-bold leading-[20px] text-[#a4a9b2]">2단계</div>
-          <div className="font-['Pretendard'] font-bold leading-[24px] text-[#a4a9b2]">유해 위험요인 파악</div>
-        </div>
-      </div>
-      <img
-        src="https://file.rendit.io/n/clA3O2yyDL6jjur4qPSv.svg"
-        id="Bg3"
-        className="w-[207px] h-20 absolute top-0 left-0"
-      />
-      <div
-        id="BottomLine"
-        className="bg-[url(https://file.rendit.io/n/12SX3SjhGafdnOvdlPo0.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat relative flex flex-col items-start"
-      >
+          className={`absolute w-[${number === LAST_STEP ? 300 : 302}px] h-[3px] top-[61px] left-[-1px] ${
+            active && stepBorderColor
+          }`}
+        />
+      ) : (
         <div
-          id="Stroke3"
-          className="bg-[url(https://file.rendit.io/n/glLPr7c0m2PrDYUJFvA1.svg)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-center pl-6 w-[308px] h-20 shrink-0 items-start"
-        >
-          <div className="text-sm font-['Pretendard'] font-bold leading-[20px] text-[#004dbc]">1단계</div>
-          <div className="font-['Pretendard'] font-bold leading-[24px] text-[#2a303b]">사전준비</div>
-        </div>
-      </div>
+          className={`absolute w-[${number === LAST_STEP ? 300 : 302}px] h-[1px] top-[63px] left-[-1px] bg-gray-200`}
+        />
+      )}
     </div>
   );
+};
+
+interface StepListProps {
+  steps: StepProps[];
 }
+
+const StepList: React.FC<StepListProps> = ({ steps }) => {
+  return (
+    <div className="relative inline-flex items-start">
+      {steps.map(step => (
+        <Step key={step.number} {...step} />
+      ))}
+    </div>
+  );
+};
+
+export default StepList;

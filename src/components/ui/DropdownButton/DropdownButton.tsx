@@ -48,7 +48,11 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
   return (
     <div ref={dropdownRef} className={styles.dropdownContainer} style={containerStyle}>
       <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
-        <Body size="m" color={selectedOption ? 'gray800' : 'gray300'} className="flex flex-1 whitespace-nowrap">
+        <Body
+          size="m"
+          color={selectedOption ? (disabled ? 'gray400' : 'gray800') : 'gray300'}
+          className="flex flex-1 whitespace-nowrap"
+        >
           {selectedOption ? selectedOption.label : '선택해주세요'}
         </Body>
         {isOpen ? (
