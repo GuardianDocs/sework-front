@@ -85,7 +85,6 @@ export default function Step1Page() {
           <Label size="l" color="gray600">
             1단계 : 위험성평가를 시작하기 위해 자동 추천된 세부작업을 선택 또는 직접 입력해주세요
           </Label>
-          {/* TODO: 과정 단계 */}
           <ProgressBox steps={steps} />
         </div>
         {/* 2.2 업종 */}

@@ -13,6 +13,7 @@ interface TextFieldSingleProps extends React.InputHTMLAttributes<HTMLInputElemen
 interface TextFieldMultiProps extends React.RefAttributes<HTMLTextAreaElement>, TextFieldProps {
   placeholder?: string;
   disabled?: boolean;
+  defaultValue?: string;
 }
 
 const getCommonClassNames = (sizeVariant: 's', isFullWidth: boolean | undefined, type: 'single' | 'multi') => {
@@ -27,12 +28,13 @@ const TextField = {
   Single: ({ sizeVariant = 's', isFullWidth, ...props }: TextFieldSingleProps) => (
     <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single')} {...props} />
   ),
-  Multi: ({ sizeVariant = 's', isFullWidth, placeholder, disabled, ...props }: TextFieldMultiProps) => (
+  Multi: ({ sizeVariant = 's', isFullWidth, placeholder, disabled, defaultValue, ...props }: TextFieldMultiProps) => (
     <TextareaAutosize
       cacheMeasurements
       className={getCommonClassNames(sizeVariant, isFullWidth, 'multi')}
       placeholder={placeholder}
       disabled={disabled}
+      defaultValue={defaultValue}
       {...props}
     />
   ),
