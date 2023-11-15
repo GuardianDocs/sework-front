@@ -1,14 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CircleHelpIcon from '../assets/CircleHelpIcon';
 import Body from '../typography/Body/Body';
 import Label from '../typography/Label/Label';
 import Title from '../typography/Title/Title';
 import ActionButton from '../ui/ActionButton/ActionButton';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
-import InfoIcon from '../assets/InfoIcon';
 import DropdownButton from '../ui/DropdownButton/DropdownButton';
 import Icon from '../ui/Icon/Icon';
 
@@ -49,7 +47,7 @@ export default function Step4Page() {
       {/* 1. 작성 가이드 버튼 */}
       <div className="flex py-4 flex-col items-end gap-2.5 w-full">
         <div className="flex items-start gap-1">
-          <CircleHelpIcon />
+          <Icon icon="circle-help" color="blue500" />
           <Label size="s" color="blue500">
             위험성평가 작성 가이드
           </Label>
@@ -167,7 +165,7 @@ export default function Step4Page() {
       </div>
       {/* 3. 저장 안내 */}
       <div className="flex items-center self-stretch justify-end gap-1 pt-3">
-        <InfoIcon />
+        <Icon icon="circle-info" color="gray600" />
         <Body size="s" color="gray600">
           내용을 수정한 후 ‘저장' 버튼을 클릭해 저장을 완료해주세요.
         </Body>

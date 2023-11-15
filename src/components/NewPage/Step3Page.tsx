@@ -1,14 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CircleHelpIcon from '../assets/CircleHelpIcon';
-import Body from '../typography/Body/Body';
 import Label from '../typography/Label/Label';
 import Title from '../typography/Title/Title';
 import ActionButton from '../ui/ActionButton/ActionButton';
 import Table from '../ui/Table/Table';
 import TextField from '../ui/TextField/TextField';
-import InfoIcon from '../assets/InfoIcon';
 import DropdownButton from '../ui/DropdownButton/DropdownButton';
 import Icon from '../ui/Icon/Icon';
 import Headline from '../typography/Headline/Headline';
@@ -78,7 +75,7 @@ export default function Step3Page() {
             위험성평가
           </Headline>
           <Label size="l" color="gray600">
-            2단계 : 세부작업별 유해위험요인을 파악하여 작성해주세요{' '}
+            3단계 : 유해 위험요인에 대한 현재의 안전보건조치 내용을 작성하고 현재의 위험성을 추정해주세요{' '}
           </Label>
           <ProgressBox steps={steps} />
         </div>

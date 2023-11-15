@@ -22,6 +22,8 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected }) => {
   if (number === FIRST_STEP) borderRound = 'rounded-[8px_0px_0px_0px]';
   else if (number === LAST_STEP) borderRound = 'rounded-[0px_8px_0px_0px]';
 
+  const borderBottomWidth = number === LAST_STEP ? 'w-[300px]' : 'w-[302px]';
+
   return (
     <div
       className={`flex w-[300px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound}`}
@@ -41,15 +43,9 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected }) => {
         </div>
       </div>
       {active ? (
-        <div
-          className={`absolute w-[${number === LAST_STEP ? 300 : 302}px] h-[3px] top-[61px] left-[-1px] ${
-            active && stepBorderColor
-          }`}
-        />
+        <div className={`absolute ${borderBottomWidth} h-[3px] top-[61px] left-[-1px] ${active && stepBorderColor}`} />
       ) : (
-        <div
-          className={`absolute w-[${number === LAST_STEP ? 300 : 302}px] h-[1px] top-[63px] left-[-1px] bg-gray-200`}
-        />
+        <div className={`absolute ${borderBottomWidth} h-[1px] top-[63px] left-[-1px] bg-gray-200`} />
       )}
     </div>
   );
