@@ -42,10 +42,10 @@ export default function Step3Page() {
   };
 
   const steps = [
-    { number: 1, label: '사전준비', active: true, selected: false },
-    { number: 2, label: '유해 위험요인 파악', active: true, selected: false },
-    { number: 3, label: '위험성 수준 판단', active: true, selected: true },
-    { number: 4, label: '감소대책 수립', active: false, selected: false },
+    { number: 1, label: '사전준비', active: true, selected: false, url: '/dashboard/step1' },
+    { number: 2, label: '유해 위험요인 파악', active: true, selected: false, url: '/dashboard/step2' },
+    { number: 3, label: '위험성 수준 판단', active: true, selected: true, url: '/dashboard/step3' },
+    { number: 4, label: '감소대책 수립', active: false, selected: false, url: '/dashboard/step4' },
   ];
 
   const handleClickPreviousStepButton = () => {
