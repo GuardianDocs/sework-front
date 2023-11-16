@@ -11,10 +11,12 @@
     border-bottom: 1px solid #e2e2e2;
     background: var(--gray-50, #f8f9fa);
 
-    @include label.label-m;
-    text-align: left;
-    white-space: nowrap;
-    color: var(--gray-600, #666d7b);
+    & > th {
+      @include label.label-m;
+      text-align: left;
+      white-space: nowrap;
+      color: var(--gray-600, #666d7b);
+    }
   }
 }
 
