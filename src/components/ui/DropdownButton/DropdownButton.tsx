@@ -4,7 +4,7 @@ import Icon from '../Icon/Icon';
 import Body from '@/components/typography/Body/Body';
 
 export interface DropdownOption {
-  label: string;
+  label: React.ReactNode;
   value: string;
   completed?: boolean;
 }
