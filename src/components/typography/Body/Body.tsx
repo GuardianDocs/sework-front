@@ -4,13 +4,18 @@ import { TypographyProps } from '@/types/typography';
 
 interface BodyProps extends TypographyProps {
   size?: 'xxs' | 'xs' | 's' | 'm' | 'l';
-  color?: ColorKey;
+  color?: ColorKey | string;
   children: React.ReactNode;
 }
 
 export default function Body({ size = 'm', color = 'black', children, ...props }: BodyProps) {
+  const isColorKey = (color: ColorKey | string): color is ColorKey => {
+    return color in colors;
+  };
+  const colorValue = isColorKey(color) ? `var(${colors[color]})` : color;
+
   return (
-    <span className={`${styles.body} ${styles[size]}`} style={{ color: `var(${colors[color]})` }} {...props}>
+    <span className={`${styles.body} ${styles[size]}`} style={{ color: `${colorValue}` }} {...props}>
       {children}
     </span>
   );

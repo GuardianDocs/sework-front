@@ -56,30 +56,37 @@ export default function Step2Page() {
   };
 
   return (
-    <>
-      {/* 1. 작성 가이드 버튼 */}
-      <div className="flex py-4 flex-col items-end gap-2.5 w-full">
-        <div className="flex items-start gap-1">
-          <Icon icon="circle-help" color="blue500" />
-          <Label size="s" color="blue500">
-            위험성평가 작성 가이드
-          </Label>
+    <div className="flex flex-col items-center gap-12 pb-[60px]">
+      {/* 1. 상단 */}
+      <div className="flex flex-col items-center w-full">
+        {/* 1.1. 작성 가이드 버튼 */}
+        <div className="flex pt-6 pb-4 flex-col items-end gap-2.5 w-full">
+          <div className="flex items-start gap-1">
+            <Icon icon="circle-help" color="blue500" size={20} />
+            <Label size="s" color="blue500">
+              위험성평가 작성 가이드
+            </Label>
+          </div>
         </div>
-      </div>
-      {/* 2. 작성내용 */}
-      <div className="flex flex-col items-center w-full gap-12">
-        {/* 2.1 상단 */}
-        <div className="flex flex-col items-center gap-8">
-          <Headline size="s" color="gray800">
-            위험성평가
-          </Headline>
-          <Label size="l" color="gray600">
-            2단계 : 세부작업별 유해위험요인을 파악하여 작성해주세요{' '}
-          </Label>
+        {/* 1.2. 타이틀 */}
+        <div className="flex flex-col items-start w-full gap-8">
+          {/* 상단 타이틀 & 설명 */}
+          <div className="flex flex-col items-center w-full gap-1">
+            <Headline size="s" color="gray800">
+              위험성평가
+            </Headline>
+            <Label size="l" color="gray600">
+              2단계 : 세부작업별 유해위험요인을 파악하여 작성해주세요
+            </Label>
+          </div>
           <ProgressBox steps={steps} />
         </div>
-        {/* 2.2 업종 */}
+      </div>
+
+      {/* 2. 세부작업 선택 */}
+      <div className="flex flex-col items-center w-full gap-12">
         <div className="flex flex-col items-start w-full gap-3">
+          {/* 2.1 title */}
           <div className="flex items-start gap-2">
             <Title size="l" color="gray800">
               세부작업 선택
@@ -89,14 +96,17 @@ export default function Step2Page() {
                 1
               </Title>
               <Title size="l" color="gray300">
-                &nbsp;/&nbsp;
+                {' '}
+                /{' '}
               </Title>
               <Title size="l" color="gray400">
                 5
               </Title>
             </div>
           </div>
-          <div className="flex items-center w-full gap-4 rounded-lg ">
+          {/* 2.2. 세부작업 리스트 */}
+          <div className="flex items-start w-full gap-8">
+            {/* 드롭다운 */}
             <div className="flex flex-grow">
               <DropdownButton
                 options={[
@@ -118,6 +128,7 @@ export default function Step2Page() {
                 isFullWidth
               />
             </div>
+            {/* 버튼 */}
             <div className="flex items-center gap-2">
               <ActionButton variant="tonal-gray" size="m">
                 이전
@@ -128,88 +139,92 @@ export default function Step2Page() {
             </div>
           </div>
         </div>
-        {/* 2.3 세부작업 */}
-        <div className="flex flex-col items-start w-full gap-3">
-          <div className="flex items-center w-full gap-2">
-            <div className="flex flex-grow">
-              <Title size="l" color="gray800">
-                유해 위험요인 파악
-              </Title>
-            </div>
-            <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
-              직접 추가
-            </ActionButton>
-            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
-              자동 추천 추가
-            </ActionButton>
+      </div>
+
+      {/* 3. 유해 위험요인 파악 */}
+      <div className="flex flex-col items-start w-full gap-3">
+        {/* 3.1. title */}
+        <div className="flex items-center w-full gap-2">
+          <div className="flex flex-grow">
+            <Title size="l" color="gray800">
+              유해 위험요인 파악
+            </Title>
           </div>
-          <Table>
-            <Table.Head>
-              <Table.Row>
-                <Table.Header required>위험분류</Table.Header>
-                <Table.Header required>위험원인</Table.Header>
-                <Table.Header required>유해 위험원인</Table.Header>
-                <Table.Header>관련근거(법적근거)</Table.Header>
+          <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+            직접 추가
+          </ActionButton>
+          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+            자동 추천 추가
+          </ActionButton>
+        </div>
+        {/* 3.2. table */}
+        <Table>
+          <Table.Head>
+            <Table.Row>
+              <Table.Header required>위험분류</Table.Header>
+              <Table.Header required>위험원인</Table.Header>
+              <Table.Header required>유해 위험원인</Table.Header>
+              <Table.Header>관련근거(법적근거)</Table.Header>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            {dummyData.data.map((item, index) => (
+              <Table.Row key={index}>
+                <Table.Cell>
+                  <DropdownButton
+                    options={[
+                      {
+                        value: '1',
+                        label: '1',
+                      },
+                      {
+                        value: '2',
+                        label: '2',
+                      },
+                    ]}
+                    onSelected={() => {}}
+                    isFullWidth
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <DropdownButton
+                    options={[
+                      {
+                        value: '1',
+                        label: '1',
+                      },
+                      {
+                        value: '2',
+                        label: '2',
+                      },
+                    ]}
+                    onSelected={() => {}}
+                    isFullWidth
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <TextField.Multi defaultValue={item.target2} isFullWidth />
+                </Table.Cell>
+                <Table.Cell>
+                  <div className="flex flex-row gap-2">
+                    <TextField.Multi defaultValue={item.target3} isFullWidth />
+                    <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
+                  </div>
+                </Table.Cell>
               </Table.Row>
-            </Table.Head>
-            <Table.Body>
-              {dummyData.data.map((item, index) => (
-                <Table.Row key={index}>
-                  <Table.Cell>
-                    <DropdownButton
-                      options={[
-                        {
-                          value: '1',
-                          label: '1',
-                        },
-                        {
-                          value: '2',
-                          label: '2',
-                        },
-                      ]}
-                      onSelected={() => {}}
-                      isFullWidth
-                    />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <DropdownButton
-                      options={[
-                        {
-                          value: '1',
-                          label: '1',
-                        },
-                        {
-                          value: '2',
-                          label: '2',
-                        },
-                      ]}
-                      onSelected={() => {}}
-                      isFullWidth
-                    />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <TextField.Multi defaultValue={item.target2} isFullWidth />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <div className="flex flex-row gap-2">
-                      <TextField.Multi defaultValue={item.target3} isFullWidth />
-                      <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
-                    </div>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
+            ))}
+          </Table.Body>
+        </Table>
+        {/* 3.3. button */}
+        <div className="flex flex-col items-end self-stretch">
+          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
+            저장하기
+          </ActionButton>
         </div>
       </div>
-      {/* 3. 저장 안내 */}
-      <div className="flex items-center self-stretch justify-end gap-1 pt-3">
-        <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
-          저장하기
-        </ActionButton>
-      </div>
+
       {/* 4. 버튼 */}
-      <div className="flex items-center self-stretch justify-center gap-2 pt-12 pb-16">
+      <div className="flex items-center self-stretch justify-center gap-2">
         <ActionButton variant="tonal-gray" size="l" onClick={handleClickPreviousStepButton}>
           저장 후 이전 단계
         </ActionButton>
@@ -217,6 +232,6 @@ export default function Step2Page() {
           저장 후 다음 단계
         </ActionButton>
       </div>
-    </>
+    </div>
   );
 }
