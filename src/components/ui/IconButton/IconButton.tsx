@@ -8,13 +8,13 @@ type ButtonType = 'outline';
 type ButtonSize = 'm';
 type ButtonIcon = IconKey;
 
-interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonType;
   size: ButtonSize;
   icon: ButtonIcon;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ variant, size, icon, ...props }) => {
+const IconButton: React.FC<IconButtonProps> = ({ variant, size, icon, ...props }) => {
   return (
     <button className={`${styles.iconButton} ${styles[variant]} ${styles[size]} ${styles[icon]}`} {...props}>
       <Icon icon={icon as any} />
@@ -22,4 +22,4 @@ const ActionButton: React.FC<ActionButtonProps> = ({ variant, size, icon, ...pro
   );
 };
 
-export default ActionButton;
+export default IconButton;

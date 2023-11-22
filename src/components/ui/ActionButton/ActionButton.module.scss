@@ -46,11 +46,11 @@
       background: var(--blue-100, #e1e3f2);
     }
     &:disabled {
-      background: var(--blue-50, #edeffa);
-      color: var(--blue-200, #afb9ea);
+      background: var(--gray-300, #c3c6cd);
+      color: var(--gray-50, #f8f9fa);
       // 아이콘 fill
       svg {
-        fill: var(--blue-200, #afb9ea);
+        fill: var(--gray-50, #f8f9fa);
       }
     }
   }

@@ -1,16 +1,20 @@
 import Title from '@/components/typography/Title/Title';
+import { useRouter } from 'next/navigation';
 
 interface StepProps {
   number: number;
   label: string;
   active: boolean;
   selected: boolean;
+  url: string;
 }
 
 const FIRST_STEP = 1;
 const LAST_STEP = 4;
 
-const Step: React.FC<StepProps> = ({ number, label, active, selected }) => {
+const Step: React.FC<StepProps> = ({ number, label, active, selected, url }) => {
+  const router = useRouter();
+
   const baseBgColor = active ? 'bg-white' : 'bg-gray-50';
   const bgColor = selected ? 'bg-blue-500' : 'bg-gray-100';
   const textColor = selected ? 'white' : 'gray400';
@@ -24,12 +28,21 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected }) => {
 
   const borderBottomWidth = number === LAST_STEP ? 'w-[300px]' : 'w-[302px]';
 
+  const isClickable = active && !selected;
+
+  const clickableCursor = isClickable ? 'cursor-pointer' : '';
+
+  const handleClickStep = () => {
+    if (isClickable) router.push(url);
+  };
+
   return (
     <div
-      className={`flex w-[300px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound}`}
+      className={`flex w-[300px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound} ${clickableCursor}`}
+      onClick={handleClickStep}
     >
       <div className={`relative w-[32px] h-[32px] ${bgColor} rounded-[16px]`}>
-        <div className={`absolute top-[6px] left-[12px] whitespace-nowrap `}>
+        <div className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 whitespace-nowrap">
           <Title size="s" color={textColor}>
             {number}
           </Title>
