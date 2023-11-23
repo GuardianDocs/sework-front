@@ -14,9 +14,33 @@ import IconButton from '../ui/IconButton/IconButton';
 import Body from '../typography/Body/Body';
 import { DotIconGreen, DotIconRed, DotIconYellow } from '../ui/Icon/EtcIcon/DotIcon';
 import ColorBox from '../ui/ColorBox/ColorBox';
+import { Configuration, TestControllerApi, TestControllerApiAxiosParamCreator } from '@/services';
+import { useEffect } from 'react';
 
 export default function Step3Page() {
   const router = useRouter();
+
+  const apiConfiguration: Configuration = new Configuration({
+    basePath: 'https://api-dev.iras.kr',
+    baseOptions: {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        // TODO: 토근은 아래와 같은 방식으로 넣어면 된다.
+        // Authorization: 'Bearer 123',
+      },
+    },
+  });
+  const testControllerApi = new TestControllerApi(apiConfiguration);
+
+  const getDate = async () => {
+    const response = await testControllerApi.testUsingGET();
+    console.log(response);
+  };
+
+  useEffect(() => {
+    getDate();
+  }, []);
 
   const dummyData = {
     data: [

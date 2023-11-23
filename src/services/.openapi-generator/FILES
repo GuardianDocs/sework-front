@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 apis/class1-api.ts
 apis/class2-api.ts
