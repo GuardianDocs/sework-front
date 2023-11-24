@@ -30,10 +30,15 @@ const apiConfigurationParams: OpenApiInstance.ConfigurationParameters = {
   },
 };
 
+// accessToken이 없으면 헤더에서 제거
+if (!accessToken) {
+  delete apiConfigurationParams.baseOptions.headers.Authorization;
+}
+
 const apiConfiguration: OpenApiInstance.Configuration = new OpenApiInstance.Configuration(apiConfigurationParams);
 
 export const TestApi = new OpenApiInstance.TestControllerApi(apiConfiguration);
-export const Step0Api = new OpenApiInstance.DefaultApi(apiConfiguration);
+export const DefaultApi = new OpenApiInstance.DefaultApi(apiConfiguration);
 export const Step1Api = new OpenApiInstance.Class1Api(apiConfiguration);
 export const Step2Api = new OpenApiInstance.Class2Api(apiConfiguration);
 export const Step34Api = new OpenApiInstance.Class34Api(apiConfiguration);

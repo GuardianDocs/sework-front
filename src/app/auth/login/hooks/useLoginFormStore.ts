@@ -12,7 +12,7 @@ type LoginFormAction = {
   setDummyState: () => void;
   getId: () => string;
   getPassword: () => string;
-  getAllState: () => LoginFormState;
+  getLoginState: () => LoginFormState;
   isFormIncomplete: () => boolean;
   reset: () => void;
 };
@@ -41,7 +41,10 @@ const useLoginFormStore = create(
       setDummyState: () => set(dummyState),
       getId: () => get().id,
       getPassword: () => get().password,
-      getAllState: () => get(),
+      getLoginState: () => {
+        const { id, password } = get();
+        return { id, password };
+      },
       isFormIncomplete: () => {
         const { id, password } = get();
         return id === '' || password === '';
