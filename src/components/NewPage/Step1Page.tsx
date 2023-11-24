@@ -15,51 +15,56 @@ import Headline from '../typography/Headline/Headline';
 import Tooltip from '../ui/Tooltip/Tooltip';
 import { useEffect, useState } from 'react';
 import { Step1Api } from '@/lib/oas-axios';
+import { getParameterFromUrl } from '@/utils/urlUtil';
+import { GetCompanyProcessResponse, ResponseResultGetCompanyProcessResponse } from '@/services';
 
 export default function Step1Page() {
   const router = useRouter();
 
-  const getData = async () => {
-    const response = await Step1Api.getCompanyProcessUsingGET(5);
-    return response.data;
-  };
-
-  const [data, setData] = useState<any>(null);
+  const [companyProcess, setCompanyProcess] = useState<GetCompanyProcessResponse>();
 
   useEffect(() => {
-    getData().then(res => setData(res));
+    const getCompanyProcess = async () => {
+      const response = await Step1Api.getCompanyProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
+
+      const { data } = response?.data as ResponseResultGetCompanyProcessResponse;
+      return data;
+    };
+
+    getCompanyProcess().then(data => {
+      setCompanyProcess(data);
+    });
   }, []);
 
-  const dummyData = {
-    data: [
-      {
-        detailJob: '123',
-        target: '5t',
-        target2: '인65쇄',
-        target3: '455743',
-        id: 1,
-      },
-      {
-        detailJob: '345',
-        target: '인347쇄',
-        target2: '인735쇄',
-        target3: '인3453쇄',
-        id: 2,
-      },
-      {
-        detailJob: '345',
-        target: '인347쇄',
-        target2: '인735쇄',
-        target3: '인3453쇄',
-      },
-    ],
-  };
-
   const steps = [
-    { number: 1, label: '사전준비', active: true, selected: true, url: '/dashboard/step1' },
-    { number: 2, label: '유해 위험요인 파악', active: false, selected: false, url: '/dashboard/step2' },
-    { number: 3, label: '위험성 수준 판단', active: false, selected: false, url: '/dashboard/step3' },
-    { number: 4, label: '감소대책 수립', active: false, selected: false, url: '/dashboard/step4' },
+    {
+      number: 1,
+      label: '사전준비',
+      active: true,
+      selected: true,
+      url: `/dashboard/step1?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 2,
+      label: '유해 위험요인 파악',
+      active: false,
+      selected: false,
+      url: `/dashboard/step2?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 3,
+      label: '위험성 수준 판단',
+      active: false,
+      selected: false,
+      url: `/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 4,
+      label: '감소대책 수립',
+      active: false,
+      selected: false,
+      url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const handleDragStart = (e: any) => {
@@ -75,7 +80,7 @@ export default function Step1Page() {
   };
 
   const handleClickNextStepButton = () => {
-    router.push('/dashboard/step2');
+    router.push(`/dashboard/step2?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 
   return (
@@ -113,7 +118,7 @@ export default function Step1Page() {
         </Title>
         <div className="flex items-center w-full gap-4 p-6 rounded-lg bg-gray-50">
           <Body size="l" color="gray800">
-            음식 및 숙박업
+            {companyProcess?.sector?.title}
           </Body>
         </div>
       </div>
@@ -163,7 +168,7 @@ export default function Step1Page() {
             </Table.Row>
           </Table.Head>
           <Table.Body>
-            {dummyData.data.map((item, index) => (
+            {companyProcess?.companyProcessList?.map((item, index) => (
               <Table.Row
                 key={index}
                 draggable
@@ -179,17 +184,21 @@ export default function Step1Page() {
                   </div>
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item.detailJob} {...(item.id && { disabled: true })} isFullWidth />
+                  <TextField.Multi
+                    defaultValue={item?.title}
+                    {...(item?.processId && { disabled: true })}
+                    isFullWidth
+                  />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item.target} isFullWidth />
+                  <TextField.Multi defaultValue={item?.description} isFullWidth />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item.target2} isFullWidth />
+                  <TextField.Multi defaultValue={item?.equipment} isFullWidth />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
-                    <TextField.Multi defaultValue={item.target3} isFullWidth />
+                    <TextField.Multi defaultValue={item?.material} isFullWidth />
                     <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
                     <button>
                       <EtcIcon icon="drag-and-drop" />
