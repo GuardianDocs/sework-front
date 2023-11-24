@@ -67,15 +67,51 @@ export default function Step1Page() {
     },
   ];
 
-  const handleDragStart = (e: any) => {
-    e.dataTransfer.setData('text/plain', e.target.id);
+  const handleDragStart = (e: any, index: number) => {
+    const targetRow = e.currentTarget.closest('tr'); // 현재 드래그하는 행을 찾음
+
+    // 행의 복사본 생성
+    const cloneRow = targetRow.cloneNode(true);
+    cloneRow.style.width = `${targetRow.clientWidth}px`;
+    cloneRow.style.height = `${targetRow.clientHeight}px`;
+    cloneRow.style.backgroundColor = '#f3f3f3'; // 배경 색상 조정
+    cloneRow.style.boxShadow = '0px 2px 5px rgba(0,0,0,0.2)'; // 그림자 효과 추가
+
+    // 문서에 복사본 추가 (화면에 보이지 않는 위치에)
+    document.body.appendChild(cloneRow);
+    cloneRow.style.position = 'absolute';
+    cloneRow.style.top = '-9999px';
+
+    // 드래그 이미지의 초기 위치 조정
+    const rect = targetRow.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+
+    // 드래그 이미지 설정
+    e.dataTransfer.setDragImage(cloneRow, offsetX, offsetY);
+
+    // 드래그 후 복사본 제거
+    setTimeout(() => {
+      document.body.removeChild(cloneRow);
+    }, 0);
+
+    e.dataTransfer.setData('text/plain', index);
+  };
+
+  // 나머지 코드는 이전과 동일
+  ``;
+
+  // 나머지 코드는 이전과 동일
+
+  const handleDrop = (e: any, dropIndex: number) => {
+    e.preventDefault();
+    const dragIndex = e.dataTransfer.getData('text/plain');
+
+    console.log('dragIndex', dragIndex);
+    console.log('dropIndex', dropIndex);
   };
 
   const handleDragOver = (e: any) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: any) => {
     e.preventDefault();
   };
 
@@ -169,13 +205,7 @@ export default function Step1Page() {
           </Table.Head>
           <Table.Body>
             {companyProcess?.companyProcessList?.map((item, index) => (
-              <Table.Row
-                key={index}
-                draggable
-                onDragStart={handleDragStart}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-              >
+              <Table.Row key={index} onDragOver={handleDragOver} onDrop={e => handleDrop(e, index)}>
                 <Table.Cell>
                   <div className="flex items-center justify-center h-[40px] w-9">
                     <Body size="m" color="gray800">
@@ -200,7 +230,7 @@ export default function Step1Page() {
                   <div className="flex flex-row gap-2">
                     <TextField.Multi defaultValue={item?.material} isFullWidth />
                     <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
-                    <button>
+                    <button draggable onDragStart={e => handleDragStart(e, index)}>
                       <EtcIcon icon="drag-and-drop" />
                     </button>
                   </div>
