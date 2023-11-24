@@ -1,19 +1,19 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Body from '../typography/Body/Body';
-import Label from '../typography/Label/Label';
-import Title from '../typography/Title/Title';
-import ActionButton from '../ui/ActionButton/ActionButton';
-import Table from '../ui/Table/Table';
-import TextField from '../ui/TextField/TextField';
-import DropdownButton from '../ui/DropdownButton/DropdownButton';
-import Icon from '../ui/Icon/Icon';
-import Headline from '../typography/Headline/Headline';
-import ProgressBox from '../ui/ProgressBox/ProgressBox';
-import IconButton from '../ui/IconButton/IconButton';
-import { DotIconRed, DotIconYellow, DotIconGreen } from '../ui/Icon/EtcIcon/DotIcon';
-import ColorBox from '../ui/ColorBox/ColorBox';
+import Body from '../../typography/Body/Body';
+import Label from '../../typography/Label/Label';
+import Title from '../../typography/Title/Title';
+import ActionButton from '../../ui/ActionButton/ActionButton';
+import Table from '../../ui/Table/Table';
+import TextField from '../../ui/TextField/TextField';
+import DropdownButton from '../../ui/DropdownButton/DropdownButton';
+import Icon from '../../ui/Icon/Icon';
+import Headline from '../../typography/Headline/Headline';
+import ProgressBox from '../../ui/ProgressBox/ProgressBox';
+import IconButton from '../../ui/IconButton/IconButton';
+import { DotIconRed, DotIconYellow, DotIconGreen } from '../../ui/Icon/EtcIcon/DotIcon';
+import ColorBox from '../../ui/ColorBox/ColorBox';
 
 export default function Step4Page() {
   const router = useRouter();

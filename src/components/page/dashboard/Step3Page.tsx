@@ -1,18 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Label from '../typography/Label/Label';
-import Title from '../typography/Title/Title';
-import ActionButton from '../ui/ActionButton/ActionButton';
-import Table from '../ui/Table/Table';
-import TextField from '../ui/TextField/TextField';
-import DropdownButton from '../ui/DropdownButton/DropdownButton';
-import Icon from '../ui/Icon/Icon';
-import IconButton from '../ui/IconButton/IconButton';
-import ProgressBox from '../ui/ProgressBox/ProgressBox';
-import Headline from '../typography/Headline/Headline';
+import Label from '../../typography/Label/Label';
+import Title from '../../typography/Title/Title';
+import ActionButton from '../../ui/ActionButton/ActionButton';
+import Table from '../../ui/Table/Table';
+import TextField from '../../ui/TextField/TextField';
+import DropdownButton from '../../ui/DropdownButton/DropdownButton';
+import Icon from '../../ui/Icon/Icon';
+import Headline from '../../typography/Headline/Headline';
+import ProgressBox from '../../ui/ProgressBox/ProgressBox';
+import IconButton from '../../ui/IconButton/IconButton';
+import Body from '../../typography/Body/Body';
+import { DotIconGreen, DotIconRed, DotIconYellow } from '../../ui/Icon/EtcIcon/DotIcon';
+import ColorBox from '../../ui/ColorBox/ColorBox';
 
-export default function Step2Page() {
+export default function Step3Page() {
   const router = useRouter();
 
   const dummyData = {
@@ -36,23 +39,24 @@ export default function Step2Page() {
         target: '인347쇄',
         target2: '인735쇄',
         target3: '인3453쇄',
+        id: 3,
       },
     ],
   };
 
   const steps = [
     { number: 1, label: '사전준비', active: true, selected: false, url: '/dashboard/step1' },
-    { number: 2, label: '유해 위험요인 파악', active: true, selected: true, url: '/dashboard/step2' },
-    { number: 3, label: '위험성 수준 판단', active: false, selected: false, url: '/dashboard/step3' },
+    { number: 2, label: '유해 위험요인 파악', active: true, selected: false, url: '/dashboard/step2' },
+    { number: 3, label: '위험성 수준 판단', active: true, selected: true, url: '/dashboard/step3' },
     { number: 4, label: '감소대책 수립', active: false, selected: false, url: '/dashboard/step4' },
   ];
 
   const handleClickPreviousStepButton = () => {
-    router.push('/dashboard/step1');
+    router.push('/dashboard/step2');
   };
 
   const handleClickNextStepButton = () => {
-    router.push('/dashboard/step3');
+    router.push('/dashboard/step4');
   };
 
   return (
@@ -76,7 +80,7 @@ export default function Step2Page() {
               위험성평가
             </Headline>
             <Label size="l" color="gray600">
-              2단계 : 세부작업별 유해위험요인을 파악하여 작성해주세요
+              3단계 : 유해 위험요인에 대한 현재의 안전보건조치 내용을 작성하고 현재의 위험성을 추정해주세요
             </Label>
           </div>
           <ProgressBox steps={steps} />
@@ -141,86 +145,122 @@ export default function Step2Page() {
         </div>
       </div>
 
-      {/* 3. 유해 위험요인 파악 */}
+      {/* 3. 위험성 추정 */}
       <div className="flex flex-col items-start w-full gap-3">
-        {/* 3.1. title */}
-        <div className="flex items-center w-full gap-2">
-          <div className="flex flex-grow">
-            <Title size="l" color="gray800">
-              유해 위험요인 파악
-            </Title>
-          </div>
-          <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
-            직접 추가
-          </ActionButton>
-          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
-            자동 추천 추가
-          </ActionButton>
-        </div>
-        {/* 3.2. table */}
+        <Title size="l" color="gray800">
+          위험성 수준 판단
+        </Title>
         <Table>
           <Table.Head>
             <Table.Row>
-              <Table.Header required>위험분류</Table.Header>
-              <Table.Header required>위험원인</Table.Header>
-              <Table.Header required>유해 위험원인</Table.Header>
-              <Table.Header>관련근거(법적근거)</Table.Header>
+              <Table.Header>유해 위험요인</Table.Header>
+              <Table.Header>현재의 안전보건조치</Table.Header>
+              <Table.Header required>가능성(빈도)</Table.Header>
+              <Table.Header required>중대성(강도)</Table.Header>
+              <Table.Header>위험성</Table.Header>
             </Table.Row>
           </Table.Head>
           <Table.Body>
             {dummyData.data.map((item, index) => (
               <Table.Row key={index}>
                 <Table.Cell>
-                  <DropdownButton
-                    options={[
-                      {
-                        value: '1',
-                        label: '1',
-                      },
-                      {
-                        value: '2',
-                        label: '2',
-                      },
-                    ]}
-                    onSelected={() => {}}
-                    isFullWidth
-                  />
-                </Table.Cell>
-                <Table.Cell>
-                  <DropdownButton
-                    options={[
-                      {
-                        value: '1',
-                        label: '1',
-                      },
-                      {
-                        value: '2',
-                        label: '2',
-                      },
-                    ]}
-                    onSelected={() => {}}
-                    isFullWidth
-                  />
-                </Table.Cell>
-                <Table.Cell>
-                  <TextField.Multi defaultValue={item.target2} isFullWidth />
+                  <TextField.Single defaultValue={item.detailJob} {...(item.id && { disabled: true })} isFullWidth />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
-                    <TextField.Multi defaultValue={item.target3} isFullWidth />
-                    <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
+                    <TextField.Multi defaultValue={item.target} isFullWidth />
+                    <IconButton variant="outline" size="m" icon="edit" onClick={() => console.log('trash')} />
                   </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <DropdownButton
+                    options={[
+                      {
+                        value: '1',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconRed />
+                            <Body size="m" color="gray800">
+                              1(하)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                      {
+                        value: '2',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconYellow />
+                            <Body size="m" color="gray800">
+                              2(중)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                      {
+                        value: '3',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconGreen />
+                            <Body size="m" color="gray800">
+                              3(상)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                    ]}
+                    onSelected={() => {}}
+                    isFullWidth
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <DropdownButton
+                    options={[
+                      {
+                        value: '1',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconRed />
+                            <Body size="m" color="gray800">
+                              1(소)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                      {
+                        value: '2',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconYellow />
+                            <Body size="m" color="gray800">
+                              2(중)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                      {
+                        value: '3',
+                        label: (
+                          <div className="flex flex-row items-center gap-1">
+                            <DotIconGreen />
+                            <Body size="m" color="gray800">
+                              3(대)
+                            </Body>
+                          </div>
+                        ),
+                      },
+                    ]}
+                    onSelected={() => {}}
+                    isFullWidth
+                  />
+                </Table.Cell>
+                <Table.Cell style={{ width: '80px' }}>
+                  <ColorBox value={item.id * 3} />
                 </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
-        {/* 3.3. button */}
-        <div className="flex flex-col items-end self-stretch">
-          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
-            저장하기
-          </ActionButton>
-        </div>
       </div>
 
       {/* 4. 버튼 */}
