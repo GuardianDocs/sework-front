@@ -13,9 +13,37 @@ import IconButton from '../ui/IconButton/IconButton';
 import EtcIcon from '../ui/Icon/EtcIcon/EtcIcon';
 import Headline from '../typography/Headline/Headline';
 import Tooltip from '../ui/Tooltip/Tooltip';
+import { Class1Api, Configuration } from '@/services';
+import { useEffect, useState } from 'react';
 
 export default function Step1Page() {
   const router = useRouter();
+
+  const temporaryAccessToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOjIwLCJ1c2VyX25hbWUiOiJDT01QQU5ZXzIwIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTcwMDkxMjQ3OCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9DT01QQU5ZIl0sImp0aSI6IjU1ZDZiYzZhLTg3Y2MtNDE4Ny1hMjc4LWI4YTMzOTI3YTk2OSIsImNsaWVudF9pZCI6InNld29yay1hcGkifQ._WYF19tsOPuUsnJ-VvQlkM-EMO1IA3q2hbO4w5-kkx0';
+
+  const apiConfiguration: Configuration = new Configuration({
+    basePath: 'https://api-dev.iras.kr',
+    baseOptions: {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${temporaryAccessToken}`,
+      },
+    },
+  });
+
+  const apiController = new Class1Api(apiConfiguration);
+
+  const getData = async () => {
+    const response = await apiController.recommendProcessUsingGET(5);
+    return response.data;
+  };
+
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    getData().then(res => setData(res));
+  }, []);
 
   const dummyData = {
     data: [
