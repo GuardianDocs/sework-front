@@ -98,11 +98,6 @@ export default function Step1Page() {
     e.dataTransfer.setData('text/plain', index);
   };
 
-  // 나머지 코드는 이전과 동일
-  ``;
-
-  // 나머지 코드는 이전과 동일
-
   const handleDrop = (e: any, dropIndex: number) => {
     e.preventDefault();
     const dragIndex = e.dataTransfer.getData('text/plain');
