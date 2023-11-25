@@ -15,15 +15,22 @@ interface Props {
   disabled?: boolean;
   width?: string;
   isFullWidth?: boolean;
+
+  // to be implemented
+  listWidth?: string;
 }
 
-export default function DropdownButton({ options, onSelected, disabled, width, isFullWidth }: Props) {
+export default function DropdownButton({ options, onSelected, disabled, width, isFullWidth, listWidth }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const containerStyle = {
     width: isFullWidth ? '100%' : width,
+  };
+
+  const listStyle = {
+    width: listWidth,
   };
 
   const handleOptionClick = (option: DropdownOption) => {
@@ -62,7 +69,7 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
         )}
       </button>
       {isOpen && (
-        <div className={styles.dropdownList}>
+        <div className={styles.dropdownList} style={listStyle}>
           {options?.map(option => (
             <div key={option.value} onClick={() => handleOptionClick(option)} className={styles.dropdownOption}>
               <Body
