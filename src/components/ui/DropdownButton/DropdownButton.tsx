@@ -15,12 +15,19 @@ interface Props {
   disabled?: boolean;
   width?: string;
   isFullWidth?: boolean;
-
-  // to be implemented
   listWidth?: string;
+  listMaxHeight?: string;
 }
 
-export default function DropdownButton({ options, onSelected, disabled, width, isFullWidth, listWidth }: Props) {
+export default function DropdownButton({
+  options,
+  onSelected,
+  disabled,
+  width,
+  isFullWidth,
+  listWidth,
+  listMaxHeight,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -31,6 +38,7 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
 
   const listStyle = {
     width: listWidth,
+    maxHeight: listMaxHeight,
   };
 
   const handleOptionClick = (option: DropdownOption) => {
