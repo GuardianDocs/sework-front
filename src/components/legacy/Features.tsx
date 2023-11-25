@@ -11,21 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog/Dialog';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/AlertDialog/AlertDialog';
 import ActionButton from '../ui/ActionButton/ActionButton';
 import Label from '../typography/Label/Label';
 import TextField from '../ui/TextField/TextField';
-import { useState } from 'react';
 
 interface Feature {
   title: string;
@@ -37,8 +25,6 @@ interface FeaturesProps {
 }
 
 const Features = ({ features }: FeaturesProps) => {
-  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
-
   return (
     <section className="p-10">
       <div className="flex justify-center">
@@ -74,30 +60,6 @@ const Features = ({ features }: FeaturesProps) => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
-          <AlertDialogTrigger asChild>
-            <ActionButton variant="filled" size="s">
-              Show Dialog
-            </ActionButton>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account and remove your data from our
-                servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel variant="tonal-red" size="s" onClick={() => setAlertDialogOpen(false)}>
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction variant="tonal-blue" size="s" onClick={() => setAlertDialogOpen(false)}>
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
       <div className="flex flex-wrap justify-around">
         {features.map((feature, index) => (
