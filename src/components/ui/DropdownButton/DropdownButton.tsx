@@ -85,7 +85,11 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
                   작성완료
                 </Body>
               )}
-              {option.value === selectedOption?.value && <Icon icon="check" size={24} color="blue500" />}
+              {option.value === selectedOption?.value ? (
+                <Icon icon="check" size={24} color="blue500" />
+              ) : (
+                <Icon icon="empty" size={24} />
+              )}
             </div>
           ))}
         </div>
