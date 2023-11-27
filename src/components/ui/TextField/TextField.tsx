@@ -2,6 +2,7 @@
 
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './TextField.module.scss';
+import Icon from '@/components/ui/Icon/Icon';
 
 interface TextFieldProps {
   sizeVariant?: 's';
@@ -16,10 +17,25 @@ interface TextFieldMultiProps extends React.RefAttributes<HTMLTextAreaElement>, 
   defaultValue?: string;
 }
 
-const getCommonClassNames = (sizeVariant: 's', isFullWidth: boolean | undefined, type: 'single' | 'multi') => {
+interface TextFieldTriggerProps extends React.HTMLAttributes<HTMLDivElement>, TextFieldProps {
+  defaultValue?: string;
+}
+
+const getCommonClassNames = (
+  sizeVariant: 's',
+  isFullWidth: boolean | undefined,
+  type: 'single' | 'multi' | 'trigger'
+) => {
   const sizeStyle = styles[sizeVariant] || '';
   const fullWidthStyle = isFullWidth ? styles.fullWidth : '';
-  const textFieldStyle = type === 'single' ? styles.textFieldSingle : styles.textFieldMulti;
+
+  const textFieldStyleMap = {
+    single: styles.textFieldSingle,
+    multi: styles.textFieldMulti,
+    trigger: styles.textFieldTrigger,
+  };
+
+  const textFieldStyle = textFieldStyleMap[type] || '';
 
   return `${textFieldStyle} ${sizeStyle} ${fullWidthStyle} focus:ring-0 focus:ring-offset-0`;
 };
@@ -37,6 +53,14 @@ const TextField = {
       defaultValue={defaultValue}
       {...props}
     />
+  ),
+  Trigger: ({ sizeVariant = 's', isFullWidth, defaultValue, ...props }: TextFieldTriggerProps) => (
+    <div className={getCommonClassNames(sizeVariant, isFullWidth, 'trigger')} {...props}>
+      <div className="flex flex-grow">{defaultValue}</div>
+      <div className="flex self-start">
+        <Icon icon="edit" size={24} />
+      </div>
+    </div>
   ),
 };
 

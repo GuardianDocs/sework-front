@@ -47,6 +47,12 @@
   resize: none;
 }
 
+.textFieldTrigger {
+  @include text-field;
+
+  cursor: pointer;
+}
+
 .fullWidth {
   width: 100%;
 }
