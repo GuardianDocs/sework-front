@@ -4,6 +4,7 @@ import RootProvider from '@/components/Providers/RootProvider';
 import Navbar from '@/components/legacy/Navbar';
 import '@/app/globals.css';
 import { type NextFont } from 'next/dist/compiled/@next/font';
+import { Toaster } from '@/components/ui/Toast/Toaster';
 
 const Pretendard: NextFont = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <RootProvider>
           <Navbar />
           <main>{children}</main>
+          <Toaster />
         </RootProvider>
       </body>
     </html>
