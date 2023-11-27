@@ -45,10 +45,43 @@ export const SingleDialog: Story = {
               <span className="sr-only">Copy</span>
             </ActionButton>
           </div>
-          <DialogFooter className="sm:justify-start">
+          <DialogFooter>
             <DialogClose asChild>
-              <ActionButton type="button" variant="tonal-red" size="l">
-                Close
+              <ActionButton type="button" variant="filled" size="l">
+                저장 후 닫기
+              </ActionButton>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  },
+};
+
+export const Step3Dialog: Story = {
+  render: function Step3Dialog() {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <ActionButton size="s" variant="filled">
+            Open
+          </ActionButton>
+        </DialogTrigger>
+        <DialogContent className="max-w-[792px]">
+          {/* 작성 내용 */}
+          <div className="flex flex-col items-start flex-grow gap-8">
+            <div className="grid flex-1 gap-2">
+              <Label>Link</Label>
+              <TextField.Single id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
+            </div>
+            <ActionButton type="submit" size="s" variant="filled" className="px-3">
+              <span className="sr-only">Copy</span>
+            </ActionButton>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <ActionButton type="button" variant="filled" size="l">
+                저장 후 닫기
               </ActionButton>
             </DialogClose>
           </DialogFooter>
