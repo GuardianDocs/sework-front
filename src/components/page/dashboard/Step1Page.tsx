@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Body, Label, Title, Headline } from '@/components/typography';
 import ActionButton from '../../ui/ActionButton/ActionButton';
@@ -14,21 +13,25 @@ import Tooltip from '../../ui/Tooltip/Tooltip';
 import { getParameterFromUrl } from '@/utils/urlUtil';
 import { Step1Api } from '@/lib/axios/oas-axios';
 import {
-  type GetCompanyProcessResponse,
   type ResponseResultGetCompanyProcessResponse,
   type ResponseResultRecommendProcessResponse,
+  type ResponseResultUpsertCompanyProcessResponse,
+  type CompanyProcessVO,
 } from '@/services';
+import { useMutation, useQuery } from 'react-query';
+import { useStep1Store } from '@/hooks/dashboard/Step1Store';
 
 export default function Step1Page() {
   const router = useRouter();
-
-  const [companyProcess, setCompanyProcess] = useState<GetCompanyProcessResponse>();
+  const { step1, setStep1 } = useStep1Store();
 
   // 페이지 진입 시, 세부작업 불러오기
   const getCompanyProcess = async () => {
     const response = await Step1Api.getCompanyProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultGetCompanyProcessResponse;
+    setStep1(data?.companyProcessList || []);
+
     return data;
   };
 
@@ -37,35 +40,51 @@ export default function Step1Page() {
     const response = await Step1Api.recommendProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultRecommendProcessResponse;
-
-    //TODO: 추후 삭제
-    console.log('getRecommendProcess', data);
+    console.log(data);
 
     return data;
   };
 
   // 세부작업 저장하기
-  const updateCompanyProcess = async () => {
+  const updateCompanyProcess = async (companyProcessList: Array<CompanyProcessVO>) => {
     const response = await Step1Api.upsertCompanyProcessUsingPUT(Number(getParameterFromUrl('assessmentId')), {
-      companyProcessList: [
-        {
-          id: 0,
-          processId: 0,
-          title: 'string',
-          description: 'string',
-          equipment: 'string',
-          material: 'string',
-          viewOrder: 0,
-        },
-      ],
+      companyProcessList: companyProcessList,
     });
+    const { data } = response?.data as ResponseResultUpsertCompanyProcessResponse;
+    return data;
   };
 
-  useEffect(() => {
-    getCompanyProcess().then(data => {
-      setCompanyProcess(data);
-    });
-  }, []);
+  const { data, isLoading, isError, error } = useQuery('getCompanyProcess', getCompanyProcess);
+
+  const {
+    data: companyProcess,
+    isLoading: isLoadingCompanyProcess,
+    isError: isErrorCompanyProcess,
+    error: errorCompanyProcess,
+  } = useQuery('getCompanyProcess', getCompanyProcess);
+
+  const {
+    data: recommendProcess,
+    isLoading: isLoadingRecommendProcess,
+    isError: isErrorRecommendProcess,
+    error: errorRecommendProcess,
+  } = useQuery('getRecommendProcess', getRecommendProcess);
+
+  const { mutate: updateCompanyProcessMutate, isLoading: isLoadingUpdateCompanyProcess } = useMutation(
+    updateCompanyProcess,
+    {
+      onSuccess: () => {
+        console.log('updateCompanyProcessMutate success');
+      },
+      onError: () => {
+        console.log('updateCompanyProcessMutate error');
+      },
+    }
+  );
+
+  const handleUpdateCompanyProcess = (companyProcessList: any) => {
+    updateCompanyProcessMutate(companyProcessList);
+  };
 
   const steps = [
     {
@@ -133,8 +152,17 @@ export default function Step1Page() {
     e.preventDefault();
     const dragIndex = e.dataTransfer.getData('text/plain');
 
-    console.log('dragIndex', dragIndex);
-    console.log('dropIndex', dropIndex);
+    const newStep1 = [...step1];
+    const dragItem = newStep1[dragIndex];
+    newStep1.splice(dragIndex, 1);
+    newStep1.splice(dropIndex, 0, dragItem);
+
+    // change viewOrder
+    newStep1.map((item, index) => {
+      item.viewOrder = index + 1;
+    });
+
+    setStep1(newStep1);
   };
 
   const handleDragOver = (e: any) => {
@@ -197,7 +225,25 @@ export default function Step1Page() {
               IRAS에서 각 업종에 맞는 세부작업을 자동으로 추천해 보여드립니다.
             </Body>
           </div>
-          <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+          <ActionButton
+            variant="tonal-gray"
+            size="s"
+            showIcon="left"
+            icon={<Icon icon="line-add" />}
+            onClick={() => {
+              const newStep1 = [...step1];
+              newStep1.push({
+                id: undefined,
+                processId: undefined,
+                title: '',
+                description: '',
+                equipment: '',
+                material: '',
+                viewOrder: step1.length + 1,
+              });
+              setStep1(newStep1);
+            }}
+          >
             직접 추가
           </ActionButton>
           <Tooltip
@@ -236,7 +282,7 @@ export default function Step1Page() {
             </Table.Row>
           </Table.Head>
           <Table.Body>
-            {companyProcess?.companyProcessList?.map((item, index) => (
+            {step1?.map((item, index) => (
               <Table.Row key={index} onDragOver={handleDragOver} onDrop={e => handleDrop(e, index)}>
                 <Table.Cell>
                   <div className="flex items-center justify-center h-[40px] w-9">
@@ -247,21 +293,63 @@ export default function Step1Page() {
                 </Table.Cell>
                 <Table.Cell>
                   <TextField.Multi
-                    defaultValue={item?.title}
+                    value={item?.title || ''}
                     {...(item?.processId && { disabled: true })}
                     isFullWidth
+                    onChange={event => {
+                      const { value } = event.target;
+                      const newStep1 = [...step1];
+                      newStep1[index].title = value;
+                      setStep1(newStep1);
+                    }}
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item?.description} isFullWidth />
+                  <TextField.Multi
+                    value={item?.description || ''}
+                    isFullWidth
+                    onChange={event => {
+                      const { value } = event.target;
+                      const newStep1 = [...step1];
+                      newStep1[index].description = value;
+                      setStep1(newStep1);
+                    }}
+                  />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item?.equipment} isFullWidth />
+                  <TextField.Multi
+                    value={item?.equipment || ''}
+                    isFullWidth
+                    onChange={event => {
+                      const { value } = event.target;
+                      const newStep1 = [...step1];
+                      newStep1[index].equipment = value;
+                      setStep1(newStep1);
+                    }}
+                  />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
-                    <TextField.Multi defaultValue={item?.material} isFullWidth />
-                    <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
+                    <TextField.Multi
+                      value={item?.material || ''}
+                      isFullWidth
+                      onChange={event => {
+                        const { value } = event.target;
+                        const newStep1 = [...step1];
+                        newStep1[index].material = value;
+                        setStep1(newStep1);
+                      }}
+                    />
+                    <IconButton
+                      variant="outline"
+                      size="m"
+                      icon="trash"
+                      onClick={() => {
+                        const newStep1 = [...step1];
+                        newStep1.splice(index, 1);
+                        setStep1(newStep1);
+                      }}
+                    />
                     <button draggable onDragStart={e => handleDragStart(e, index)}>
                       <EtcIcon icon="drag-and-drop" />
                     </button>
@@ -273,7 +361,13 @@ export default function Step1Page() {
         </Table>
         {/* 3.3. 저장하기 버튼 */}
         <div className="flex flex-col items-end self-stretch">
-          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
+          <ActionButton
+            variant="tonal-blue"
+            size="s"
+            showIcon="left"
+            icon={<Icon icon="save" />}
+            onClick={() => handleUpdateCompanyProcess(step1)}
+          >
             저장하기
           </ActionButton>
         </div>

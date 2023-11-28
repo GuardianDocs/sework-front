@@ -15,6 +15,8 @@ interface TextFieldMultiProps extends React.RefAttributes<HTMLTextAreaElement>, 
   placeholder?: string;
   disabled?: boolean;
   defaultValue?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 interface TextFieldTriggerProps extends React.HTMLAttributes<HTMLDivElement>, TextFieldProps {
@@ -44,13 +46,24 @@ const TextField = {
   Single: ({ sizeVariant = 's', isFullWidth, ...props }: TextFieldSingleProps) => (
     <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single')} {...props} />
   ),
-  Multi: ({ sizeVariant = 's', isFullWidth, placeholder, disabled, defaultValue, ...props }: TextFieldMultiProps) => (
+  Multi: ({
+    sizeVariant = 's',
+    isFullWidth,
+    placeholder,
+    disabled,
+    defaultValue,
+    value,
+    onChange,
+    ...props
+  }: TextFieldMultiProps) => (
     <TextareaAutosize
       cacheMeasurements
       className={getCommonClassNames(sizeVariant, isFullWidth, 'multi')}
       placeholder={placeholder}
       disabled={disabled}
       defaultValue={defaultValue}
+      value={value}
+      onChange={onChange}
       {...props}
     />
   ),
