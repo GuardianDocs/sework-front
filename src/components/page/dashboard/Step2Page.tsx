@@ -1,8 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Label from '../../typography/Label/Label';
-import Title from '../../typography/Title/Title';
+import { Label, Title, Headline } from '@/components/typography';
 import ActionButton from '../../ui/ActionButton/ActionButton';
 import Table from '../../ui/Table/Table';
 import TextField from '../../ui/TextField/TextField';
@@ -10,7 +9,8 @@ import DropdownButton from '../../ui/DropdownButton/DropdownButton';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
-import Headline from '../../typography/Headline/Headline';
+import { getParameterFromUrl } from '@/utils/urlUtil';
+import { Step2Api } from '@/lib/oas-axios';
 
 export default function Step2Page() {
   const router = useRouter();
