@@ -1,9 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Body from '../../typography/Body/Body';
-import Label from '../../typography/Label/Label';
-import Title from '../../typography/Title/Title';
+import { Body, Label, Title, Headline } from '@/components/typography';
 import ActionButton from '../../ui/ActionButton/ActionButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
 import Table from '../../ui/Table/Table';
@@ -11,26 +10,58 @@ import TextField from '../../ui/TextField/TextField';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import EtcIcon from '../../ui/Icon/EtcIcon/EtcIcon';
-import Headline from '../../typography/Headline/Headline';
 import Tooltip from '../../ui/Tooltip/Tooltip';
-import { useEffect, useState } from 'react';
-import { Step1Api } from '@/lib/oas-axios';
 import { getParameterFromUrl } from '@/utils/urlUtil';
-import { GetCompanyProcessResponse, ResponseResultGetCompanyProcessResponse } from '@/services';
+import { Step1Api } from '@/lib/oas-axios';
+import {
+  type GetCompanyProcessResponse,
+  type ResponseResultGetCompanyProcessResponse,
+  type ResponseResultRecommendProcessResponse,
+} from '@/services';
 
 export default function Step1Page() {
   const router = useRouter();
 
   const [companyProcess, setCompanyProcess] = useState<GetCompanyProcessResponse>();
 
+  // 페이지 진입 시, 세부작업 불러오기
+  const getCompanyProcess = async () => {
+    const response = await Step1Api.getCompanyProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
+
+    const { data } = response?.data as ResponseResultGetCompanyProcessResponse;
+    return data;
+  };
+
+  // 자동 추천 추가 버튼 클릭 시, 추천 세부작업 불러오기
+  const getRecommendProcess = async () => {
+    const response = await Step1Api.recommendProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
+
+    const { data } = response?.data as ResponseResultRecommendProcessResponse;
+
+    //TODO: 추후 삭제
+    console.log('getRecommendProcess', data);
+
+    return data;
+  };
+
+  // 세부작업 저장하기
+  const updateCompanyProcess = async () => {
+    const response = await Step1Api.upsertCompanyProcessUsingPUT(Number(getParameterFromUrl('assessmentId')), {
+      companyProcessList: [
+        {
+          id: 0,
+          processId: 0,
+          title: 'string',
+          description: 'string',
+          equipment: 'string',
+          material: 'string',
+          viewOrder: 0,
+        },
+      ],
+    });
+  };
+
   useEffect(() => {
-    const getCompanyProcess = async () => {
-      const response = await Step1Api.getCompanyProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
-
-      const { data } = response?.data as ResponseResultGetCompanyProcessResponse;
-      return data;
-    };
-
     getCompanyProcess().then(data => {
       setCompanyProcess(data);
     });
@@ -182,7 +213,13 @@ export default function Step1Page() {
             }
             placement="top"
           >
-            <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+            <ActionButton
+              variant="tonal-blue"
+              size="s"
+              showIcon="left"
+              icon={<Icon icon="line-add" />}
+              onClick={getRecommendProcess}
+            >
               자동 추천 추가
             </ActionButton>
           </Tooltip>

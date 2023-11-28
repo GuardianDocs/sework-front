@@ -1,8 +1,7 @@
 import * as OpenApiInstance from '@/services';
 
-const { NODE_ENV } = process.env;
-
 const getBasePath = () => {
+  const { NODE_ENV } = process.env;
   switch (NODE_ENV) {
     case 'development':
       return 'https://api-dev.iras.kr';
@@ -13,29 +12,34 @@ const getBasePath = () => {
   }
 };
 
-// get localStroage
-const loginInfoLocalStorage = localStorage.getItem('loginInfo');
-const loginInfo = loginInfoLocalStorage ? JSON.parse(loginInfoLocalStorage) : null;
-
-// get accessToken
-const accessToken = loginInfo?.state?.accessToken;
-
-const apiConfigurationParams: OpenApiInstance.ConfigurationParameters = {
-  basePath: getBasePath(),
-  baseOptions: {
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+const getAccessToken = () => {
+  if (typeof window !== 'undefined') {
+    const loginInfoLocalStorage = localStorage.getItem('loginInfo');
+    const loginInfo = loginInfoLocalStorage ? JSON.parse(loginInfoLocalStorage) : null;
+    return loginInfo?.state?.accessToken;
+  }
+  return null;
+};
+const createApiConfiguration = () => {
+  const accessToken = getAccessToken();
+  const apiConfigurationParams: OpenApiInstance.ConfigurationParameters = {
+    basePath: getBasePath(),
+    baseOptions: {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  },
+  };
+
+  if (!accessToken) {
+    delete apiConfigurationParams.baseOptions.headers.Authorization;
+  }
+
+  return new OpenApiInstance.Configuration(apiConfigurationParams);
 };
 
-// accessToken이 없으면 헤더에서 제거
-if (!accessToken) {
-  delete apiConfigurationParams.baseOptions.headers.Authorization;
-}
-
-const apiConfiguration: OpenApiInstance.Configuration = new OpenApiInstance.Configuration(apiConfigurationParams);
+const apiConfiguration = createApiConfiguration();
 
 export const TestApi = new OpenApiInstance.TestControllerApi(apiConfiguration);
 export const DefaultApi = new OpenApiInstance.DefaultApi(apiConfiguration);
