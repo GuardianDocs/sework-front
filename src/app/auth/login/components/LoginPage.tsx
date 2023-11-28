@@ -4,8 +4,6 @@ import Link from 'next/link';
 import useLoginFormStore from '../hooks/useLoginFormStore';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import { useRouter } from 'next/navigation';
-import { DefaultApi } from '@/lib/oas-axios';
-import { ResponseResultLoginCompanyAccountResponse } from '@/services';
 
 export default function LoginPage() {
   const { id, password, setId, setPassword, setDummyState, getLoginState } = useLoginFormStore(state => ({

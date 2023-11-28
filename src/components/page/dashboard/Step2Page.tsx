@@ -9,8 +9,6 @@ import DropdownButton from '../../ui/DropdownButton/DropdownButton';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
-import { getParameterFromUrl } from '@/utils/urlUtil';
-import { Step2Api } from '@/lib/oas-axios';
 
 export default function Step2Page() {
   const router = useRouter();

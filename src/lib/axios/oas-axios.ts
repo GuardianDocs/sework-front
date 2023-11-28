@@ -1,4 +1,5 @@
 import * as OpenApiInstance from '@/services';
+import axios from 'axios';
 
 const getBasePath = () => {
   const { NODE_ENV } = process.env;
@@ -23,7 +24,6 @@ const getAccessToken = () => {
 const createApiConfiguration = () => {
   const accessToken = getAccessToken();
   const apiConfigurationParams: OpenApiInstance.ConfigurationParameters = {
-    basePath: getBasePath(),
     baseOptions: {
       headers: {
         accept: 'application/json',
@@ -41,8 +41,8 @@ const createApiConfiguration = () => {
 
 const apiConfiguration = createApiConfiguration();
 
-export const TestApi = new OpenApiInstance.TestControllerApi(apiConfiguration);
-export const DefaultApi = new OpenApiInstance.DefaultApi(apiConfiguration);
-export const Step1Api = new OpenApiInstance.Class1Api(apiConfiguration);
-export const Step2Api = new OpenApiInstance.Class2Api(apiConfiguration);
-export const Step34Api = new OpenApiInstance.Class34Api(apiConfiguration);
+export const TestApi = new OpenApiInstance.TestControllerApi(apiConfiguration, getBasePath(), axios);
+export const DefaultApi = new OpenApiInstance.DefaultApi(apiConfiguration, getBasePath(), axios);
+export const Step1Api = new OpenApiInstance.Class1Api(apiConfiguration, getBasePath(), axios);
+export const Step2Api = new OpenApiInstance.Class2Api(apiConfiguration, getBasePath(), axios);
+export const Step34Api = new OpenApiInstance.Class34Api(apiConfiguration, getBasePath(), axios);

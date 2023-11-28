@@ -12,7 +12,7 @@ import IconButton from '../../ui/IconButton/IconButton';
 import EtcIcon from '../../ui/Icon/EtcIcon/EtcIcon';
 import Tooltip from '../../ui/Tooltip/Tooltip';
 import { getParameterFromUrl } from '@/utils/urlUtil';
-import { Step1Api } from '@/lib/oas-axios';
+import { Step1Api } from '@/lib/axios/oas-axios';
 import {
   type GetCompanyProcessResponse,
   type ResponseResultGetCompanyProcessResponse,
