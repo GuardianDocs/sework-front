@@ -9,9 +9,44 @@ import DropdownButton from '../../ui/DropdownButton/DropdownButton';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
+import { Step2Api } from '@/lib/axios/oas-axios';
+import { getParameterFromUrl } from '@/utils/urlUtil';
+import { type ResponseResultGetCompanyProcessTitleResponse } from '@/services';
+import { useEffect } from 'react';
+import { useStep2Store } from '@/hooks/dashboard/Step2Store';
 
 export default function Step2Page() {
   const router = useRouter();
+
+  const {
+    companyProcessTitle,
+    selectedCompanyProcessTitleIndex,
+    setSelectedCompanyProcessTitleIndex,
+    setCompanyProcessTitle,
+  } = useStep2Store();
+
+  // 1 단계 공정 목록 조회
+  const getCompanyProcessTitle = async () => {
+    const response = await Step2Api.getCompanyProcessTitleUsingGET(Number(getParameterFromUrl('assessmentId')));
+
+    const { data } = response?.data as ResponseResultGetCompanyProcessTitleResponse;
+    return data;
+  };
+
+  useEffect(() => {
+    getCompanyProcessTitle().then(data => {
+      // data to dropdown options
+      const options = data?.companyProcessTitleList?.map(item => {
+        return {
+          value: item?.id ?? '',
+          label: item?.title ?? '',
+        };
+      });
+
+      setCompanyProcessTitle(options ?? []);
+      setSelectedCompanyProcessTitleIndex(0);
+    });
+  }, []);
 
   const dummyData = {
     data: [
@@ -22,35 +57,46 @@ export default function Step2Page() {
         target3: '455743',
         id: 1,
       },
-      {
-        detailJob: '345',
-        target: '인347쇄',
-        target2: '인735쇄',
-        target3: '인3453쇄',
-        id: 2,
-      },
-      {
-        detailJob: '345',
-        target: '인347쇄',
-        target2: '인735쇄',
-        target3: '인3453쇄',
-      },
     ],
   };
 
   const steps = [
-    { number: 1, label: '사전준비', active: true, selected: false, url: '/dashboard/step1' },
-    { number: 2, label: '유해 위험요인 파악', active: true, selected: true, url: '/dashboard/step2' },
-    { number: 3, label: '위험성 수준 판단', active: false, selected: false, url: '/dashboard/step3' },
-    { number: 4, label: '감소대책 수립', active: false, selected: false, url: '/dashboard/step4' },
+    {
+      number: 1,
+      label: '사전준비',
+      active: true,
+      selected: false,
+      url: `/dashboard/step1?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 2,
+      label: '유해 위험요인 파악',
+      active: true,
+      selected: true,
+      url: `/dashboard/step2?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 3,
+      label: '위험성 수준 판단',
+      active: false,
+      selected: false,
+      url: `/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 4,
+      label: '감소대책 수립',
+      active: false,
+      selected: false,
+      url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const handleClickPreviousStepButton = () => {
-    router.push('/dashboard/step1');
+    router.push(`/dashboard/step1?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 
   const handleClickNextStepButton = () => {
-    router.push('/dashboard/step3');
+    router.push(`/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 
   return (
@@ -91,14 +137,14 @@ export default function Step2Page() {
             </Title>
             <div>
               <Title size="l" color="blue500">
-                1
+                {Number(selectedCompanyProcessTitleIndex) + 1 || '-'}
               </Title>
               <Title size="l" color="gray300">
                 {' '}
                 /{' '}
               </Title>
               <Title size="l" color="gray400">
-                5
+                {companyProcessTitle.length || '-'}
               </Title>
             </div>
           </div>
@@ -107,31 +153,36 @@ export default function Step2Page() {
             {/* 드롭다운 */}
             <div className="flex flex-grow">
               <DropdownButton
-                options={[
-                  {
-                    value: '1',
-                    label: '1',
-                  },
-                  {
-                    value: '2',
-                    label: '2',
-                    completed: true,
-                  },
-                  {
-                    value: '3',
-                    label: '3',
-                  },
-                ]}
-                onSelected={() => {}}
+                options={companyProcessTitle}
+                selectedOption={companyProcessTitle[selectedCompanyProcessTitleIndex || 0]}
+                onSelected={option => {
+                  setSelectedCompanyProcessTitleIndex(
+                    companyProcessTitle.findIndex(item => item.value === option.value)
+                  );
+                }}
                 isFullWidth
               />
             </div>
             {/* 버튼 */}
             <div className="flex items-center gap-2">
-              <ActionButton variant="tonal-gray" size="m">
+              <ActionButton
+                variant="tonal-gray"
+                size="m"
+                onClick={() => {
+                  setSelectedCompanyProcessTitleIndex(selectedCompanyProcessTitleIndex - 1);
+                }}
+                disabled={selectedCompanyProcessTitleIndex === 0}
+              >
                 이전
               </ActionButton>
-              <ActionButton variant="filled" size="m">
+              <ActionButton
+                variant="filled"
+                size="m"
+                onClick={() => {
+                  setSelectedCompanyProcessTitleIndex(selectedCompanyProcessTitleIndex + 1);
+                }}
+                disabled={selectedCompanyProcessTitleIndex === companyProcessTitle.length - 1}
+              >
                 다음
               </ActionButton>
             </div>
@@ -180,7 +231,7 @@ export default function Step2Page() {
                         label: '2',
                       },
                     ]}
-                    onSelected={() => {}}
+                    onSelected={option => console.log(option)}
                     isFullWidth
                   />
                 </Table.Cell>
@@ -196,7 +247,6 @@ export default function Step2Page() {
                         label: '2',
                       },
                     ]}
-                    onSelected={() => {}}
                     isFullWidth
                   />
                 </Table.Cell>

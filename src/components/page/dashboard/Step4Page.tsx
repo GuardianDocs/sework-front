@@ -124,7 +124,6 @@ export default function Step4Page() {
                     label: '3',
                   },
                 ]}
-                onSelected={() => {}}
                 isFullWidth
               />
             </div>

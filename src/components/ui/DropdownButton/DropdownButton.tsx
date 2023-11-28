@@ -5,13 +5,14 @@ import Body from '@/components/typography/Body/Body';
 
 export interface DropdownOption {
   label: React.ReactNode;
-  value: string;
+  value: string | number;
   completed?: boolean;
 }
 
 interface Props {
   options: DropdownOption[];
-  onSelected: (option: DropdownOption) => void;
+  onSelected?: (option: DropdownOption) => void;
+  selectedOption?: DropdownOption;
   disabled?: boolean;
   width?: string;
   isFullWidth?: boolean;
@@ -22,6 +23,7 @@ interface Props {
 export default function DropdownButton({
   options,
   onSelected,
+  selectedOption: externalSelectedOption,
   disabled,
   width,
   isFullWidth,
@@ -29,7 +31,7 @@ export default function DropdownButton({
   listMaxHeight,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(externalSelectedOption || null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const containerStyle = {
@@ -42,9 +44,9 @@ export default function DropdownButton({
   };
 
   const handleOptionClick = (option: DropdownOption) => {
-    setSelectedOption(option);
     setIsOpen(false);
-    onSelected(option);
+    setSelectedOption(option); // 내부 상태 업데이트
+    onSelected && onSelected(option); // 외부 상태 업데이트
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -59,6 +61,10 @@ export default function DropdownButton({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setSelectedOption(externalSelectedOption || null);
+  }, [externalSelectedOption]);
 
   return (
     <div ref={dropdownRef} className={styles.dropdownContainer} style={containerStyle}>

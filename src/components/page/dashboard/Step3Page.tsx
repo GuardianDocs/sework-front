@@ -128,7 +128,6 @@ export default function Step3Page() {
                     label: '3',
                   },
                 ]}
-                onSelected={() => {}}
                 isFullWidth
               />
             </div>
@@ -209,7 +208,6 @@ export default function Step3Page() {
                         ),
                       },
                     ]}
-                    onSelected={() => {}}
                     isFullWidth
                   />
                 </Table.Cell>
@@ -250,7 +248,6 @@ export default function Step3Page() {
                         ),
                       },
                     ]}
-                    onSelected={() => {}}
                     isFullWidth
                   />
                 </Table.Cell>
