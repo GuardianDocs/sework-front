@@ -1,1 +1,1 @@
-export { default } from '@/components/NewPage/Step4Page';
+export { default } from '@/components/page/dashboard/Step4Page';

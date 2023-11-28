@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from './ActionButton.module.scss';
 import Icon from '../Icon/Icon';
 
@@ -17,27 +17,23 @@ interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   icon?: React.ReactElement<typeof Icon>;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({
-  variant,
-  size,
-  children,
-  isFullWidth,
-  showIcon,
-  icon,
-  ...props
-}) => {
-  return (
-    <button
-      className={`${styles.actionButton} ${styles[variant]} ${styles[size]} ${isFullWidth ? styles.fullWidth : ''}`}
-      {...props}
-    >
-      <div className="flex gap-1">
-        {showIcon === 'left' && React.cloneElement(icon as React.ReactElement<typeof Icon>)}
-        {children}
-        {showIcon === 'right' && React.cloneElement(icon as React.ReactElement<typeof Icon>)}
-      </div>
-    </button>
-  );
-};
+const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
+  ({ variant, size, children, isFullWidth, showIcon, icon, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={`${styles.actionButton} ${styles[variant]} ${styles[size]} ${isFullWidth ? styles.fullWidth : ''}`}
+        {...props}
+      >
+        <div className="flex gap-1">
+          {showIcon === 'left' && React.cloneElement(icon as React.ReactElement<typeof Icon>)}
+          {children}
+          {showIcon === 'right' && React.cloneElement(icon as React.ReactElement<typeof Icon>)}
+        </div>
+      </button>
+    );
+  }
+);
+ActionButton.displayName = 'ActionButton';
 
 export default ActionButton;

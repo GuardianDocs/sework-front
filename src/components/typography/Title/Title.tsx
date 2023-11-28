@@ -1,17 +1,27 @@
 import { ColorKey, colors } from '@/types/theme/color';
 import styles from './Title.module.scss';
+import { TypographyProps } from '@/types/typography';
+import { forwardRef } from 'react';
 
-// TODO: Body처럼 확장
-type BodyProps = {
+interface TitleProps extends TypographyProps {
   size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
   color?: ColorKey;
   children: React.ReactNode;
-};
+}
 
-export default function Title({ size = 'm', color = 'black', children }: BodyProps) {
+// TODO: cn util 사용하도록 변경
+const Title = forwardRef<HTMLSpanElement, TitleProps>(({ size = 'm', color = 'black', children, ...props }, ref) => {
+  const isColorKey = (color: ColorKey | string): color is ColorKey => {
+    return color in colors;
+  };
+  const colorValue = isColorKey(color) ? `var(${colors[color]})` : color;
+
   return (
-    <span className={`${styles.title} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
+    <span ref={ref} className={`${styles.title} ${styles[size]}`} style={{ color: `${colorValue}` }} {...props}>
       {children}
     </span>
   );
-}
+});
+Title.displayName = 'Title';
+
+export default Title;

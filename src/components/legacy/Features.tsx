@@ -1,8 +1,6 @@
 'use client';
 
 import Headline from '@/components/typography/Headline/Headline';
-import DropdownButton, { DropdownOption } from '../ui/DropdownButton/DropdownButton';
-import { useEffect, useState } from 'react';
 
 interface Feature {
   title: string;

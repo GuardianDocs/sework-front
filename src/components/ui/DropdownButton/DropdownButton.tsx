@@ -5,31 +5,48 @@ import Body from '@/components/typography/Body/Body';
 
 export interface DropdownOption {
   label: React.ReactNode;
-  value: string;
+  value: string | number;
   completed?: boolean;
 }
 
 interface Props {
   options: DropdownOption[];
-  onSelected: (option: DropdownOption) => void;
+  onSelected?: (option: DropdownOption) => void;
+  selectedOption?: DropdownOption;
   disabled?: boolean;
   width?: string;
   isFullWidth?: boolean;
+  listWidth?: string;
+  listMaxHeight?: string;
 }
 
-export default function DropdownButton({ options, onSelected, disabled, width, isFullWidth }: Props) {
+export default function DropdownButton({
+  options,
+  onSelected,
+  selectedOption: externalSelectedOption,
+  disabled,
+  width,
+  isFullWidth,
+  listWidth,
+  listMaxHeight,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(externalSelectedOption || null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const containerStyle = {
     width: isFullWidth ? '100%' : width,
   };
 
+  const listStyle = {
+    width: listWidth,
+    maxHeight: listMaxHeight,
+  };
+
   const handleOptionClick = (option: DropdownOption) => {
-    setSelectedOption(option);
     setIsOpen(false);
-    onSelected(option);
+    setSelectedOption(option); // 내부 상태 업데이트
+    onSelected && onSelected(option); // 외부 상태 업데이트
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -45,12 +62,16 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
     };
   }, []);
 
+  useEffect(() => {
+    setSelectedOption(externalSelectedOption || null);
+  }, [externalSelectedOption]);
+
   return (
     <div ref={dropdownRef} className={styles.dropdownContainer} style={containerStyle}>
       <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
         <Body
           size="m"
-          color={selectedOption ? (disabled ? 'gray400' : 'gray800') : 'gray300'}
+          color={selectedOption ? (disabled ? 'gray800' : 'gray800') : 'gray300'}
           className="flex flex-1 whitespace-nowrap"
         >
           {selectedOption ? selectedOption.label : '선택해주세요'}
@@ -62,7 +83,7 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
         )}
       </button>
       {isOpen && (
-        <div className={styles.dropdownList}>
+        <div className={styles.dropdownList} style={listStyle}>
           {options?.map(option => (
             <div key={option.value} onClick={() => handleOptionClick(option)} className={styles.dropdownOption}>
               <Body
@@ -78,7 +99,11 @@ export default function DropdownButton({ options, onSelected, disabled, width, i
                   작성완료
                 </Body>
               )}
-              {option.value === selectedOption?.value && <Icon icon="check" size={24} color="blue500" />}
+              {option.value === selectedOption?.value ? (
+                <Icon icon="check" size={24} color="blue500" />
+              ) : (
+                <Icon icon="empty" size={24} />
+              )}
             </div>
           ))}
         </div>
