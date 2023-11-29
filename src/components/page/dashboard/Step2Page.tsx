@@ -11,7 +11,14 @@ import IconButton from '../../ui/IconButton/IconButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
 import { Step2Api } from '@/lib/axios/oas-axios';
 import { getParameterFromUrl } from '@/utils/urlUtil';
-import { type ResponseResultGetCompanyProcessTitleResponse } from '@/services';
+import {
+  type ResponseResultRecommendDangerFactorResponse,
+  type ResponseResultGetCompanyDangerFactorResponse,
+  type ResponseResultGetCompanyProcessTitleResponse,
+  type GetDangerFactorTitleUsingGETCategoryEnum,
+  type ResponseResultGetDangerFactorTitleResponse,
+  ResponseResultUpsertCompanyDangerFactorResponse,
+} from '@/services';
 import { useEffect } from 'react';
 import { useStep2Store } from '@/hooks/dashboard/Step2Store';
 
@@ -25,11 +32,55 @@ export default function Step2Page() {
     setCompanyProcessTitle,
   } = useStep2Store();
 
-  // 1 단계 공정 목록 조회
+  // 1 단계 공정 목록 조회 (Dropdown)
   const getCompanyProcessTitle = async () => {
     const response = await Step2Api.getCompanyProcessTitleUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultGetCompanyProcessTitleResponse;
+    return data;
+  };
+
+  // 안전 위험 평가 1 단계 (위험 요인) 조회
+  const getCompanyDangerFactor = async (companyProcessId: number) => {
+    // 999는 dropdown에서 선택한 공정 id
+    const response = await Step2Api.getCompanyDangerFactorUsingGET(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId
+    );
+
+    const { data } = response?.data as ResponseResultGetCompanyDangerFactorResponse;
+    return data;
+  };
+
+  // 안전 위험 평가 2 단계 (위험 요인) 추천 조회 (버튼 클릭)
+  const getRecommendDangerFactor = async (companyProcessId: number) => {
+    // 999는 dropdown에서 선택한 공정 id
+    const response = await Step2Api.getRecommendDangerFactorUsingGET(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId
+    );
+
+    const { data } = response?.data as ResponseResultRecommendDangerFactorResponse;
+    return data;
+  };
+
+  // 안전 위험 평가 2 단계 (위험 요인) 위험 요인 조회
+  const getDangerFactorTitle = async (category: GetDangerFactorTitleUsingGETCategoryEnum) => {
+    const response = await Step2Api.getDangerFactorTitleUsingGET(category);
+
+    const { data } = response?.data as ResponseResultGetDangerFactorTitleResponse;
+    return data;
+  };
+
+  // 저장, TODO: any 타입 대신 제대로 된 타입으로 변경
+  const upsertCompanyDangerFactor = async (companyProcessId: number, companyDangerFactorRequest: any) => {
+    const response = await Step2Api.upsertCompanyDangerFactorUsingPUT(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId,
+      companyDangerFactorRequest
+    );
+
+    const { data } = response?.data as ResponseResultUpsertCompanyDangerFactorResponse;
     return data;
   };
 
