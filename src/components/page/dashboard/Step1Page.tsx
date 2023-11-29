@@ -350,7 +350,7 @@ export default function Step1Page() {
                         setStep1(newStep1);
                       }}
                     />
-                    <button draggable onDragStart={e => handleDragStart(e, index)}>
+                    <button className="h-[42px]" draggable onDragStart={e => handleDragStart(e, index)}>
                       <EtcIcon icon="drag-and-drop" />
                     </button>
                   </div>
