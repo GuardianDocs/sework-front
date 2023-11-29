@@ -19,8 +19,8 @@ import {
   type ResponseResultGetDangerFactorTitleResponse,
   ResponseResultUpsertCompanyDangerFactorResponse,
 } from '@/services';
-import { useEffect } from 'react';
 import { useStep2Store } from '@/hooks/dashboard/Step2Store';
+import { useMutation, useQuery } from 'react-query';
 
 export default function Step2Page() {
   const router = useRouter();
@@ -28,8 +28,10 @@ export default function Step2Page() {
   const {
     companyProcessTitle,
     selectedCompanyProcessTitleIndex,
+    companyDangerFactorList,
     setSelectedCompanyProcessTitleIndex,
     setCompanyProcessTitle,
+    setCompanyDangerFactorList,
   } = useStep2Store();
 
   // 1 단계 공정 목록 조회 (Dropdown)
@@ -37,24 +39,35 @@ export default function Step2Page() {
     const response = await Step2Api.getCompanyProcessTitleUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultGetCompanyProcessTitleResponse;
+
+    const options = data?.companyProcessTitleList?.map(item => {
+      return {
+        value: item?.id ?? '',
+        label: item?.title ?? '',
+      };
+    });
+
+    setCompanyProcessTitle(options ?? []);
+    setSelectedCompanyProcessTitleIndex(0);
+
     return data;
   };
 
   // 안전 위험 평가 1 단계 (위험 요인) 조회
   const getCompanyDangerFactor = async (companyProcessId: number) => {
-    // 999는 dropdown에서 선택한 공정 id
     const response = await Step2Api.getCompanyDangerFactorUsingGET(
       Number(getParameterFromUrl('assessmentId')),
       companyProcessId
     );
 
     const { data } = response?.data as ResponseResultGetCompanyDangerFactorResponse;
+    setCompanyDangerFactorList(data?.companyDangerFactorList || []);
+
     return data;
   };
 
   // 안전 위험 평가 2 단계 (위험 요인) 추천 조회 (버튼 클릭)
   const getRecommendDangerFactor = async (companyProcessId: number) => {
-    // 999는 dropdown에서 선택한 공정 id
     const response = await Step2Api.getRecommendDangerFactorUsingGET(
       Number(getParameterFromUrl('assessmentId')),
       companyProcessId
@@ -73,7 +86,7 @@ export default function Step2Page() {
   };
 
   // 저장, TODO: any 타입 대신 제대로 된 타입으로 변경
-  const upsertCompanyDangerFactor = async (companyProcessId: number, companyDangerFactorRequest: any) => {
+  const updateCompanyDangerFactor = async (companyProcessId: number, companyDangerFactorRequest: any) => {
     const response = await Step2Api.upsertCompanyDangerFactorUsingPUT(
       Number(getParameterFromUrl('assessmentId')),
       companyProcessId,
@@ -84,32 +97,63 @@ export default function Step2Page() {
     return data;
   };
 
-  useEffect(() => {
-    getCompanyProcessTitle().then(data => {
-      // data to dropdown options
-      const options = data?.companyProcessTitleList?.map(item => {
-        return {
-          value: item?.id ?? '',
-          label: item?.title ?? '',
-        };
-      });
+  const {
+    data: companyProcessTitleData,
+    isLoading: companyProcessTitleIsLoading,
+    isError: companyProcessTitleIsError,
+    error: companyProcessTitleError,
+  } = useQuery('getCompanyProcessTitle', getCompanyProcessTitle);
 
-      setCompanyProcessTitle(options ?? []);
-      setSelectedCompanyProcessTitleIndex(0);
-    });
-  }, []);
+  const {
+    data: companyDangerFactorData,
+    isLoading: companyDangerFactorIsLoading,
+    isError: companyDangerFactorIsError,
+    error: companyDangerFactorError,
+  } = useQuery(
+    'getCompanyDangerFactor',
+    () => getCompanyDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
+    {
+      enabled: !!companyProcessTitle.length,
+    }
+  );
 
-  const dummyData = {
-    data: [
-      {
-        detailJob: '123',
-        target: '5t',
-        target2: '인65쇄',
-        target3: '455743',
-        id: 1,
+  const {
+    data: recommendDangerFactorData,
+    isLoading: recommendDangerFactorIsLoading,
+    isError: recommendDangerFactorIsError,
+    error: recommendDangerFactorError,
+  } = useQuery(
+    'getRecommendDangerFactor',
+    () => getRecommendDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
+    {
+      enabled: !!companyProcessTitle.length,
+    }
+  );
+
+  // TODO: key 설정
+  /*
+  const {
+    data: dangerFactorTitleData,
+    isLoading: dangerFactorTitleIsLoading,
+    isError: dangerFactorTitleIsError,
+    error: dangerFactorTitleError,
+  } = useQuery('getDangerFactorTitle', () => getDangerFactorTitle('DANGER'));
+  */
+
+  // TODO: 왜 에러나는지 확인
+  /*
+  const { mutate: updateCompanyDangerFactorMutate, isLoading: updateCompanyDangerFactorIsLoading } = useMutation(
+    updateCompanyDangerFactor,
+    {
+      onSuccess: data => {
+        console.log('updateCompanyDangerFactorMutate', data);
       },
-    ],
-  };
+      onError: error => {
+        console.log('updateCompanyDangerFactorMutate', error);
+      },
+    }
+  );
+  */
 
   const steps = [
     {
@@ -139,6 +183,33 @@ export default function Step2Page() {
       active: false,
       selected: false,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+  ];
+
+  const dangerFactorOptions = [
+    {
+      value: 'BIOLOGICAL',
+      label: '생물학적요인',
+    },
+    {
+      value: 'CHARACTER',
+      label: '작업특성요인',
+    },
+    {
+      value: 'CHEMICAL',
+      label: '화학(물질적)요인',
+    },
+    {
+      value: 'ELECTRICAL',
+      label: '전기적요인',
+    },
+    {
+      value: 'ENVIRONMENTAL',
+      label: '작업환경요인',
+    },
+    {
+      value: 'MACHINERY',
+      label: '기계(위험)적요인',
     },
   ];
 
@@ -268,20 +339,12 @@ export default function Step2Page() {
             </Table.Row>
           </Table.Head>
           <Table.Body>
-            {dummyData.data.map((item, index) => (
+            {companyDangerFactorList?.map((item, index) => (
               <Table.Row key={index}>
                 <Table.Cell>
                   <DropdownButton
-                    options={[
-                      {
-                        value: '1',
-                        label: '1',
-                      },
-                      {
-                        value: '2',
-                        label: '2',
-                      },
-                    ]}
+                    options={dangerFactorOptions}
+                    selectedOption={dangerFactorOptions.find(option => option.value === item?.category)}
                     onSelected={option => console.log(option)}
                     isFullWidth
                   />
@@ -302,11 +365,11 @@ export default function Step2Page() {
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item.target2} isFullWidth />
+                  <TextField.Multi defaultValue={item?.description} isFullWidth />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
-                    <TextField.Multi defaultValue={item.target3} isFullWidth />
+                    <TextField.Multi defaultValue={item?.legalDescription} isFullWidth />
                     <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
                   </div>
                 </Table.Cell>
