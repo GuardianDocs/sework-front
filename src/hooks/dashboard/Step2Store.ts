@@ -12,6 +12,8 @@ type Step2State = {
   selectedCompanyProcessTitleIndex: number;
 
   companyDangerFactorList: Array<CompanyDangerFactorVORes>;
+
+  titleList: Array<Array<SelectOption>> | [];
 };
 
 type Step2Actions = {
@@ -21,6 +23,7 @@ type Step2Actions = {
   ) => void;
 
   setCompanyDangerFactorList: (companyDangerFactorList: Step2State['companyDangerFactorList']) => void;
+  setTitleList: (titleList: Step2State['titleList']) => void;
 };
 
 export const useStep2Store = create(
@@ -28,11 +31,13 @@ export const useStep2Store = create(
     companyProcessTitle: [],
     selectedCompanyProcessTitleIndex: 0,
     companyDangerFactorList: [],
+    titleList: [],
     setCompanyProcessTitle: (companyProcessTitle: Step2State['companyProcessTitle']) => set({ companyProcessTitle }),
     setSelectedCompanyProcessTitleIndex: (
       selectedCompanyProcessTitleIndex: Step2State['selectedCompanyProcessTitleIndex']
     ) => set({ selectedCompanyProcessTitleIndex }),
     setCompanyDangerFactorList: (companyDangerFactorList: Step2State['companyDangerFactorList']) =>
       set({ companyDangerFactorList }),
+    setTitleList: (titleList: Step2State['titleList']) => set({ titleList }),
   }))
 );
