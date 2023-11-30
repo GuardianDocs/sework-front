@@ -20,8 +20,10 @@ import {
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import { useStep1Store } from '@/hooks/dashboard/Step1Store';
+import { useToast } from '@/components/ui/Toast/use-toast';
 
 export default function Step1Page() {
+  const { toast } = useToast();
   const router = useRouter();
   const { step1, setStep1 } = useStep1Store();
 
@@ -74,10 +76,30 @@ export default function Step1Page() {
     updateCompanyProcess,
     {
       onSuccess: () => {
-        console.log('updateCompanyProcessMutate success');
+        toast({
+          description: (
+            <div className="inline-flex items-center gap-2">
+              <EtcIcon icon="complete-s" />
+              <Label size="s" color="gray100">
+                작성한 내용이 저장되었습니다
+              </Label>
+            </div>
+          ),
+          duration: 1400,
+        });
       },
       onError: () => {
-        console.log('updateCompanyProcessMutate error');
+        toast({
+          description: (
+            <div className="inline-flex items-center gap-2">
+              <EtcIcon icon="complete-s" />
+              <Label size="s" color="gray100">
+                저장에 실패했습니다. 다시 시도해주시기 바랍니다
+              </Label>
+            </div>
+          ),
+          duration: 1400,
+        });
       },
     }
   );
@@ -350,7 +372,7 @@ export default function Step1Page() {
                         setStep1(newStep1);
                       }}
                     />
-                    <button draggable onDragStart={e => handleDragStart(e, index)}>
+                    <button className="h-[42px]" draggable onDragStart={e => handleDragStart(e, index)}>
                       <EtcIcon icon="drag-and-drop" />
                     </button>
                   </div>

@@ -11,53 +11,199 @@ import IconButton from '../../ui/IconButton/IconButton';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
 import { Step2Api } from '@/lib/axios/oas-axios';
 import { getParameterFromUrl } from '@/utils/urlUtil';
-import { type ResponseResultGetCompanyProcessTitleResponse } from '@/services';
-import { useEffect } from 'react';
+import {
+  type ResponseResultRecommendDangerFactorResponse,
+  type ResponseResultGetCompanyDangerFactorResponse,
+  type ResponseResultGetCompanyProcessTitleResponse,
+  type GetDangerFactorTitleUsingGETCategoryEnum,
+  type ResponseResultGetDangerFactorTitleResponse,
+  type ResponseResultUpsertCompanyDangerFactorResponse,
+} from '@/services';
 import { useStep2Store } from '@/hooks/dashboard/Step2Store';
+import { useMutation, useQuery } from 'react-query';
+import { useToast } from '@/components/ui/Toast/use-toast';
+import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
 
 export default function Step2Page() {
+  const { toast } = useToast();
   const router = useRouter();
 
   const {
     companyProcessTitle,
     selectedCompanyProcessTitleIndex,
+    companyDangerFactorList,
+    titleList,
     setSelectedCompanyProcessTitleIndex,
     setCompanyProcessTitle,
+    setCompanyDangerFactorList,
+    setTitleList,
   } = useStep2Store();
 
-  // 1 단계 공정 목록 조회
+  // 1 단계 공정 목록 조회 (Dropdown)
   const getCompanyProcessTitle = async () => {
     const response = await Step2Api.getCompanyProcessTitleUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultGetCompanyProcessTitleResponse;
+
+    const options = data?.companyProcessTitleList?.map(item => {
+      return {
+        value: item?.id ?? '',
+        label: item?.title ?? '',
+      };
+    });
+
+    setCompanyProcessTitle(options ?? []);
+    setSelectedCompanyProcessTitleIndex(0);
+
     return data;
   };
 
-  useEffect(() => {
-    getCompanyProcessTitle().then(data => {
-      // data to dropdown options
-      const options = data?.companyProcessTitleList?.map(item => {
-        return {
-          value: item?.id ?? '',
-          label: item?.title ?? '',
-        };
-      });
+  // 안전 위험 평가 1 단계 (위험 요인) 조회
+  const getCompanyDangerFactor = async (companyProcessId: number) => {
+    const response = await Step2Api.getCompanyDangerFactorUsingGET(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId
+    );
 
-      setCompanyProcessTitle(options ?? []);
-      setSelectedCompanyProcessTitleIndex(0);
-    });
-  }, []);
+    const { data } = response?.data as ResponseResultGetCompanyDangerFactorResponse;
+    setCompanyDangerFactorList(data?.companyDangerFactorList || []);
 
-  const dummyData = {
-    data: [
-      {
-        detailJob: '123',
-        target: '5t',
-        target2: '인65쇄',
-        target3: '455743',
-        id: 1,
+    const filteredTitleList = await Promise.all(
+      data?.companyDangerFactorList?.map(async item => {
+        const getDangerFactorTitleList = await getDangerFactorTitle(item?.category || '');
+
+        return getDangerFactorTitleList?.dangerFactorTitleList?.map(getDangerFactorTitle => {
+          return {
+            value: getDangerFactorTitle ?? '',
+            label: getDangerFactorTitle ?? '',
+          };
+        });
+      }) ?? []
+    );
+
+    setTitleList(filteredTitleList as any);
+
+    return data;
+  };
+
+  // 안전 위험 평가 2 단계 (위험 요인) 추천 조회 (버튼 클릭)
+  const getRecommendDangerFactor = async (companyProcessId: number) => {
+    const response = await Step2Api.getRecommendDangerFactorUsingGET(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId
+    );
+
+    const { data } = response?.data as ResponseResultRecommendDangerFactorResponse;
+    return data;
+  };
+
+  // 안전 위험 평가 2 단계 (위험 요인) 위험 요인 조회
+  // TODO: any 타입 대신 제대로 된 타입으로 변경
+  const getDangerFactorTitle = async (category: string) => {
+    const response = await Step2Api.getDangerFactorTitleUsingGET(category as GetDangerFactorTitleUsingGETCategoryEnum);
+
+    const { data } = response?.data as ResponseResultGetDangerFactorTitleResponse;
+    return data;
+  };
+
+  // 저장, TODO: any 타입 대신 제대로 된 타입으로 변경
+  const updateCompanyDangerFactor = async ({
+    companyProcessId,
+    companyDangerFactorRequest,
+  }: {
+    companyProcessId: number;
+    companyDangerFactorRequest: any;
+  }) => {
+    const response = await Step2Api.upsertCompanyDangerFactorUsingPUT(
+      Number(getParameterFromUrl('assessmentId')),
+      companyProcessId,
+      companyDangerFactorRequest
+    );
+
+    const { data } = response?.data as ResponseResultUpsertCompanyDangerFactorResponse;
+    return data;
+  };
+
+  const {
+    data: companyProcessTitleData,
+    isLoading: companyProcessTitleIsLoading,
+    isError: companyProcessTitleIsError,
+    error: companyProcessTitleError,
+  } = useQuery('getCompanyProcessTitle', getCompanyProcessTitle);
+
+  const {
+    data: companyDangerFactorData,
+    isLoading: companyDangerFactorIsLoading,
+    isError: companyDangerFactorIsError,
+    error: companyDangerFactorError,
+  } = useQuery(
+    ['getCompanyDangerFactor', selectedCompanyProcessTitleIndex],
+    () => getCompanyDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
+    {
+      enabled: !!companyProcessTitle.length,
+    }
+  );
+
+  const {
+    data: recommendDangerFactorData,
+    isLoading: recommendDangerFactorIsLoading,
+    isError: recommendDangerFactorIsError,
+    error: recommendDangerFactorError,
+  } = useQuery(
+    ['getRecommendDangerFactor', selectedCompanyProcessTitleIndex],
+    () => getRecommendDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
+    {
+      enabled: !!companyProcessTitle.length,
+    }
+  );
+
+  // TODO: page onload 시에는 호출되지 않도록 변경
+  const {
+    data: biologicalDangerFactorTitleData,
+    isLoading: biologicalDangerFactorTitleIsLoading,
+    isError: biologicalDangerFactorTitleIsError,
+    error: biologicalDangerFactorTitleError,
+  } = useQuery(['getBiologicalDangerFactorTitle'], () => getDangerFactorTitle('CHEMICAL'), {
+    enabled: !!companyProcessTitle.length,
+  });
+
+  const { mutate: updateCompanyDangerFactorMutate, isLoading: updateCompanyDangerFactorIsLoading } = useMutation(
+    updateCompanyDangerFactor,
+    {
+      onSuccess: () => {
+        toast({
+          description: (
+            <div className="inline-flex items-center gap-2">
+              <EtcIcon icon="complete-s" />
+              <Label size="s" color="gray100">
+                작성한 내용이 저장되었습니다
+              </Label>
+            </div>
+          ),
+          duration: 1400,
+        });
       },
-    ],
+      onError: () => {
+        toast({
+          description: (
+            <div className="inline-flex items-center gap-2">
+              <EtcIcon icon="complete-s" />
+              <Label size="s" color="gray100">
+                저장에 실패했습니다. 다시 시도해주시기 바랍니다
+              </Label>
+            </div>
+          ),
+          duration: 1400,
+        });
+      },
+    }
+  );
+
+  const handleUpdateCompanyDangerFactor = (companyDangerFactorRequest: any) => {
+    updateCompanyDangerFactorMutate({
+      companyProcessId: Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0,
+      companyDangerFactorRequest,
+    });
   };
 
   const steps = [
@@ -88,6 +234,33 @@ export default function Step2Page() {
       active: false,
       selected: false,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+  ];
+
+  const dangerFactorOptions = [
+    {
+      value: 'BIOLOGICAL',
+      label: '생물학적요인',
+    },
+    {
+      value: 'CHARACTER',
+      label: '작업특성요인',
+    },
+    {
+      value: 'CHEMICAL',
+      label: '화학(물질적)요인',
+    },
+    {
+      value: 'ELECTRICAL',
+      label: '전기적요인',
+    },
+    {
+      value: 'ENVIRONMENTAL',
+      label: '작업환경요인',
+    },
+    {
+      value: 'MACHINERY',
+      label: '기계(위험)적요인',
     },
   ];
 
@@ -199,7 +372,22 @@ export default function Step2Page() {
               유해 위험요인 파악
             </Title>
           </div>
-          <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+          <ActionButton
+            variant="tonal-gray"
+            size="s"
+            showIcon="left"
+            icon={<Icon icon="line-add" />}
+            onClick={() => {
+              const newCompanyDangerFactorList = [...companyDangerFactorList];
+              newCompanyDangerFactorList.push({
+                id: undefined,
+                category: undefined,
+                description: undefined,
+                legalDescription: undefined,
+              });
+              setCompanyDangerFactorList(newCompanyDangerFactorList);
+            }}
+          >
             직접 추가
           </ActionButton>
           <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
@@ -217,46 +405,79 @@ export default function Step2Page() {
             </Table.Row>
           </Table.Head>
           <Table.Body>
-            {dummyData.data.map((item, index) => (
+            {companyDangerFactorList?.map((item, index) => (
               <Table.Row key={index}>
                 <Table.Cell>
                   <DropdownButton
-                    options={[
-                      {
-                        value: '1',
-                        label: '1',
-                      },
-                      {
-                        value: '2',
-                        label: '2',
-                      },
-                    ]}
-                    onSelected={option => console.log(option)}
+                    options={dangerFactorOptions}
+                    selectedOption={dangerFactorOptions?.find(option => option.value === item?.category)}
+                    onSelected={async selectedOption => {
+                      const updatedCompanyDangerFactors = [...companyDangerFactorList];
+                      updatedCompanyDangerFactors[index].category = selectedOption.value as any;
+                      updatedCompanyDangerFactors[index].title = undefined;
+                      setCompanyDangerFactorList(updatedCompanyDangerFactors);
+
+                      const dangerFactorData = await getDangerFactorTitle(selectedOption.value as string);
+
+                      const formattedTitles =
+                        dangerFactorData?.dangerFactorTitleList?.map(title => ({
+                          value: title ?? '',
+                          label: title ?? '',
+                        })) ?? [];
+                      const updatedTitleList = [...titleList];
+                      while (updatedTitleList.length < companyProcessTitle.length) {
+                        updatedTitleList.push([]);
+                      }
+                      updatedTitleList[index] = formattedTitles;
+                      setTitleList(updatedTitleList);
+                    }}
                     isFullWidth
                   />
                 </Table.Cell>
                 <Table.Cell>
                   <DropdownButton
-                    options={[
-                      {
-                        value: '1',
-                        label: '1',
-                      },
-                      {
-                        value: '2',
-                        label: '2',
-                      },
-                    ]}
+                    options={titleList[index]}
+                    selectedOption={titleList[index]?.find(title => title.value === item?.title)}
+                    onSelected={option => {
+                      const newCompanyDangerFactorList = [...companyDangerFactorList];
+                      newCompanyDangerFactorList[index].title = option.value as any;
+                      setCompanyDangerFactorList(newCompanyDangerFactorList);
+                    }}
                     isFullWidth
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <TextField.Multi defaultValue={item.target2} isFullWidth />
+                  <TextField.Multi
+                    defaultValue={item?.description}
+                    isFullWidth
+                    onChange={event => {
+                      const newCompanyDangerFactorList = [...companyDangerFactorList];
+                      newCompanyDangerFactorList[index].description = event.target.value;
+                      setCompanyDangerFactorList(newCompanyDangerFactorList);
+                    }}
+                  />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
-                    <TextField.Multi defaultValue={item.target3} isFullWidth />
-                    <IconButton variant="outline" size="m" icon="trash" onClick={() => console.log('trash')} />
+                    <TextField.Multi
+                      defaultValue={item?.legalDescription}
+                      isFullWidth
+                      onChange={event => {
+                        const newCompanyDangerFactorList = [...companyDangerFactorList];
+                        newCompanyDangerFactorList[index].legalDescription = event.target.value;
+                        setCompanyDangerFactorList(newCompanyDangerFactorList);
+                      }}
+                    />
+                    <IconButton
+                      variant="outline"
+                      size="m"
+                      icon="trash"
+                      onClick={() => {
+                        const newCompanyDangerFactorList = [...companyDangerFactorList];
+                        newCompanyDangerFactorList.splice(index, 1);
+                        setCompanyDangerFactorList(newCompanyDangerFactorList);
+                      }}
+                    />
                   </div>
                 </Table.Cell>
               </Table.Row>
@@ -265,7 +486,15 @@ export default function Step2Page() {
         </Table>
         {/* 3.3. button */}
         <div className="flex flex-col items-end self-stretch">
-          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="save" />}>
+          <ActionButton
+            variant="tonal-blue"
+            size="s"
+            showIcon="left"
+            icon={<Icon icon="save" />}
+            onClick={() => {
+              handleUpdateCompanyDangerFactor(companyDangerFactorList);
+            }}
+          >
             저장하기
           </ActionButton>
         </div>
