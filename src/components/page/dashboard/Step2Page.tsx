@@ -157,7 +157,7 @@ export default function Step2Page() {
     }
   );
 
-  // TODO: page onload 시에는 호출되지 않도록 변경
+  // TODO: page onload 시에는 호출되지 않도록 변경. 그냥 useQuery를 안 쓰고, getDangerFactorTitle를 호출하면 되는거잖아?!
   const {
     data: biologicalDangerFactorTitleData,
     isLoading: biologicalDangerFactorTitleIsLoading,
