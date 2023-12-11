@@ -23,6 +23,7 @@ import {
   type ResponseResultUpsertCompanyDangerSolutionResponse,
   type ResponseResultGetCompanyProcessTitleResponse,
   type UpsertCompanyDangerSolutionRequest,
+  CompanyDangerSolutionVOResTypeEnum,
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
@@ -186,7 +187,9 @@ export default function Step3Page() {
     isLoading: companyProcessTitleIsLoading,
     isError: companyProcessTitleIsError,
     error: companyProcessTitleError,
-  } = useQuery('getCompanyProcessTitle', getCompanyProcessTitle);
+  } = useQuery('getCompanyProcessTitle', getCompanyProcessTitle, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: companyDangerFactorAndSolutionData,
@@ -198,6 +201,7 @@ export default function Step3Page() {
     () => getCompanyDangerFactorAndSolution(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
     {
       enabled: !!companyProcessTitle.length,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -211,6 +215,7 @@ export default function Step3Page() {
     () => getRecommendDangerSolution(Number(dialogDangerFactorList[selectedDialogDangerFactorIndex]?.value) || 0),
     {
       enabled: !!dialogDangerFactorList.length,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -511,6 +516,7 @@ export default function Step3Page() {
                                     selectedDialogDangerFactorIndex
                                   ].companyDangerSolutionList?.push({
                                     title: '',
+                                    type: CompanyDangerSolutionVOResTypeEnum.Current,
                                   });
                                   setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                 }}
@@ -593,7 +599,10 @@ export default function Step3Page() {
                                     const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                                     newCompanyDangerFactorAndSolution[
                                       selectedDialogDangerFactorIndex
-                                    ].companyDangerSolutionList?.push(item);
+                                    ].companyDangerSolutionList?.push({
+                                      ...item,
+                                      type: CompanyDangerSolutionVOResTypeEnum.Current,
+                                    });
                                     setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                   }}
                                   disabled={
