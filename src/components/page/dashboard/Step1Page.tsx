@@ -21,11 +21,27 @@ import {
 import { useMutation, useQuery } from 'react-query';
 import { useStep1Store } from '@/hooks/dashboard/Step1Store';
 import { useToast } from '@/components/ui/Toast/use-toast';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/AlertDialog/AlertDialog';
+import { useState } from 'react';
 
 export default function Step1Page() {
   const { toast } = useToast();
   const router = useRouter();
   const { step1, setStep1 } = useStep1Store();
+
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
+  const [deleteConfirmDialogIndex, setDeleteConfirmDialogIndex] = useState(0);
 
   // 페이지 진입 시, 세부작업 불러오기
   const getCompanyProcess = async () => {
@@ -42,7 +58,24 @@ export default function Step1Page() {
     const response = await Step1Api.recommendProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultRecommendProcessResponse;
-    console.log(data);
+
+    if (data?.companyProcessList?.length) {
+      const newStep1 = [...step1];
+      data?.companyProcessList?.map(item => {
+        newStep1.push({
+          id: undefined,
+          processId: item.processId,
+          title: item.title,
+          description: item.description,
+          equipment: item.equipment,
+          material: item.material,
+          viewOrder: step1.length + 1,
+        });
+      });
+      setStep1(newStep1);
+    } else {
+      setAlertDialogOpen(true);
+    }
 
     return data;
   };
@@ -56,21 +89,16 @@ export default function Step1Page() {
     return data;
   };
 
-  const { data, isLoading, isError, error } = useQuery('getCompanyProcess', getCompanyProcess);
-
   const {
     data: companyProcess,
     isLoading: isLoadingCompanyProcess,
     isError: isErrorCompanyProcess,
     error: errorCompanyProcess,
-  } = useQuery('getCompanyProcess', getCompanyProcess);
-
-  const {
-    data: recommendProcess,
-    isLoading: isLoadingRecommendProcess,
-    isError: isErrorRecommendProcess,
-    error: errorRecommendProcess,
-  } = useQuery('getRecommendProcess', getRecommendProcess);
+  } = useQuery(['getCompanyProcess'], getCompanyProcess, {
+    enabled: !!getParameterFromUrl('assessmentId'),
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+  });
 
   const { mutate: updateCompanyProcessMutate, isLoading: isLoadingUpdateCompanyProcess } = useMutation(
     updateCompanyProcess,
@@ -367,9 +395,8 @@ export default function Step1Page() {
                       size="m"
                       icon="trash"
                       onClick={() => {
-                        const newStep1 = [...step1];
-                        newStep1.splice(index, 1);
-                        setStep1(newStep1);
+                        setDeleteConfirmDialogOpen(true);
+                        setDeleteConfirmDialogIndex(index);
                       }}
                     />
                     <button className="h-[42px]" draggable onDragStart={e => handleDragStart(e, index)}>
@@ -399,6 +426,56 @@ export default function Step1Page() {
       <ActionButton variant="filled" size="l" onClick={handleClickNextStepButton}>
         저장 후 다음 단계
       </ActionButton>
+
+      {/* 모달 */}
+
+      <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>추천 세부작업 항목이 이미 존재해요</AlertDialogTitle>
+            <AlertDialogDescription>
+              자동으로 추천한 항목 중 일부를 수정하거나
+              <br />
+              삭제했을 때 추천 항목을 다시 추가할 수 있습니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel variant="filled" size="l" onClick={() => setAlertDialogOpen(false)}>
+              닫기
+            </AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={deleteConfirmDialogOpen} onOpenChange={setDeleteConfirmDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>해당 세부작업 내용을 삭제하시겠어요?</AlertDialogTitle>
+            <AlertDialogDescription>
+              삭제 시 해당 세부작업 관련된 데이터가
+              <br />
+              모두 삭제됩니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel variant="tonal-gray" size="l" onClick={() => setDeleteConfirmDialogOpen(false)}>
+              취소하기
+            </AlertDialogCancel>
+            <AlertDialogAction
+              variant="tonal-red"
+              size="l"
+              onClick={() => {
+                const newStep1 = [...step1];
+                newStep1.splice(deleteConfirmDialogIndex, 1);
+                setStep1(newStep1);
+                setDeleteConfirmDialogOpen(false);
+              }}
+            >
+              삭제하기
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
