@@ -23,6 +23,18 @@ import { useStep2Store } from '@/hooks/dashboard/Step2Store';
 import { useMutation, useQuery } from 'react-query';
 import { useToast } from '@/components/ui/Toast/use-toast';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/AlertDialog/AlertDialog';
+
+import { useState } from 'react';
 
 export default function Step2Page() {
   const { toast } = useToast();
@@ -38,6 +50,10 @@ export default function Step2Page() {
     setCompanyDangerFactorList,
     setTitleList,
   } = useStep2Store();
+
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
+  const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
+  const [deleteConfirmDialogIndex, setDeleteConfirmDialogIndex] = useState(0);
 
   // 1 단계 공정 목록 조회 (Dropdown)
   const getCompanyProcessTitle = async () => {
@@ -66,7 +82,8 @@ export default function Step2Page() {
     );
 
     const { data } = response?.data as ResponseResultGetCompanyDangerFactorResponse;
-    setCompanyDangerFactorList(data?.companyDangerFactorList || []);
+
+    setCompanyDangerFactorList([...(data?.companyDangerFactorList || [])]);
 
     const filteredTitleList = await Promise.all(
       data?.companyDangerFactorList?.map(async item => {
@@ -94,6 +111,15 @@ export default function Step2Page() {
     );
 
     const { data } = response?.data as ResponseResultRecommendDangerFactorResponse;
+
+    if (data?.companyDangerFactorList?.length) {
+      const newCompanyDangerFactorList = [...companyDangerFactorList];
+      newCompanyDangerFactorList.push(...data?.companyDangerFactorList);
+      setCompanyDangerFactorList(newCompanyDangerFactorList);
+    } else {
+      setAlertDialogOpen(true);
+    }
+
     return data;
   };
 
@@ -129,7 +155,10 @@ export default function Step2Page() {
     isLoading: companyProcessTitleIsLoading,
     isError: companyProcessTitleIsError,
     error: companyProcessTitleError,
-  } = useQuery('getCompanyProcessTitle', getCompanyProcessTitle);
+  } = useQuery(['getCompanyProcessTitle'], getCompanyProcessTitle, {
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
+  });
 
   const {
     data: companyDangerFactorData,
@@ -141,31 +170,10 @@ export default function Step2Page() {
     () => getCompanyDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
     {
       enabled: !!companyProcessTitle.length,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
     }
   );
-
-  const {
-    data: recommendDangerFactorData,
-    isLoading: recommendDangerFactorIsLoading,
-    isError: recommendDangerFactorIsError,
-    error: recommendDangerFactorError,
-  } = useQuery(
-    ['getRecommendDangerFactor', selectedCompanyProcessTitleIndex],
-    () => getRecommendDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0),
-    {
-      enabled: !!companyProcessTitle.length,
-    }
-  );
-
-  // TODO: page onload 시에는 호출되지 않도록 변경. 그냥 useQuery를 안 쓰고, getDangerFactorTitle를 호출하면 되는거잖아?!
-  const {
-    data: biologicalDangerFactorTitleData,
-    isLoading: biologicalDangerFactorTitleIsLoading,
-    isError: biologicalDangerFactorTitleIsError,
-    error: biologicalDangerFactorTitleError,
-  } = useQuery(['getBiologicalDangerFactorTitle'], () => getDangerFactorTitle('CHEMICAL'), {
-    enabled: !!companyProcessTitle.length,
-  });
 
   const { mutate: updateCompanyDangerFactorMutate, isLoading: updateCompanyDangerFactorIsLoading } = useMutation(
     updateCompanyDangerFactor,
@@ -390,7 +398,15 @@ export default function Step2Page() {
           >
             직접 추가
           </ActionButton>
-          <ActionButton variant="tonal-blue" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+          <ActionButton
+            variant="tonal-blue"
+            size="s"
+            showIcon="left"
+            icon={<Icon icon="line-add" />}
+            onClick={() => {
+              getRecommendDangerFactor(Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0);
+            }}
+          >
             자동 추천 추가
           </ActionButton>
         </div>
@@ -448,7 +464,7 @@ export default function Step2Page() {
                 </Table.Cell>
                 <Table.Cell>
                   <TextField.Multi
-                    defaultValue={item?.description}
+                    value={item?.description}
                     isFullWidth
                     onChange={event => {
                       const newCompanyDangerFactorList = [...companyDangerFactorList];
@@ -460,7 +476,7 @@ export default function Step2Page() {
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
                     <TextField.Multi
-                      defaultValue={item?.legalDescription}
+                      value={item?.legalDescription}
                       isFullWidth
                       onChange={event => {
                         const newCompanyDangerFactorList = [...companyDangerFactorList];
@@ -473,9 +489,8 @@ export default function Step2Page() {
                       size="m"
                       icon="trash"
                       onClick={() => {
-                        const newCompanyDangerFactorList = [...companyDangerFactorList];
-                        newCompanyDangerFactorList.splice(index, 1);
-                        setCompanyDangerFactorList(newCompanyDangerFactorList);
+                        setDeleteConfirmDialogOpen(true);
+                        setDeleteConfirmDialogIndex(index);
                       }}
                     />
                   </div>
@@ -509,6 +524,57 @@ export default function Step2Page() {
           저장 후 다음 단계
         </ActionButton>
       </div>
+
+      {/* 모달 */}
+
+      <AlertDialog open={alertDialogOpen} onOpenChange={setAlertDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>추천 유해 위험요인 항목이 이미 존재해요</AlertDialogTitle>
+            <AlertDialogDescription>
+              자동으로 추천한 항목 중 일부를 수정하거나
+              <br />
+              삭제했을 때 추천 항목을 다시 추가할 수 있습니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel variant="filled" size="l" onClick={() => setAlertDialogOpen(false)}>
+              닫기
+            </AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={deleteConfirmDialogOpen} onOpenChange={setDeleteConfirmDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>해당 유해 위험요인 내용을 삭제하시겠어요?</AlertDialogTitle>
+            <AlertDialogDescription>
+              삭제 시 해당 유해 위험요인 관련된 데이터가
+              <br />
+              모두 삭제됩니다.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel variant="tonal-gray" size="l" onClick={() => setDeleteConfirmDialogOpen(false)}>
+              취소하기
+            </AlertDialogCancel>
+            <AlertDialogAction
+              variant="tonal-red"
+              size="l"
+              onClick={() => {
+                const newCompanyDangerFactorList = [...companyDangerFactorList];
+                newCompanyDangerFactorList.splice(deleteConfirmDialogIndex, 1);
+                setCompanyDangerFactorList(newCompanyDangerFactorList);
+
+                setDeleteConfirmDialogOpen(false);
+              }}
+            >
+              삭제하기
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

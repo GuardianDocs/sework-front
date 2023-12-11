@@ -22,7 +22,6 @@ import {
   type ResponseResultGetCompanyDangerFactorAndSolutionResponse,
   type ResponseResultUpsertCompanyDangerSolutionResponse,
   type ResponseResultGetCompanyProcessTitleResponse,
-  type ResponseResultGetCompanyDangerFactorResponse,
   type UpsertCompanyDangerSolutionRequest,
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
@@ -135,18 +134,6 @@ export default function Step3Page() {
 
     setCompanyProcessTitle(options ?? []);
     setSelectedCompanyProcessTitleIndex(0);
-
-    return data;
-  };
-
-  // 안전 위험 평가 1 단계 (위험 요인) 조회 (유해 위험요인 추출용)
-  const getCompanyDangerFactor = async (companyProcessId: number) => {
-    const response = await Step2Api.getCompanyDangerFactorUsingGET(
-      Number(getParameterFromUrl('assessmentId')),
-      companyProcessId
-    );
-
-    const { data } = response?.data as ResponseResultGetCompanyDangerFactorResponse;
 
     return data;
   };
@@ -417,7 +404,7 @@ export default function Step3Page() {
                   <div className="flex flex-row gap-2">
                     {/* 이거는 사실상 내용 미리보기 해주는 버튼임. onChange 없음 */}
                     <TextField.Multi
-                      defaultValue={item?.companyDangerSolutionList?.map(item => item?.title ?? '').join(', ')}
+                      value={item?.companyDangerSolutionList?.map(item => item?.title ?? '').join(', ')}
                       isFullWidth
                       disabled
                     />
