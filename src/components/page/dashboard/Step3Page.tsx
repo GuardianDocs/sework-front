@@ -23,11 +23,12 @@ import {
   type ResponseResultUpsertCompanyDangerSolutionResponse,
   type ResponseResultGetCompanyProcessTitleResponse,
   type ResponseResultGetCompanyDangerFactorResponse,
-  type CompanyDangerFactorAndSolutionVO,
+  type UpsertCompanyDangerSolutionRequest,
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
 import { useStep3Store } from '@/hooks/dashboard/Step3Store';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/Dialog/Dialog';
 
 export default function Step3Page() {
   const { toast } = useToast();
@@ -108,9 +109,15 @@ export default function Step3Page() {
     companyProcessTitle,
     selectedCompanyProcessTitleIndex,
     companyDangerFactorAndSolution,
+    dialogDangerFactorList,
+    selectedDialogDangerFactorIndex,
+    dialogCompanyDangerSolutionList,
     setCompanyDangerFactorAndSolution,
     setCompanyProcessTitle,
     setSelectedCompanyProcessTitleIndex,
+    setDialogDangerFactorList,
+    setSelectedDialogDangerFactorIndex,
+    setDialogCompanyDangerSolutionList,
   } = useStep3Store();
 
   // 1 단계 공정 목록 조회 (Dropdown)
@@ -152,24 +159,7 @@ export default function Step3Page() {
 
     const { data } = response?.data as ResponseResultGetCompanyDangerFactorAndSolutionResponse;
 
-    // 아직 입력된 데이터가 없다면, 위험 요인을 조회해서 기본값으로 넣어준다
-    if (!data?.companyDangerFactorAndSolutionList?.length) {
-      const temp = await getCompanyDangerFactor(
-        Number(companyProcessTitle[selectedCompanyProcessTitleIndex]?.value) || 0
-      );
-      const descriptionList = temp?.companyDangerFactorList?.map(item => {
-        return {
-          companyDangerFactorDescription: item?.description ?? '',
-          possibility: 1,
-          severe: 1,
-          afterRisk: 1,
-        } as CompanyDangerFactorAndSolutionVO;
-      });
-
-      setCompanyDangerFactorAndSolution(descriptionList ?? []);
-    } else {
-      setCompanyDangerFactorAndSolution(data?.companyDangerFactorAndSolutionList ?? []);
-    }
+    setCompanyDangerFactorAndSolution(data?.companyDangerFactorAndSolutionList ?? []);
 
     return data;
   };
@@ -181,6 +171,9 @@ export default function Step3Page() {
     );
 
     const { data } = response?.data as ResponseResultRecommendDangerSolutionResponse;
+
+    setDialogCompanyDangerSolutionList(data?.dangerSolutionList ?? []);
+
     return data;
   };
 
@@ -189,7 +182,7 @@ export default function Step3Page() {
     companyDangerSolutionRequest,
   }: {
     companyDangerFactorId: number;
-    companyDangerSolutionRequest: any;
+    companyDangerSolutionRequest: UpsertCompanyDangerSolutionRequest;
   }) => {
     const response = await Step34Api.upsertCompanyDangerSolutionUsingPUT(
       Number(getParameterFromUrl('assessmentId')),
@@ -221,14 +214,17 @@ export default function Step3Page() {
     }
   );
 
-  // TODO: param 수정, 모달에 들어갈 데이터임
   const {
     data: recommendDangerSolutionData,
     isLoading: recommendDangerSolutionIsLoading,
     isError: recommendDangerSolutionIsError,
     error: recommendDangerSolutionError,
-  } = useQuery('getRecommendDangerSolution', () =>
-    getRecommendDangerSolution(Number(getParameterFromUrl('companyDangerFactorId')))
+  } = useQuery(
+    ['getRecommendDangerSolution', selectedDialogDangerFactorIndex],
+    () => getRecommendDangerSolution(Number(dialogDangerFactorList[selectedDialogDangerFactorIndex]?.value) || 0),
+    {
+      enabled: !!dialogDangerFactorList.length,
+    }
   );
 
   const {
@@ -415,13 +411,249 @@ export default function Step3Page() {
               <Table.Row key={index}>
                 <Table.Cell>
                   {/* TODO: 무조건 disabled 처리해야하나? */}
-                  <TextField.Single defaultValue={item?.companyDangerFactorDescription} disabled isFullWidth />
+                  <TextField.Single value={item?.companyDangerFactorDescription} disabled isFullWidth />
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-row gap-2">
                     {/* 이거는 사실상 내용 미리보기 해주는 버튼임. onChange 없음 */}
-                    <TextField.Multi defaultValue={item?.companyDangerFactorDescription} isFullWidth />
-                    <IconButton variant="outline" size="m" icon="edit" onClick={() => console.log('trash')} />
+                    <TextField.Multi
+                      defaultValue={item?.companyDangerSolutionList?.map(item => item?.title ?? '').join(', ')}
+                      isFullWidth
+                      disabled
+                    />
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <IconButton
+                          variant="outline"
+                          size="m"
+                          icon="edit"
+                          onClick={async () => {
+                            const dangerFactorIdAndDescription = companyDangerFactorAndSolution?.map(item => {
+                              return {
+                                value: item?.companyDangerFactorId as number,
+                                label: item?.companyDangerFactorDescription as string,
+                              };
+                            });
+
+                            setDialogDangerFactorList(dangerFactorIdAndDescription ?? []);
+                            setSelectedDialogDangerFactorIndex(index);
+                          }}
+                        />
+                      </DialogTrigger>
+                      <DialogContent className="max-w-[792px]">
+                        {/* 작성 내용 */}
+                        <div className="flex max-h-[448px] w-[712px] flex-col items-start gap-8">
+                          {/* 유해 위험 요인 */}
+                          <div className="flex flex-col items-start self-stretch gap-3">
+                            {/* title */}
+                            <div className="flex items-center self-stretch justify-between">
+                              <div className="flex items-center flex-grow gap-2">
+                                <Title size="l" color="gray800">
+                                  유해 위험요인 선택
+                                </Title>
+                                <div>
+                                  <Title size="l" color="blue500">
+                                    {Number(selectedDialogDangerFactorIndex) + 1 || '-'}
+                                  </Title>
+                                  <Title size="l" color="gray300">
+                                    {' '}
+                                    /{' '}
+                                  </Title>
+                                  <Title size="l" color="gray400">
+                                    {Number(dialogDangerFactorList?.length) || '-'}
+                                  </Title>
+                                </div>
+                              </div>
+                              <Label size="s" color="blue500">
+                                다음 위험요인으로 바로 이동하세요!
+                              </Label>
+                            </div>
+                            <div className="flex items-start w-full gap-8">
+                              {/* 드롭다운 */}
+                              <div className="flex flex-grow">
+                                <DropdownButton
+                                  options={dialogDangerFactorList}
+                                  selectedOption={dialogDangerFactorList[selectedDialogDangerFactorIndex || 0]}
+                                  onSelected={option => {
+                                    setSelectedDialogDangerFactorIndex(
+                                      dialogDangerFactorList.findIndex(item => item.value === option.value)
+                                    );
+                                  }}
+                                  isFullWidth
+                                />
+                              </div>
+                              {/* 버튼 */}
+                              <div className="flex items-center gap-2">
+                                <ActionButton
+                                  variant="tonal-gray"
+                                  size="m"
+                                  onClick={() => {
+                                    setSelectedDialogDangerFactorIndex(selectedDialogDangerFactorIndex - 1);
+                                  }}
+                                  disabled={selectedDialogDangerFactorIndex === 0}
+                                >
+                                  이전
+                                </ActionButton>
+                                <ActionButton
+                                  variant="filled"
+                                  size="m"
+                                  onClick={() => {
+                                    setSelectedDialogDangerFactorIndex(selectedDialogDangerFactorIndex + 1);
+                                  }}
+                                  disabled={selectedDialogDangerFactorIndex === dialogDangerFactorList.length - 1}
+                                >
+                                  다음
+                                </ActionButton>
+                              </div>
+                            </div>
+                          </div>
+                          {/* 현재의 안전보건조치 */}
+                          <div className="flex flex-col items-start self-stretch gap-3">
+                            <div className="flex items-start self-stretch justify-between">
+                              <Title size="l" color="gray800">
+                                현재의 안전보건조치
+                              </Title>
+                              <ActionButton
+                                variant="tonal-gray"
+                                size="s"
+                                showIcon="left"
+                                icon={<Icon icon="line-add" />}
+                                onClick={() => {
+                                  const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                  newCompanyDangerFactorAndSolution[
+                                    selectedDialogDangerFactorIndex
+                                  ].companyDangerSolutionList?.push({
+                                    title: '',
+                                  });
+                                  setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                }}
+                              >
+                                직접 추가
+                              </ActionButton>
+                            </div>
+                            {companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]
+                              ?.companyDangerSolutionList?.length ? (
+                              // 존재하는 경우
+                              companyDangerFactorAndSolution?.[
+                                selectedDialogDangerFactorIndex
+                              ]?.companyDangerSolutionList?.map((item, index) => (
+                                <div className="flex items-start self-stretch gap-2" key={index}>
+                                  <TextField.Single
+                                    defaultValue={item.title}
+                                    isFullWidth
+                                    onChange={event => {
+                                      const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                      newCompanyDangerFactorAndSolution[
+                                        selectedDialogDangerFactorIndex
+                                      ].companyDangerSolutionList?.splice(index, 1, {
+                                        ...item,
+                                        title: event.target.value,
+                                      });
+                                      setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                    }}
+                                  />
+                                  <IconButton
+                                    variant="outline"
+                                    size="m"
+                                    icon="trash"
+                                    onClick={() => {
+                                      const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                      newCompanyDangerFactorAndSolution[
+                                        selectedDialogDangerFactorIndex
+                                      ].companyDangerSolutionList?.splice(index, 1);
+                                      setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                    }}
+                                  />
+                                  <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                    <Icon icon="chevron-up-s" size={18} />
+                                    <div className="relative w-[32px] h-px bg-gray-200" />
+                                    <Icon icon="chevron-down-s" size={18} />
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              // 존재하지 않는 경우
+                              <div className="flex flex-col items-start self-stretch gap-3">
+                                <div className="flex items-center self-stretch justify-center px-3 py-5 bg-white border border-gray-200 border-dashed rounded">
+                                  <Body size="m" color="gray400" className="text-center">
+                                    현재 시행하고 있는 안전보건조치를
+                                    <br />
+                                    아래 추천 항목의 + 버튼을 눌러 추가하거나 항목을 직접 추가해주세요
+                                  </Body>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          {/* 표준 안전보건조치 추천 */}
+                          <div className="flex flex-col items-start self-stretch gap-3">
+                            {/* 타이틀 */}
+                            <div className="flex items-center self-stretch justify-between">
+                              <Title size="l" color="gray600">
+                                표준 안전보건조치 추천
+                              </Title>
+                              <Icon icon="chevron-up-s" size={24} />
+                            </div>
+                            {dialogCompanyDangerSolutionList.map((item, index) => (
+                              <div className="flex items-start self-stretch gap-2" key={index}>
+                                <div className="flex items-center flex-grow gap-2 px-3 py-2 rounded bg-gray-50">
+                                  {item?.title}
+                                </div>
+                                <IconButton
+                                  variant="outline"
+                                  size="m"
+                                  icon="line-add"
+                                  onClick={() => {
+                                    const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                    newCompanyDangerFactorAndSolution[
+                                      selectedDialogDangerFactorIndex
+                                    ].companyDangerSolutionList?.push(item);
+                                    setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                  }}
+                                  disabled={
+                                    companyDangerFactorAndSolution?.[
+                                      selectedDialogDangerFactorIndex
+                                    ]?.companyDangerSolutionList?.findIndex(
+                                      companyDangerSolution =>
+                                        // TODO: id만 비교해도 되는지 확인
+                                        companyDangerSolution?.dangerSolutionId === item?.dangerSolutionId
+                                      // companyDangerSolution?.title === item?.title
+                                    ) !== -1
+                                  }
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <DialogFooter>
+                          <DialogClose asChild>
+                            <ActionButton
+                              type="button"
+                              variant="filled"
+                              size="l"
+                              onClick={() => {
+                                updateCompanyDangerSolutionMutate({
+                                  companyDangerFactorId:
+                                    Number(dialogDangerFactorList[selectedDialogDangerFactorIndex]?.value) || 0,
+                                  companyDangerSolutionRequest: {
+                                    companyDangerSolutionList: companyDangerFactorAndSolution?.[
+                                      selectedDialogDangerFactorIndex
+                                    ]
+                                      ?.companyDangerSolutionList as UpsertCompanyDangerSolutionRequest['companyDangerSolutionList'],
+                                    afterRisk:
+                                      companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.afterRisk,
+                                    possibility:
+                                      companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.possibility,
+                                    severe: companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.severe,
+                                  },
+                                });
+                              }}
+                            >
+                              저장 후 닫기
+                            </ActionButton>
+                          </DialogClose>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </Table.Cell>
                 <Table.Cell>
@@ -454,7 +686,7 @@ export default function Step3Page() {
                   />
                 </Table.Cell>
                 <Table.Cell style={{ width: '80px' }}>
-                  <ColorBox value={item?.afterRisk || 1} />
+                  <ColorBox value={item?.afterRisk || 0} />
                 </Table.Cell>
               </Table.Row>
             ))}

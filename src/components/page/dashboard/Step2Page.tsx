@@ -117,7 +117,7 @@ export default function Step2Page() {
     const response = await Step2Api.upsertCompanyDangerFactorUsingPUT(
       Number(getParameterFromUrl('assessmentId')),
       companyProcessId,
-      companyDangerFactorRequest
+      { companyDangerFactorList: companyDangerFactorRequest }
     );
 
     const { data } = response?.data as ResponseResultUpsertCompanyDangerFactorResponse;
