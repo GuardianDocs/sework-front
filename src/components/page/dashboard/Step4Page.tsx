@@ -14,6 +14,7 @@ import ProgressBox from '../../ui/ProgressBox/ProgressBox';
 import IconButton from '../../ui/IconButton/IconButton';
 import { DotIconRed, DotIconYellow, DotIconGreen } from '../../ui/Icon/EtcIcon/DotIcon';
 import ColorBox from '../../ui/ColorBox/ColorBox';
+import { getParameterFromUrl } from '@/utils/urlUtil';
 
 export default function Step4Page() {
   const router = useRouter();
@@ -45,14 +46,38 @@ export default function Step4Page() {
   };
 
   const steps = [
-    { number: 1, label: '사전준비', active: true, selected: false, url: '/dashboard/step1' },
-    { number: 2, label: '유해 위험요인 파악', active: true, selected: false, url: '/dashboard/step2' },
-    { number: 3, label: '위험성 수준 판단', active: true, selected: false, url: '/dashboard/step3' },
-    { number: 4, label: '감소대책 수립', active: true, selected: true, url: '/dashboard/step4' },
+    {
+      number: 1,
+      label: '사전준비',
+      active: true,
+      selected: false,
+      url: `/dashboard/step1?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 2,
+      label: '유해 위험요인 파악',
+      active: true,
+      selected: false,
+      url: `/dashboard/step2?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 3,
+      label: '위험성 수준 판단',
+      active: true,
+      selected: false,
+      url: `/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 4,
+      label: '감소대책 수립',
+      active: true,
+      selected: true,
+      url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const handleClickPreviousStepButton = () => {
-    router.push('/dashboard/step3');
+    router.push(`/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 
   return (
@@ -222,7 +247,7 @@ export default function Step4Page() {
           저장 후 이전 단계
         </ActionButton>
         <ActionButton variant="filled" size="l" disabled>
-          저장 후 다음 단계
+          저장 후 보고서 생성
         </ActionButton>
       </div>
     </div>
