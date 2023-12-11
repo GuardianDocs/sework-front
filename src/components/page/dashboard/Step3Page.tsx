@@ -404,7 +404,7 @@ export default function Step3Page() {
                   <div className="flex flex-row gap-2">
                     {/* 이거는 사실상 내용 미리보기 해주는 버튼임. onChange 없음 */}
                     <TextField.Multi
-                      value={item?.companyDangerSolutionList?.map(item => item?.title ?? '').join(', ')}
+                      value={item?.companyDangerSolutionList?.map(item => `- ${item?.title ?? ''}`).join('\n')}
                       isFullWidth
                       disabled
                     />
