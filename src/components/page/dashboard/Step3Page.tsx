@@ -586,6 +586,50 @@ export default function Step3Page() {
                               </div>
                             )}
                           </div>
+                          {/* 위험성 감소대책 */}
+                          {!!companyDangerFactorAndSolution?.[
+                            selectedDialogDangerFactorIndex
+                          ]?.companyDangerSolutionList?.filter(
+                            item => item?.type === CompanyDangerSolutionVOResTypeEnum.Future
+                          )?.length && (
+                            <div className="flex flex-col items-start self-stretch gap-3">
+                              {/* 타이틀 */}
+                              <div className="flex items-center self-stretch justify-between">
+                                <Title size="l" color="gray600">
+                                  위험성 감소대책
+                                </Title>
+                                <Icon icon="chevron-up-s" size={24} />
+                              </div>
+                              {companyDangerFactorAndSolution?.[
+                                selectedDialogDangerFactorIndex
+                              ]?.companyDangerSolutionList?.map(
+                                (item, index) =>
+                                  item?.type === CompanyDangerSolutionVOResTypeEnum.Future && (
+                                    <div className="flex items-start self-stretch gap-2" key={index}>
+                                      <TextField.Single
+                                        value={item.title}
+                                        isFullWidth
+                                        onChange={event => {
+                                          const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                          newCompanyDangerFactorAndSolution[
+                                            selectedDialogDangerFactorIndex
+                                          ].companyDangerSolutionList?.splice(index, 1, {
+                                            ...item,
+                                            title: event.target.value,
+                                          });
+                                          setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                        }}
+                                      />
+                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <Icon icon="chevron-up-s" size={18} />
+                                        <div className="relative w-[32px] h-px bg-gray-200" />
+                                        <Icon icon="chevron-down-s" size={18} />
+                                      </div>
+                                    </div>
+                                  )
+                              )}
+                            </div>
+                          )}
                           {/* 표준 안전보건조치 추천 */}
                           <div className="flex flex-col items-start self-stretch gap-3">
                             {/* 타이틀 */}
