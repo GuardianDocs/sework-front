@@ -556,11 +556,11 @@ export default function Step4Page() {
                               </div>
                             </div>
                           </div>
-                          {/* 현재의 안전보건조치 */}
+                          {/* 위험성 감소대책 */}
                           <div className="flex flex-col items-start self-stretch gap-3">
                             <div className="flex items-start self-stretch justify-between">
                               <Title size="l" color="gray800">
-                                현재의 안전보건조치
+                                위험성 감소대책
                               </Title>
                               <ActionButton
                                 variant="tonal-gray"
@@ -573,7 +573,7 @@ export default function Step4Page() {
                                     selectedDialogDangerFactorIndex
                                   ].companyDangerSolutionList?.push({
                                     title: '',
-                                    type: CompanyDangerSolutionVOResTypeEnum.Current,
+                                    type: CompanyDangerSolutionVOResTypeEnum.Future,
                                   });
                                   setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                 }}
@@ -584,14 +584,14 @@ export default function Step4Page() {
                             {companyDangerFactorAndSolution?.[
                               selectedDialogDangerFactorIndex
                             ]?.companyDangerSolutionList?.filter(
-                              item => item?.type === CompanyDangerSolutionVOResTypeEnum.Current
+                              item => item?.type === CompanyDangerSolutionVOResTypeEnum.Future
                             )?.length ? (
                               // 존재하는 경우
                               companyDangerFactorAndSolution?.[
                                 selectedDialogDangerFactorIndex
                               ]?.companyDangerSolutionList?.map(
                                 (item, index) =>
-                                  item?.type === CompanyDangerSolutionVOResTypeEnum.Current && (
+                                  item?.type === CompanyDangerSolutionVOResTypeEnum.Future && (
                                     <div className="flex items-start self-stretch gap-2" key={index}>
                                       <TextField.Single
                                         value={item.title}
@@ -632,12 +632,50 @@ export default function Step4Page() {
                               <div className="flex flex-col items-start self-stretch gap-3">
                                 <div className="flex items-center self-stretch justify-center px-3 py-5 bg-white border border-gray-200 border-dashed rounded">
                                   <Body size="m" color="gray400" className="text-center">
-                                    현재 시행하고 있는 안전보건조치를
+                                    앞으로 추가로 시행할 안전보건조치를
                                     <br />
                                     아래 추천 항목의 + 버튼을 눌러 추가하거나 항목을 직접 추가해주세요
                                   </Body>
                                 </div>
                               </div>
+                            )}
+                          </div>
+                          {/* 현재의 안전보건조치 */}
+                          <div className="flex flex-col items-start self-stretch gap-3">
+                            {/* 타이틀 */}
+                            <div className="flex items-center self-stretch justify-between">
+                              <Title size="l" color="gray600">
+                                현재의 안전보건조치
+                              </Title>
+                              <Icon icon="chevron-up-s" size={24} />
+                            </div>
+                            {companyDangerFactorAndSolution?.[
+                              selectedDialogDangerFactorIndex
+                            ]?.companyDangerSolutionList?.map(
+                              (item, index) =>
+                                item?.type === CompanyDangerSolutionVOResTypeEnum.Current && (
+                                  <div className="flex items-start self-stretch gap-2" key={index}>
+                                    <TextField.Single
+                                      value={item.title}
+                                      isFullWidth
+                                      onChange={event => {
+                                        const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                        newCompanyDangerFactorAndSolution[
+                                          selectedDialogDangerFactorIndex
+                                        ].companyDangerSolutionList?.splice(index, 1, {
+                                          ...item,
+                                          title: event.target.value,
+                                        });
+                                        setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                      }}
+                                    />
+                                    <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                      <Icon icon="chevron-up-s" size={18} />
+                                      <div className="relative w-[32px] h-px bg-gray-200" />
+                                      <Icon icon="chevron-down-s" size={18} />
+                                    </div>
+                                  </div>
+                                )
                             )}
                           </div>
                           {/* 표준 안전보건조치 추천 */}
@@ -664,7 +702,7 @@ export default function Step4Page() {
                                       selectedDialogDangerFactorIndex
                                     ].companyDangerSolutionList?.push({
                                       ...item,
-                                      type: CompanyDangerSolutionVOResTypeEnum.Current,
+                                      type: CompanyDangerSolutionVOResTypeEnum.Future,
                                     });
                                     setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                   }}
