@@ -409,7 +409,10 @@ export default function Step3Page() {
                   <div className="flex flex-row gap-2">
                     {/* 이거는 사실상 내용 미리보기 해주는 버튼임. onChange 없음 */}
                     <TextField.Multi
-                      value={item?.companyDangerSolutionList?.map(item => `- ${item?.title ?? ''}`).join('\n')}
+                      value={item?.companyDangerSolutionList
+                        ?.filter(item => item?.type === CompanyDangerSolutionVOResTypeEnum.Current)
+                        ?.map(item => `- ${item?.title ?? ''}`)
+                        .join('\n')}
                       isFullWidth
                       disabled
                     />
@@ -635,8 +638,6 @@ export default function Step3Page() {
                                       selectedDialogDangerFactorIndex
                                     ]
                                       ?.companyDangerSolutionList as UpsertCompanyDangerSolutionRequest['companyDangerSolutionList'],
-                                    afterRisk:
-                                      companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.afterRisk,
                                     possibility:
                                       companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.possibility,
                                     severe: companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]?.severe,
@@ -661,7 +662,6 @@ export default function Step3Page() {
                     onSelected={option => {
                       const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                       newCompanyDangerFactorAndSolution[index].possibility = option.value as number;
-                      newCompanyDangerFactorAndSolution[index].afterRisk = Number(option.value) * Number(item?.severe);
                       setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                     }}
                     isFullWidth
@@ -675,14 +675,12 @@ export default function Step3Page() {
                     onSelected={option => {
                       const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                       newCompanyDangerFactorAndSolution[index].severe = option.value as number;
-                      newCompanyDangerFactorAndSolution[index].afterRisk =
-                        Number(option.value) * Number(item?.possibility);
                       setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                     }}
                   />
                 </Table.Cell>
                 <Table.Cell style={{ width: '80px' }}>
-                  <ColorBox value={item?.afterRisk || 0} />
+                  <ColorBox value={(item?.possibility || 0) * (item?.severe || 0)} />
                 </Table.Cell>
               </Table.Row>
             ))}
