@@ -437,7 +437,7 @@ export default function Step3Page() {
                       </DialogTrigger>
                       <DialogContent className="max-w-[792px]">
                         {/* 작성 내용 */}
-                        <div className="flex max-h-[448px] w-[712px] flex-col items-start gap-8">
+                        <div className="flex max-h-[448px] w-[712px] flex-col items-start gap-8 overflow-y-auto">
                           {/* 유해 위험 요인 */}
                           <div className="flex flex-col items-start self-stretch gap-3">
                             {/* title */}
@@ -527,46 +527,52 @@ export default function Step3Page() {
                                 직접 추가
                               </ActionButton>
                             </div>
-                            {companyDangerFactorAndSolution?.[selectedDialogDangerFactorIndex]
-                              ?.companyDangerSolutionList?.length ? (
+                            {companyDangerFactorAndSolution?.[
+                              selectedDialogDangerFactorIndex
+                            ]?.companyDangerSolutionList?.filter(
+                              item => item?.type === CompanyDangerSolutionVOResTypeEnum.Current
+                            )?.length ? (
                               // 존재하는 경우
                               companyDangerFactorAndSolution?.[
                                 selectedDialogDangerFactorIndex
-                              ]?.companyDangerSolutionList?.map((item, index) => (
-                                <div className="flex items-start self-stretch gap-2" key={index}>
-                                  <TextField.Single
-                                    defaultValue={item.title}
-                                    isFullWidth
-                                    onChange={event => {
-                                      const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
-                                      newCompanyDangerFactorAndSolution[
-                                        selectedDialogDangerFactorIndex
-                                      ].companyDangerSolutionList?.splice(index, 1, {
-                                        ...item,
-                                        title: event.target.value,
-                                      });
-                                      setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
-                                    }}
-                                  />
-                                  <IconButton
-                                    variant="outline"
-                                    size="m"
-                                    icon="trash"
-                                    onClick={() => {
-                                      const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
-                                      newCompanyDangerFactorAndSolution[
-                                        selectedDialogDangerFactorIndex
-                                      ].companyDangerSolutionList?.splice(index, 1);
-                                      setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
-                                    }}
-                                  />
-                                  <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                    <Icon icon="chevron-up-s" size={18} />
-                                    <div className="relative w-[32px] h-px bg-gray-200" />
-                                    <Icon icon="chevron-down-s" size={18} />
-                                  </div>
-                                </div>
-                              ))
+                              ]?.companyDangerSolutionList?.map(
+                                (item, index) =>
+                                  item?.type === CompanyDangerSolutionVOResTypeEnum.Current && (
+                                    <div className="flex items-start self-stretch gap-2" key={index}>
+                                      <TextField.Single
+                                        value={item.title}
+                                        isFullWidth
+                                        onChange={event => {
+                                          const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                          newCompanyDangerFactorAndSolution[
+                                            selectedDialogDangerFactorIndex
+                                          ].companyDangerSolutionList?.splice(index, 1, {
+                                            ...item,
+                                            title: event.target.value,
+                                          });
+                                          setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                        }}
+                                      />
+                                      <IconButton
+                                        variant="outline"
+                                        size="m"
+                                        icon="trash"
+                                        onClick={() => {
+                                          const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                                          newCompanyDangerFactorAndSolution[
+                                            selectedDialogDangerFactorIndex
+                                          ].companyDangerSolutionList?.splice(index, 1);
+                                          setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                        }}
+                                      />
+                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <Icon icon="chevron-up-s" size={18} />
+                                        <div className="relative w-[32px] h-px bg-gray-200" />
+                                        <Icon icon="chevron-down-s" size={18} />
+                                      </div>
+                                    </div>
+                                  )
+                              )
                             ) : (
                               // 존재하지 않는 경우
                               <div className="flex flex-col items-start self-stretch gap-3">
