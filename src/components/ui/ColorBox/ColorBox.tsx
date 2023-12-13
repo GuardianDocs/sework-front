@@ -13,6 +13,13 @@ interface ValueMap {
 }
 
 const valueMap: ValueMap = {
+  0: {
+    dotIcon: <></>,
+    color: 'white',
+    borderColor: 'border-gray-200',
+    backgroundColor: 'bg-white',
+    label: '0',
+  },
   1: {
     dotIcon: <DotIconGreen />,
     color: 'green600',

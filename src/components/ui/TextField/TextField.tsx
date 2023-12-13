@@ -5,7 +5,7 @@ import styles from './TextField.module.scss';
 import Icon from '@/components/ui/Icon/Icon';
 
 interface TextFieldProps {
-  sizeVariant?: 's';
+  sizeVariant?: 's' | 'm';
   isFullWidth?: boolean;
 }
 
@@ -24,7 +24,7 @@ interface TextFieldTriggerProps extends React.HTMLAttributes<HTMLDivElement>, Te
 }
 
 const getCommonClassNames = (
-  sizeVariant: 's',
+  sizeVariant: 's' | 'm',
   isFullWidth: boolean | undefined,
   type: 'single' | 'multi' | 'trigger'
 ) => {
