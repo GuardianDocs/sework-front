@@ -63,7 +63,8 @@ export default function LoginPage() {
       setAccessToken(data.accessToken);
       setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
 
-      router.push('/');
+      // TODO: 회사 정보가 없으면 기본 정보 입력 페이지로 이동
+      router.push('/landing/basic-info');
     } else {
       alert(message);
     }

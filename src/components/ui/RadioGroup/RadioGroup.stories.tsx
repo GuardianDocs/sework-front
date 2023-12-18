@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { RadioGroup, RadioGroupItem } from './RadioGroup';
-import { Label } from '@/components/ui/Label/Label';
+import { Label as HtmlLabel } from '@/components/ui/Label/Label';
+import { Label } from '@/components/typography';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Design System/UI/RadioGroup',
@@ -17,15 +18,27 @@ export const Default: Story = {
       <RadioGroup defaultValue="comfortable">
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="default" id="r1" />
-          <Label htmlFor="r1">Default</Label>
+          <HtmlLabel htmlFor="r1">
+            <Label size="s" color="blue500">
+              Default
+            </Label>
+          </HtmlLabel>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="comfortable" id="r2" />
-          <Label htmlFor="r2">Comfortable</Label>
+          <HtmlLabel htmlFor="r2">
+            <Label size="s" color="blue500">
+              Comfortable
+            </Label>
+          </HtmlLabel>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="compact" id="r3" />
-          <Label htmlFor="r3">Compact</Label>
+          <HtmlLabel htmlFor="r3">
+            <Label size="s" color="blue500">
+              Compact
+            </Label>
+          </HtmlLabel>
         </div>
       </RadioGroup>
     );

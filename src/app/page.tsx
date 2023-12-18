@@ -1,38 +1,123 @@
 import type { Metadata } from 'next';
-import HeroSection from '@/components/legacy/HeroSection';
-import Features from '@/components/legacy/Features';
-import CTASection from '@/components/legacy/CTASection';
+import { Headline, Label, Title } from '@/components/typography';
+import ActionButton from '@/components/ui/ActionButton/ActionButton';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'IRAS',
 };
 
+const FeatureItem = ({ title, description }: { title: React.ReactNode; description: React.ReactNode }) => {
+  return (
+    <div className="flex flex-col items-center justify-center gap-1">
+      <Title size="xl" color="gray800">
+        {title}
+      </Title>
+      <Label size="m" color="gray600">
+        <div className="text-center">{description}</div>
+      </Label>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <>
-      <HeroSection
-        backgroundImage="/hero1.jpg"
-        title="Intelligent Risk Assurance System"
-        subtitle="당신의 사업장의 위험 평가를 도와드립니다."
-      />
-      <Features
-        features={[
-          {
-            title: '위험성 평가 보고서 작성 지원',
-            description: '위험성 평가 보고서를 쉽게 작성할 수 있도록 템플릿과 가이드라인을 제공합니다.',
-          },
-          {
-            title: '설문조사 기능',
-            description: '설문조사를 통해 사용자 의견을 신속하게 수집하고 분석할 수 있는 기능입니다.',
-          },
-        ]}
-      />
-      <HeroSection
-        backgroundImage="/hero1.jpg"
-        title="안전한 작업환경 구축 서비스"
-        subtitle="당신의 업무 환경을 보호하고 개선합니다."
-      />
-      <CTASection />
+      <div className="flex flex-row items-center justify-center bg-blue-100 h-[720px] gap-[200px]">
+        <div className="flex flex-col items-start justify-center gap-4">
+          <Headline size="l" color="gray800">
+            빠르고 스마트한
+            <br />
+            위험성 평가 솔루션
+          </Headline>
+          <Label size="l" color="gray800">
+            아이라스는 중소기업을 위해서
+            <br />
+            전문가와 기술이 만난 위험성 평가 솔루션입니다.
+          </Label>
+          <ActionButton size="l" variant="filled">
+            아이라스 체험해보기
+          </ActionButton>
+        </div>
+        <div className="flex">
+          <Image src="/hero.svg" alt="hero" width={500} height={400} />
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center gap-12 p-20 bg-white">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <Headline size="m" color="gray800">
+            위험성 평가
+          </Headline>
+          <Title size="xl" color="gray600">
+            보고서에 담을 내용을 쉽고 스마트하게 관리하세요
+          </Title>
+        </div>
+        {/* TODO: FeatureSection 컴포넌트 */}
+        <div className="flex flex-row items-start self-stretch justify-between">
+          <FeatureItem
+            title="위험성 평가"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+          <FeatureItem
+            title="아차사고 관리"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+          <FeatureItem
+            title="근로자 참여"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+        </div>
+        <div className="flex flex-row items-start self-stretch justify-between">
+          <FeatureItem
+            title="의무안전교육 관리"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+          <FeatureItem
+            title="위험 장비 및 화학물질 파악"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+          <FeatureItem
+            title="AI 및 전문가 자문 기반 보고서 생성"
+            description={
+              <>
+                위험성 평가에 대한
+                <br />
+                디스크립션
+              </>
+            }
+          />
+        </div>
+      </div>
     </>
   );
 }
