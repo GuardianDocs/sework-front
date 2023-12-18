@@ -45,6 +45,17 @@ export const colors = {
   green700: '--green-700',
   green800: '--green-800',
   green900: '--green-900',
+
+  yellow50: '--yellow-50',
+  yellow100: '--yellow-100',
+  yellow200: '--yellow-200',
+  yellow300: '--yellow-300',
+  yellow400: '--yellow-400',
+  yellow500: '--yellow-500',
+  yellow600: '--yellow-600',
+  yellow700: '--yellow-700',
+  yellow800: '--yellow-800',
+  yellow900: '--yellow-900',
 } as const;
 
 export type ColorKey = keyof typeof colors;

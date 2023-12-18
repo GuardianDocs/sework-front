@@ -56,5 +56,16 @@
     --green-700: #008638;
     --green-800: #005f28;
     --green-900: #003617;
+
+    --yellow-50: #fff8e4;
+    --yellow-100: #feedb7;
+    --yellow-200: #fde28c;
+    --yellow-300: #fcd568;
+    --yellow-400: #fbc94b;
+    --yellow-500: #f6b100;
+    --yellow-600: #bf832a;
+    --yellow-700: #926123;
+    --yellow-800: #68451f;
+    --yellow-900: #422d1a;
   }
 }

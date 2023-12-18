@@ -24,6 +24,8 @@ import {
   type ResponseResultGetCompanyProcessTitleResponse,
   type UpsertCompanyDangerSolutionRequest,
   CompanyDangerSolutionVOResTypeEnum,
+  type UpdateCompanyDangerFactorPossibilityRequest,
+  type UpdateCompanyDangerFactorSevereRequest,
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
@@ -130,6 +132,7 @@ export default function Step3Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
+        completed: item?.doneYn,
       };
     });
 
@@ -182,6 +185,42 @@ export default function Step3Page() {
     return data;
   };
 
+  // 가능성 수정
+  const updateCompanyDangerFactorPossibility = async ({
+    companyDangerFactorId,
+    updateCompanyDangerFactorPossibilityRequest,
+  }: {
+    companyDangerFactorId: number;
+    updateCompanyDangerFactorPossibilityRequest: UpdateCompanyDangerFactorPossibilityRequest;
+  }) => {
+    const response = await Step34Api.updateCompanyDangerFactorAfterRiskUsingPUT1(
+      Number(getParameterFromUrl('assessmentId')),
+      companyDangerFactorId,
+      updateCompanyDangerFactorPossibilityRequest
+    );
+
+    const { data } = response?.data as ResponseResultUpsertCompanyDangerSolutionResponse;
+    return data;
+  };
+
+  // 중대성 수정
+  const updateCompanyDangerFactorSevere = async ({
+    companyDangerFactorId,
+    updateCompanyDangerFactorSevereRequest,
+  }: {
+    companyDangerFactorId: number;
+    updateCompanyDangerFactorSevereRequest: UpdateCompanyDangerFactorSevereRequest;
+  }) => {
+    const response = await Step34Api.updateCompanyDangerFactorAfterRiskUsingPUT2(
+      Number(getParameterFromUrl('assessmentId')),
+      companyDangerFactorId,
+      updateCompanyDangerFactorSevereRequest
+    );
+
+    const { data } = response?.data as ResponseResultUpsertCompanyDangerSolutionResponse;
+    return data;
+  };
+
   const {
     data: companyProcessTitleData,
     isLoading: companyProcessTitleIsLoading,
@@ -225,6 +264,74 @@ export default function Step3Page() {
     isError: updateCompanyDangerSolutionIsError,
     error: updateCompanyDangerSolutionError,
   } = useMutation(updateCompanyDangerSolution, {
+    onSuccess: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              작성한 내용이 저장되었습니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+    onError: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              저장에 실패했습니다. 다시 시도해주시기 바랍니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+  });
+
+  const {
+    mutate: updateCompanyDangerFactorPossibilityMutate,
+    isLoading: updateCompanyDangerFactorPossibilityIsLoading,
+    isError: updateCompanyDangerFactorPossibilityIsError,
+    error: updateCompanyDangerFactorPossibilityError,
+  } = useMutation(updateCompanyDangerFactorPossibility, {
+    onSuccess: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              작성한 내용이 저장되었습니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+    onError: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              저장에 실패했습니다. 다시 시도해주시기 바랍니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+  });
+
+  const {
+    mutate: updateCompanyDangerFactorSevereMutate,
+    isLoading: updateCompanyDangerFactorSevereIsLoading,
+    isError: updateCompanyDangerFactorSevereIsError,
+    error: updateCompanyDangerFactorSevereError,
+  } = useMutation(updateCompanyDangerFactorSevere, {
     onSuccess: () => {
       toast({
         description: (
@@ -712,6 +819,14 @@ export default function Step3Page() {
                     onSelected={option => {
                       const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                       newCompanyDangerFactorAndSolution[index].possibility = option.value as number;
+
+                      updateCompanyDangerFactorPossibilityMutate({
+                        companyDangerFactorId: item?.companyDangerFactorId as number,
+                        updateCompanyDangerFactorPossibilityRequest: {
+                          possibility: option.value as number,
+                        },
+                      });
+
                       setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                     }}
                     isFullWidth
@@ -725,6 +840,14 @@ export default function Step3Page() {
                     onSelected={option => {
                       const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                       newCompanyDangerFactorAndSolution[index].severe = option.value as number;
+
+                      updateCompanyDangerFactorSevereMutate({
+                        companyDangerFactorId: item?.companyDangerFactorId as number,
+                        updateCompanyDangerFactorSevereRequest: {
+                          severe: option.value as number,
+                        },
+                      });
+
                       setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                     }}
                   />

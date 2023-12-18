@@ -65,6 +65,7 @@ export default function Step2Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
+        completed: item?.doneYn,
       };
     });
 

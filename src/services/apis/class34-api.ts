@@ -26,11 +26,19 @@ import { GetCompanyDangerFactorAndSolutionResponse } from '../models';
 // @ts-ignore
 import { RecommendDangerFactorResponse } from '../models';
 // @ts-ignore
+import { ResponseResult } from '../models';
+// @ts-ignore
 import { ResponseResultGetCompanyDangerFactorAndSolutionResponse } from '../models';
 // @ts-ignore
 import { ResponseResultRecommendDangerSolutionResponse } from '../models';
 // @ts-ignore
 import { ResponseResultUpsertCompanyDangerSolutionResponse } from '../models';
+// @ts-ignore
+import { UpdateCompanyDangerFactorAfterRiskRequest } from '../models';
+// @ts-ignore
+import { UpdateCompanyDangerFactorPossibilityRequest } from '../models';
+// @ts-ignore
+import { UpdateCompanyDangerFactorSevereRequest } from '../models';
 // @ts-ignore
 import { UpsertCompanyDangerSolutionRequest } from '../models';
 // @ts-ignore
@@ -132,6 +140,153 @@ export const Class34ApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @summary 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorAfterRiskRequest} [updateCompanyDangerFactorAfterRiskRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT: async (assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorAfterRiskRequest?: UpdateCompanyDangerFactorAfterRiskRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerFactorId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT', 'companyDangerFactorId', companyDangerFactorId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/danger-solution/after-risk`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+            if (companyDangerFactorId !== undefined) {
+                localVarQueryParameter['companyDangerFactorId'] = companyDangerFactorId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCompanyDangerFactorAfterRiskRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 가능성 수정
+         * @summary 안전 위험 평가 3, 4 단계 가능성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorPossibilityRequest} [updateCompanyDangerFactorPossibilityRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT1: async (assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorPossibilityRequest?: UpdateCompanyDangerFactorPossibilityRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT1', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerFactorId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT1', 'companyDangerFactorId', companyDangerFactorId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/danger-solution/possibility`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+            if (companyDangerFactorId !== undefined) {
+                localVarQueryParameter['companyDangerFactorId'] = companyDangerFactorId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCompanyDangerFactorPossibilityRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 중대성 수정
+         * @summary 안전 위험 평가 3, 4 단계 중대성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorSevereRequest} [updateCompanyDangerFactorSevereRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT2: async (assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorSevereRequest?: UpdateCompanyDangerFactorSevereRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT2', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerFactorId' is not null or undefined
+            assertParamExists('updateCompanyDangerFactorAfterRiskUsingPUT2', 'companyDangerFactorId', companyDangerFactorId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/danger-solution/severe`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+            if (companyDangerFactorId !== undefined) {
+                localVarQueryParameter['companyDangerFactorId'] = companyDangerFactorId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCompanyDangerFactorSevereRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 안전 위험 평가 3, 4 단계 (위험 수준 판단) 입력, 수정, 삭제
          * @summary 안전 위험 평가 3, 4 단계 (위험성 수준 판단) 입력, 수정, 삭제
          * @param {number} assessmentId assessmentId
@@ -219,6 +374,51 @@ export const Class34ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @summary 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorAfterRiskRequest} [updateCompanyDangerFactorAfterRiskRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorAfterRiskRequest?: UpdateCompanyDangerFactorAfterRiskRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertCompanyDangerSolutionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId, companyDangerFactorId, updateCompanyDangerFactorAfterRiskRequest, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['Class34Api.updateCompanyDangerFactorAfterRiskUsingPUT']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 가능성 수정
+         * @summary 안전 위험 평가 3, 4 단계 가능성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorPossibilityRequest} [updateCompanyDangerFactorPossibilityRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorPossibilityRequest?: UpdateCompanyDangerFactorPossibilityRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertCompanyDangerSolutionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId, companyDangerFactorId, updateCompanyDangerFactorPossibilityRequest, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['Class34Api.updateCompanyDangerFactorAfterRiskUsingPUT1']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 중대성 수정
+         * @summary 안전 위험 평가 3, 4 단계 중대성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorSevereRequest} [updateCompanyDangerFactorSevereRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorSevereRequest?: UpdateCompanyDangerFactorSevereRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertCompanyDangerSolutionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId, companyDangerFactorId, updateCompanyDangerFactorSevereRequest, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['Class34Api.updateCompanyDangerFactorAfterRiskUsingPUT2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 안전 위험 평가 3, 4 단계 (위험 수준 판단) 입력, 수정, 삭제
          * @summary 안전 위험 평가 3, 4 단계 (위험성 수준 판단) 입력, 수정, 삭제
          * @param {number} assessmentId assessmentId
@@ -266,6 +466,42 @@ export const Class34ApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.recommendDangerSolutionUsingGET(assessmentId, companyDangerFactorId, options).then((request) => request(axios, basePath));
         },
         /**
+         * 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @summary 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorAfterRiskRequest} [updateCompanyDangerFactorAfterRiskRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorAfterRiskRequest?: UpdateCompanyDangerFactorAfterRiskRequest, options?: any): AxiosPromise<UpsertCompanyDangerSolutionResponse> {
+            return localVarFp.updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId, companyDangerFactorId, updateCompanyDangerFactorAfterRiskRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 가능성 수정
+         * @summary 안전 위험 평가 3, 4 단계 가능성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorPossibilityRequest} [updateCompanyDangerFactorPossibilityRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorPossibilityRequest?: UpdateCompanyDangerFactorPossibilityRequest, options?: any): AxiosPromise<UpsertCompanyDangerSolutionResponse> {
+            return localVarFp.updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId, companyDangerFactorId, updateCompanyDangerFactorPossibilityRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 안전 위험 평가 3, 4 단계 중대성 수정
+         * @summary 안전 위험 평가 3, 4 단계 중대성 수정
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {UpdateCompanyDangerFactorSevereRequest} [updateCompanyDangerFactorSevereRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorSevereRequest?: UpdateCompanyDangerFactorSevereRequest, options?: any): AxiosPromise<UpsertCompanyDangerSolutionResponse> {
+            return localVarFp.updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId, companyDangerFactorId, updateCompanyDangerFactorSevereRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 안전 위험 평가 3, 4 단계 (위험 수준 판단) 입력, 수정, 삭제
          * @summary 안전 위험 평가 3, 4 단계 (위험성 수준 판단) 입력, 수정, 삭제
          * @param {number} assessmentId assessmentId
@@ -311,6 +547,48 @@ export class Class34Api extends BaseAPI {
      */
     public recommendDangerSolutionUsingGET(assessmentId: number, companyDangerFactorId: number, options?: AxiosRequestConfig) {
         return Class34ApiFp(this.configuration).recommendDangerSolutionUsingGET(assessmentId, companyDangerFactorId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+     * @summary 안전 위험 평가 3, 4 단계 개선 후 위험성 수정
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerFactorId companyDangerFactorId
+     * @param {UpdateCompanyDangerFactorAfterRiskRequest} [updateCompanyDangerFactorAfterRiskRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof Class34Api
+     */
+    public updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorAfterRiskRequest?: UpdateCompanyDangerFactorAfterRiskRequest, options?: AxiosRequestConfig) {
+        return Class34ApiFp(this.configuration).updateCompanyDangerFactorAfterRiskUsingPUT(assessmentId, companyDangerFactorId, updateCompanyDangerFactorAfterRiskRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 3, 4 단계 가능성 수정
+     * @summary 안전 위험 평가 3, 4 단계 가능성 수정
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerFactorId companyDangerFactorId
+     * @param {UpdateCompanyDangerFactorPossibilityRequest} [updateCompanyDangerFactorPossibilityRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof Class34Api
+     */
+    public updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorPossibilityRequest?: UpdateCompanyDangerFactorPossibilityRequest, options?: AxiosRequestConfig) {
+        return Class34ApiFp(this.configuration).updateCompanyDangerFactorAfterRiskUsingPUT1(assessmentId, companyDangerFactorId, updateCompanyDangerFactorPossibilityRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 3, 4 단계 중대성 수정
+     * @summary 안전 위험 평가 3, 4 단계 중대성 수정
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerFactorId companyDangerFactorId
+     * @param {UpdateCompanyDangerFactorSevereRequest} [updateCompanyDangerFactorSevereRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof Class34Api
+     */
+    public updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId: number, companyDangerFactorId: number, updateCompanyDangerFactorSevereRequest?: UpdateCompanyDangerFactorSevereRequest, options?: AxiosRequestConfig) {
+        return Class34ApiFp(this.configuration).updateCompanyDangerFactorAfterRiskUsingPUT2(assessmentId, companyDangerFactorId, updateCompanyDangerFactorSevereRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

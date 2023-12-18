@@ -17,26 +17,14 @@
 /**
  * 
  * @export
- * @interface CompanyProcessTitleVO
+ * @interface UpdateCompanyDangerFactorSevereRequest
  */
-export interface CompanyProcessTitleVO {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CompanyProcessTitleVO
-     */
-    'doneYn'?: boolean;
+export interface UpdateCompanyDangerFactorSevereRequest {
     /**
      * 
      * @type {number}
-     * @memberof CompanyProcessTitleVO
+     * @memberof UpdateCompanyDangerFactorSevereRequest
      */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CompanyProcessTitleVO
-     */
-    'title'?: string;
+    'severe'?: number;
 }
 

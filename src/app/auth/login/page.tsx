@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import LoginPage from './components/LoginPage';
+import LoginPage from '@/components/page/login/LoginPage';
 
 export const metadata: Metadata = {
   title: '로그인',

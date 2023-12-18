@@ -18,5 +18,5 @@ export default function DotIcon({ color = 'black' }: DotIconProps) {
 }
 
 export const DotIconRed = () => <DotIcon color="red500" />;
-export const DotIconYellow = () => <DotIcon color="#F4C624" />;
+export const DotIconYellow = () => <DotIcon color="yellow500" />;
 export const DotIconGreen = () => <DotIcon color="green500" />;

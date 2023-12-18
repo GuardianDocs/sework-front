@@ -17,26 +17,14 @@
 /**
  * 
  * @export
- * @interface CompanyProcessTitleVO
+ * @interface UpdateCompanyDangerFactorAfterRiskRequest
  */
-export interface CompanyProcessTitleVO {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CompanyProcessTitleVO
-     */
-    'doneYn'?: boolean;
+export interface UpdateCompanyDangerFactorAfterRiskRequest {
     /**
      * 
      * @type {number}
-     * @memberof CompanyProcessTitleVO
+     * @memberof UpdateCompanyDangerFactorAfterRiskRequest
      */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CompanyProcessTitleVO
-     */
-    'title'?: string;
+    'afterRisk'?: number;
 }
 
