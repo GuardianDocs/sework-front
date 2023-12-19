@@ -47,6 +47,13 @@ export default function Step1Page() {
     const response = await Step1Api.getCompanyProcessUsingGET(Number(getParameterFromUrl('assessmentId')));
 
     const { data } = response?.data as ResponseResultGetCompanyProcessResponse;
+
+    // TODO: 최초 1단계 접속시에는 viewOrder가 없어서, client에서 추가해줘야 함
+    // 근데 이렇게 하면 viewOrder가 이미 있을때도, 초기화해줌. 사실 상관은 없지만... 그래도 좀 더 나은 방법이 있을 것 같음
+    data?.companyProcessList?.map((item, index) => {
+      item.viewOrder = index + 1;
+    });
+
     setStep1(data?.companyProcessList || []);
 
     return data;

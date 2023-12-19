@@ -1,5 +1,7 @@
+export * from './additional-company-account-info-request';
 export * from './assessment-start-response';
 export * from './company-additional-info-vo';
+export * from './company-business-look-up-response';
 export * from './company-danger-factor-and-solution-vo';
 export * from './company-danger-factor-voreq';
 export * from './company-danger-factor-vores';
@@ -24,6 +26,7 @@ export * from './register-company-account-response';
 export * from './register-company-assessment-basic-info-request';
 export * from './response-result';
 export * from './response-result-assessment-start-response';
+export * from './response-result-company-business-look-up-response';
 export * from './response-result-get-company-additional-info-answer-response';
 export * from './response-result-get-company-danger-factor-and-solution-response';
 export * from './response-result-get-company-danger-factor-response';

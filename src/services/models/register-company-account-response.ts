@@ -31,7 +31,7 @@ export interface RegisterCompanyAccountResponse {
      * @type {string}
      * @memberof RegisterCompanyAccountResponse
      */
-    'businessNumber'?: string;
+    'companyName'?: string;
     /**
      * 
      * @type {number}
@@ -44,5 +44,11 @@ export interface RegisterCompanyAccountResponse {
      * @memberof RegisterCompanyAccountResponse
      */
     'refreshTokenExpiredAt'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RegisterCompanyAccountResponse
+     */
+    'requireAdditionalInfoYn'?: boolean;
 }
 

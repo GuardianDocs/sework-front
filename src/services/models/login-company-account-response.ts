@@ -31,12 +31,6 @@ export interface LoginCompanyAccountResponse {
      * @type {string}
      * @memberof LoginCompanyAccountResponse
      */
-    'businessNumber': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof LoginCompanyAccountResponse
-     */
     'companyName': string;
     /**
      * 
@@ -49,12 +43,12 @@ export interface LoginCompanyAccountResponse {
      * @type {string}
      * @memberof LoginCompanyAccountResponse
      */
-    'ownerName': string;
+    'refreshTokenExpiredAt': string;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof LoginCompanyAccountResponse
      */
-    'refreshTokenExpiredAt': string;
+    'requireAdditionalInfoYn': boolean;
 }
 
