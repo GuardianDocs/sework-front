@@ -27,9 +27,8 @@ const initialState: LoginFormState = {
 };
 
 const dummyState: LoginFormState = {
-  id: '8973400618',
-  // password: 'qwer1234',
-  password: 'aaaa',
+  id: 'test@email.com',
+  password: 'qwer1234',
 };
 
 const useLoginFormStore = create(

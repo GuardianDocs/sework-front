@@ -43,7 +43,7 @@ export default function LoginPage() {
   const loginCompanyAccount = async () => {
     const loginInfo = getLoginState();
     const loginRequest: LoginCompanyAccountRequest = {
-      id: loginInfo.id,
+      email: loginInfo.id,
       password: loginInfo.password,
     };
 
@@ -56,10 +56,13 @@ export default function LoginPage() {
     const { code, message, data } = response?.data as ResponseResultLoginCompanyAccountResponse;
 
     if (code === '0001' && data) {
+      console.log('로그인 성공');
+      console.log(data);
+
       setLoggedInId(data.id);
-      setBusinessNumber(data.businessNumber);
+      // setBusinessNumber(data.businessNumber);
       setCompanyName(data.companyName);
-      setOwnerName(data.ownerName);
+      // setOwnerName(data.ownerName);
       setAccessToken(data.accessToken);
       setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
 

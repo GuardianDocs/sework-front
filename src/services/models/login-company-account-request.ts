@@ -25,7 +25,7 @@ export interface LoginCompanyAccountRequest {
      * @type {string}
      * @memberof LoginCompanyAccountRequest
      */
-    'id': string;
+    'email': string;
     /**
      * 
      * @type {string}

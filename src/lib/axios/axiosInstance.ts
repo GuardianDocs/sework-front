@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
 
 const service = axios.create({
   withCredentials: true, // send cookies when cross-domain requests
@@ -16,8 +17,14 @@ const getAccessToken = () => {
 };
 
 service.interceptors.request.use(
-  config => {
+  async config => {
     config.headers = config.headers ?? {};
+
+    const fingerAgent = await fingerPrintJsLoad();
+    const fingerPrintAgentResult = await fingerAgent.get();
+    const uid = fingerPrintAgentResult.visitorId;
+
+    config.headers['X-SEWORK-PID'] = uid;
 
     const accessToken = getAccessToken();
 

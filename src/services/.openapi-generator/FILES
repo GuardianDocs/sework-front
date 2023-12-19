@@ -1,6 +1,7 @@
 .gitignore
 .npmignore
 api.ts
+apis/batchapi.ts
 apis/class1-api.ts
 apis/class2-api.ts
 apis/class34-api.ts
@@ -11,8 +12,10 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
+models/additional-company-account-info-request.ts
 models/assessment-start-response.ts
 models/company-additional-info-vo.ts
+models/company-business-look-up-response.ts
 models/company-danger-factor-and-solution-vo.ts
 models/company-danger-factor-voreq.ts
 models/company-danger-factor-vores.ts
@@ -37,6 +40,7 @@ models/register-company-account-request.ts
 models/register-company-account-response.ts
 models/register-company-assessment-basic-info-request.ts
 models/response-result-assessment-start-response.ts
+models/response-result-company-business-look-up-response.ts
 models/response-result-get-company-additional-info-answer-response.ts
 models/response-result-get-company-danger-factor-and-solution-response.ts
 models/response-result-get-company-danger-factor-response.ts

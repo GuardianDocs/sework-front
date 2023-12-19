@@ -21,12 +21,6 @@
  */
 export interface RegisterCompanyAccountRequest {
     /**
-     * 
-     * @type {string}
-     * @memberof RegisterCompanyAccountRequest
-     */
-    'baddress'?: string;
-    /**
      * 사업자등록번호
      * @type {string}
      * @memberof RegisterCompanyAccountRequest
@@ -43,42 +37,12 @@ export interface RegisterCompanyAccountRequest {
      * @type {string}
      * @memberof RegisterCompanyAccountRequest
      */
-    'detailAddress': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RegisterCompanyAccountRequest
-     */
     'email': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof RegisterCompanyAccountRequest
-     */
-    'employeeNumber': number;
-    /**
-     * 대표자성명1
-     * @type {string}
-     * @memberof RegisterCompanyAccountRequest
-     */
-    'ownerName': string;
     /**
      * 
      * @type {string}
      * @memberof RegisterCompanyAccountRequest
      */
     'password': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof RegisterCompanyAccountRequest
-     */
-    'postNumber': string;
-    /**
-     * 개업 일자
-     * @type {string}
-     * @memberof RegisterCompanyAccountRequest
-     */
-    'startDate': string;
 }
 

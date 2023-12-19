@@ -22,7 +22,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import { AdditionalCompanyAccountInfoRequest } from '../models';
+// @ts-ignore
 import { AssessmentStartResponse } from '../models';
+// @ts-ignore
+import { CompanyBusinessLookUpResponse } from '../models';
 // @ts-ignore
 import { GetCompanyAdditionalInfoAnswerResponse } from '../models';
 // @ts-ignore
@@ -39,6 +43,8 @@ import { RegisterCompanyAssessmentBasicInfoRequest } from '../models';
 import { ResponseResult } from '../models';
 // @ts-ignore
 import { ResponseResultAssessmentStartResponse } from '../models';
+// @ts-ignore
+import { ResponseResultCompanyBusinessLookUpResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyAdditionalInfoAnswerResponse } from '../models';
 // @ts-ignore
@@ -67,6 +73,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getAdditionalInfoAnswerUsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/assessment/v1/company/additional-info/answer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 기업 사업자 정보를 조회 합니다.
+         * @summary 기업 사업자 정보 조회
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyInfoUsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/account/v1/company/company-business-info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -225,6 +265,44 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 계정의 추가 정보를 저장합니다.
+         * @summary 계정 추가 정보
+         * @param {AdditionalCompanyAccountInfoRequest} [additionalCompanyAccountInfoRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        saveAdditionalInfoUsingPOST: async (additionalCompanyAccountInfoRequest?: AdditionalCompanyAccountInfoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/account/v1/company/additional-info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(additionalCompanyAccountInfoRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 안전 위험 평가 사전 정보 입력
          * @summary 안전 위험 평가 사전 정보 입력
          * @param {number} assessmentId assessmentId
@@ -372,6 +450,18 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * 기업 사업자 정보를 조회 합니다.
+         * @summary 기업 사업자 정보 조회
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyInfoUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyBusinessLookUpResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyInfoUsingGET(options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyInfoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 기업회원이 로그인을 합니다.
          * @summary 기업회원 로그인
          * @param {string} xSEWORKPID X-SEWORK-PID
@@ -410,6 +500,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerCompanyUsingPOST(xSEWORKPID, registerCompanyAccountRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.registerCompanyUsingPOST']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 계정의 추가 정보를 저장합니다.
+         * @summary 계정 추가 정보
+         * @param {AdditionalCompanyAccountInfoRequest} [additionalCompanyAccountInfoRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest?: AdditionalCompanyAccountInfoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.saveAdditionalInfoUsingPOST']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
@@ -473,6 +576,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAdditionalInfoAnswerUsingGET(options).then((request) => request(axios, basePath));
         },
         /**
+         * 기업 사업자 정보를 조회 합니다.
+         * @summary 기업 사업자 정보 조회
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyInfoUsingGET(options?: any): AxiosPromise<CompanyBusinessLookUpResponse> {
+            return localVarFp.getCompanyInfoUsingGET(options).then((request) => request(axios, basePath));
+        },
+        /**
          * 기업회원이 로그인을 합니다.
          * @summary 기업회원 로그인
          * @param {string} xSEWORKPID X-SEWORK-PID
@@ -503,6 +615,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: any): AxiosPromise<RegisterCompanyAccountResponse> {
             return localVarFp.registerCompanyUsingPOST(xSEWORKPID, registerCompanyAccountRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 계정의 추가 정보를 저장합니다.
+         * @summary 계정 추가 정보
+         * @param {AdditionalCompanyAccountInfoRequest} [additionalCompanyAccountInfoRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest?: AdditionalCompanyAccountInfoRequest, options?: any): AxiosPromise<ResponseResult> {
+            return localVarFp.saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 안전 위험 평가 사전 정보 입력
@@ -558,6 +680,17 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
+     * 기업 사업자 정보를 조회 합니다.
+     * @summary 기업 사업자 정보 조회
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyInfoUsingGET(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyInfoUsingGET(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 기업회원이 로그인을 합니다.
      * @summary 기업회원 로그인
      * @param {string} xSEWORKPID X-SEWORK-PID
@@ -593,6 +726,18 @@ export class DefaultApi extends BaseAPI {
      */
     public registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).registerCompanyUsingPOST(xSEWORKPID, registerCompanyAccountRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 계정의 추가 정보를 저장합니다.
+     * @summary 계정 추가 정보
+     * @param {AdditionalCompanyAccountInfoRequest} [additionalCompanyAccountInfoRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest?: AdditionalCompanyAccountInfoRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).saveAdditionalInfoUsingPOST(additionalCompanyAccountInfoRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
