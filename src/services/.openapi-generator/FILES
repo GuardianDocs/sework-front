@@ -57,6 +57,9 @@ models/response-result.ts
 models/search-sector-response.ts
 models/sector-vo.ts
 models/token-refresh-response.ts
+models/update-company-danger-factor-after-risk-request.ts
+models/update-company-danger-factor-possibility-request.ts
+models/update-company-danger-factor-severe-request.ts
 models/upsert-company-danger-factor-request.ts
 models/upsert-company-danger-factor-response.ts
 models/upsert-company-danger-solution-request.ts

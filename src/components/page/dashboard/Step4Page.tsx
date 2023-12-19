@@ -25,6 +25,7 @@ import {
   type ResponseResultGetCompanyProcessTitleResponse,
   type UpsertCompanyDangerSolutionRequest,
   CompanyDangerSolutionVOResTypeEnum,
+  type UpdateCompanyDangerFactorAfterRiskRequest,
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
@@ -187,6 +188,7 @@ export default function Step4Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
+        completed: item?.doneYn,
       };
     });
 
@@ -239,6 +241,23 @@ export default function Step4Page() {
     return data;
   };
 
+  const updateCompanyDangerFactorAfterRisk = async ({
+    companyDangerFactorId,
+    updateCompanyDangerFactorAfterRiskRequest,
+  }: {
+    companyDangerFactorId: number;
+    updateCompanyDangerFactorAfterRiskRequest: UpdateCompanyDangerFactorAfterRiskRequest;
+  }) => {
+    const response = await Step34Api.updateCompanyDangerFactorAfterRiskUsingPUT(
+      Number(getParameterFromUrl('assessmentId')),
+      companyDangerFactorId,
+      updateCompanyDangerFactorAfterRiskRequest
+    );
+
+    const { data } = response?.data as ResponseResultUpsertCompanyDangerSolutionResponse;
+    return data;
+  };
+
   const {
     data: companyProcessTitleData,
     isLoading: companyProcessTitleIsLoading,
@@ -282,6 +301,40 @@ export default function Step4Page() {
     isError: updateCompanyDangerSolutionIsError,
     error: updateCompanyDangerSolutionError,
   } = useMutation(updateCompanyDangerSolution, {
+    onSuccess: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              작성한 내용이 저장되었습니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+    onError: () => {
+      toast({
+        description: (
+          <div className="inline-flex items-center gap-2">
+            <EtcIcon icon="complete-s" />
+            <Label size="s" color="gray100">
+              저장에 실패했습니다. 다시 시도해주시기 바랍니다
+            </Label>
+          </div>
+        ),
+        duration: 1400,
+      });
+    },
+  });
+
+  const {
+    mutate: updateCompanyDangerFactorAfterRiskMutate,
+    isLoading: updateCompanyDangerFactorAfterRiskIsLoading,
+    isError: updateCompanyDangerFactorAfterRiskIsError,
+    error: updateCompanyDangerFactorAfterRiskError,
+  } = useMutation(updateCompanyDangerFactorAfterRisk, {
     onSuccess: () => {
       toast({
         description: (
@@ -752,7 +805,26 @@ export default function Step4Page() {
                   </div>
                 </Table.Cell>
                 <Table.Cell style={{ width: '104px' }}>
-                  <DropdownButton options={afterRiskOptionList} onSelected={() => {}} isFullWidth />
+                  <DropdownButton
+                    options={afterRiskOptionList}
+                    selectedOption={afterRiskOptionList.find(
+                      afterRiskOption => afterRiskOption.value === item?.afterRisk
+                    )}
+                    onSelected={option => {
+                      const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
+                      newCompanyDangerFactorAndSolution[index].afterRisk = option.value as number;
+
+                      updateCompanyDangerFactorAfterRiskMutate({
+                        companyDangerFactorId: item?.companyDangerFactorId as number,
+                        updateCompanyDangerFactorAfterRiskRequest: {
+                          afterRisk: option.value as number,
+                        },
+                      });
+
+                      setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                    }}
+                    isFullWidth
+                  />
                 </Table.Cell>
               </Table.Row>
             ))}

@@ -1,11 +1,9 @@
+import { type DropdownOption } from '@/components/ui/DropdownButton/DropdownButton';
 import { type CompanyDangerFactorAndSolutionVO, type CompanyDangerSolutionVORes } from '@/services';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-type SelectOption = {
-  label: React.ReactNode;
-  value: string | number;
-};
+type SelectOption = DropdownOption;
 
 type Step3State = {
   companyProcessTitle: Array<SelectOption> | [];

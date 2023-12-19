@@ -1,10 +1,10 @@
 import { PropsWithChildren } from 'react';
 import localFont from 'next/font/local';
 import RootProvider from '@/components/Providers/RootProvider';
-import Navbar from '@/components/legacy/Navbar';
-import '@/app/globals.css';
+import Header from '@/components/ui/Header/Header';
 import { type NextFont } from 'next/dist/compiled/@next/font';
 import { Toaster } from '@/components/ui/Toast/Toaster';
+import '@/app/globals.css';
 
 const Pretendard: NextFont = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="ko" className={`${Pretendard.className} light`}>
       <body>
         <RootProvider>
-          <Navbar />
+          <Header />
           <main>{children}</main>
           <Toaster />
         </RootProvider>

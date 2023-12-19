@@ -7,10 +7,6 @@ describe('Home', () => {
   });
 
   test('renders HeroSection component', () => {
-    expect(screen.getByText('Intelligent Risk Assurance System')).toBeInTheDocument();
-  });
-
-  test('1+1=2', () => {
-    expect(1 + 1).toBe(2);
+    expect(screen.getByText(/빠르고 스마트한/i)).toBeInTheDocument();
   });
 });
