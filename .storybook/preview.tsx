@@ -3,7 +3,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import { type NextFont } from 'next/dist/compiled/@next/font';
 import localFont from 'next/font/local';
-import '../src/app/globals.css';
+import '@/app/globals.css';
 
 const Pretendard: NextFont = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
