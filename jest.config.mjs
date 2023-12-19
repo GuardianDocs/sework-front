@@ -20,6 +20,7 @@ const config = {
 		// If your project is using Module Path Aliases, you will need to configure Jest to resolve the imports by matching the paths option
 		// https://jestjs.io/docs/configuration#modulenamemapper-objectstring-string--arraystring
 	},
+
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

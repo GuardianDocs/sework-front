@@ -1,0 +1,7 @@
+{
+  "modelPackage": "models",
+  "apiPackage": "apis",
+  "withSeparateModelsAndApi": true,
+  "supportsES6": true,
+  "stringEnums": true
+}

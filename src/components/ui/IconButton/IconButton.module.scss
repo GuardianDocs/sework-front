@@ -1,0 +1,89 @@
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  border-radius: 4px;
+
+  // 1. variant
+  &.outline {
+    background: var(--white, #fff);
+    border: 1px solid var(--gray-200, #e1e2e5);
+
+    &:hover {
+      border: 1px solid var(--gray-300, #c3c6cd);
+    }
+    &:disabled {
+      border: 1px solid var(--gray-200, #e1e2e5);
+    }
+  }
+
+  // 2. size
+  &.m {
+    padding: 8px;
+
+    // 아이콘 width, height
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // 3. style by icon
+
+  // default : same as save style
+  svg {
+    fill: var(--gray-600);
+  }
+
+  &:hover {
+    svg {
+      fill: var(--gray-600);
+    }
+  }
+
+  &:disabled {
+    svg {
+      fill: var(--gray-300);
+    }
+  }
+
+  &.save {
+    svg {
+      fill: var(--gray-600);
+    }
+
+    &:hover {
+      svg {
+        fill: var(--gray-600);
+      }
+    }
+
+    &:disabled {
+      svg {
+        fill: var(--gray-300);
+      }
+    }
+  }
+
+  &.trash {
+    svg {
+      fill: var(--red-400);
+    }
+
+    &:hover {
+      svg {
+        fill: var(--red-400);
+      }
+    }
+
+    &:disabled {
+      svg {
+        fill: var(--red-200);
+      }
+    }
+  }
+}

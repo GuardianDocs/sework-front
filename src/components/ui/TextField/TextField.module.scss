@@ -1,0 +1,64 @@
+@use '../../typography/Body/Body.module.scss' as body;
+
+@mixin text-field {
+  display: flex;
+
+  align-items: center;
+
+  border: 1px solid var(--gray-200, #e1e2e5);
+  background: var(--white, #fff);
+
+  &.s {
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+
+  &.m {
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+
+  &:hover {
+    border: 1px solid var(--gray-300, #c3c6cd);
+    background: var(--white, #fff);
+  }
+
+  &:focus {
+    border: 1px solid var(--gray-500, #878d99);
+    background: var(--white, #fff);
+  }
+
+  &:disabled {
+    border: 1px solid var(--gray-200, #e1e2e5);
+    background: var(--gray-50, #f8f9fa);
+
+    color: var(--gray-800, #2a303b);
+  }
+
+  @include body.body-m;
+  color: var(--gray-800, #2a303b);
+
+  &::placeholder {
+    color: var(--gray-300, #c3c6cd);
+  }
+}
+
+.textFieldSingle {
+  @include text-field;
+}
+
+.textFieldMulti {
+  @include text-field;
+
+  resize: none;
+}
+
+.textFieldTrigger {
+  @include text-field;
+
+  cursor: pointer;
+}
+
+.fullWidth {
+  width: 100%;
+}

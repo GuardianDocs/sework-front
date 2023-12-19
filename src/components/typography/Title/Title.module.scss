@@ -1,0 +1,62 @@
+@mixin title-xxl {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px;
+}
+
+@mixin title-xl {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+@mixin title-l {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+@mixin title-m {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+@mixin title-s {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+@mixin title-xs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.title {
+  &.xxl {
+    @include title-xxl;
+  }
+  &.xl {
+    @include title-xl;
+  }
+  &.l {
+    @include title-l;
+  }
+  &.m {
+    @include title-m;
+  }
+  &.s {
+    @include title-s;
+  }
+  &.xs {
+    @include title-xs;
+  }
+}

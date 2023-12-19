@@ -1,8 +1,8 @@
 # sework-front
 
-sework-front app
+Frontend for the IRAS(previously known as SEWORK) project.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e60bf404-a5f1-4ab3-9273-12f2a842279e/deploy-status)](https://app.netlify.com/sites/sework/deploys)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://6546744ba5fe9015a3cf191e-bkwsyfasab.chromatic.com/)
 
 ## Table of Contents
 
@@ -17,6 +17,7 @@ sework-front app
 ### Pre-requisites
 
 - [Node.js](https://nodejs.org/en/) >= 18.16.0
+  - Currently using 20.10.0
 - [Yarn](https://yarnpkg.com/en/)
 - [VS Code](https://code.visualstudio.com/) (recommended)
 

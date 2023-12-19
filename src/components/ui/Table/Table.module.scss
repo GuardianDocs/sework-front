@@ -1,0 +1,58 @@
+@use '../../typography/Label/Label.module.scss' as label;
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.thead {
+  & > tr {
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    background: var(--gray-50, #f8f9fa);
+
+    & > th {
+      @include label.label-m;
+      text-align: left;
+      white-space: nowrap;
+      color: var(--gray-600, #666d7b);
+    }
+  }
+}
+
+.th,
+.td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  padding-left: 4px;
+  padding-right: 4px;
+
+  // 첫번째 th
+  &:first-child {
+    padding-left: 12px;
+  }
+
+  // 마지막 th
+  &:last-child {
+    padding-right: 12px;
+  }
+
+  vertical-align: top;
+}
+
+.th {
+  .required {
+    // TODO: to be deprecated
+    color: var(--red-300, #ff8585);
+    // 아이콘 fill
+    svg {
+      fill: var(--red-300, #ff8585);
+    }
+  }
+}
+
+.td {
+  border-bottom: 1px solid #e2e2e2;
+  background-color: var(--white, #fff); // td 배경색 지정 : drag and drop 시 배경색이 없어서 지정
+}

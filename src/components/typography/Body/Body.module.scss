@@ -1,0 +1,56 @@
+@mixin body-l {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@mixin body-m {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin body-s {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+@mixin body-xs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+@mixin body-xxs {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.body {
+  &.l {
+    @include body-l;
+  }
+
+  &.m {
+    @include body-m;
+  }
+
+  &.s {
+    @include body-s;
+  }
+
+  &.xs {
+    @include body-xs;
+  }
+
+  &.xxs {
+    @include body-xxs;
+  }
+}
