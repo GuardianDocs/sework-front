@@ -16,15 +16,17 @@ const getAccessToken = () => {
   return null;
 };
 
+const getFingerPrintUid = async () => {
+  const fingerAgent = await fingerPrintJsLoad();
+  const fingerPrintAgentResult = await fingerAgent.get();
+  return fingerPrintAgentResult.visitorId;
+};
+
 service.interceptors.request.use(
   async config => {
     config.headers = config.headers ?? {};
 
-    const fingerAgent = await fingerPrintJsLoad();
-    const fingerPrintAgentResult = await fingerAgent.get();
-    const uid = fingerPrintAgentResult.visitorId;
-
-    config.headers['X-SEWORK-PID'] = uid;
+    config.headers['X-SEWORK-PID'] = await getFingerPrintUid();
 
     const accessToken = getAccessToken();
 
