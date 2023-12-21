@@ -11,6 +11,8 @@ import { type ResponseResultLoginCompanyAccountResponse, type LoginCompanyAccoun
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
 
 export default function LoginPage() {
+  // TODO: 로그인 Input 값은 굳이 store쓰지 말고, 그냥 useState로 관리하는게 나을 것 같다.
+  // react-hook-form을 쓰면 더 좋을 것 같다.
   const { id, password, setId, setPassword, setDummyState, getLoginState } = useLoginFormStore(state => ({
     id: state.id,
     password: state.password,
