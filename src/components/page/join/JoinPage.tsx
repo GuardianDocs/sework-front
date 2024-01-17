@@ -2,6 +2,7 @@
 
 import { Body, Headline, Label } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
+import { Checkbox } from '@/components/ui/Checkbox/Checkbox';
 import TextField from '@/components/ui/TextField/TextField';
 import Image from 'next/image';
 
@@ -13,7 +14,7 @@ export default function JoinPage() {
         <Image src="/main-logo.png" width={60} height={20} alt="logo" />
       </div>
       {/* 회원가입 */}
-      <div className="flex items-start pb-[60px]">
+      <div className="flex items-start mb-[60px] border border-gray-200 rounded-xl">
         <div className="flex flex-col items-center gap-12 px-10 py-12">
           <Headline size="s" color="gray800">
             회원가입
@@ -67,7 +68,86 @@ export default function JoinPage() {
               </div>
             </div>
             {/* TODO: 동의 */}
-            <div></div>
+            <div className="flex flex-col items-start self-stretch gap-4">
+              {/* 모두 동의합니다. */}
+              <div className="flex items-center gap-3">
+                <Checkbox id="all-agree" />
+                <label htmlFor="all-agree">
+                  <Body size="m" color="gray800">
+                    모두 동의합니다.
+                  </Body>
+                </label>
+              </div>
+              {/* border */}
+              <div className="flex w-full h-[1px] bg-gray-200" />
+              {/* 4개 항목 */}
+              <div className="flex flex-col items-start gap-3">
+                <div className="flex items-center gap-3">
+                  <Checkbox id="agree-1" />
+                  <label htmlFor="agree-1">
+                    <div className="flex flex-start gap-0.5">
+                      <Body size="m" color="blue500">
+                        [필수]
+                      </Body>
+                      <Body size="m" color="gray600" className="underline underline-offset-2 ">
+                        이용약관
+                      </Body>
+                      <Body size="m" color="gray600">
+                        에 동의합니다.
+                      </Body>
+                    </div>
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="agree-2" />
+                  <label htmlFor="agree-2">
+                    <div className="flex flex-start gap-0.5">
+                      <Body size="m" color="blue500">
+                        [필수]
+                      </Body>
+                      <Body size="m" color="gray600" className="underline underline-offset-2 ">
+                        개인정보 수집 및 이용 동의서
+                      </Body>
+                      <Body size="m" color="gray600">
+                        에 동의합니다.
+                      </Body>
+                    </div>
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="agree-3" />
+                  <label htmlFor="agree-3">
+                    <div className="flex flex-start gap-0.5">
+                      <Body size="m" color="blue500">
+                        [필수]
+                      </Body>
+                      <Body size="m" color="gray600" className="underline underline-offset-2 ">
+                        회원가입 수집 이용
+                      </Body>
+                      <Body size="m" color="gray600">
+                        에 동의합니다.
+                      </Body>
+                    </div>
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="agree-4" />
+                  <label htmlFor="agree-4">
+                    <div className="flex flex-start gap-0.5">
+                      <Body size="m" color="gray600">
+                        [선택]
+                      </Body>
+                      <Body size="m" color="gray600" className="underline underline-offset-2 ">
+                        마케팅 정보 수신
+                      </Body>
+                      <Body size="m" color="gray600">
+                        에 동의합니다.
+                      </Body>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
           <ActionButton variant="filled" size="l">
             회원가입
