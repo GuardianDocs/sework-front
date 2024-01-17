@@ -155,7 +155,7 @@ export const Step3Dialog: Story = {
               <div className="flex items-start self-stretch gap-2">
                 <TextField.Single defaultValue={'작업 발판 설치'} isFullWidth />
                 <IconButton variant="outline" size="m" icon="trash" />
-                <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
                   <Icon icon="chevron-up-s" size={18} />
                   <div className="relative w-[32px] h-px bg-gray-200" />
                   <Icon icon="chevron-down-s" size={18} />

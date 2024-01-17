@@ -675,10 +675,26 @@ export default function Step3Page() {
                                           setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                         }}
                                       />
-                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                        <Icon icon="chevron-up-s" size={18} />
+                                      <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <Icon icon="chevron-up-s" size={18} color="gray300" />
                                         <div className="relative w-[32px] h-px bg-gray-200" />
-                                        <Icon icon="chevron-down-s" size={18} />
+                                        <div
+                                          onClick={() => {
+                                            const newCompanyDangerFactorAndSolution = [
+                                              ...companyDangerFactorAndSolution,
+                                            ];
+                                            newCompanyDangerFactorAndSolution[
+                                              selectedDialogDangerFactorIndex
+                                            ].companyDangerSolutionList?.splice(index, 1, {
+                                              ...item,
+                                              type: CompanyDangerSolutionVOResTypeEnum.Future,
+                                            });
+                                            setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                          }}
+                                          className="flex items-center justify-center w-full cursor-pointer"
+                                        >
+                                          <Icon icon="chevron-down-s" size={18} color="gray600" />
+                                        </div>
                                       </div>
                                     </div>
                                   )
@@ -730,10 +746,26 @@ export default function Step3Page() {
                                           setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                         }}
                                       />
-                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                        <Icon icon="chevron-up-s" size={18} />
+                                      <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <div
+                                          onClick={() => {
+                                            const newCompanyDangerFactorAndSolution = [
+                                              ...companyDangerFactorAndSolution,
+                                            ];
+                                            newCompanyDangerFactorAndSolution[
+                                              selectedDialogDangerFactorIndex
+                                            ].companyDangerSolutionList?.splice(index, 1, {
+                                              ...item,
+                                              type: CompanyDangerSolutionVOResTypeEnum.Current,
+                                            });
+                                            setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                          }}
+                                          className="flex items-center justify-center w-full cursor-pointer"
+                                        >
+                                          <Icon icon="chevron-up-s" size={18} color="gray600" />
+                                        </div>
                                         <div className="relative w-[32px] h-px bg-gray-200" />
-                                        <Icon icon="chevron-down-s" size={18} />
+                                        <Icon icon="chevron-down-s" size={18} color="gray300" />
                                       </div>
                                     </div>
                                   )
