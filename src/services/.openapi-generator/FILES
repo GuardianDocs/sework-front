@@ -24,6 +24,7 @@ models/company-danger-solution-vores.ts
 models/company-process-title-vo.ts
 models/company-process-vo.ts
 models/get-company-additional-info-answer-response.ts
+models/get-company-assessment-progress-response.ts
 models/get-company-danger-factor-and-solution-response.ts
 models/get-company-danger-factor-response.ts
 models/get-company-process-response.ts
@@ -42,6 +43,7 @@ models/register-company-assessment-basic-info-request.ts
 models/response-result-assessment-start-response.ts
 models/response-result-company-business-look-up-response.ts
 models/response-result-get-company-additional-info-answer-response.ts
+models/response-result-get-company-assessment-progress-response.ts
 models/response-result-get-company-danger-factor-and-solution-response.ts
 models/response-result-get-company-danger-factor-response.ts
 models/response-result-get-company-process-response.ts

@@ -63,40 +63,6 @@ export const TestControllerApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
-         * @summary test3
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        test3UsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/test/redis`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication OAUTH2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary test
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -153,18 +119,6 @@ export const TestControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary test3
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async test3UsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.test3UsingGET(options);
-            const index = configuration?.serverIndex ?? 0;
-            const operationBasePath = operationServerMap['TestControllerApi.test3UsingGET']?.[index]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
-        },
-        /**
-         * 
          * @summary test
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -196,15 +150,6 @@ export const TestControllerApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @summary test3
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        test3UsingGET(options?: any): AxiosPromise<void> {
-            return localVarFp.test3UsingGET(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary test
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -231,17 +176,6 @@ export class TestControllerApi extends BaseAPI {
      */
     public test2UsingGET(options?: AxiosRequestConfig) {
         return TestControllerApiFp(this.configuration).test2UsingGET(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary test3
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TestControllerApi
-     */
-    public test3UsingGET(options?: AxiosRequestConfig) {
-        return TestControllerApiFp(this.configuration).test3UsingGET(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
