@@ -31,6 +31,7 @@ import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
 import { useStep3Store } from '@/hooks/dashboard/Step3Store';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/Dialog/Dialog';
+import style from './page.module.scss';
 
 export default function Step3Page() {
   const { toast } = useToast();
@@ -544,7 +545,9 @@ export default function Step3Page() {
                       </DialogTrigger>
                       <DialogContent className="max-w-[792px]">
                         {/* 작성 내용 */}
-                        <div className="flex max-h-[448px] w-[712px] flex-col items-start gap-8 overflow-y-auto">
+                        <div
+                          className={`flex max-h-[448px] w-[712px] flex-col items-start gap-8 overflow-y-auto ${style.dialogScrollbar}`}
+                        >
                           {/* 유해 위험 요인 */}
                           <div className="flex flex-col items-start self-stretch gap-3">
                             {/* title */}
