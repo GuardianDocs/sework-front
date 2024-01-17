@@ -5,8 +5,70 @@ import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox';
 import TextField from '@/components/ui/TextField/TextField';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+import { DefaultApi } from '@/lib/axios/oas-axios';
 
 export default function JoinPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [companyNumber, setCompanyNumber] = useState('');
+  const [allAgree, setAllAgree] = useState(false);
+  const [agree1, setAgree1] = useState(false);
+  const [agree2, setAgree2] = useState(false);
+  const [agree3, setAgree3] = useState(false);
+  const [agree4, setAgree4] = useState(false);
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handlePasswordCheckChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setPasswordCheck(event.target.value);
+  const handleCompanyNameChange = (event: React.ChangeEvent<HTMLInputElement>) => setCompanyName(event.target.value);
+  const handleCompanyNumberChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setCompanyNumber(event.target.value);
+
+  const handleAllAgreeChange = () => {
+    setAllAgree(!allAgree);
+    setAgree1(!allAgree);
+    setAgree2(!allAgree);
+    setAgree3(!allAgree);
+    setAgree4(!allAgree);
+  };
+  const handleAgree1Change = () => setAgree1(!agree1);
+  const handleAgree2Change = () => setAgree2(!agree2);
+  const handleAgree3Change = () => setAgree3(!agree3);
+  const handleAgree4Change = () => setAgree4(!agree4);
+
+  // 모두 동의 여부 확인
+  useEffect(() => {
+    if (agree1 && agree2 && agree3 && agree4) {
+      setAllAgree(true);
+    } else {
+      setAllAgree(false);
+    }
+  }, [agree1, agree2, agree3, agree4]);
+
+  // TODO: API 미구현
+  const checkEmail = async () => {};
+  const checkCompanyNumber = async () => {};
+
+  // 회원가입
+  const join = async () => {
+    try {
+      const response = await DefaultApi.registerCompanyUsingPOST('', {
+        email: email,
+        password: password,
+        companyName: companyName,
+        businessNumber: companyNumber,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/* 로고 */}
@@ -28,9 +90,22 @@ export default function JoinPage() {
               </Label>
               <div className="flex items-start self-stretch gap-2">
                 <div className="flex flex-grow">
-                  <TextField.Single sizeVariant="m" placeholder="example@email.com" isFullWidth />
+                  <TextField.Single
+                    sizeVariant="m"
+                    placeholder="example@email.com"
+                    isFullWidth
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
                 </div>
-                <ActionButton variant="tonal-blue" size="l">
+                <ActionButton
+                  variant="tonal-blue"
+                  size="l"
+                  disabled={!email}
+                  onClick={() => {
+                    console.log('중복 확인' + email);
+                  }}
+                >
                   중복 확인
                 </ActionButton>
               </div>
@@ -43,15 +118,35 @@ export default function JoinPage() {
               <Body size="s" color="gray400">
                 영문, 숫자, 특수문자 중 2종류 이상을 조합하여 10자리 이상으로 입력해주세요
               </Body>
-              <TextField.Single sizeVariant="m" placeholder="비밀번호" isFullWidth type="password" />
-              <TextField.Single sizeVariant="m" placeholder="비밀번호 확인" isFullWidth type="password" />
+              <TextField.Single
+                sizeVariant="m"
+                placeholder="비밀번호"
+                isFullWidth
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <TextField.Single
+                sizeVariant="m"
+                placeholder="비밀번호 확인"
+                isFullWidth
+                type="password"
+                value={passwordCheck}
+                onChange={handlePasswordCheckChange}
+              />
             </div>
             {/* 회사이름 */}
             <div className="flex flex-col items-start self-stretch gap-2">
               <Label size="s" color="gray600">
                 회사 이름
               </Label>
-              <TextField.Single sizeVariant="m" placeholder="(주) 아이라스" isFullWidth />
+              <TextField.Single
+                sizeVariant="m"
+                placeholder="(주) 아이라스"
+                isFullWidth
+                value={companyName}
+                onChange={handleCompanyNameChange}
+              />
             </div>
             {/* 사업자 등록번호 */}
             <div className="flex flex-col items-start self-stretch gap-2">
@@ -60,18 +155,30 @@ export default function JoinPage() {
               </Label>
               <div className="flex items-start self-stretch gap-2">
                 <div className="flex flex-grow">
-                  <TextField.Single sizeVariant="m" placeholder="000-00-00000" isFullWidth />
+                  <TextField.Single
+                    sizeVariant="m"
+                    placeholder="000-00-00000"
+                    isFullWidth
+                    value={companyNumber}
+                    onChange={handleCompanyNumberChange}
+                  />
                 </div>
-                <ActionButton variant="tonal-blue" size="l">
+                <ActionButton
+                  variant="tonal-blue"
+                  size="l"
+                  disabled={!companyNumber}
+                  onClick={() => {
+                    console.log('중복 확인' + companyNumber);
+                  }}
+                >
                   중복 확인
                 </ActionButton>
               </div>
             </div>
-            {/* TODO: 동의 */}
             <div className="flex flex-col items-start self-stretch gap-4">
               {/* 모두 동의합니다. */}
               <div className="flex items-center gap-3">
-                <Checkbox id="all-agree" />
+                <Checkbox id="all-agree" checked={allAgree} onCheckedChange={handleAllAgreeChange} />
                 <label htmlFor="all-agree">
                   <Body size="m" color="gray800">
                     모두 동의합니다.
@@ -83,7 +190,7 @@ export default function JoinPage() {
               {/* 4개 항목 */}
               <div className="flex flex-col items-start gap-3">
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-1" />
+                  <Checkbox id="agree-1" checked={agree1} onCheckedChange={handleAgree1Change} />
                   <label htmlFor="agree-1">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -99,7 +206,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-2" />
+                  <Checkbox id="agree-2" checked={agree2} onCheckedChange={handleAgree2Change} />
                   <label htmlFor="agree-2">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -115,7 +222,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-3" />
+                  <Checkbox id="agree-3" checked={agree3} onCheckedChange={handleAgree3Change} />
                   <label htmlFor="agree-3">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -131,7 +238,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-4" />
+                  <Checkbox id="agree-4" checked={agree4} onCheckedChange={handleAgree4Change} />
                   <label htmlFor="agree-4">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="gray600">
@@ -149,7 +256,7 @@ export default function JoinPage() {
               </div>
             </div>
           </div>
-          <ActionButton variant="filled" size="l">
+          <ActionButton variant="filled" size="l" onClick={join}>
             회원가입
           </ActionButton>
         </div>
