@@ -101,7 +101,8 @@ export default function Step1Page() {
     isError: isErrorCompanyProcess,
     error: errorCompanyProcess,
   } = useQuery(['getCompanyProcess'], getCompanyProcess, {
-    enabled: !!getParameterFromUrl('assessmentId'),
+    // TODO: 왜 이렇게 하면 안되는지 모르겠음
+    // enabled: !!getParameterFromUrl('assessmentId'),
     refetchOnWindowFocus: false,
     keepPreviousData: true,
   });

@@ -2,7 +2,7 @@
 
 Frontend for the IRAS(previously known as SEWORK) project.
 
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://6546744ba5fe9015a3cf191e-bkwsyfasab.chromatic.com/)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://develop--6546744ba5fe9015a3cf191e.chromatic.com/)
 
 ## Table of Contents
 

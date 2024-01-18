@@ -31,6 +31,7 @@ import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
 import { useStep3Store } from '@/hooks/dashboard/Step3Store';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/Dialog/Dialog';
+import style from './page.module.scss';
 
 export default function Step3Page() {
   const { toast } = useToast();
@@ -544,7 +545,9 @@ export default function Step3Page() {
                       </DialogTrigger>
                       <DialogContent className="max-w-[792px]">
                         {/* 작성 내용 */}
-                        <div className="flex max-h-[448px] w-[712px] flex-col items-start gap-8 overflow-y-auto">
+                        <div
+                          className={`flex max-h-[448px] w-[712px] flex-col items-start gap-8 overflow-y-auto ${style.dialogScrollbar}`}
+                        >
                           {/* 유해 위험 요인 */}
                           <div className="flex flex-col items-start self-stretch gap-3">
                             {/* title */}
@@ -672,10 +675,26 @@ export default function Step3Page() {
                                           setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                         }}
                                       />
-                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                        <Icon icon="chevron-up-s" size={18} />
+                                      <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <Icon icon="chevron-up-s" size={18} color="gray300" />
                                         <div className="relative w-[32px] h-px bg-gray-200" />
-                                        <Icon icon="chevron-down-s" size={18} />
+                                        <div
+                                          onClick={() => {
+                                            const newCompanyDangerFactorAndSolution = [
+                                              ...companyDangerFactorAndSolution,
+                                            ];
+                                            newCompanyDangerFactorAndSolution[
+                                              selectedDialogDangerFactorIndex
+                                            ].companyDangerSolutionList?.splice(index, 1, {
+                                              ...item,
+                                              type: CompanyDangerSolutionVOResTypeEnum.Future,
+                                            });
+                                            setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                          }}
+                                          className="flex items-center justify-center w-full cursor-pointer"
+                                        >
+                                          <Icon icon="chevron-down-s" size={18} color="gray600" />
+                                        </div>
                                       </div>
                                     </div>
                                   )
@@ -727,10 +746,26 @@ export default function Step3Page() {
                                           setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
                                         }}
                                       />
-                                      <div className="inline-flex flex-col h-[40px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                        <Icon icon="chevron-up-s" size={18} />
+                                      <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
+                                        <div
+                                          onClick={() => {
+                                            const newCompanyDangerFactorAndSolution = [
+                                              ...companyDangerFactorAndSolution,
+                                            ];
+                                            newCompanyDangerFactorAndSolution[
+                                              selectedDialogDangerFactorIndex
+                                            ].companyDangerSolutionList?.splice(index, 1, {
+                                              ...item,
+                                              type: CompanyDangerSolutionVOResTypeEnum.Current,
+                                            });
+                                            setCompanyDangerFactorAndSolution(newCompanyDangerFactorAndSolution);
+                                          }}
+                                          className="flex items-center justify-center w-full cursor-pointer"
+                                        >
+                                          <Icon icon="chevron-up-s" size={18} color="gray600" />
+                                        </div>
                                         <div className="relative w-[32px] h-px bg-gray-200" />
-                                        <Icon icon="chevron-down-s" size={18} />
+                                        <Icon icon="chevron-down-s" size={18} color="gray300" />
                                       </div>
                                     </div>
                                   )

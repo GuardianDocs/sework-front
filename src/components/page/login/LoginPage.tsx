@@ -11,6 +11,8 @@ import { type ResponseResultLoginCompanyAccountResponse, type LoginCompanyAccoun
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
 
 export default function LoginPage() {
+  // TODO: 로그인 Input 값은 굳이 store쓰지 말고, 그냥 useState로 관리하는게 나을 것 같다.
+  // react-hook-form을 쓰면 더 좋을 것 같다.
   const { id, password, setId, setPassword, setDummyState, getLoginState } = useLoginFormStore(state => ({
     id: state.id,
     password: state.password,
@@ -20,23 +22,14 @@ export default function LoginPage() {
     getLoginState: state.actions.getLoginState,
   }));
 
-  const {
-    setLoggedInId,
-    setBusinessNumber,
-    setCompanyId, // TODO: 필요 없는 것 같은데?
-    setCompanyName,
-    setOwnerName,
-    setAccessToken,
-    setRefreshTokenExpiredAt,
-  } = useLoginInfoStore(state => ({
-    setLoggedInId: state.setId,
-    setBusinessNumber: state.setBusinessNumber,
-    setCompanyId: state.setCompanyId,
-    setCompanyName: state.setCompanyName,
-    setOwnerName: state.setOwnerName,
-    setAccessToken: state.setAccessToken,
-    setRefreshTokenExpiredAt: state.setRefreshTokenExpiredAt,
-  }));
+  const { setLoggedInId, setCompanyName, setAccessToken, setRefreshTokenExpiredAt, setRequireAdditionalInfoYn } =
+    useLoginInfoStore(state => ({
+      setLoggedInId: state.setId,
+      setCompanyName: state.setCompanyName,
+      setAccessToken: state.setAccessToken,
+      setRefreshTokenExpiredAt: state.setRefreshTokenExpiredAt,
+      setRequireAdditionalInfoYn: state.setRequireAdditionalInfoYn,
+    }));
 
   const router = useRouter();
 
@@ -60,14 +53,13 @@ export default function LoginPage() {
       console.log(data);
 
       setLoggedInId(data.id);
-      // setBusinessNumber(data.businessNumber);
       setCompanyName(data.companyName);
-      // setOwnerName(data.ownerName);
       setAccessToken(data.accessToken);
       setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
+      setRequireAdditionalInfoYn(data.requireAdditionalInfoYn);
 
-      // TODO: 회사 정보가 없으면 기본 정보 입력 페이지로 이동
-      router.push('/landing/basic-info');
+      if (data.requireAdditionalInfoYn) router.push('/landing/basic-info');
+      else router.push('/');
     } else {
       alert(message);
     }
