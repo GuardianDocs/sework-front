@@ -133,7 +133,7 @@ export default function Step3Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
-        completed: item?.doneYn,
+        completed: item?.currentDangerSolutionDoneYn,
       };
     });
 
@@ -389,6 +389,13 @@ export default function Step3Page() {
       active: false,
       selected: false,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
+    {
+      number: 5,
+      label: '감소대책 실행',
+      active: false,
+      selected: false,
+      url: `/dashboard/step5?assessmentId=${getParameterFromUrl('assessmentId')}`,
     },
   ];
 

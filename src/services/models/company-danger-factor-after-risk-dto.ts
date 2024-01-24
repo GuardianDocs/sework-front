@@ -17,20 +17,20 @@
 /**
  * 
  * @export
- * @interface AssessmentStartResponse
+ * @interface CompanyDangerFactorAfterRiskDto
  */
-export interface AssessmentStartResponse {
+export interface CompanyDangerFactorAfterRiskDto {
     /**
      * 
      * @type {number}
-     * @memberof AssessmentStartResponse
+     * @memberof CompanyDangerFactorAfterRiskDto
      */
-    'assessmentId'?: number;
+    'afterRisk'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof AssessmentStartResponse
+     * @type {number}
+     * @memberof CompanyDangerFactorAfterRiskDto
      */
-    'title'?: string;
+    'companyDangerFactorId'?: number;
 }
 

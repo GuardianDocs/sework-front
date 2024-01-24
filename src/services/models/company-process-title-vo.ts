@@ -25,7 +25,19 @@ export interface CompanyProcessTitleVO {
      * @type {boolean}
      * @memberof CompanyProcessTitleVO
      */
-    'doneYn'?: boolean;
+    'currentDangerSolutionDoneYn'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CompanyProcessTitleVO
+     */
+    'dangerFactorDoneYn'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CompanyProcessTitleVO
+     */
+    'futureDangerSolutionDoneYn'?: boolean;
     /**
      * 
      * @type {number}

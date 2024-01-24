@@ -2,14 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { Body, Label, Title, Headline } from '@/components/typography';
-import ActionButton from '../../ui/ActionButton/ActionButton';
-import ProgressBox from '../../ui/ProgressBox/ProgressBox';
-import Table from '../../ui/Table/Table';
-import TextField from '../../ui/TextField/TextField';
-import Icon from '../../ui/Icon/Icon';
-import IconButton from '../../ui/IconButton/IconButton';
-import EtcIcon from '../../ui/Icon/EtcIcon/EtcIcon';
-import Tooltip from '../../ui/Tooltip/Tooltip';
+import ActionButton from '@/components/ui/ActionButton/ActionButton';
+import ProgressBox from '@/components/ui/ProgressBox/ProgressBox';
+import Table from '@/components/ui/Table/Table';
+import TextField from '@/components/ui/TextField/TextField';
+import Icon from '@/components/ui/Icon/Icon';
+import IconButton from '@/components/ui/IconButton/IconButton';
+import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
+import Tooltip from '@/components/ui/Tooltip/Tooltip';
 import { getParameterFromUrl } from '@/utils/urlUtil';
 import { Step1Api } from '@/lib/axios/oas-axios';
 import {
@@ -172,6 +172,13 @@ export default function Step1Page() {
       selected: false,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
     },
+    {
+      number: 5,
+      label: '감소대책 실행',
+      active: false,
+      selected: false,
+      url: `/dashboard/step5?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const handleDragStart = (e: any, index: number) => {
@@ -227,6 +234,7 @@ export default function Step1Page() {
   };
 
   const handleClickNextStepButton = () => {
+    handleUpdateCompanyProcess(step1);
     router.push(`/dashboard/step2?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 

@@ -40,7 +40,7 @@ import { RegisterCompanyAccountRequest } from '../models';
 // @ts-ignore
 import { RegisterCompanyAccountResponse } from '../models';
 // @ts-ignore
-import { RegisterCompanyAssessmentBasicInfoRequest } from '../models';
+import { RegisterCompanyAssessmentAdditionalInfoRequest } from '../models';
 // @ts-ignore
 import { ResponseResult } from '../models';
 // @ts-ignore
@@ -51,6 +51,8 @@ import { ResponseResultCompanyBusinessLookUpResponse } from '../models';
 import { ResponseResultGetCompanyAdditionalInfoAnswerResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyAssessmentProgressResponse } from '../models';
+// @ts-ignore
+import { ResponseResultGetCompanyAssessmentReportResponse } from '../models';
 // @ts-ignore
 import { ResponseResultLoginCompanyAccountResponse } from '../models';
 // @ts-ignore
@@ -114,6 +116,44 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'assessmentId' is not null or undefined
             assertParamExists('getCompanyAssessmentProgressUsingGET', 'assessmentId', assessmentId)
             const localVarPath = `/api/assessment/v1/company/{assessmentId}/progress`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 상세 조회
+         * @summary 안전 위험 평가 상세 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyAssessmentReportUsingGET: async (assessmentId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getCompanyAssessmentReportUsingGET', 'assessmentId', assessmentId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}`
                 .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -348,11 +388,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * 안전 위험 평가 사전 정보 입력
          * @summary 안전 위험 평가 사전 정보 입력
          * @param {number} assessmentId assessmentId
-         * @param {RegisterCompanyAssessmentBasicInfoRequest} [registerCompanyAssessmentBasicInfoRequest] 
+         * @param {RegisterCompanyAssessmentAdditionalInfoRequest} [registerCompanyAssessmentAdditionalInfoRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        saveAssessmentBasicInfoUsingPOST: async (assessmentId: number, registerCompanyAssessmentBasicInfoRequest?: RegisterCompanyAssessmentBasicInfoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveAssessmentBasicInfoUsingPOST: async (assessmentId: number, registerCompanyAssessmentAdditionalInfoRequest?: RegisterCompanyAssessmentAdditionalInfoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assessmentId' is not null or undefined
             assertParamExists('saveAssessmentBasicInfoUsingPOST', 'assessmentId', assessmentId)
             const localVarPath = `/api/assessment/v1/company/{assessmentId}`
@@ -379,7 +419,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(registerCompanyAssessmentBasicInfoRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(registerCompanyAssessmentAdditionalInfoRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -505,6 +545,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * 안전 위험 평가 상세 조회
+         * @summary 안전 위험 평가 상세 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyAssessmentReportUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAssessmentProgressResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyAssessmentReportUsingGET(assessmentId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyAssessmentReportUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 기업 사업자 정보를 조회 합니다.
          * @summary 기업 사업자 정보 조회
          * @param {*} [options] Override http request option.
@@ -574,12 +627,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * 안전 위험 평가 사전 정보 입력
          * @summary 안전 위험 평가 사전 정보 입력
          * @param {number} assessmentId assessmentId
-         * @param {RegisterCompanyAssessmentBasicInfoRequest} [registerCompanyAssessmentBasicInfoRequest] 
+         * @param {RegisterCompanyAssessmentAdditionalInfoRequest} [registerCompanyAssessmentAdditionalInfoRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentBasicInfoRequest?: RegisterCompanyAssessmentBasicInfoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentBasicInfoRequest, options);
+        async saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentAdditionalInfoRequest?: RegisterCompanyAssessmentAdditionalInfoRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentAdditionalInfoRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.saveAssessmentBasicInfoUsingPOST']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -641,6 +694,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCompanyAssessmentProgressUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
+         * 안전 위험 평가 상세 조회
+         * @summary 안전 위험 평가 상세 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyAssessmentReportUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyAssessmentProgressResponse> {
+            return localVarFp.getCompanyAssessmentReportUsingGET(assessmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 기업 사업자 정보를 조회 합니다.
          * @summary 기업 사업자 정보 조회
          * @param {*} [options] Override http request option.
@@ -695,12 +758,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * 안전 위험 평가 사전 정보 입력
          * @summary 안전 위험 평가 사전 정보 입력
          * @param {number} assessmentId assessmentId
-         * @param {RegisterCompanyAssessmentBasicInfoRequest} [registerCompanyAssessmentBasicInfoRequest] 
+         * @param {RegisterCompanyAssessmentAdditionalInfoRequest} [registerCompanyAssessmentAdditionalInfoRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentBasicInfoRequest?: RegisterCompanyAssessmentBasicInfoRequest, options?: any): AxiosPromise<ResponseResult> {
-            return localVarFp.saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentBasicInfoRequest, options).then((request) => request(axios, basePath));
+        saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentAdditionalInfoRequest?: RegisterCompanyAssessmentAdditionalInfoRequest, options?: any): AxiosPromise<ResponseResult> {
+            return localVarFp.saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentAdditionalInfoRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 업종 목록을 조회합니다
@@ -754,6 +817,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getCompanyAssessmentProgressUsingGET(assessmentId: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getCompanyAssessmentProgressUsingGET(assessmentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 상세 조회
+     * @summary 안전 위험 평가 상세 조회
+     * @param {number} assessmentId assessmentId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyAssessmentReportUsingGET(assessmentId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyAssessmentReportUsingGET(assessmentId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -821,13 +896,13 @@ export class DefaultApi extends BaseAPI {
      * 안전 위험 평가 사전 정보 입력
      * @summary 안전 위험 평가 사전 정보 입력
      * @param {number} assessmentId assessmentId
-     * @param {RegisterCompanyAssessmentBasicInfoRequest} [registerCompanyAssessmentBasicInfoRequest] 
+     * @param {RegisterCompanyAssessmentAdditionalInfoRequest} [registerCompanyAssessmentAdditionalInfoRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentBasicInfoRequest?: RegisterCompanyAssessmentBasicInfoRequest, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentBasicInfoRequest, options).then((request) => request(this.axios, this.basePath));
+    public saveAssessmentBasicInfoUsingPOST(assessmentId: number, registerCompanyAssessmentAdditionalInfoRequest?: RegisterCompanyAssessmentAdditionalInfoRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).saveAssessmentBasicInfoUsingPOST(assessmentId, registerCompanyAssessmentAdditionalInfoRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
