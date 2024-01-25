@@ -65,7 +65,7 @@ export default function Step2Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
-        completed: item?.doneYn,
+        completed: item?.dangerFactorDoneYn,
       };
     });
 
@@ -244,6 +244,13 @@ export default function Step2Page() {
       selected: false,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
     },
+    {
+      number: 5,
+      label: '감소대책 실행',
+      active: false,
+      selected: false,
+      url: `/dashboard/step5?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const dangerFactorOptions = [
@@ -278,6 +285,7 @@ export default function Step2Page() {
   };
 
   const handleClickNextStepButton = () => {
+    handleUpdateCompanyDangerFactor(companyDangerFactorList);
     router.push(`/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 

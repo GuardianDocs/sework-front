@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
 import { useRouter } from 'next/navigation';
 
+import { deleteCookie, getCookie } from 'cookies-next';
+
 interface LinkButtonProps {
   href: string;
   label: React.ReactNode;
@@ -54,12 +56,23 @@ const UserStatus = () => {
     reset: state.reset,
   }));
 
-  return companyName ? (
+  const realCompanyName = getCookie('companyName');
+  const logout = () => {
+    //TODO: 당분간 필요
+    localStorage.clear();
+
+    deleteCookie('companyName');
+    deleteCookie('accessToken');
+    deleteCookie('id');
+    deleteCookie('requireAdditionalInfoYn');
+  };
+
+  return realCompanyName ? (
     <>
       <Body size="s" color="blue800">
-        {companyName}님
+        {realCompanyName}님
       </Body>
-      <ActionButton variant="tonal-blue" size="s" onClick={reset}>
+      <ActionButton variant="tonal-blue" size="s" onClick={logout}>
         로그아웃
       </ActionButton>
     </>

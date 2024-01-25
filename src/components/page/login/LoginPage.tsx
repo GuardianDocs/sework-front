@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation';
 import { type ResponseResultLoginCompanyAccountResponse, type LoginCompanyAccountRequest } from '@/services';
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
 
+import { setCookie } from 'cookies-next';
+
 export default function LoginPage() {
   // TODO: 로그인 Input 값은 굳이 store쓰지 말고, 그냥 useState로 관리하는게 나을 것 같다.
   // react-hook-form을 쓰면 더 좋을 것 같다.
@@ -52,11 +54,23 @@ export default function LoginPage() {
       console.log('로그인 성공');
       console.log(data);
 
-      setLoggedInId(data.id);
-      setCompanyName(data.companyName);
-      setAccessToken(data.accessToken);
-      setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
-      setRequireAdditionalInfoYn(data.requireAdditionalInfoYn);
+      // setLoggedInId(data.id);
+      // setCompanyName(data.companyName);
+      // setAccessToken(data.accessToken);
+      // setRefreshTokenExpiredAt(data.refreshTokenExpiredAt);
+      // setRequireAdditionalInfoYn(data.requireAdditionalInfoYn);
+
+      const cookieOptions = {
+        expires: new Date(data.refreshTokenExpiredAt),
+      };
+
+      setCookie('accessToken', data.accessToken, cookieOptions);
+      setCookie('id', data.id, cookieOptions);
+      setCookie('companyName', data.companyName, cookieOptions);
+      setCookie('requireAdditionalInfoYn', data.requireAdditionalInfoYn, cookieOptions);
+
+      //TODO: 당분간 필요
+      localStorage.clear();
 
       if (data.requireAdditionalInfoYn) router.push('/landing/basic-info');
       else router.push('/');

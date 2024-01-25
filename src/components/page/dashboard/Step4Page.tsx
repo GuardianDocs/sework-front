@@ -189,7 +189,7 @@ export default function Step4Page() {
       return {
         value: item?.id ?? '',
         label: item?.title ?? '',
-        completed: item?.doneYn,
+        completed: item?.futureDangerSolutionDoneYn,
       };
     });
 
@@ -393,10 +393,21 @@ export default function Step4Page() {
       selected: true,
       url: `/dashboard/step4?assessmentId=${getParameterFromUrl('assessmentId')}`,
     },
+    {
+      number: 5,
+      label: '감소대책 실행',
+      active: false,
+      selected: false,
+      url: `/dashboard/step5?assessmentId=${getParameterFromUrl('assessmentId')}`,
+    },
   ];
 
   const handleClickPreviousStepButton = () => {
     router.push(`/dashboard/step3?assessmentId=${getParameterFromUrl('assessmentId')}`);
+  };
+
+  const handleClickNextStepButton = () => {
+    router.push(`/dashboard/step5?assessmentId=${getParameterFromUrl('assessmentId')}`);
   };
 
   return (
@@ -500,7 +511,7 @@ export default function Step4Page() {
             <Table.Row>
               <Table.Header>유해 위험요인</Table.Header>
               <Table.Header>위험성</Table.Header>
-              <Table.Header>추가 위험성 감소대책</Table.Header>
+              <Table.Header>위험성 감소대책</Table.Header>
               <Table.Header required>개선 후 위험성</Table.Header>
             </Table.Row>
           </Table.Head>
@@ -870,8 +881,8 @@ export default function Step4Page() {
         <ActionButton variant="tonal-gray" size="l" onClick={handleClickPreviousStepButton}>
           저장 후 이전 단계
         </ActionButton>
-        <ActionButton variant="filled" size="l" disabled>
-          저장 후 보고서 생성
+        <ActionButton variant="filled" size="l" onClick={handleClickNextStepButton}>
+          저장 후 다음 단계
         </ActionButton>
       </div>
     </div>

@@ -1,0 +1,11 @@
+.dialogScrollbar::-webkit-scrollbar,
+.dialogScrollbar::-webkit-scrollbar-thumb {
+  width: 22px; // padding : 8px * 2 + width : 6px
+  border-radius: 11px; // width : 22px / 2
+  background-clip: padding-box;
+  border: 8px solid transparent; // padding
+}
+
+.dialogScrollbar::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;
+}

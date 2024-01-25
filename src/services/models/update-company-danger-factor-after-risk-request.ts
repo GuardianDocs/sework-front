@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { CompanyDangerFactorAfterRiskDto } from './company-danger-factor-after-risk-dto';
 
 /**
  * 
@@ -22,9 +25,9 @@
 export interface UpdateCompanyDangerFactorAfterRiskRequest {
     /**
      * 
-     * @type {number}
+     * @type {Array<CompanyDangerFactorAfterRiskDto>}
      * @memberof UpdateCompanyDangerFactorAfterRiskRequest
      */
-    'afterRisk'?: number;
+    'companyDangerFactorAfterRiskList'?: Array<CompanyDangerFactorAfterRiskDto>;
 }
 

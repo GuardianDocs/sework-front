@@ -15,19 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { CompanyDangerSolutionVOReq } from './company-danger-solution-voreq';
+import { CompanyDangerFactorRiskDto } from './company-danger-factor-risk-dto';
 
 /**
  * 
  * @export
- * @interface UpsertCompanyDangerSolutionRequest
+ * @interface UpdateCompanyDangerFactorRiskRequest
  */
-export interface UpsertCompanyDangerSolutionRequest {
+export interface UpdateCompanyDangerFactorRiskRequest {
     /**
      * 
-     * @type {Array<CompanyDangerSolutionVOReq>}
-     * @memberof UpsertCompanyDangerSolutionRequest
+     * @type {Array<CompanyDangerFactorRiskDto>}
+     * @memberof UpdateCompanyDangerFactorRiskRequest
      */
-    'companyDangerSolutionList'?: Array<CompanyDangerSolutionVOReq>;
+    'companyDangerFactorRiskList'?: Array<CompanyDangerFactorRiskDto>;
 }
 

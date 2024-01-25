@@ -1,18 +1,22 @@
 import axios from 'axios';
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
 
+import { getCookie } from 'cookies-next';
+
 const service = axios.create({
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 5_000, // request timeout
 });
 
-// TODO: accessToken을 어떻게 관리할지 고민해보자.
 const getAccessToken = () => {
-  if (typeof window !== 'undefined') {
-    const loginInfoLocalStorage = localStorage.getItem('loginInfo');
-    const loginInfo = loginInfoLocalStorage ? JSON.parse(loginInfoLocalStorage) : null;
-    return loginInfo?.state?.accessToken;
+  const accessToken = getCookie('accessToken');
+  if (accessToken) {
+    return accessToken;
+  } else {
+    // TODO: refresh token
+    console.log('refreshToken');
   }
+
   return null;
 };
 

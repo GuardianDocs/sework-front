@@ -7,13 +7,14 @@ interface StepProps {
   active: boolean;
   selected: boolean;
   url: string;
+  lastStep?: number;
 }
 
-const FIRST_STEP = 1;
-const LAST_STEP = 4;
-
-const Step: React.FC<StepProps> = ({ number, label, active, selected, url }) => {
+const Step: React.FC<StepProps> = ({ number, label, active, selected, url, lastStep }) => {
   const router = useRouter();
+
+  const FIRST_STEP = 1;
+  const LAST_STEP = lastStep || 5;
 
   const baseBgColor = active ? 'bg-white' : 'bg-gray-50';
   const bgColor = selected ? 'bg-blue-500' : 'bg-gray-100';
@@ -26,7 +27,7 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected, url }) => 
   if (number === FIRST_STEP) borderRound = 'rounded-[8px_0px_0px_0px]';
   else if (number === LAST_STEP) borderRound = 'rounded-[0px_8px_0px_0px]';
 
-  const borderBottomWidth = number === LAST_STEP ? 'w-[300px]' : 'w-[302px]';
+  const borderBottomWidth = number === LAST_STEP ? 'w-[226px]' : 'w-[228px]';
 
   const isClickable = active && !selected;
 
@@ -38,7 +39,7 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected, url }) => 
 
   return (
     <div
-      className={`flex w-[300px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound} ${clickableCursor}`}
+      className={`flex w-[226px] items-center gap-3 px-6 py-4 relative ${baseBgColor} ${marginLeft} border-x border-t border-solid border-gray-200 ${borderRound} ${clickableCursor}`}
       onClick={handleClickStep}
     >
       <div className={`relative w-[32px] h-[32px] ${bgColor} rounded-[16px]`}>
@@ -66,13 +67,14 @@ const Step: React.FC<StepProps> = ({ number, label, active, selected, url }) => 
 
 interface StepListProps {
   steps: StepProps[];
+  lastStep?: number;
 }
 
-const StepList: React.FC<StepListProps> = ({ steps }) => {
+const StepList: React.FC<StepListProps> = ({ steps, lastStep }) => {
   return (
     <div className="relative inline-flex items-start">
       {steps.map(step => (
-        <Step key={step.number} {...step} />
+        <Step key={step.number} {...step} lastStep={lastStep} />
       ))}
     </div>
   );
