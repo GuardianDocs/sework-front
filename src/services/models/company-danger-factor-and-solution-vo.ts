@@ -52,12 +52,6 @@ export interface CompanyDangerFactorAndSolutionVO {
      * @type {number}
      * @memberof CompanyDangerFactorAndSolutionVO
      */
-    'possibility'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof CompanyDangerFactorAndSolutionVO
-     */
-    'severe'?: number;
+    'risk'?: number;
 }
 

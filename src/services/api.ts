@@ -19,5 +19,6 @@ export * from './apis/batchapi';
 export * from './apis/class1-api';
 export * from './apis/class2-api';
 export * from './apis/class34-api';
+export * from './apis/s3-controller-api';
 export * from './apis/test-controller-api';
 

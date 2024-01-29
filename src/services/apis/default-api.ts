@@ -32,6 +32,8 @@ import { GetCompanyAdditionalInfoAnswerResponse } from '../models';
 // @ts-ignore
 import { GetCompanyAssessmentProgressResponse } from '../models';
 // @ts-ignore
+import { GetCompanyProcessPhotoResponse } from '../models';
+// @ts-ignore
 import { LoginCompanyAccountRequest } from '../models';
 // @ts-ignore
 import { LoginCompanyAccountResponse } from '../models';
@@ -54,6 +56,12 @@ import { ResponseResultGetCompanyAssessmentProgressResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyAssessmentReportResponse } from '../models';
 // @ts-ignore
+import { ResponseResultGetCompanyDangerFactorPhotoResponse } from '../models';
+// @ts-ignore
+import { ResponseResultGetCompanyDangerSolutionPhotoResponse } from '../models';
+// @ts-ignore
+import { ResponseResultGetCompanyProcessPhotoResponse } from '../models';
+// @ts-ignore
 import { ResponseResultLoginCompanyAccountResponse } from '../models';
 // @ts-ignore
 import { ResponseResultRegisterCompanyAccountResponse } from '../models';
@@ -62,15 +70,151 @@ import { ResponseResultSearchSectorResponse } from '../models';
 // @ts-ignore
 import { ResponseResultTokenRefreshResponse } from '../models';
 // @ts-ignore
+import { ResponseResultUploadCompanyDangerFactorPhotoResponse } from '../models';
+// @ts-ignore
+import { ResponseResultUploadCompanyDangerSolutionPhotoResponse } from '../models';
+// @ts-ignore
+import { ResponseResultUploadCompanyProcessPhotoResponse } from '../models';
+// @ts-ignore
 import { SearchSectorResponse } from '../models';
 // @ts-ignore
 import { TokenRefreshResponse } from '../models';
+// @ts-ignore
+import { UploadCompanyDangerFactorPhotoResponse } from '../models';
+// @ts-ignore
+import { UploadCompanyProcessPhotoResponse } from '../models';
 /**
  * DefaultApi - axios parameter creator
  * @export
  */
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 유해위험요인 사진 삭제
+         * @summary 유해위험요인 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyDangerFactorPhotoUsingDELETE: async (assessmentId: number, companyDangerFactorId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('deleteCompanyDangerFactorPhotoUsingDELETE', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerFactorId' is not null or undefined
+            assertParamExists('deleteCompanyDangerFactorPhotoUsingDELETE', 'companyDangerFactorId', companyDangerFactorId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/danger-factor/{companyDangerFactorId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyDangerFactorId"}}`, encodeURIComponent(String(companyDangerFactorId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 감소대책 사진 삭제
+         * @summary 감소대책 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyDangerSolutionPhotoUsingDELETE: async (assessmentId: number, companyDangerSolutionId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('deleteCompanyDangerSolutionPhotoUsingDELETE', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerSolutionId' is not null or undefined
+            assertParamExists('deleteCompanyDangerSolutionPhotoUsingDELETE', 'companyDangerSolutionId', companyDangerSolutionId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/danger-solution/{companyDangerSolutionId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyDangerSolutionId"}}`, encodeURIComponent(String(companyDangerSolutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 세부 작업 사진 삭제
+         * @summary 세부작업 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyProcessPhotoUsingDELETE: async (assessmentId: number, companyProcessId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('deleteCompanyProcessPhotoUsingDELETE', 'assessmentId', assessmentId)
+            // verify required parameter 'companyProcessId' is not null or undefined
+            assertParamExists('deleteCompanyProcessPhotoUsingDELETE', 'companyProcessId', companyProcessId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/{companyProcessId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyProcessId"}}`, encodeURIComponent(String(companyProcessId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 기업 추가 정보 설문지 답변 목록 조회
          * @summary 기업 추가 정보 설문지 답변 목록 조회
@@ -182,6 +326,90 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 유해위험요인 사진 조회
+         * @summary 유해위험요인 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyDangerFactorPhotoUsingGET: async (assessmentId: number, companyProcessId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getCompanyDangerFactorPhotoUsingGET', 'assessmentId', assessmentId)
+            // verify required parameter 'companyProcessId' is not null or undefined
+            assertParamExists('getCompanyDangerFactorPhotoUsingGET', 'companyProcessId', companyProcessId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/{companyProcessId}/danger-factor/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyProcessId"}}`, encodeURIComponent(String(companyProcessId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 감소대책 사진 조회
+         * @summary 감소대책 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyDangerSolutionPhotoUsingGET: async (assessmentId: number, companyProcessId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getCompanyDangerSolutionPhotoUsingGET', 'assessmentId', assessmentId)
+            // verify required parameter 'companyProcessId' is not null or undefined
+            assertParamExists('getCompanyDangerSolutionPhotoUsingGET', 'companyProcessId', companyProcessId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/{companyProcessId}/danger-solution/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyProcessId"}}`, encodeURIComponent(String(companyProcessId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 기업 사업자 정보를 조회 합니다.
          * @summary 기업 사업자 정보 조회
          * @param {*} [options] Override http request option.
@@ -189,6 +417,44 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getCompanyInfoUsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/account/v1/company/company-business-info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 세부 작업 사진 조회
+         * @summary 세부작업 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyProcessPhotoUsingGET: async (assessmentId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getCompanyProcessPhotoUsingGET', 'assessmentId', assessmentId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -509,6 +775,165 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 유해위험요인 사진 업로드
+         * @summary 유해위험요인 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyDangerFactorPhotoUsingPOST: async (assessmentId: number, companyDangerFactorId: number, file: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('uploadCompanyDangerFactorPhotoUsingPOST', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerFactorId' is not null or undefined
+            assertParamExists('uploadCompanyDangerFactorPhotoUsingPOST', 'companyDangerFactorId', companyDangerFactorId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadCompanyDangerFactorPhotoUsingPOST', 'file', file)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/danger-factor/{companyDangerFactorId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyDangerFactorId"}}`, encodeURIComponent(String(companyDangerFactorId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 감소대책 사진 업로드
+         * @summary 감소대책 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyDangerSolutionPhotoUsingPOST: async (assessmentId: number, companyDangerSolutionId: number, file: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('uploadCompanyDangerSolutionPhotoUsingPOST', 'assessmentId', assessmentId)
+            // verify required parameter 'companyDangerSolutionId' is not null or undefined
+            assertParamExists('uploadCompanyDangerSolutionPhotoUsingPOST', 'companyDangerSolutionId', companyDangerSolutionId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadCompanyDangerSolutionPhotoUsingPOST', 'file', file)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/danger-solution/{companyDangerSolutionId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyDangerSolutionId"}}`, encodeURIComponent(String(companyDangerSolutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 세부 작업 사진 업로드
+         * @summary 세부작업 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyProcessPhotoUsingPOST: async (assessmentId: number, companyProcessId: number, file: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('uploadCompanyProcessPhotoUsingPOST', 'assessmentId', assessmentId)
+            // verify required parameter 'companyProcessId' is not null or undefined
+            assertParamExists('uploadCompanyProcessPhotoUsingPOST', 'companyProcessId', companyProcessId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadCompanyProcessPhotoUsingPOST', 'file', file)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/process/{companyProcessId}/photo`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)))
+                .replace(`{${"companyProcessId"}}`, encodeURIComponent(String(companyProcessId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -519,6 +944,48 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 export const DefaultApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 유해위험요인 사진 삭제
+         * @summary 유해위험요인 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId, companyDangerFactorId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.deleteCompanyDangerFactorPhotoUsingDELETE']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 감소대책 사진 삭제
+         * @summary 감소대책 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId, companyDangerSolutionId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.deleteCompanyDangerSolutionPhotoUsingDELETE']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 세부 작업 사진 삭제
+         * @summary 세부작업 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyProcessPhotoUsingDELETE(assessmentId, companyProcessId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.deleteCompanyProcessPhotoUsingDELETE']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
         /**
          * 기업 추가 정보 설문지 답변 목록 조회
          * @summary 기업 추가 정보 설문지 답변 목록 조회
@@ -558,6 +1025,34 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * 유해위험요인 사진 조회
+         * @summary 유해위험요인 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerFactorPhotoUsingGET(assessmentId, companyProcessId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyDangerFactorPhotoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 감소대책 사진 조회
+         * @summary 감소대책 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerSolutionPhotoUsingGET(assessmentId, companyProcessId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyDangerSolutionPhotoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 기업 사업자 정보를 조회 합니다.
          * @summary 기업 사업자 정보 조회
          * @param {*} [options] Override http request option.
@@ -567,6 +1062,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyInfoUsingGET(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyInfoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 세부 작업 사진 조회
+         * @summary 세부작업 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyProcessPhotoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyProcessPhotoUsingGET(assessmentId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyProcessPhotoUsingGET']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
@@ -664,6 +1172,51 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const operationBasePath = operationServerMap['DefaultApi.startAssessmentUsingPOST']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
+        /**
+         * 유해위험요인 사진 업로드
+         * @summary 유해위험요인 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyDangerFactorPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyDangerFactorPhotoUsingPOST(assessmentId, companyDangerFactorId, file, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.uploadCompanyDangerFactorPhotoUsingPOST']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 감소대책 사진 업로드
+         * @summary 감소대책 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyDangerFactorPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId, companyDangerSolutionId, file, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.uploadCompanyDangerSolutionPhotoUsingPOST']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 세부 작업 사진 업로드
+         * @summary 세부작업 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyProcessPhotoUsingPOST(assessmentId, companyProcessId, file, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.uploadCompanyProcessPhotoUsingPOST']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
     }
 };
 
@@ -674,6 +1227,39 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DefaultApiFp(configuration)
     return {
+        /**
+         * 유해위험요인 사진 삭제
+         * @summary 유해위험요인 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+            return localVarFp.deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId, companyDangerFactorId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 감소대책 사진 삭제
+         * @summary 감소대책 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+            return localVarFp.deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId, companyDangerSolutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 세부 작업 사진 삭제
+         * @summary 세부작업 사진 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+            return localVarFp.deleteCompanyProcessPhotoUsingDELETE(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
+        },
         /**
          * 기업 추가 정보 설문지 답변 목록 조회
          * @summary 기업 추가 정보 설문지 답변 목록 조회
@@ -704,6 +1290,28 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCompanyAssessmentReportUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
+         * 유해위험요인 사진 조회
+         * @summary 유해위험요인 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+            return localVarFp.getCompanyDangerFactorPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 감소대책 사진 조회
+         * @summary 감소대책 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+            return localVarFp.getCompanyDangerSolutionPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 기업 사업자 정보를 조회 합니다.
          * @summary 기업 사업자 정보 조회
          * @param {*} [options] Override http request option.
@@ -711,6 +1319,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         getCompanyInfoUsingGET(options?: any): AxiosPromise<CompanyBusinessLookUpResponse> {
             return localVarFp.getCompanyInfoUsingGET(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 세부 작업 사진 조회
+         * @summary 세부작업 사진 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyProcessPhotoUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+            return localVarFp.getCompanyProcessPhotoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
          * 기업회원이 로그인을 합니다.
@@ -786,6 +1404,42 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         startAssessmentUsingPOST(options?: any): AxiosPromise<AssessmentStartResponse> {
             return localVarFp.startAssessmentUsingPOST(options).then((request) => request(axios, basePath));
         },
+        /**
+         * 유해위험요인 사진 업로드
+         * @summary 유해위험요인 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerFactorId companyDangerFactorId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: any): AxiosPromise<UploadCompanyDangerFactorPhotoResponse> {
+            return localVarFp.uploadCompanyDangerFactorPhotoUsingPOST(assessmentId, companyDangerFactorId, file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 감소대책 사진 업로드
+         * @summary 감소대책 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyDangerSolutionId companyDangerSolutionId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: any): AxiosPromise<UploadCompanyDangerFactorPhotoResponse> {
+            return localVarFp.uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId, companyDangerSolutionId, file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 세부 작업 사진 업로드
+         * @summary 세부작업 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {number} companyProcessId companyProcessId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+            return localVarFp.uploadCompanyProcessPhotoUsingPOST(assessmentId, companyProcessId, file, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -796,6 +1450,45 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class DefaultApi extends BaseAPI {
+    /**
+     * 유해위험요인 사진 삭제
+     * @summary 유해위험요인 사진 삭제
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerFactorId companyDangerFactorId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId, companyDangerFactorId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 감소대책 사진 삭제
+     * @summary 감소대책 사진 삭제
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerSolutionId companyDangerSolutionId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId, companyDangerSolutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 세부 작업 사진 삭제
+     * @summary 세부작업 사진 삭제
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyProcessId companyProcessId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).deleteCompanyProcessPhotoUsingDELETE(assessmentId, companyProcessId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 기업 추가 정보 설문지 답변 목록 조회
      * @summary 기업 추가 정보 설문지 답변 목록 조회
@@ -832,6 +1525,32 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
+     * 유해위험요인 사진 조회
+     * @summary 유해위험요인 사진 조회
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyProcessId companyProcessId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyDangerFactorPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 감소대책 사진 조회
+     * @summary 감소대책 사진 조회
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyProcessId companyProcessId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyDangerSolutionPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 기업 사업자 정보를 조회 합니다.
      * @summary 기업 사업자 정보 조회
      * @param {*} [options] Override http request option.
@@ -840,6 +1559,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getCompanyInfoUsingGET(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getCompanyInfoUsingGET(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 세부 작업 사진 조회
+     * @summary 세부작업 사진 조회
+     * @param {number} assessmentId assessmentId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyProcessPhotoUsingGET(assessmentId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyProcessPhotoUsingGET(assessmentId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -928,6 +1659,48 @@ export class DefaultApi extends BaseAPI {
      */
     public startAssessmentUsingPOST(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).startAssessmentUsingPOST(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 유해위험요인 사진 업로드
+     * @summary 유해위험요인 사진 업로드
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerFactorId companyDangerFactorId
+     * @param {File} file file
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).uploadCompanyDangerFactorPhotoUsingPOST(assessmentId, companyDangerFactorId, file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 감소대책 사진 업로드
+     * @summary 감소대책 사진 업로드
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyDangerSolutionId companyDangerSolutionId
+     * @param {File} file file
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId, companyDangerSolutionId, file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 세부 작업 사진 업로드
+     * @summary 세부작업 사진 업로드
+     * @param {number} assessmentId assessmentId
+     * @param {number} companyProcessId companyProcessId
+     * @param {File} file file
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).uploadCompanyProcessPhotoUsingPOST(assessmentId, companyProcessId, file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
