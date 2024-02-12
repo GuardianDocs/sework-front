@@ -1,10 +1,10 @@
-import { PropsWithChildren } from 'react';
-import localFont from 'next/font/local';
+import '@/app/globals.css';
 import RootProvider from '@/components/Providers/RootProvider';
 import Header from '@/components/ui/Header/Header';
-import { type NextFont } from 'next/dist/compiled/@next/font';
 import { Toaster } from '@/components/ui/Toast/Toaster';
-import '@/app/globals.css';
+import { type NextFont } from 'next/dist/compiled/@next/font';
+import localFont from 'next/font/local';
+import { PropsWithChildren } from 'react';
 
 const Pretendard: NextFont = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',

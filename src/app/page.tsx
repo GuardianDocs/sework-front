@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
 import { Headline, Label, Title } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const FeatureItem = ({ title, description }: { title: React.ReactNode; description: React.ReactNode }) => {
   return (
-    <div className="flex flex-col items-center justify-center gap-1">
+    <div className="flex flex-col items-center justify-center gap-1 flex-1">
       <Title size="xl" color="gray800">
         {title}
       </Title>
