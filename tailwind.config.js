@@ -2,6 +2,7 @@ import { nextui } from '@nextui-org/react';
 import { animation } from './src/styles/animation';
 import { defaultColors } from './src/styles/colors';
 import { keyframes } from './src/styles/keyFrames';
+import { textEllipsis, textStyle } from './src/styles/typography';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,5 +22,15 @@ module.exports = {
     },
   },
   darkMode: 'class',
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/forms'), nextui()],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/forms'),
+    nextui(),
+    ({ addUtilities }) => {
+      addUtilities({
+        ...textStyle,
+        ...textEllipsis,
+      });
+    },
+  ],
 };
