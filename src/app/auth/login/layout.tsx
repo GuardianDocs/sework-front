@@ -5,7 +5,7 @@ import loginGateImage from './img-login_gate.svg';
 
 export default function LoginLayout({ children }: PropsWithChildren) {
   return (
-    <div className="w-[100vw] h-[100vh] flex">
+    <div className="flex h-[100vh]">
       <div className="h-full min-w-[810px] bg-blue-100 w-[810px] flex items-center justify-center relative">
         <Link href="/">
           <Image src="/main-logo.png" width={90} height={30} alt="logo" className="absolute top-12 left-[60px]" />
