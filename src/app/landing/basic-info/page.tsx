@@ -29,9 +29,17 @@ export default function BasicInfoPage() {
     <>
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-4">
-          <div className="flex items-start gap-2">
-            <Label size="s">1</Label>
-            <Label size="s">2</Label>
+          <div className="flex gap-2">
+            <div className="w-6 h-6 rounded-full flex items-center justify-center bg-blue-500">
+              <Label size="s" color="white">
+                1
+              </Label>
+            </div>
+            <div className="w-6 h-6 rounded-full flex items-center justify-center bg-gray-100">
+              <Label size="s" color="gray400">
+                2
+              </Label>
+            </div>
           </div>
           <div className="flex flex-col items-center gap-1">
             <Headline size="s" color="gray800">
