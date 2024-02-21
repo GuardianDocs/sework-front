@@ -20,7 +20,7 @@ const Checkbox = React.forwardRef<
   >
     <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
       {/* TODO: text-current class 사용불가, 추후 개선 */}
-      <Icon icon="check" size={24} color="white" />
+      <Icon icon="check" className="text-white" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

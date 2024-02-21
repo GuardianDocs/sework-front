@@ -71,7 +71,7 @@ const TextField = {
     <div className={getCommonClassNames(sizeVariant, isFullWidth, 'trigger')} {...props}>
       <div className="flex flex-grow">{defaultValue}</div>
       <div className="flex self-start">
-        <Icon icon="edit" size={24} />
+        <Icon icon="edit" />
       </div>
     </div>
   ),

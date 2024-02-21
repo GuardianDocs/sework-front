@@ -414,7 +414,7 @@ export default function Step3Page() {
         {/* 1.1. 작성 가이드 버튼 */}
         <div className="flex pt-6 pb-4 flex-col items-end gap-2.5 w-full">
           <div className="flex items-start gap-1">
-            <Icon icon="circle-help" color="blue500" size={20} />
+            <Icon icon="circleHelp" className="w-[20px] h-[20px] text-blue-500" />
             <Label size="s" color="blue500">
               위험성평가 작성 가이드
             </Label>
@@ -629,7 +629,7 @@ export default function Step3Page() {
                                 variant="tonal-gray"
                                 size="s"
                                 showIcon="left"
-                                icon={<Icon icon="line-add" />}
+                                icon={<Icon icon="lineAdd" />}
                                 onClick={() => {
                                   const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                                   newCompanyDangerFactorAndSolution[
@@ -683,7 +683,7 @@ export default function Step3Page() {
                                         }}
                                       />
                                       <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                                        <Icon icon="chevron-up-s" size={18} color="gray300" />
+                                        <Icon icon="chevronUp" className="w-[18px] h-[18px] text-gray-300" />
                                         <div className="relative w-[32px] h-px bg-gray-200" />
                                         <div
                                           onClick={() => {
@@ -700,7 +700,7 @@ export default function Step3Page() {
                                           }}
                                           className="flex items-center justify-center w-full cursor-pointer"
                                         >
-                                          <Icon icon="chevron-down-s" size={18} color="gray600" />
+                                          <Icon icon="chevronDown" className="w-[18px] h-[18px] text-gray-600" />
                                         </div>
                                       </div>
                                     </div>
@@ -731,7 +731,7 @@ export default function Step3Page() {
                                 <Title size="l" color="gray600">
                                   위험성 감소대책
                                 </Title>
-                                <Icon icon="chevron-up-s" size={24} />
+                                <Icon icon="chevronUp" />
                               </div>
                               {companyDangerFactorAndSolution?.[
                                 selectedDialogDangerFactorIndex
@@ -769,10 +769,10 @@ export default function Step3Page() {
                                           }}
                                           className="flex items-center justify-center w-full cursor-pointer"
                                         >
-                                          <Icon icon="chevron-up-s" size={18} color="gray600" />
+                                          <Icon icon="chevronUp" className="w-[18px] h-[18px] text-gray-600" />
                                         </div>
                                         <div className="relative w-[32px] h-px bg-gray-200" />
-                                        <Icon icon="chevron-down-s" size={18} color="gray300" />
+                                        <Icon icon="chevronDown" className="w-[18px] h-[18px] text-gray-300" />
                                       </div>
                                     </div>
                                   )
@@ -786,7 +786,7 @@ export default function Step3Page() {
                               <Title size="l" color="gray600">
                                 표준 안전보건조치 추천
                               </Title>
-                              <Icon icon="chevron-up-s" size={24} />
+                              <Icon icon="chevronUp" />
                             </div>
                             {dialogCompanyDangerSolutionList.map((item, index) => (
                               <div className="flex items-start self-stretch gap-2" key={index}>
@@ -796,7 +796,7 @@ export default function Step3Page() {
                                 <IconButton
                                   variant="outline"
                                   size="m"
-                                  icon="line-add"
+                                  icon="lineAdd"
                                   onClick={() => {
                                     const newCompanyDangerFactorAndSolution = [...companyDangerFactorAndSolution];
                                     newCompanyDangerFactorAndSolution[

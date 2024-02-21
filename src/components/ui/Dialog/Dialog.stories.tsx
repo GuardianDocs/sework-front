@@ -137,7 +137,7 @@ export const Step3Dialog: Story = {
                 <Title size="l" color="gray800">
                   현재의 안전보건조치
                 </Title>
-                <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="line-add" />}>
+                <ActionButton variant="tonal-gray" size="s" showIcon="left" icon={<Icon icon="lineAdd" />}>
                   직접 추가
                 </ActionButton>
               </div>
@@ -156,9 +156,9 @@ export const Step3Dialog: Story = {
                 <TextField.Single defaultValue={'작업 발판 설치'} isFullWidth />
                 <IconButton variant="outline" size="m" icon="trash" />
                 <div className="inline-flex flex-col h-[42px] items-center justify-center relative rounded-[4px] border border-solid border-gray-200">
-                  <Icon icon="chevron-up-s" size={18} />
+                  <Icon icon="chevronUp" className="w-[18px] h-[18px]" />
                   <div className="relative w-[32px] h-px bg-gray-200" />
-                  <Icon icon="chevron-down-s" size={18} />
+                  <Icon icon="chevronDown" className="w-[18px] h-[18px]" />
                 </div>
               </div>
             </div>
@@ -169,12 +169,12 @@ export const Step3Dialog: Story = {
                 <Title size="l" color="gray600">
                   표준 안전보건조치 추천
                 </Title>
-                <Icon icon="chevron-up-s" size={24} />
+                <Icon icon="chevronUp" />
               </div>
               {/* row */}
               <div className="flex items-start self-stretch gap-2">
                 <div className="flex items-center flex-grow gap-2 px-3 py-2 rounded bg-gray-50">작업 발판 설치</div>
-                <IconButton variant="outline" size="m" icon="line-add" />
+                <IconButton variant="outline" size="m" icon="lineAdd" />
               </div>
             </div>
           </div>

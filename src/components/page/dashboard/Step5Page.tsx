@@ -11,9 +11,7 @@ import DropdownButton from '../../ui/DropdownButton/DropdownButton';
 import Icon from '../../ui/Icon/Icon';
 import Headline from '../../typography/Headline/Headline';
 import ProgressBox from '../../ui/ProgressBox/ProgressBox';
-import IconButton from '../../ui/IconButton/IconButton';
 import { DotIconRed, DotIconYellow, DotIconGreen } from '../../ui/Icon/EtcIcon/DotIcon';
-import ColorBox from '../../ui/ColorBox/ColorBox';
 import { getParameterFromUrl } from '@/utils/urlUtil';
 import { useToast } from '@/components/ui/Toast/use-toast';
 import { useStep4Store } from '@/hooks/dashboard/Step4Store';
@@ -29,8 +27,6 @@ import {
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/Dialog/Dialog';
-import style from './page.module.scss';
 
 export default function Step5Page() {
   const { toast } = useToast();
@@ -413,7 +409,7 @@ export default function Step5Page() {
         {/* 1.1. 작성 가이드 버튼 */}
         <div className="flex pt-6 pb-4 flex-col items-end gap-2.5 w-full">
           <div className="flex items-start gap-1">
-            <Icon icon="circle-help" color="blue500" size={20} />
+            <Icon icon="circleHelp" className="w-[20px] h-[20px] text-blue-500" />
             <Label size="s" color="blue500">
               위험성평가 작성 가이드
             </Label>

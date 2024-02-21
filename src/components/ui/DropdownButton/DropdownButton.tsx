@@ -77,9 +77,9 @@ export default function DropdownButton({
           {selectedOption ? selectedOption.label : '선택해주세요'}
         </Body>
         {isOpen ? (
-          <Icon icon="chevron-up-s" size={24} color="gray800" />
+          <Icon icon="chevronUp" className="text-gray-800" />
         ) : (
-          <Icon icon="chevron-down-s" size={24} color="gray800" />
+          <Icon icon="chevronDown" className="text-gray-800" />
         )}
       </button>
       {isOpen && (
@@ -100,9 +100,9 @@ export default function DropdownButton({
                 </Body>
               )}
               {option.value === selectedOption?.value ? (
-                <Icon icon="check" size={24} color="blue500" />
+                <Icon icon="check" className="text-blue-500" />
               ) : (
-                <Icon icon="empty" size={24} />
+                <Icon icon="empty" />
               )}
             </div>
           ))}

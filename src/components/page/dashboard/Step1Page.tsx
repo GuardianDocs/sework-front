@@ -245,7 +245,7 @@ export default function Step1Page() {
         {/* 1.1. 작성 가이드 버튼 */}
         <div className="flex pt-6 pb-4 flex-col items-end gap-2.5 w-full">
           <div className="flex items-start gap-1">
-            <Icon icon="circle-help" color="blue500" size={20} />
+            <Icon icon="circleHelp" className="w-[20px] h-[20px] text-blue-500" />
             <Label size="s" color="blue500">
               위험성평가 작성 가이드
             </Label>
@@ -294,7 +294,7 @@ export default function Step1Page() {
             variant="tonal-gray"
             size="s"
             showIcon="left"
-            icon={<Icon icon="line-add" />}
+            icon={<Icon icon="lineAdd" />}
             onClick={() => {
               const newStep1 = [...step1];
               newStep1.push({
@@ -328,7 +328,7 @@ export default function Step1Page() {
               variant="tonal-blue"
               size="s"
               showIcon="left"
-              icon={<Icon icon="line-add" />}
+              icon={<Icon icon="lineAdd" />}
               onClick={getRecommendProcess}
             >
               자동 추천 추가

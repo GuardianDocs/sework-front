@@ -117,7 +117,7 @@ export default function Prepare1Page() {
             </div>
           </div>
           <div className="flex items-start gap-1">
-            <Icon icon="circle-info" size={20} color="gray600" />
+            <Icon icon="circleInfo" className="w-[20px] h-[20px] text-gray-600" />
             <Body color="gray600" size="s">
               아이라스는 한 평가에 한 종목만 평가할 수 있습니다. 다른 종목 평가를 원하시면 이후 새로운 평가를
               생성해주세요.

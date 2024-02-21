@@ -17,6 +17,9 @@ const meta: Meta<typeof Icon> = {
       mapping: iconMapping,
       control: { type: 'select' },
     },
+    className: {
+      control: { type: 'text' },
+    },
   },
 };
 
@@ -25,8 +28,7 @@ type Story = StoryObj<typeof Icon>;
 
 export const Default: Story = {
   args: {
-    icon: 'line-add',
-    size: 50,
-    color: 'blue500',
+    icon: 'check',
+    className: 'w-[50px] h-[50px] text-blue-500',
   },
 };
