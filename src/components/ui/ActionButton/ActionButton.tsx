@@ -3,6 +3,7 @@
 import React, { forwardRef } from 'react';
 import styles from './ActionButton.module.scss';
 import Icon from '../Icon/Icon';
+import { cn } from '@/lib/utils';
 
 type ButtonType = 'filled' | 'tonal-blue' | 'tonal-gray' | 'tonal-red';
 type ButtonSize = 'l' | 'm' | 's';
@@ -40,7 +41,13 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
     return (
       <button
         ref={ref}
-        className={`${styles.actionButton} ${styles[variant]} ${styles[size]} ${isFullWidth ? styles.fullWidth : ''}`}
+        className={cn(
+          'transition-all',
+          styles.actionButton,
+          styles[variant],
+          styles[size],
+          isFullWidth ? styles.fullWidth : ''
+        )}
         {...props}
       >
         <div className="flex gap-1">
