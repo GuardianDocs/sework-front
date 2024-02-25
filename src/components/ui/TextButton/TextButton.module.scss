@@ -1,0 +1,81 @@
+@use '../../typography/Title/Title.module.scss' as title;
+@use '../../typography/Label/Label.module.scss' as label;
+
+.textButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &.hasIcon {
+    text-decoration: none;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.primary {
+    color: var(--blue-500, #004dbc);
+
+    &:hover {
+      color: var(--blue-600, #0040a3);
+    }
+    &:disabled {
+      color: var(--gray-300, #c3c6cd);
+    }
+  }
+
+  &.secondary {
+    color: var(--gray-800, #2a303b);
+
+    &:hover {
+      color: var(--gray-900, #171b23);
+    }
+    &:disabled {
+      color: var(--gray-300, #c3c6cd);
+    }
+  }
+
+  &.tertiary {
+    color: var(--gray-600, #666d7b);
+
+    &:hover {
+      color: var(--gray-700, #3a4252);
+    }
+    &:disabled {
+      color: var(--gray-300, #c3c6cd);
+    }
+  }
+
+  &.m {
+    padding: 8px 20px;
+    border-radius: 8px;
+
+    @include label.label-m;
+
+    // 아이콘 width, height
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.s {
+    padding: 6px 12px;
+    border-radius: 6px;
+
+    @include label.label-s;
+
+    // 아이콘 width, height
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
