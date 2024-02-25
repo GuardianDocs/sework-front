@@ -11,7 +11,7 @@ const Pretendard: NextFont = localFont({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="ko" className={`${Pretendard.className} light`}>
+    <html lang="ko" className={`${Pretendard.className} light w-full h-full`}>
       <body>
         <RootProvider>{children}</RootProvider>
       </body>
