@@ -224,4 +224,4 @@ export const SVG_ICON_MAPPER = {
   empty: {
     path: { d: '' },
   },
-} as const satisfies IconMapper;
+} satisfies IconMapper;
