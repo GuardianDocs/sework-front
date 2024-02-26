@@ -45,11 +45,11 @@ const MenuButton = ({ text, icon, subMenu, onlyIcon, actived, menuLevel, onClick
               {text}
             </span>
           )}
-          {subMenu && <Icon icon="chevronUp" className={cn('transition-all', open && 'rotate-180')} />}
+          {!onlyIcon && subMenu && <Icon icon="chevronUp" className={cn('transition-all', open && 'rotate-180')} />}
         </button>
       </div>
 
-      {subMenu && open && (
+      {!onlyIcon && subMenu && open && (
         <div className="flex flex-col gap-y-1 relative">
           <div className="absolute h-full top-0 left-[19.5px] py-[20px] -z-10">
             <div className="h-full border-dashed border-l border-gray-400" />

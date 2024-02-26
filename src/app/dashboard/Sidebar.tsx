@@ -32,18 +32,18 @@ const Sidebar = () => {
         <VersionCard open={open} />
         <div className="flex flex-col gap-y-1">
           {DASHBOARD_MENU.map(menu => (
-            <MenuButton key={menu.text} {...menu} menuLevel={0} />
+            <MenuButton key={menu.text} {...menu} menuLevel={0} onlyIcon={!open} />
           ))}
         </div>
       </section>
       <Divider />
       <section className="p-3 flex flex-col gap-y-3 flex-1 items-stretch">
-        <MenuButton text="아이라스 가이드" icon="home" menuLevel={0} />
+        <MenuButton text="아이라스 가이드" icon="home" menuLevel={0} onlyIcon={!open} />
       </section>
       <Divider />
       <section className="p-3 flex flex-col gap-y-3">
-        <MenuButton text="결제 및 플랜" icon="card" menuLevel={0} />
-        <MenuButton text="내 정보" icon="user" menuLevel={0} />
+        <MenuButton text="결제 및 플랜" icon="card" menuLevel={0} onlyIcon={!open} />
+        <MenuButton text="내 정보" icon="user" menuLevel={0} onlyIcon={!open} />
       </section>
       <Divider />
     </aside>
