@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
+import axios from 'axios';
 
 import { getCookie } from 'cookies-next';
 
@@ -49,7 +49,16 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    return response;
+    const newResponse = {
+      ...response,
+      irasResponse: {
+        code: response?.data?.code,
+        message: response?.data?.message,
+      },
+    };
+    newResponse.data = newResponse.data.data;
+
+    return newResponse;
   },
   error => {
     console.error(error); // for debug

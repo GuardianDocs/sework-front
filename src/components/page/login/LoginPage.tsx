@@ -1,14 +1,14 @@
 'use client';
 
+import useLoginFormStore from '@/app/auth/login/hooks/useLoginFormStore';
 import { Body, Headline, Label } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import TextField from '@/components/ui/TextField/TextField';
 import useLoginInfoStore from '@/hooks/useLoginInfoStore';
-import useLoginFormStore from '@/app/auth/login/hooks/useLoginFormStore';
 import { DefaultApi } from '@/lib/axios/oas-axios';
-import { useRouter } from 'next/navigation';
-import { type ResponseResultLoginCompanyAccountResponse, type LoginCompanyAccountRequest } from '@/services';
+import { type LoginCompanyAccountRequest } from '@/services';
 import { load as fingerPrintJsLoad } from '@fingerprintjs/fingerprintjs';
+import { useRouter } from 'next/navigation';
 
 import { setCookie } from 'cookies-next';
 
@@ -45,12 +45,9 @@ export default function LoginPage() {
     const fingerAgent = await fingerPrintJsLoad();
     const fingerPrintAgentResult = await fingerAgent.get();
     const uid = fingerPrintAgentResult.visitorId;
+    const { data } = await DefaultApi.loginCompanyUsingPOST(uid, loginRequest);
 
-    const response = await DefaultApi.loginCompanyUsingPOST(uid, loginRequest);
-
-    const { code, message, data } = response?.data as ResponseResultLoginCompanyAccountResponse;
-
-    if (code === '0001' && data) {
+    if (data) {
       console.log('로그인 성공');
       console.log(data);
 
@@ -75,7 +72,7 @@ export default function LoginPage() {
       if (data.requireAdditionalInfoYn) router.push('/landing/basic-info');
       else router.push('/');
     } else {
-      alert(message);
+      alert('로그인 실패');
     }
   };
 
