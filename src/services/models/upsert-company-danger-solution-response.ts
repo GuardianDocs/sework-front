@@ -52,12 +52,6 @@ export interface UpsertCompanyDangerSolutionResponse {
      * @type {number}
      * @memberof UpsertCompanyDangerSolutionResponse
      */
-    'possibility'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof UpsertCompanyDangerSolutionResponse
-     */
-    'severe'?: number;
+    'risk'?: number;
 }
 
