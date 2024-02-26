@@ -1,9 +1,9 @@
 'use client';
 
-import React, { forwardRef } from 'react';
-import styles from './ActionButton.module.scss';
-import Icon from '../Icon/Icon';
 import { cn } from '@/lib/utils';
+import React, { forwardRef } from 'react';
+import Icon from '../Icon/Icon';
+import styles from './ActionButton.module.scss';
 
 type ButtonType = 'filled' | 'tonal-blue' | 'tonal-gray' | 'tonal-red';
 type ButtonSize = 'l' | 'm' | 's';
@@ -37,7 +37,7 @@ interface ActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 }
 
 const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
-  ({ variant, size, children, isFullWidth, showIcon, icon, ...props }, ref) => {
+  ({ variant, size, children, isFullWidth, showIcon, icon, className, ...props }, ref) => {
     return (
       <button
         ref={ref}
@@ -46,7 +46,8 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
           styles.actionButton,
           styles[variant],
           styles[size],
-          isFullWidth ? styles.fullWidth : ''
+          isFullWidth ? styles.fullWidth : '',
+          className
         )}
         {...props}
       >

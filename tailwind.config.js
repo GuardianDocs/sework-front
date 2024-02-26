@@ -30,6 +30,17 @@ module.exports = {
       addUtilities({
         ...textStyle,
         ...textEllipsis,
+        '.flex-center': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        '.flex-col-center': {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
       });
     },
   ],

@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { ColorKey, colors } from '@/types/theme/color';
 import styles from './Label.module.scss';
 
@@ -5,12 +6,13 @@ import styles from './Label.module.scss';
 type BodyProps = {
   size?: 'xxs' | 'xs' | 's' | 'm' | 'l';
   color?: ColorKey;
+  className?: string;
   children: React.ReactNode;
 };
 
-export default function Label({ size = 'm', color = 'black', children }: BodyProps) {
+export default function Label({ size = 'm', color = 'black', className, children }: BodyProps) {
   return (
-    <span className={`${styles.label} ${styles[size]}`} style={{ color: `var(${colors[color]})` }}>
+    <span className={cn(`${styles.label} ${styles[size]}`, className)} style={{ color: `var(${colors[color]})` }}>
       {children}
     </span>
   );
