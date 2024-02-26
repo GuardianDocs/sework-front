@@ -35,6 +35,10 @@
     color: var(--gray-800, #2a303b);
   }
 
+  &.danger {
+    border: 1px solid var(--red-500, #d32f2f);
+  }
+
   @include body.body-m;
   color: var(--gray-800, #2a303b);
 

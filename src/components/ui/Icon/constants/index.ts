@@ -173,31 +173,24 @@ export const SVG_ICON_MAPPER = {
   fold: {
     path: [
       {
-        d: 'M5 12L10 17M5 12L10 7M5 12H16',
-        stroke: 'currentColor',
-        strokeWidth: '1.6',
-        strokeLinejoin: 'round',
+        d: 'M6.93137 12.8L10.5657 16.4343L9.43432 17.5657L4.43432 12.5657C4.1219 12.2533 4.1219 11.7467 4.43432 11.4343L9.43432 6.43431L10.5657 7.56569L6.93137 11.2H16V12.8H6.93137Z',
+        fill: 'currentColor',
       },
       {
-        d: 'M19 5V19',
-        stroke: 'currentColor',
-        strokeWidth: '1.6',
+        d: 'M18.2 19V5H19.8V19H18.2Z',
+        fill: 'currentColor',
       },
     ],
   },
   unfold: {
     path: [
+      { d: 'M19 12L14 17M19 12L14 7M19 12H8', stroke: 'currentColor', strokeWidth: '1.6', strokeLinejoin: 'round' },
+      { d: 'M5 5V19', stroke: 'currentColor', strokeWidth: '1.6' },
       {
-        d: 'M19 12L14 17M19 12L14 7M19 12H8',
-        stroke: 'currentColor',
-        strokeWidth: '1.6',
-        strokeLinejoin: 'round',
+        d: 'M17.0686 12.8L13.4343 16.4343L14.5657 17.5657L19.5657 12.5657C19.8781 12.2533 19.8781 11.7467 19.5657 11.4343L14.5657 6.43431L13.4343 7.56569L17.0686 11.2H8V12.8H17.0686Z',
+        fill: 'currentColor',
       },
-      {
-        d: 'M5 5V19',
-        stroke: 'currentColor',
-        strokeWidth: '1.6',
-      },
+      { d: 'M5.8 19V5H4.2V19H5.8Z', fill: 'currentColor' },
     ],
   },
   image: {

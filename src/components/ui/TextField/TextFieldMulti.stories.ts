@@ -18,3 +18,13 @@ export const TextFieldMulti: Story = {
     disabled: false,
   },
 };
+
+export const TextFieldMultiError: Story = {
+  args: {
+    sizeVariant: 's',
+    placeholder: '텍스트를 입력해주세요',
+    isFullWidth: false,
+    disabled: false,
+    error: '오류 메세지',
+  },
+};

@@ -18,3 +18,13 @@ export const TextFieldTrigger: Story = {
     style: { width: '300px' },
   },
 };
+
+export const TextFieldTriggerError: Story = {
+  args: {
+    sizeVariant: 's',
+    defaultValue: '뭔가 이미 입력된 텍스트 친구',
+    isFullWidth: false,
+    style: { width: '300px' },
+    error: '오류 메세지',
+  },
+};
