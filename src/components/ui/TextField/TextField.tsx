@@ -42,7 +42,9 @@ const getCommonClassNames = (
 
   const textFieldStyle = textFieldStyleMap[type] || '';
 
-  return `${textFieldStyle} ${sizeStyle} ${fullWidthStyle} focus:ring-0 focus:ring-offset-0 ${error ? styles.danger : ''}`;
+  return `${textFieldStyle} ${sizeStyle} ${fullWidthStyle} focus:ring-0 focus:ring-offset-0 ${
+    error ? styles.danger : ''
+  }`;
 };
 
 const TextField = {

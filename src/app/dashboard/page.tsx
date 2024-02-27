@@ -6,16 +6,24 @@ import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
 import Icon from '@/components/ui/Icon/Icon';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-type ReportType = 'new' | string | null;
+type ReportType = 'newReport' | string | null;
 
 export default function Page() {
+  const router = useRouter();
   const [selectedReport, setSelectedReport] = useState<ReportType>(null);
 
-  const handleClickCard = (report: ReportType) => {
+  const handleCardClick = (report: ReportType) => {
     console.log(report);
     setSelectedReport(report);
+  };
+
+  const handleSelectReport = () => {
+    if (selectedReport) {
+      router.push(`/dashboard/${selectedReport}`);
+    }
   };
 
   return (
@@ -36,9 +44,9 @@ export default function Page() {
           <CardButton
             title="새로운 평가 만들기"
             icon="lineAdd"
-            actived={selectedReport === 'new'}
+            actived={selectedReport === 'newReport'}
             onClick={() => {
-              handleClickCard('new');
+              handleCardClick('newReport');
             }}
           />
           <div className="border-t border-gray-200" />
@@ -64,7 +72,7 @@ export default function Page() {
             </ActionButton>
           </div>
         </div>
-        <ActionButton variant="filled" size="l" disabled={!selectedReport}>
+        <ActionButton variant="filled" size="l" disabled={!selectedReport} onClick={handleSelectReport}>
           선택 완료
         </ActionButton>
       </div>
