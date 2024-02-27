@@ -1,4 +1,5 @@
 import Body from '@/components/typography/Body/Body';
+import { cn } from '@/lib/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '../Icon/Icon';
 import styles from './DropdownButton.module.scss';
@@ -76,11 +77,7 @@ export default function DropdownButton({
         >
           {selectedOption ? selectedOption.label : '선택해주세요'}
         </Body>
-        {isOpen ? (
-          <Icon icon="chevronUp" className="text-gray-800" />
-        ) : (
-          <Icon icon="chevronDown" className="text-gray-800" />
-        )}
+        <Icon icon="chevronUp" className={cn('transition-all text-gray-800', isOpen && 'rotate-180')} />
       </button>
       {isOpen && (
         <div className={styles.dropdownList} style={listStyle}>
