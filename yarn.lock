@@ -2415,6 +2415,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^3.3.4":
+  version: 3.3.4
+  resolution: "@hookform/resolvers@npm:3.3.4"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: 7761e3340d23acd092dec4023344678e62b0c0ea0ed5aa3687cd315fc339b3b965e11124d643811292e6962683357423e6fe646fffabf9b96f8322f41903924d
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.13
   resolution: "@humanwhocodes/config-array@npm:0.11.13"
@@ -17072,6 +17081,7 @@ __metadata:
     "@fingerprintjs/fingerprintjs": 3.4.2
     "@headlessui/react": ^1.7.17
     "@heroicons/react": ^2.0.18
+    "@hookform/resolvers": ^3.3.4
     "@nextui-org/react": ^2.1.13
     "@openapitools/openapi-generator-cli": ^2.7.0
     "@radix-ui/react-alert-dialog": ^1.0.5
