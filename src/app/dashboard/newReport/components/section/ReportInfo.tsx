@@ -41,7 +41,9 @@ export const ReportInfo = () => {
             <Controller
               name="startAt"
               control={control}
-              render={({ field }) => <TextField.Single isFullWidth placeholder="YYYY-MM-DD" {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <TextField.Single isFullWidth placeholder="YYYY-MM-DD" {...field} error={error?.message} />
+              )}
             />
           </div>
           <div className="flex-1 flex flex-col gap-y-2">
@@ -51,20 +53,28 @@ export const ReportInfo = () => {
             <Controller
               name="endAt"
               control={control}
-              render={({ field }) => <TextField.Single isFullWidth placeholder="YYYY-MM-DD" {...field} />}
+              render={({ field, fieldState: { error } }) => (
+                <TextField.Single isFullWidth placeholder="YYYY-MM-DD" {...field} error={error?.message} />
+              )}
             />
           </div>
         </div>
       </FormItem>
       <FormItem title="평가하고자 하는 업종은 어떻게 되시나요?">
-        <div className="flex gap-x-2 w-full">
-          <div className="flex-1">
-            <TextField.Single isFullWidth readOnly />
-          </div>
-          <ActionButton variant="tonal-blue" size="m" type="button">
-            업종 검색
-          </ActionButton>
-        </div>
+        <Controller
+          name="sectorId"
+          control={control}
+          render={({ field }) => (
+            <div className="flex gap-x-2 w-full">
+              <div className="flex-1">
+                <TextField.Single isFullWidth readOnly value={field.value} />
+              </div>
+              <ActionButton variant="tonal-blue" size="m" type="button">
+                업종 검색
+              </ActionButton>
+            </div>
+          )}
+        />
       </FormItem>
     </>
   );

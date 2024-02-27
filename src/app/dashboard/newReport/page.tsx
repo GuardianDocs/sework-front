@@ -6,22 +6,35 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { NewReportHeader } from './components/NewReportHeader';
 import { AccidentAndWorkerInfo, ReportInfo } from './components/section';
 import { useReportStep } from './hooks/useReportStep';
+import { resolver } from './validationSchema';
 
 const Page = () => {
-  const { step, nextStep, prevStep, isFirstStep, isLastStep } = useReportStep();
-
   const formMethods = useForm<RegisterCompanyAssessmentAdditionalInfoRequest>({
+    resolver,
     mode: 'all',
   });
 
-  const handeSubmit = (data: RegisterCompanyAssessmentAdditionalInfoRequest) => {
-    console.log(data);
-    // DefaultApi.saveAdditionalInfoUsingPOST(data);
+  const {
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = formMethods;
+
+  const values = getValues();
+
+  const { step, nextStep, prevStep, isFirstStep, isLastStep, isPassibleToNextStep } = useReportStep(values, errors);
+
+  const handeSaveCompanyAssessmentAdditionalInfo = async (data: RegisterCompanyAssessmentAdditionalInfoRequest) => {
+    // const response = await DefaultApi.saveAdditionalInfoUsingPOST(data);
+    // response.data;
   };
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={formMethods.handleSubmit(handeSubmit)} className="flex-col-center gap-y-12 w-full">
+      <form
+        onSubmit={handleSubmit(handeSaveCompanyAssessmentAdditionalInfo)}
+        className="flex-col-center gap-y-12 w-full"
+      >
         <NewReportHeader step={step} />
         {step === 1 && <ReportInfo />}
         {step === 2 && <AccidentAndWorkerInfo />}
@@ -38,7 +51,7 @@ const Page = () => {
               완료하기
             </ActionButton>
           ) : (
-            <ActionButton type="button" variant="filled" size="l" onClick={nextStep}>
+            <ActionButton type="button" variant="filled" size="l" onClick={nextStep} disabled={!isPassibleToNextStep}>
               다음 단계
             </ActionButton>
           )}

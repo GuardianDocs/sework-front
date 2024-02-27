@@ -2,6 +2,7 @@
 
 import { Label } from '@/components/typography';
 import Icon from '@/components/ui/Icon/Icon';
+import { cn } from '@/lib/utils';
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './TextField.module.scss';
 
@@ -49,7 +50,7 @@ const getCommonClassNames = (
 
 const TextField = {
   Single: ({ sizeVariant = 's', isFullWidth, error, ...props }: TextFieldSingleProps) => (
-    <div>
+    <div className={cn(isFullWidth && 'w-full')}>
       <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single', error)} {...props} />
       {error && <ErrorDescription error={error} />}
     </div>
