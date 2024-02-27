@@ -31,6 +31,7 @@
       svg {
         fill: var(--white, #fff);
       }
+      cursor: not-allowed;
     }
   }
 
@@ -52,6 +53,7 @@
       svg {
         fill: var(--gray-50, #f8f9fa);
       }
+      cursor: not-allowed;
     }
   }
 
@@ -73,6 +75,7 @@
       svg {
         fill: var(--gray-300, #c3c6cd);
       }
+      cursor: not-allowed;
     }
   }
 
@@ -94,6 +97,7 @@
       svg {
         fill: var(--red-200, #ffbfbf);
       }
+      cursor: not-allowed;
     }
   }
 

@@ -1,11 +1,23 @@
+'use client';
+
 import report from '@/assets/images/report.svg';
 import { Headline, Label } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
 import Icon from '@/components/ui/Icon/Icon';
 import Image from 'next/image';
+import { useState } from 'react';
+
+type ReportType = 'new' | string | null;
 
 export default function Page() {
+  const [selectedReport, setSelectedReport] = useState<ReportType>(null);
+
+  const handleClickCard = (report: ReportType) => {
+    console.log(report);
+    setSelectedReport(report);
+  };
+
   return (
     <div className="pt-12 w-full flex justify-center">
       <div className="flex-col-center gap-y-12 w-[712px]">
@@ -21,7 +33,14 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col w-full gap-y-6">
-          <CardButton title="새로운 평가 만들기" icon="lineAdd" />
+          <CardButton
+            title="새로운 평가 만들기"
+            icon="lineAdd"
+            actived={selectedReport === 'new'}
+            onClick={() => {
+              handleClickCard('new');
+            }}
+          />
           <div className="border-t border-gray-200" />
           <div className="flex flex-col w-full gap-y-3">
             <CardButton
@@ -45,7 +64,7 @@ export default function Page() {
             </ActionButton>
           </div>
         </div>
-        <ActionButton variant="filled" size="l">
+        <ActionButton variant="filled" size="l" disabled={!selectedReport}>
           선택 완료
         </ActionButton>
       </div>

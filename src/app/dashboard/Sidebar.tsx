@@ -10,6 +10,7 @@ import VersionCard from './VersionCard';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+
   return (
     <aside className="border-r border-gray-100 flex flex-col">
       <div
@@ -24,7 +25,7 @@ const Sidebar = () => {
           </div>
         )}
         <button onClick={() => setOpen(prev => !prev)}>
-          <Icon icon={open ? 'fold' : 'unfold'} className="text-gray-500" />
+          <Icon icon={open ? 'fold' : 'unfold'} className="transition-all text-gray-500 hover:text-blue-500" />
         </button>
       </div>
       <Divider />
