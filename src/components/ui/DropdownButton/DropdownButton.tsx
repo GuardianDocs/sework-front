@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './DropdownButton.module.scss';
-import Icon from '../Icon/Icon';
 import Body from '@/components/typography/Body/Body';
+import React, { useEffect, useRef, useState } from 'react';
+import Icon from '../Icon/Icon';
+import styles from './DropdownButton.module.scss';
 
 export interface DropdownOption {
   label: React.ReactNode;
@@ -68,7 +68,7 @@ export default function DropdownButton({
 
   return (
     <div ref={dropdownRef} className={styles.dropdownContainer} style={containerStyle}>
-      <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
+      <button type="button" className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)} disabled={disabled}>
         <Body
           size="m"
           color={selectedOption ? (disabled ? 'gray800' : 'gray800') : 'gray300'}

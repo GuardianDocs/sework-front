@@ -4,6 +4,7 @@ import DropdownButton from '@/components/ui/DropdownButton/DropdownButton';
 import TextField from '@/components/ui/TextField/TextField';
 import { RegisterCompanyAssessmentAdditionalInfoRequest } from '@/services';
 import { Controller, useFormContext } from 'react-hook-form';
+import { REPORT_TYPE } from '../../constants';
 import { FormItem } from '../FormItem';
 
 export const ReportInfo = () => {
@@ -18,7 +19,18 @@ export const ReportInfo = () => {
         />
       </FormItem>
       <FormItem title="보고서 종류를 알려주세요">
-        <DropdownButton options={[]} isFullWidth />
+        <Controller
+          name="type"
+          control={control}
+          render={({ field }) => (
+            <DropdownButton
+              options={REPORT_TYPE}
+              isFullWidth
+              selectedOption={REPORT_TYPE.find(el => el.value === field.value)}
+              onSelected={option => field.onChange(option.value)}
+            />
+          )}
+        />
       </FormItem>
       <FormItem title="평가 기준일을 알려주세요">
         <div className="flex gap-x-6">
@@ -49,7 +61,7 @@ export const ReportInfo = () => {
           <div className="flex-1">
             <TextField.Single isFullWidth readOnly />
           </div>
-          <ActionButton variant="tonal-blue" size="m">
+          <ActionButton variant="tonal-blue" size="m" type="button">
             업종 검색
           </ActionButton>
         </div>

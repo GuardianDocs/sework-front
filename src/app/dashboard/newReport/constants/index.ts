@@ -20,3 +20,18 @@ export const NEW_REPORT_STEP = [
     description: '설문을 통해 보다 정확한 보고서를 출력해드릴 수 있습니다.',
   },
 ];
+
+export const REPORT_TYPE = [
+  {
+    label: '최초평가',
+    value: 'INITIAL',
+  },
+  {
+    label: '수시평가',
+    value: 'CONTINUOUS',
+  },
+  {
+    label: '정기평가',
+    value: 'REGULAR',
+  },
+];
