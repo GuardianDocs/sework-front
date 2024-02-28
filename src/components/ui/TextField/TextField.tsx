@@ -9,6 +9,7 @@ import styles from './TextField.module.scss';
 interface TextFieldProps {
   sizeVariant?: 's' | 'm';
   isFullWidth?: boolean;
+  rightElement?: React.ReactNode;
   error?: string;
 }
 
@@ -49,9 +50,12 @@ const getCommonClassNames = (
 };
 
 const TextField = {
-  Single: ({ sizeVariant = 's', isFullWidth, error, ...props }: TextFieldSingleProps) => (
+  Single: ({ sizeVariant = 's', isFullWidth, error, rightElement, ...props }: TextFieldSingleProps) => (
     <div className={cn(isFullWidth && 'w-full')}>
-      <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single', error)} {...props} />
+      <div className={cn('flex gap-x-2 items-center', isFullWidth && 'w-full')}>
+        <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single', error)} {...props} />
+        {rightElement}
+      </div>
       {error && <ErrorDescription error={error} />}
     </div>
   ),
