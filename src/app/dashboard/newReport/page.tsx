@@ -4,7 +4,7 @@ import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { RegisterCompanyAssessmentAdditionalInfoRequest } from '@/services';
 import { FormProvider, useForm } from 'react-hook-form';
 import { NewReportHeader } from './components/NewReportHeader';
-import { AccidentAndWorkerInfo, CompanyInfo, ManagerStructure, ReportInfo } from './components/section';
+import { AccidentAndWorkerInfo, ReportInfo } from './components/section';
 import { useReportStep } from './hooks/useReportStep';
 import { resolver } from './validationSchema';
 
@@ -38,8 +38,8 @@ const Page = () => {
         <NewReportHeader step={step} />
         {step === 1 && <ReportInfo />}
         {step === 2 && <AccidentAndWorkerInfo />}
-        {step === 3 && <ManagerStructure />}
-        {step === 4 && <CompanyInfo />}
+        {step === 3 && <AccidentAndWorkerInfo />}
+        {step === 4 && <AccidentAndWorkerInfo />}
         <div className="flex-center gap-x-3">
           {!isFirstStep && (
             <ActionButton type="button" variant="tonal-gray" size="l" onClick={prevStep}>
@@ -51,8 +51,7 @@ const Page = () => {
               완료하기
             </ActionButton>
           ) : (
-            // <ActionButton type="button" variant="filled" size="l" onClick={nextStep} disabled={!isPassibleToNextStep}>
-            <ActionButton type="button" variant="filled" size="l" onClick={nextStep}>
+            <ActionButton type="button" variant="filled" size="l" onClick={nextStep} disabled={!isPassibleToNextStep}>
               다음 단계
             </ActionButton>
           )}

@@ -1,12 +1,11 @@
 import { Title } from '@/components/typography';
-import { cn } from '@/lib/utils';
 import { PropsWithChildren } from 'react';
 
-type FormItemProps = PropsWithChildren & { title: string; className?: string };
+type FormItemProps = PropsWithChildren & { title: string };
 
-export const FormItem = ({ children, title, className }: FormItemProps) => {
+export const FormItem = ({ children, title }: FormItemProps) => {
   return (
-    <div className={cn('flex flex-col gap-y-3 w-full', className)}>
+    <div className="flex flex-col gap-y-3 w-full">
       <Title size="l" color="gray800">
         {title}
       </Title>
