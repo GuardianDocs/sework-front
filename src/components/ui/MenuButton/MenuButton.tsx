@@ -45,7 +45,7 @@ const MenuButton = ({ text, icon, subMenu, onlyIcon, actived, menuLevel, onClick
               {text}
             </span>
           )}
-          {!onlyIcon && subMenu && <Icon icon="chevronUp" className={cn('transition-all', open && 'rotate-180')} />}
+          {!onlyIcon && subMenu && <Icon icon="chevronDown" className={cn('transition-all', open && 'rotate-180')} />}
         </button>
       </div>
 
