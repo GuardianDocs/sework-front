@@ -1,29 +1,51 @@
-'use client';
-
-import * as React from 'react';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-
 import { cn } from '@/lib/utils';
+import { HTMLAttributes, InputHTMLAttributes, forwardRef } from 'react';
 import Icon from '../Icon/Icon';
 
-const Checkbox = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <CheckboxPrimitive.Root
-    ref={ref}
-    className={cn(
-      'peer h-6 w-6 shrink-0 rounded-[4px] border-[1px] border-gray-200 hover:border-blue-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:data-[state=checked]:border-gray-200 disabled:data-[state=checked]:bg-gray-200 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500 data-[state=checked]:text-white',
-      className
-    )}
-    {...props}
-  >
-    <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      {/* TODO: text-current class 사용불가, 추후 개선 */}
-      <Icon icon="check" className="text-white" />
-    </CheckboxPrimitive.Indicator>
-  </CheckboxPrimitive.Root>
-));
-Checkbox.displayName = CheckboxPrimitive.Root.displayName;
+export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onMouseEnter' | 'onMouseLeave'> &
+  Pick<HTMLAttributes<HTMLDivElement>, 'onMouseEnter' | 'onMouseLeave'>;
 
-export { Checkbox };
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ children, id, disabled, className, onMouseEnter, onMouseLeave, ...props }, ref) => {
+    return (
+      <label
+        htmlFor={id}
+        className={cn(
+          'checkbox relative flex cursor-pointer items-center',
+          { 'cursor-not-allowed': disabled },
+          className
+        )}
+      >
+        <input
+          id={id}
+          ref={ref}
+          type="checkbox"
+          disabled={disabled}
+          className="clip-rect-0 peer absolute m-[-1px] h-0 w-0 overflow-hidden whitespace-nowrap border-none p-0"
+          {...props}
+        />
+        <div
+          className={cn(
+            'rounded-4 mr-8 box-content flex items-center justify-center transition-colors border-1', // base style
+            'peer-hover:bg-primary-03 peer-hover:border-primary-01', // peer-hover:
+            'peer-checked:[&_svg]:text-text-inverted-active peer-checked:!bg-primary-01 peer-checked:border-primary-01 peer-checked:[&_svg]:scale-100', // peer-checked:
+            'peer-disabled:!border-grey-80 peer-disabled:!bg-grey-90 peer-disabled:[&_svg]:text-text-disabled' // peer-disabled:
+          )}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <Icon icon="check" className="text-white" />
+        </div>
+        <span
+          className={cn('select-none', {
+            'text-text-disabled': disabled,
+          })}
+        >
+          {children}
+        </span>
+      </label>
+    );
+  }
+);
+
+Checkbox.displayName = 'Checkbox';
