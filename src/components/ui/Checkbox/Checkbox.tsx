@@ -21,28 +21,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ref={ref}
           type="checkbox"
           disabled={disabled}
-          className="clip-rect-0 peer absolute m-[-1px] h-0 w-0 overflow-hidden whitespace-nowrap border-none p-0"
+          className="clip-rect-0 peer absolute m-[-1px] h-0 w-0 overflow-hidden whitespace-nowrap border-none p-0 focus:outline-none focus:ring-0 focus:ring-offset-0"
           {...props}
         />
         <div
           className={cn(
-            'rounded-4 mr-8 box-content flex items-center justify-center transition-colors border-1', // base style
-            'peer-hover:bg-primary-03 peer-hover:border-primary-01', // peer-hover:
-            'peer-checked:[&_svg]:text-text-inverted-active peer-checked:!bg-primary-01 peer-checked:border-primary-01 peer-checked:[&_svg]:scale-100', // peer-checked:
-            'peer-disabled:!border-grey-80 peer-disabled:!bg-grey-90 peer-disabled:[&_svg]:text-text-disabled' // peer-disabled:
+            'w-6 h-6 rounded-[4px] mr-3 box-border flex items-center justify-center transition-colors border-1 border-gray-200', // base style
+            'peer-hover:border-blue-200', // peer-hover:
+            'peer-checked:[&_svg]:text-white peer-checked:!bg-blue-500 peer-checked:border-none peer-checked:[&_svg]:scale-100', // peer-checked:
+            'peer-disabled:!border-gray-200 peer-disabled:!bg-gray-100 peer-disabled:[&_svg]:text-text-disabled' // peer-disabled:
           )}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
-          <Icon icon="check" className="text-white" />
+          <Icon icon="check" className="w-5 h-5 text-transparent" />
         </div>
-        <span
-          className={cn('select-none', {
-            'text-text-disabled': disabled,
-          })}
-        >
-          {children}
-        </span>
+        <span className="select-none">{children}</span>
       </label>
     );
   }

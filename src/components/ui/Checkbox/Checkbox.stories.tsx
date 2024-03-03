@@ -14,10 +14,12 @@ export const Default: Story = {
   render: function Default() {
     return (
       <div className="flex flex-row gap-4">
-        <Checkbox />
-        <Checkbox checked />
-        <Checkbox disabled />
-        <Checkbox checked disabled />
+        <Checkbox>기본</Checkbox>
+        <Checkbox checked>체크됨</Checkbox>
+        <Checkbox disabled>비활성화</Checkbox>
+        <Checkbox checked disabled>
+          체크된 비활성화
+        </Checkbox>
       </div>
     );
   },
