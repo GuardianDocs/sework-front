@@ -35,3 +35,34 @@ export const REPORT_TYPE = [
     value: 'REGULAR',
   },
 ];
+
+export const DEMOGRAPHY_LIST = [
+  {
+    value: 'WOMEN',
+    text: '여성근로자',
+  },
+  {
+    value: 'ROOKIE',
+    text: '1년미만 미숙련자 (신입)',
+  },
+  {
+    value: 'ELDERLY',
+    text: '고령근로자 (만60세 이상)',
+  },
+  {
+    value: 'TEMPORARY',
+    text: '비정규직 근로자 (계약직, 용역, 파견, 프리랜서 포함)',
+  },
+  {
+    value: 'FOREIGN',
+    text: '외국인근로자 (불법체류자 포함)',
+  },
+  {
+    value: 'HANDICAPPED',
+    text: '장애근로자',
+  },
+  {
+    value: 'NONE',
+    text: '해당사항 없음',
+  },
+];

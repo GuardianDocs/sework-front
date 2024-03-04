@@ -1,39 +1,44 @@
-'use client';
-
-import * as React from 'react';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-
+import { Body } from '@/components/typography';
 import { cn } from '@/lib/utils';
+import { forwardRef, InputHTMLAttributes } from 'react';
 
-const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => {
-  return <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />;
-});
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+export type RadioProps = {
+  parentsClassNames?: string;
+  childrenClassName?: string;
+} & InputHTMLAttributes<HTMLInputElement>;
 
-const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => {
-  return (
-    <RadioGroupPrimitive.Item
-      ref={ref}
-      className={cn(
-        'aspect-square h-6 w-6 rounded-full border border-gray-200 hover:border-blue-200 text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:data-[state=checked]:bg-gray-200 disabled:data-[state=checked]:border-gray-200 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500',
-        className
-      )}
-      {...props}
-    >
-      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <circle cx="5" cy="5" r="5" fill="white" />
-        </svg>
-      </RadioGroupPrimitive.Indicator>
-    </RadioGroupPrimitive.Item>
-  );
-});
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  ({ children, id, disabled, className, childrenClassName, ...props }, ref) => {
+    return (
+      <label
+        htmlFor={id}
+        className={cn('group relative flex cursor-pointer items-center', { 'cursor-not-allowed': disabled }, className)}
+      >
+        <input
+          id={id}
+          ref={ref}
+          type="radio"
+          disabled={disabled}
+          className="clip-rect-0 peer absolute m-[-1px] h-0 w-0 overflow-hidden whitespace-nowrap border-none p-0 focus:outline-none focus:ring-0 focus:ring-offset-0"
+          {...props}
+        />
+        <div
+          className={cn(
+            'mr-3 bg-white border-gray-200 relative box-border flex h-6 w-6 items-center justify-center rounded-full border-1 transition-colors',
+            'group-hover:border-blue-200',
+            'peer-disabled:bg-gray-100 peer-disabled:border-gray-200 peer-disabled:[&_div]:bg-input-default-stroke peer-disabled:[&_div]:border-gray-90',
+            'peer-checked:[&_div]:opacity-100 peer-checked:border-[7px] peer-checked:border-blue-500',
+            'peer-checked:peer-disabled:border-gray-200'
+          )}
+        >
+          <div className="bg-white box-content h-[10px] w-[10px] flex-shrink-0 rounded-full opacity-0 transition-opacity" />
+        </div>
+        <Body size="m" color="gray800" className="select-none">
+          {children}
+        </Body>
+      </label>
+    );
+  }
+);
 
-export { RadioGroup, RadioGroupItem };
+Radio.displayName = 'Radio';

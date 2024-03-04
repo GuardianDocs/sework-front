@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { HTMLAttributes, InputHTMLAttributes, forwardRef } from 'react';
 import Icon from '../Icon/Icon';
+import { Body } from '@/components/typography';
 
 export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onMouseEnter' | 'onMouseLeave'> &
   Pick<HTMLAttributes<HTMLDivElement>, 'onMouseEnter' | 'onMouseLeave'>;
@@ -36,7 +37,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         >
           <Icon icon="check" className="w-5 h-5 text-transparent" />
         </div>
-        <span className="select-none">{children}</span>
+        <Body size="m" color="gray800" className="select-none">
+          {children}
+        </Body>
       </label>
     );
   }

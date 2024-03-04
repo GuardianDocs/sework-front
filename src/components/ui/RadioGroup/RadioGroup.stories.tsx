@@ -1,46 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Radio } from './RadioGroup';
 
-import { RadioGroup, RadioGroupItem } from './RadioGroup';
-import { Label as HtmlLabel } from '@/components/ui/Label/Label';
-import { Label } from '@/components/typography';
-
-const meta: Meta<typeof RadioGroup> = {
+const meta: Meta<typeof Radio> = {
   title: 'Design System/UI/RadioGroup',
-  component: RadioGroup,
+  component: Radio,
 };
 
 export default meta;
-type Story = StoryObj<typeof RadioGroup>;
+type Story = StoryObj<typeof Radio>;
 
 export const Default: Story = {
   render: function Default() {
     return (
-      <RadioGroup defaultValue="comfortable">
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="default" id="r1" />
-          <HtmlLabel htmlFor="r1">
-            <Label size="s" color="blue500">
-              Default
-            </Label>
-          </HtmlLabel>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="comfortable" id="r2" />
-          <HtmlLabel htmlFor="r2">
-            <Label size="s" color="blue500">
-              Comfortable
-            </Label>
-          </HtmlLabel>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="compact" id="r3" />
-          <HtmlLabel htmlFor="r3">
-            <Label size="s" color="blue500">
-              Compact
-            </Label>
-          </HtmlLabel>
-        </div>
-      </RadioGroup>
+      <div>
+        <Radio>라디오버튼</Radio>
+
+        <br />
+
+        <Radio defaultChecked>라디오버튼 CHECK</Radio>
+
+        <br />
+
+        <Radio disabled>DISABLED</Radio>
+
+        <br />
+
+        <Radio disabled defaultChecked>
+          DISABLED CHECK
+        </Radio>
+      </div>
     );
   },
 };
@@ -48,14 +36,12 @@ export const Default: Story = {
 export const Style: Story = {
   render: function Style() {
     return (
-      <RadioGroup>
-        <div className="flex flex-row gap-4">
-          <RadioGroupItem value="1" id="r1" />
-          <RadioGroupItem value="2" id="r2" checked />
-          <RadioGroupItem value="3" id="r3" disabled />
-          <RadioGroupItem value="4" id="r4" checked disabled />
-        </div>
-      </RadioGroup>
+      <div className="flex flex-row gap-4">
+        <Radio value="1" id="r1" />
+        <Radio value="2" id="r2" checked />
+        <Radio value="3" id="r3" disabled />
+        <Radio value="4" id="r4" checked disabled />
+      </div>
     );
   },
 };
