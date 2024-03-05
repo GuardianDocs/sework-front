@@ -86,7 +86,7 @@ export default function DropdownButton({
               <Body
                 size="m"
                 color={option.value === selectedOption?.value ? 'blue500' : 'gray800'}
-                className="flex flex-1 whitespace-nowrap"
+                className="flex flex-1 whitespace-nowrap cursor-pointer"
               >
                 {option.label}
               </Body>
