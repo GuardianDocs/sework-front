@@ -1,8 +1,8 @@
 import { Title } from '@/components/typography';
 import { cn } from '@/lib/utils';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
-type FormItemProps = PropsWithChildren & { title: string; className?: string };
+type FormItemProps = PropsWithChildren & { title: ReactNode; className?: string };
 
 export const FormItem = ({ children, title, className }: FormItemProps) => {
   return (
