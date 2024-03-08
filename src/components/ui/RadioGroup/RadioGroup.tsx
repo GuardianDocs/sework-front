@@ -1,6 +1,6 @@
 import { Body } from '@/components/typography';
 import { cn } from '@/lib/utils';
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, useId } from 'react';
 
 export type RadioProps = {
   parentsClassNames?: string;
@@ -8,7 +8,9 @@ export type RadioProps = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ children, id, disabled, className, childrenClassName, ...props }, ref) => {
+  ({ children, disabled, className, childrenClassName, ...props }, ref) => {
+    const id = useId();
+
     return (
       <label
         htmlFor={id}

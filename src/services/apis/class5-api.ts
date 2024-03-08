@@ -36,8 +36,8 @@ import { SaveCompanyDangerSolutionExecutionRequest } from '../models';
 export const Class5ApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 조회
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 조회
+         * 안전 위험 평가 5 단계 (감소대책 수립) 조회
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 조회
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {*} [options] Override http request option.
@@ -81,8 +81,8 @@ export const Class5ApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 저장
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 저장
+         * 안전 위험 평가 5 단계 (감소대책 수립) 저장
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 저장
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {SaveCompanyDangerSolutionExecutionRequest} [saveCompanyDangerSolutionExecutionRequest] 
@@ -140,8 +140,8 @@ export const Class5ApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = Class5ApiAxiosParamCreator(configuration)
     return {
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 조회
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 조회
+         * 안전 위험 평가 5 단계 (감소대책 수립) 조회
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 조회
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {*} [options] Override http request option.
@@ -154,8 +154,8 @@ export const Class5ApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 저장
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 저장
+         * 안전 위험 평가 5 단계 (감소대책 수립) 저장
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 저장
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {SaveCompanyDangerSolutionExecutionRequest} [saveCompanyDangerSolutionExecutionRequest] 
@@ -179,8 +179,8 @@ export const Class5ApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = Class5ApiFp(configuration)
     return {
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 조회
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 조회
+         * 안전 위험 평가 5 단계 (감소대책 수립) 조회
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 조회
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {*} [options] Override http request option.
@@ -190,8 +190,8 @@ export const Class5ApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getCompanyDangerSolutionExecutionUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 안전 위험 평가 5 단계 (감소대첵 수립) 저장
-         * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 저장
+         * 안전 위험 평가 5 단계 (감소대책 수립) 저장
+         * @summary 안전 위험 평가 5 단계 (감소대책 수립) 저장
          * @param {number} assessmentId assessmentId
          * @param {number} companyProcessId companyProcessId
          * @param {SaveCompanyDangerSolutionExecutionRequest} [saveCompanyDangerSolutionExecutionRequest] 
@@ -212,8 +212,8 @@ export const Class5ApiFactory = function (configuration?: Configuration, basePat
  */
 export class Class5Api extends BaseAPI {
     /**
-     * 안전 위험 평가 5 단계 (감소대첵 수립) 조회
-     * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 조회
+     * 안전 위험 평가 5 단계 (감소대책 수립) 조회
+     * @summary 안전 위험 평가 5 단계 (감소대책 수립) 조회
      * @param {number} assessmentId assessmentId
      * @param {number} companyProcessId companyProcessId
      * @param {*} [options] Override http request option.
@@ -225,8 +225,8 @@ export class Class5Api extends BaseAPI {
     }
 
     /**
-     * 안전 위험 평가 5 단계 (감소대첵 수립) 저장
-     * @summary 안전 위험 평가 5 단계 (감소대첵 수립) 저장
+     * 안전 위험 평가 5 단계 (감소대책 수립) 저장
+     * @summary 안전 위험 평가 5 단계 (감소대책 수립) 저장
      * @param {number} assessmentId assessmentId
      * @param {number} companyProcessId companyProcessId
      * @param {SaveCompanyDangerSolutionExecutionRequest} [saveCompanyDangerSolutionExecutionRequest] 

@@ -37,6 +37,12 @@ export interface GetCompanyAssessmentProgressResponse {
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
+    'dangerSolutionExecutionStepDoneYn'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GetCompanyAssessmentProgressResponse
+     */
     'futureDangerSolutionStepDoneYn'?: boolean;
     /**
      * 

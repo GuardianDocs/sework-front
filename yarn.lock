@@ -17975,6 +17975,7 @@ __metadata:
     class-variance-authority: ^0.7.0
     clsx: ^2.0.0
     cookies-next: ^4.1.0
+    dayjs: ^1.11.10
     eslint: 8.53.0
     eslint-config-next: 13.5.6
     eslint-config-prettier: ^9.0.0
@@ -17995,6 +17996,7 @@ __metadata:
     react-textarea-autosize: ^8.5.3
     sass: ^1.69.5
     storybook: ^7.6.6
+    swr: ^2.2.5
     tailwind-merge: ^2.0.0
     tailwindcss: 3.3.3
     tailwindcss-animate: ^1.0.7
@@ -18646,6 +18648,18 @@ __metadata:
     "@swc/core": ^1.2.147
     webpack: ">=2"
   checksum: 010d84d399525c0185d36d62c86c55ae017e7a90046bc8a39be4b7e07526924037868049f6037bc966da98151cb2600934b96a66279b742d3c413a718b427251
+  languageName: node
+  linkType: hard
+
+"swr@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "swr@npm:2.2.5"
+  dependencies:
+    client-only: ^0.0.1
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: c6e6a5bd254951b22e5fd0930a95c7f79b5d0657f803c41ba1542cd6376623fb70b1895049d54ddde26da63b91951ae9d62a06772f82be28c1014d421e5b7aa9
   languageName: node
   linkType: hard
 
@@ -19612,7 +19626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:1.2.0":
+"use-sync-external-store@npm:1.2.0, use-sync-external-store@npm:^1.2.0":
   version: 1.2.0
   resolution: "use-sync-external-store@npm:1.2.0"
   peerDependencies:

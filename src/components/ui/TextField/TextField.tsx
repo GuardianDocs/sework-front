@@ -11,6 +11,7 @@ interface TextFieldProps {
   isFullWidth?: boolean;
   rightElement?: React.ReactNode;
   error?: string;
+  inputClassName?: string;
 }
 
 interface TextFieldSingleProps extends React.InputHTMLAttributes<HTMLInputElement>, TextFieldProps {}
@@ -31,7 +32,8 @@ const getCommonClassNames = (
   sizeVariant: 's' | 'm',
   isFullWidth: boolean | undefined,
   type: 'single' | 'multi' | 'trigger',
-  error?: string
+  error?: string,
+  inputClassName?: string
 ) => {
   const sizeStyle = styles[sizeVariant] || '';
   const fullWidthStyle = isFullWidth ? styles.fullWidth : '';
@@ -46,14 +48,14 @@ const getCommonClassNames = (
 
   return `${textFieldStyle} ${sizeStyle} ${fullWidthStyle} focus:ring-0 focus:ring-offset-0 ${
     error ? styles.danger : ''
-  }`;
+  } ${inputClassName}`;
 };
 
 const TextField = {
-  Single: ({ sizeVariant = 's', isFullWidth, error, rightElement, ...props }: TextFieldSingleProps) => (
+  Single: ({ sizeVariant = 's', isFullWidth, error, rightElement, inputClassName, ...props }: TextFieldSingleProps) => (
     <div className={cn(isFullWidth && 'w-full')}>
-      <div className={cn('flex gap-x-2 items-center', isFullWidth && 'w-full')}>
-        <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single', error)} {...props} />
+      <div className={cn('relative flex gap-x-2 items-center', isFullWidth && 'w-full')}>
+        <input className={getCommonClassNames(sizeVariant, isFullWidth, 'single', error, inputClassName)} {...props} />
         {rightElement}
       </div>
       {error && <ErrorDescription error={error} />}

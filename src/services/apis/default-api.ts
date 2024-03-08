@@ -30,6 +30,8 @@ import { CompanyBusinessLookUpResponse } from '../models';
 // @ts-ignore
 import { GetCompanyAdditionalInfoAnswerResponse } from '../models';
 // @ts-ignore
+import { GetCompanyAssessmentAdditionalInfoResponse } from '../models';
+// @ts-ignore
 import { GetCompanyAssessmentProgressResponse } from '../models';
 // @ts-ignore
 import { GetCompanyProcessPhotoResponse } from '../models';
@@ -53,6 +55,8 @@ import { ResponseResultAssessmentStartResponse } from '../models';
 import { ResponseResultCompanyBusinessLookUpResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyAdditionalInfoAnswerResponse } from '../models';
+// @ts-ignore
+import { ResponseResultGetCompanyAssessmentAdditionalInfoResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyAssessmentProgressResponse } from '../models';
 // @ts-ignore
@@ -227,6 +231,44 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         getAdditionalInfoAnswerUsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/assessment/v1/company/additional-info/answer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 사전 정보 조회
+         * @summary 안전 위험 평가 사전 정보 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyAssessmentAdditionalInfoUsingGET: async (assessmentId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getCompanyAssessmentAdditionalInfoUsingGET', 'assessmentId', assessmentId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/info`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -699,7 +741,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         saveAssessmentBasicInfoUsingPOST: async (assessmentId: number, registerCompanyAssessmentAdditionalInfoRequest?: RegisterCompanyAssessmentAdditionalInfoRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assessmentId' is not null or undefined
             assertParamExists('saveAssessmentBasicInfoUsingPOST', 'assessmentId', assessmentId)
-            const localVarPath = `/api/assessment/v1/company/{assessmentId}`
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/info`
                 .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1037,6 +1079,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
+         * 안전 위험 평가 사전 정보 조회
+         * @summary 안전 위험 평가 사전 정보 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAssessmentAdditionalInfoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyAssessmentAdditionalInfoUsingGET(assessmentId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getCompanyAssessmentAdditionalInfoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 안전 위험 평가 진행 상태 조회 (상단 단계 바)
          * @summary 안전 위험 평가 진행 상태 조회 (상단 단계 바)
          * @param {number} assessmentId assessmentId
@@ -1320,6 +1375,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAdditionalInfoAnswerUsingGET(options).then((request) => request(axios, basePath));
         },
         /**
+         * 안전 위험 평가 사전 정보 조회
+         * @summary 안전 위험 평가 사전 정보 조회
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyAssessmentAdditionalInfoResponse> {
+            return localVarFp.getCompanyAssessmentAdditionalInfoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 안전 위험 평가 진행 상태 조회 (상단 단계 바)
          * @summary 안전 위험 평가 진행 상태 조회 (상단 단계 바)
          * @param {number} assessmentId assessmentId
@@ -1557,6 +1622,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getAdditionalInfoAnswerUsingGET(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getAdditionalInfoAnswerUsingGET(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 사전 정보 조회
+     * @summary 안전 위험 평가 사전 정보 조회
+     * @param {number} assessmentId assessmentId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getCompanyAssessmentAdditionalInfoUsingGET(assessmentId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

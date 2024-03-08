@@ -1,50 +1,59 @@
 'use client';
-import { RegisterCompanyAssessmentAdditionalInfoRequest } from '@/services';
+import { AccidentAndWorkerInfoType, AssessmentInfoType, CompanyInfoType, ManagerStructureType } from '../validations';
+import { useFunnel } from '@/hooks';
+import { STEP, StepType } from '../constants';
 import { useState } from 'react';
-import { FieldErrors } from 'react-hook-form';
 
-export const useReportStep = (
-  values: RegisterCompanyAssessmentAdditionalInfoRequest,
-  errors: FieldErrors<RegisterCompanyAssessmentAdditionalInfoRequest>
-) => {
-  const [step, setStep] = useState(1);
+type NewReportData = {
+  assessmentInfo?: AssessmentInfoType;
+  accidentAndWorkerInfo?: AccidentAndWorkerInfoType;
+  managerStructure?: ManagerStructureType;
+  companyInfo?: CompanyInfoType;
+};
 
-  const nextStep = () => {
-    setStep(prev => prev + 1);
+export const useNewReportData = () => {
+  const [newReportData, setNewReportData] = useState<NewReportData>();
+  const { Funnel, Step, currentStep, setStep } = useFunnel<StepType>('assessmentInfo');
+
+  const assessmentInfoNextStep = (assessmentInfo: AssessmentInfoType) => {
+    setNewReportData(prev => ({ ...prev, assessmentInfo }));
+    setStep('accidentAndWorkerInfo');
   };
 
-  const prevStep = () => {
-    setStep(prev => prev - 1);
+  const accidentAndWorkerInfoNextStep = (accidentAndWorkerInfo: AccidentAndWorkerInfoType) => {
+    setNewReportData(prev => ({ ...prev, accidentAndWorkerInfo }));
+    setStep('managerStructure');
   };
 
-  const isFirstStep = step === 1;
+  const managerStructureNextStep = (managerStructure: ManagerStructureType) => {
+    setNewReportData(prev => ({ ...prev, managerStructure }));
+    setStep('companyInfo');
+  };
 
-  const isLastStep = step === 4;
+  const companyInfoNextStep = (companyInfo: CompanyInfoType) => {
+    setNewReportData(prev => ({ ...prev, companyInfo }));
+    console.log('done', newReportData);
+  };
 
-  const isPassibleToNextStep = (() => {
-    if (step === 1) {
-      return (
-        !!(values?.title && values?.type && values?.startAt && values?.endAt && values?.sectorId) &&
-        !errors.title &&
-        !errors.type &&
-        !errors.startAt &&
-        !errors.endAt &&
-        !errors.sectorId
-      );
-    }
+  const nextStep = {
+    assessmentInfo: assessmentInfoNextStep,
+    accidentAndWorkerInfo: accidentAndWorkerInfoNextStep,
+    managerStructure: managerStructureNextStep,
+    companyInfo: companyInfoNextStep,
+  };
 
-    if (step === 2) {
-      // return values.accidentAndWorkerInfo?.accidentType && values.accidentAndWorkerInfo?.accidentDate;
-    }
+  const preventStep = () => {
+    const currentStepIndex = STEP.findIndex(s => s === currentStep);
+    if (currentStepIndex === 0) return;
+    setStep(STEP[currentStepIndex - 1]);
+  };
 
-    if (step === 3) {
-      // return values.accidentAndWorkerInfo?.accidentType && values.accidentAndWorkerInfo?.accidentDate;
-    }
-
-    if (step === 4) {
-      // return values.accidentAndWorkerInfo?.accidentType && values.accidentAndWorkerInfo?.accidentDate;
-    }
-  })();
-
-  return { step, nextStep, prevStep, isFirstStep, isLastStep, isPassibleToNextStep };
+  return {
+    newReportData,
+    Funnel,
+    Step,
+    currentStep,
+    nextStep,
+    preventStep,
+  };
 };

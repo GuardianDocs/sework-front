@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { AssessmentAdditionalInfoReq } from './assessment-additional-info-req';
+import { AssessmentAdditionalInfoRes } from './assessment-additional-info-res';
 // May contain unused imports in some cases
 // @ts-ignore
 import { CompanyRoleStructure } from './company-role-structure';
@@ -23,142 +23,148 @@ import { CompanyRoleStructure } from './company-role-structure';
 /**
  * 
  * @export
- * @interface RegisterCompanyAssessmentAdditionalInfoRequest
+ * @interface GetCompanyAssessmentAdditionalInfoResponse
  */
-export interface RegisterCompanyAssessmentAdditionalInfoRequest {
+export interface GetCompanyAssessmentAdditionalInfoResponse {
     /**
      * 
-     * @type {AssessmentAdditionalInfoReq}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @type {AssessmentAdditionalInfoRes}
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'additionalInfo'?: AssessmentAdditionalInfoReq;
+    'additionalInfo'?: AssessmentAdditionalInfoRes;
+    /**
+     * 
+     * @type {number}
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
+     */
+    'assessmentId'?: number;
     /**
      * 사내 협력업체 수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'associatedInternalCorpCount'?: number;
     /**
      * 사내 협력업체 근로자 수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'associatedInternalCorpEmployeeCount'?: number;
     /**
      * 대표근로자
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'chiefWorker'?: string;
     /**
-     * 대표근로자 소속 부서 
+     * 대표근로자 소속 부서
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'chiefWorkerDepartment'?: string;
     /**
      * 
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'employeeNumber'?: number;
     /**
      * 평가 종료 기준일
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'endAt'?: string;
     /**
      * 1년 전 재해 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'lastYearAccidentCount'?: number;
     /**
      * 1년 전 아차 사고 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'lastYearNearAccidentCount'?: number;
     /**
      * 사업주
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'ownerName'?: string;
     /**
      * 
      * @type {CompanyRoleStructure}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'roleStructure'?: CompanyRoleStructure;
     /**
      * 업종 id
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'sectorId': number;
     /**
      * 평가 시작 기준일
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'startAt'?: string;
     /**
      * 관리감독자
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'supervisor'?: string;
     /**
      * 관리감독자 소속 부서
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'supervisorDepartment'?: string;
     /**
      * 3년 전 재해 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'threeYearsAgoAccidentCount'?: number;
     /**
      * 3년 전 아차 사고 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'threeYearsAgoNearAccidentCount'?: number;
     /**
      * 
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'title'?: string;
     /**
      * 2년 전 재해 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'twoYearsAgoAccidentCount'?: number;
     /**
      * 2년 전 아차 사고 발생 건수
      * @type {number}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'twoYearsAgoNearAccidentCount'?: number;
     /**
      * 보고서 종류
      * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
+     * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'type'?: RegisterCompanyAssessmentAdditionalInfoRequestTypeEnum;
+    'type'?: GetCompanyAssessmentAdditionalInfoResponseTypeEnum;
 }
 
 /**
     * @export
     * @enum {string}
     */
-export enum RegisterCompanyAssessmentAdditionalInfoRequestTypeEnum {
+export enum GetCompanyAssessmentAdditionalInfoResponseTypeEnum {
     Continuous = 'CONTINUOUS',
     Initial = 'INITIAL',
     Regular = 'REGULAR'

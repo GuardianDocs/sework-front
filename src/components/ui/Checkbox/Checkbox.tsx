@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes, InputHTMLAttributes, forwardRef } from 'react';
+import { HTMLAttributes, InputHTMLAttributes, forwardRef, useId } from 'react';
 import Icon from '../Icon/Icon';
 import { Body } from '@/components/typography';
 
@@ -7,7 +7,9 @@ export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' |
   Pick<HTMLAttributes<HTMLDivElement>, 'onMouseEnter' | 'onMouseLeave'>;
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ children, id, disabled, className, onMouseEnter, onMouseLeave, ...props }, ref) => {
+  ({ children, disabled, className, onMouseEnter, onMouseLeave, ...props }, ref) => {
+    const id = useId();
+
     return (
       <label
         htmlFor={id}

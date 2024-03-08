@@ -15,7 +15,8 @@ configuration.ts
 git_push.sh
 index.ts
 models/additional-company-account-info-request.ts
-models/assessment-additional-info.ts
+models/assessment-additional-info-req.ts
+models/assessment-additional-info-res.ts
 models/assessment-start-response.ts
 models/company-business-look-up-response.ts
 models/company-danger-factor-after-risk-dto.ts
@@ -36,7 +37,10 @@ models/company-danger-solution-vores.ts
 models/company-process-photo-dto.ts
 models/company-process-title-vo.ts
 models/company-process-vo.ts
+models/company-role-structure.ts
+models/company-worker.ts
 models/get-company-additional-info-answer-response.ts
+models/get-company-assessment-additional-info-response.ts
 models/get-company-assessment-progress-response.ts
 models/get-company-assessment-report-response.ts
 models/get-company-danger-factor-and-solution-response.ts
@@ -63,6 +67,7 @@ models/register-company-assessment-additional-info-request.ts
 models/response-result-assessment-start-response.ts
 models/response-result-company-business-look-up-response.ts
 models/response-result-get-company-additional-info-answer-response.ts
+models/response-result-get-company-assessment-additional-info-response.ts
 models/response-result-get-company-assessment-progress-response.ts
 models/response-result-get-company-assessment-report-response.ts
 models/response-result-get-company-danger-factor-and-solution-response.ts

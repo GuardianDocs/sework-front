@@ -6,9 +6,8 @@ import Icon from '@/components/ui/Icon/Icon';
 import TextField from '@/components/ui/TextField/TextField';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from '@/components/ui/Dialog/Dialog';
 import style from './page.module.scss';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/RadioGroup/RadioGroup';
-import { Label as HtmlLabel } from '@/components/ui/Label/Label';
 import { useRouter } from 'next/navigation';
+import { Radio } from '@/components/ui/RadioGroup/RadioGroup';
 
 export default function Prepare1Page() {
   const router = useRouter();
@@ -87,16 +86,7 @@ export default function Prepare1Page() {
                     >
                       {/* 컨데이너 */}
                       <div className="flex flex-col items-start flex-grow gap-4">
-                        <RadioGroup className="flex flex-col items-start gap-[10px] self-stretch">
-                          <div className="flex items-start gap-3">
-                            <RadioGroupItem value="default" id="r1" />
-                            <HtmlLabel htmlFor="r1">
-                              <Label size="s">
-                                <div className="text-gray-800 hover:text-blue-500">Default</div>
-                              </Label>
-                            </HtmlLabel>
-                          </div>
-                        </RadioGroup>
+                        <Radio className="flex flex-col items-start gap-[10px] self-stretch">Default</Radio>
                       </div>
                     </div>
                   </div>

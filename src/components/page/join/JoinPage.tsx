@@ -178,7 +178,7 @@ export default function JoinPage() {
             <div className="flex flex-col items-start self-stretch gap-4">
               {/* 모두 동의합니다. */}
               <div className="flex items-center gap-3">
-                <Checkbox id="all-agree" checked={allAgree} onCheckedChange={handleAllAgreeChange} />
+                <Checkbox id="all-agree" checked={allAgree} onChange={handleAllAgreeChange} />
                 <label htmlFor="all-agree">
                   <Body size="m" color="gray800">
                     모두 동의합니다.
@@ -190,7 +190,7 @@ export default function JoinPage() {
               {/* 4개 항목 */}
               <div className="flex flex-col items-start gap-3">
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-1" checked={agree1} onCheckedChange={handleAgree1Change} />
+                  <Checkbox id="agree-1" checked={agree1} onChange={handleAgree1Change} />
                   <label htmlFor="agree-1">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -206,7 +206,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-2" checked={agree2} onCheckedChange={handleAgree2Change} />
+                  <Checkbox id="agree-2" checked={agree2} onChange={handleAgree2Change} />
                   <label htmlFor="agree-2">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -222,7 +222,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-3" checked={agree3} onCheckedChange={handleAgree3Change} />
+                  <Checkbox id="agree-3" checked={agree3} onChange={handleAgree3Change} />
                   <label htmlFor="agree-3">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="blue500">
@@ -238,7 +238,7 @@ export default function JoinPage() {
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="agree-4" checked={agree4} onCheckedChange={handleAgree4Change} />
+                  <Checkbox id="agree-4" checked={agree4} onChange={handleAgree4Change} />
                   <label htmlFor="agree-4">
                     <div className="flex flex-start gap-0.5">
                       <Body size="m" color="gray600">

@@ -1,21 +1,31 @@
-export const NEW_REPORT_STEP = [
+export const STEP = ['assessmentInfo', 'accidentAndWorkerInfo', 'managerStructure', 'companyInfo'] as const;
+
+export type StepType = (typeof STEP)[number];
+
+type NewReportStepType = {
+  step: StepType;
+  title: string;
+  description: string;
+};
+
+export const NEW_REPORT_STEP: NewReportStepType[] = [
   {
-    step: 1,
+    step: 'assessmentInfo',
     title: '평가 관련 정보를 알려주세요',
     description: '설문을 통해 보다 정확한 보고서를 출력해드릴 수 있습니다.',
   },
   {
-    step: 2,
+    step: 'accidentAndWorkerInfo',
     title: '사고 및 근로자 관련 정보를 알려주세요',
     description: '설문을 통해 보다 정확한 보고서를 출력해드릴 수 있습니다.',
   },
   {
-    step: 3,
+    step: 'managerStructure',
     title: '안전보건체계의 담당자를 입력해주세요',
     description: '설문을 통해 보다 정확한 보고서를 출력해드릴 수 있습니다.',
   },
   {
-    step: 4,
+    step: 'companyInfo',
     title: '귀하의 회사에 대해서 알려주세요',
     description: '설문을 통해 보다 정확한 보고서를 출력해드릴 수 있습니다.',
   },
