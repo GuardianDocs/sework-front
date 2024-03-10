@@ -98,6 +98,44 @@ import { UploadCompanyProcessPhotoResponse } from '../models';
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * 안전 위험 평가 삭제
+         * @summary 안전 위험 평가 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyAssessmentUsingDELETE: async (assessmentId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('deleteCompanyAssessmentUsingDELETE', 'assessmentId', assessmentId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 유해위험요인 사진 삭제
          * @summary 유해위험요인 사진 삭제
          * @param {number} assessmentId assessmentId
@@ -1025,6 +1063,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
     return {
         /**
+         * 안전 위험 평가 삭제
+         * @summary 안전 위험 평가 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCompanyAssessmentUsingDELETE(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyAssessmentUsingDELETE(assessmentId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.deleteCompanyAssessmentUsingDELETE']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
          * 유해위험요인 사진 삭제
          * @summary 유해위험요인 사진 삭제
          * @param {number} assessmentId assessmentId
@@ -1333,6 +1384,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = DefaultApiFp(configuration)
     return {
         /**
+         * 안전 위험 평가 삭제
+         * @summary 안전 위험 평가 삭제
+         * @param {number} assessmentId assessmentId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCompanyAssessmentUsingDELETE(assessmentId: number, options?: any): AxiosPromise<ResponseResult> {
+            return localVarFp.deleteCompanyAssessmentUsingDELETE(assessmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 유해위험요인 사진 삭제
          * @summary 유해위험요인 사진 삭제
          * @param {number} assessmentId assessmentId
@@ -1574,6 +1635,18 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class DefaultApi extends BaseAPI {
+    /**
+     * 안전 위험 평가 삭제
+     * @summary 안전 위험 평가 삭제
+     * @param {number} assessmentId assessmentId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteCompanyAssessmentUsingDELETE(assessmentId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).deleteCompanyAssessmentUsingDELETE(assessmentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 유해위험요인 사진 삭제
      * @summary 유해위험요인 사진 삭제

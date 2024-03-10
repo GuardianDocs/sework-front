@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { CompanyDangerReportDto } from './company-danger-report-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import { SectorVO } from './sector-vo';
 
 /**
  * 
@@ -67,10 +70,10 @@ export interface GetCompanyAssessmentReportResponse {
     'lastUpdatedAt'?: string;
     /**
      * 
-     * @type {string}
+     * @type {SectorVO}
      * @memberof GetCompanyAssessmentReportResponse
      */
-    'sector'?: string;
+    'sector'?: SectorVO;
     /**
      * 
      * @type {string}

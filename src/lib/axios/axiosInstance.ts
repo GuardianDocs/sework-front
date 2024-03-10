@@ -61,7 +61,7 @@ service.interceptors.response.use(
     return newResponse;
   },
   error => {
-    console.error(error); // for debug
+    console.error('er1111r' + error); // for debug
     return Promise.reject(error);
   }
 );

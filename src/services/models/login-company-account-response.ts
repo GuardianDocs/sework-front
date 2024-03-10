@@ -50,5 +50,26 @@ export interface LoginCompanyAccountResponse {
      * @memberof LoginCompanyAccountResponse
      */
     'requireAdditionalInfoYn': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginCompanyAccountResponse
+     */
+    'supervisorJobPosition'?: LoginCompanyAccountResponseSupervisorJobPositionEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginCompanyAccountResponse
+     */
+    'supervisorName'?: string;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum LoginCompanyAccountResponseSupervisorJobPositionEnum {
+    Worker = 'WORKER'
+}
+
 

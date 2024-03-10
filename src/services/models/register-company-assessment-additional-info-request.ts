@@ -45,18 +45,6 @@ export interface RegisterCompanyAssessmentAdditionalInfoRequest {
      */
     'associatedInternalCorpEmployeeCount'?: number;
     /**
-     * 대표근로자
-     * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
-     */
-    'chiefWorker'?: string;
-    /**
-     * 대표근로자 소속 부서 
-     * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
-     */
-    'chiefWorkerDepartment'?: string;
-    /**
      * 
      * @type {number}
      * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
@@ -81,12 +69,6 @@ export interface RegisterCompanyAssessmentAdditionalInfoRequest {
      */
     'lastYearNearAccidentCount'?: number;
     /**
-     * 사업주
-     * @type {string}
-     * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
-     */
-    'ownerName'?: string;
-    /**
      * 
      * @type {CompanyRoleStructure}
      * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
@@ -105,17 +87,17 @@ export interface RegisterCompanyAssessmentAdditionalInfoRequest {
      */
     'startAt'?: string;
     /**
-     * 관리감독자
+     * 담당자
      * @type {string}
      * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
      */
     'supervisor'?: string;
     /**
-     * 관리감독자 소속 부서
+     * 담당자 직책
      * @type {string}
      * @memberof RegisterCompanyAssessmentAdditionalInfoRequest
      */
-    'supervisorDepartment'?: string;
+    'supervisorPosition'?: RegisterCompanyAssessmentAdditionalInfoRequestSupervisorPositionEnum;
     /**
      * 3년 전 재해 발생 건수
      * @type {number}
@@ -154,6 +136,13 @@ export interface RegisterCompanyAssessmentAdditionalInfoRequest {
     'type'?: RegisterCompanyAssessmentAdditionalInfoRequestTypeEnum;
 }
 
+/**
+    * @export
+    * @enum {string}
+    */
+export enum RegisterCompanyAssessmentAdditionalInfoRequestSupervisorPositionEnum {
+    Worker = 'WORKER'
+}
 /**
     * @export
     * @enum {string}

@@ -39,8 +39,6 @@ export const AssessmentInfo = ({ data, nextStep }: AssessmentInfoProps) => {
 
   const [startAt, endAt] = watch(['startAt', 'endAt' as const]);
 
-  console.log(startAt, endAt);
-
   const handleChangeDate = ([startAt, endAt]: [string, string]) => {
     setValue('startAt', startAt, { shouldValidate: true, shouldDirty: true });
     setValue('endAt', endAt, { shouldValidate: true, shouldDirty: true });

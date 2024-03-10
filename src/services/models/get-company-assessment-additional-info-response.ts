@@ -19,6 +19,9 @@ import { AssessmentAdditionalInfoRes } from './assessment-additional-info-res';
 // May contain unused imports in some cases
 // @ts-ignore
 import { CompanyRoleStructure } from './company-role-structure';
+// May contain unused imports in some cases
+// @ts-ignore
+import { SectorVO } from './sector-vo';
 
 /**
  * 
@@ -51,18 +54,6 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
      */
     'associatedInternalCorpEmployeeCount'?: number;
     /**
-     * 대표근로자
-     * @type {string}
-     * @memberof GetCompanyAssessmentAdditionalInfoResponse
-     */
-    'chiefWorker'?: string;
-    /**
-     * 대표근로자 소속 부서
-     * @type {string}
-     * @memberof GetCompanyAssessmentAdditionalInfoResponse
-     */
-    'chiefWorkerDepartment'?: string;
-    /**
      * 
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
@@ -87,23 +78,17 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
      */
     'lastYearNearAccidentCount'?: number;
     /**
-     * 사업주
-     * @type {string}
-     * @memberof GetCompanyAssessmentAdditionalInfoResponse
-     */
-    'ownerName'?: string;
-    /**
      * 
      * @type {CompanyRoleStructure}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'roleStructure'?: CompanyRoleStructure;
     /**
-     * 업종 id
-     * @type {number}
+     * 
+     * @type {SectorVO}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'sectorId': number;
+    'sector': SectorVO;
     /**
      * 평가 시작 기준일
      * @type {string}
@@ -111,17 +96,17 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
      */
     'startAt'?: string;
     /**
-     * 관리감독자
+     * 담당자
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
     'supervisor'?: string;
     /**
-     * 관리감독자 소속 부서
+     * 담당자 직책
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'supervisorDepartment'?: string;
+    'supervisorPosition'?: GetCompanyAssessmentAdditionalInfoResponseSupervisorPositionEnum;
     /**
      * 3년 전 재해 발생 건수
      * @type {number}
@@ -160,6 +145,13 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
     'type'?: GetCompanyAssessmentAdditionalInfoResponseTypeEnum;
 }
 
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GetCompanyAssessmentAdditionalInfoResponseSupervisorPositionEnum {
+    Worker = 'WORKER'
+}
 /**
     * @export
     * @enum {string}

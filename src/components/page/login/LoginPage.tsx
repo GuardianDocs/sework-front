@@ -69,7 +69,7 @@ export default function LoginPage() {
       //TODO: 당분간 필요
       localStorage.clear();
 
-      if (data.requireAdditionalInfoYn) router.push('/landing/basic-info');
+      if (data.requireAdditionalInfoYn) router.push('/advance-information');
       else router.push('/');
     } else {
       alert('로그인 실패');
