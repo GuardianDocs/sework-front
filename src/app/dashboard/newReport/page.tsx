@@ -22,7 +22,11 @@ const Page = () => {
           />
         </Step>
         <Step name="managerStructure">
-          <ManagerStructure />
+          <ManagerStructure
+            data={newReportData?.managerStructure}
+            nextStep={nextStep['managerStructure']}
+            preventStep={preventStep}
+          />
         </Step>
         <Step name="companyInfo">
           <CompanyInfo />

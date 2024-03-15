@@ -47,7 +47,11 @@
 
   &:disabled {
     svg {
-      fill: var(--gray-300);
+      color: var(--gray-300);
+    }
+
+    &:hover {
+      cursor: not-allowed;
     }
   }
 
@@ -58,13 +62,13 @@
 
     &:hover {
       svg {
-        fill: var(--gray-600);
+        color: var(--gray-600);
       }
     }
 
     &:disabled {
       svg {
-        fill: var(--gray-300);
+        color: var(--gray-300);
       }
     }
   }

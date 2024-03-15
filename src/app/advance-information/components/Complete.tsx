@@ -22,7 +22,7 @@ export const Complete = () => {
       </div>
       <div className="flex-col-center gap-y-4 w-[792px]">
         <Link
-          href="/dashboard"
+          href="/dashboard/newReport"
           className={cn(
             'border w-full p-8 rounded-xl bg-blue-500 flex gap-x-6 items-center transition-all ease-out duration-100 text-start',
             'hover:-translate-y-1 hover:shadow-[0_8px_24px_0px_rgba(0,0,0,0.3)]'

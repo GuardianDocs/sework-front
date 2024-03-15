@@ -6,6 +6,7 @@ import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
 import Icon from '@/components/ui/Icon/Icon';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -30,7 +31,9 @@ export default function Page() {
     <div className="pt-12 w-full flex justify-center">
       <div className="flex-col-center gap-y-12 w-[712px]">
         <div className="flex-col-center gap-y-3">
-          <Image src={report} width={72} height={72} alt="report" />
+          <Link href="/">
+            <Image src={report} width={72} height={72} alt="report" />
+          </Link>
           <div className="flex-col-center gap-y-1 text-center">
             <Headline color="gray800" size="s">
               확인할 평가 버전을 선택해주세요

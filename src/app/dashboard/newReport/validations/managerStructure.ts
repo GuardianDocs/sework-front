@@ -1,27 +1,31 @@
 import { CompanyRoleStructure, CompanyWorker } from '@/services';
-import { ZodObject, z } from 'zod';
+import { z } from 'zod';
 
 type CompanyWorkerKey = keyof CompanyWorker;
 
-const companyWorkerValidationSchema: ZodObject<Record<CompanyWorkerKey, z.ZodTypeAny>> = z.object({
+const companyWorkerValidationObject: Record<CompanyWorkerKey, z.ZodTypeAny> = {
   department: z.string(),
   name: z.string(),
   role: z.string(),
-});
+};
+
+const companyWorkerValidationSchema = z.object(companyWorkerValidationObject);
 
 type CompanyRoleStructureKey = keyof CompanyRoleStructure;
 
-const roleStructureValidationSchema: ZodObject<Record<CompanyRoleStructureKey, z.ZodTypeAny>> = z.object({
-  coordinateOfficer: companyWorkerValidationSchema.array(),
-  headOfficer: companyWorkerValidationSchema.array(),
-  healthManager: companyWorkerValidationSchema.array(),
-  industrialHealthOfficer: companyWorkerValidationSchema.array(),
+const roleStructureValidationObject: Record<CompanyRoleStructureKey, z.ZodTypeAny> = {
   owners: companyWorkerValidationSchema.array(),
-  safetyHealthManager: companyWorkerValidationSchema.array(),
+  headOfficer: companyWorkerValidationSchema.array().optional(),
+  safetyOfficer: companyWorkerValidationSchema.array().optional(),
+  coordinateOfficer: companyWorkerValidationSchema.array().optional(),
+  supervisor: companyWorkerValidationSchema.array().optional(),
   safetyManager: companyWorkerValidationSchema.array(),
-  safetyOfficer: companyWorkerValidationSchema.array(),
-  supervisor: companyWorkerValidationSchema.array(),
-});
+  healthManager: companyWorkerValidationSchema.array().optional(),
+  industrialHealthOfficer: companyWorkerValidationSchema.array(),
+  safetyHealthManager: companyWorkerValidationSchema.array(),
+};
+
+const roleStructureValidationSchema = z.object(roleStructureValidationObject);
 
 export type ManagerStructureType = {
   roloStructure: CompanyRoleStructure;

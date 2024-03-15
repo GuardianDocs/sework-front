@@ -9,13 +9,16 @@
   & > tr {
     border-top: 1px solid #e2e2e2;
     border-bottom: 1px solid #e2e2e2;
-    background: var(--gray-50, #f8f9fa);
 
     & > th {
       @include label.label-m;
       text-align: left;
       white-space: nowrap;
       color: var(--gray-600, #666d7b);
+    }
+
+    & > td {
+      background: var(--gray-50, #f8f9fa);
     }
   }
 }
