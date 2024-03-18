@@ -6,5 +6,5 @@ const fetcher = async ([, , assessmentId]: [string, string, number]) => {
 };
 
 export const useGetAssessment = (assessmentId: number) => {
-  return useSWR(['GET', '/api/assessment/v1/company/assessment/additional-info', assessmentId], fetcher);
+  return useSWR(['GET', '/api/assessment/v1/company/{assessmentId}', assessmentId], fetcher);
 };

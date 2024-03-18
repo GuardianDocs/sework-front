@@ -4,21 +4,21 @@ import report from '@/assets/images/report.svg';
 import { Headline, Label } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
-import Icon from '@/components/ui/Icon/Icon';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useMutateAssessmentStart } from '../../hooks/useMutateAssessmentStart';
+import { AssessmentList } from './components/AssessmentList';
 
-type ReportType = 'new-assessment' | string | null;
+export type ReportType = 'new-assessment' | number | null;
 
 export default function Page() {
   const router = useRouter();
   const [selectedAssessment, setSelectedAssessment] = useState<ReportType>(null);
   const { trigger } = useMutateAssessmentStart();
 
-  const handleCardClick = (report: ReportType) => {
+  const handleCardClick = (report: ReportType = 0) => {
     setSelectedAssessment(report);
   };
 
@@ -63,27 +63,7 @@ export default function Page() {
             }}
           />
           <div className="border-t border-gray-200" />
-          <div className="flex flex-col w-full gap-y-3">
-            <CardButton
-              title="version 1 (2023-02-18)"
-              subContents="최초평가 | 김담당 선임 | A업종 ..."
-              updatedAt="최종 수정 2024.02.23 오후 1:24"
-            />
-            <CardButton
-              title="version 1 (2023-02-18)"
-              subContents="최초평가 | 김담당 선임 | A업종 ..."
-              updatedAt="최종 수정 2024.02.23 오후 1:24"
-            />
-            <ActionButton
-              className="self-end"
-              icon={<Icon icon="edit" className="w-5 h-5" />}
-              showIcon="left"
-              variant="tonal-gray"
-              size="s"
-            >
-              평가 편집하기
-            </ActionButton>
-          </div>
+          <AssessmentList selectedAssessment={selectedAssessment} onClickAssessment={handleCardClick} />
         </div>
         <ActionButton variant="filled" size="l" disabled={!selectedAssessment} onClick={handleSelectReport}>
           선택 완료
