@@ -1,9 +1,9 @@
 import { Headline, Label } from '@/components/typography';
 import { NEW_REPORT_STEP, StepType } from '../constants';
 
-type NewReportHeaderProps = { step: StepType };
+type NewAssessmentHeaderProps = { step: StepType };
 
-export const NewReportHeader = ({ step }: NewReportHeaderProps) => {
+export const NewAssessmentHeader = ({ step }: NewAssessmentHeaderProps) => {
   const stepHeader = NEW_REPORT_STEP.find(item => item.step === step);
   return (
     <div className="flex-col-center gap-y-4">

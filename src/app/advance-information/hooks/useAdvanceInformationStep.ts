@@ -11,7 +11,7 @@ type AdvanceInformationData = AdditionalCompanyAccountInfoRequest;
 export const useAdvanceInformationStep = () => {
   const { trigger, isMutating } = useMutateCompayAdditionalInfo();
   const [advanceInformation, setAdvanceInformation] = useState<AdvanceInformationData>();
-  const { Funnel, Step, currentStep, setStep } = useFunnel<StepType>('basic');
+  const { Funnel, Step, currentStep, setStep } = useFunnel<StepType>('complete');
 
   const basicInformationNextStep = (basicInformation: BasicInfoType) => {
     setAdvanceInformation(prev => ({ ...prev, ...basicInformation }));

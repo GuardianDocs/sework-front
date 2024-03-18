@@ -9,22 +9,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useMutateAssessmentStart } from '../../hooks/useMutateAssessmentStart';
 
-type ReportType = 'newReport' | string | null;
+type ReportType = 'new-assessment' | string | null;
 
 export default function Page() {
   const router = useRouter();
-  const [selectedReport, setSelectedReport] = useState<ReportType>(null);
+  const [selectedAssessment, setSelectedAssessment] = useState<ReportType>(null);
+  const { trigger } = useMutateAssessmentStart();
 
   const handleCardClick = (report: ReportType) => {
-    console.log(report);
-    setSelectedReport(report);
+    setSelectedAssessment(report);
   };
 
-  const handleSelectReport = () => {
-    if (selectedReport) {
-      router.push(`/dashboard/${selectedReport}`);
+  const handleSelectReport = async () => {
+    if (!selectedAssessment) return;
+
+    if (selectedAssessment === 'new-assessment') {
+      const response = await trigger();
+
+      if (response) {
+        router.push(`/dashboard/${response.assessmentId}`);
+        return;
+      }
     }
+
+    router.push(`/dashboard/${selectedAssessment}`);
   };
 
   return (
@@ -47,9 +57,9 @@ export default function Page() {
           <CardButton
             title="새로운 평가 만들기"
             icon="lineAdd"
-            actived={selectedReport === 'newReport'}
+            actived={selectedAssessment === 'new-assessment'}
             onClick={() => {
-              handleCardClick('newReport');
+              handleCardClick('new-assessment');
             }}
           />
           <div className="border-t border-gray-200" />
@@ -75,7 +85,7 @@ export default function Page() {
             </ActionButton>
           </div>
         </div>
-        <ActionButton variant="filled" size="l" disabled={!selectedReport} onClick={handleSelectReport}>
+        <ActionButton variant="filled" size="l" disabled={!selectedAssessment} onClick={handleSelectReport}>
           선택 완료
         </ActionButton>
       </div>

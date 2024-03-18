@@ -1,6 +1,6 @@
 'use client';
 // import { DefaultApi } from '@/lib/axios/oas-axios';
-import { NewReportHeader } from './components/NewReportHeader';
+import { NewAssessmentHeader } from './components/NewAssessmentHeader';
 import { AccidentAndWorkerInfo, CompanyInfo, ManagerStructure, AssessmentInfo } from './components/section';
 import { useNewReportData } from './hooks/useReportStep';
 
@@ -9,7 +9,7 @@ const Page = () => {
 
   return (
     <div className="flex-col-center gap-y-12 w-full">
-      <NewReportHeader step={currentStep} />
+      <NewAssessmentHeader step={currentStep} />
       <Funnel>
         <Step name="assessmentInfo">
           <AssessmentInfo data={newReportData?.assessmentInfo} nextStep={nextStep['assessmentInfo']} />
