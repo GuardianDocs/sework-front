@@ -6,7 +6,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
     <main className="flex h-[100vh]">
       <Sidebar />
       <div className="flex-1 self-stretch px-10 overflow-auto">
-        <div className="pb-[60px]">{children}</div>
+        <div className="pb-[60px] h-full">{children}</div>
       </div>
     </main>
   );

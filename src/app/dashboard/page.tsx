@@ -2,7 +2,6 @@
 
 import report from '@/assets/images/report.svg';
 import { Headline, Label } from '@/components/typography';
-import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,22 +23,22 @@ export default function Page() {
 
   const handleSelectReport = async () => {
     if (!selectedAssessment) return;
+    let assessmentId = selectedAssessment;
 
     if (selectedAssessment === 'new-assessment') {
       const response = await trigger();
 
       if (response) {
-        router.push(`/dashboard/${response.assessmentId}`);
-        return;
+        assessmentId = response.assessmentId || 0;
       }
     }
 
-    router.push(`/dashboard/${selectedAssessment}`);
+    router.push(`/dashboard/${assessmentId}`);
   };
 
   return (
-    <div className="pt-12 w-full flex justify-center">
-      <div className="flex-col-center gap-y-12 w-[712px]">
+    <div className="pt-12 w-full flex justify-center h-full">
+      <div className="flex-col flex gap-y-12 w-[712px]">
         <div className="flex-col-center gap-y-3">
           <Link href="/">
             <Image src={report} width={72} height={72} alt="report" />
@@ -53,7 +52,9 @@ export default function Page() {
             </Label>
           </div>
         </div>
-        <div className="flex flex-col w-full gap-y-6">
+        <div className="flex flex-col w-full gap-y-6 h-full overflow-auto">
+          <AssessmentList selectedAssessment={selectedAssessment} onClickAssessment={handleCardClick} />
+          <div className="border-t border-gray-200" />
           <CardButton
             title="새로운 평가 만들기"
             icon="lineAdd"
@@ -62,12 +63,7 @@ export default function Page() {
               handleCardClick('new-assessment');
             }}
           />
-          <div className="border-t border-gray-200" />
-          <AssessmentList selectedAssessment={selectedAssessment} onClickAssessment={handleCardClick} />
         </div>
-        <ActionButton variant="filled" size="l" disabled={!selectedAssessment} onClick={handleSelectReport}>
-          선택 완료
-        </ActionButton>
       </div>
     </div>
   );
