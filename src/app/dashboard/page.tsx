@@ -58,7 +58,6 @@ export default function Page() {
           <CardButton
             title="새로운 평가 만들기"
             icon="lineAdd"
-            actived={selectedAssessment === 'new-assessment'}
             onClick={() => {
               handleCardClick('new-assessment');
             }}

@@ -11,12 +11,11 @@ type CardButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   actived?: boolean;
 };
 
-export const CardButton = ({ icon, title, subContents, updatedAt, actived, ...props }: CardButtonProps) => {
+export const CardButton = ({ icon, title, subContents, updatedAt, ...props }: CardButtonProps) => {
   return (
     <button
       className={cn(
-        'transition-all text-start w-full p-6 flex gap-x-3 items-center rounded-lg border border-gray-100 hover:border-blue-200',
-        actived && 'border-blue-500 hover:border-blue-500 bg-blue-50'
+        'transition-all text-start w-full p-6 flex gap-x-3 items-center rounded-lg border border-gray-100 hover:border-blue-200'
       )}
       {...props}
     >
@@ -40,7 +39,6 @@ export const CardButton = ({ icon, title, subContents, updatedAt, actived, ...pr
           </div>
         )}
       </div>
-      {actived && <Icon icon="check" className="text-blue-500 w-8 h-8" />}
     </button>
   );
 };
