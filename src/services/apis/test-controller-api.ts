@@ -21,12 +21,52 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import { ResponseResult } from '../models';
 /**
  * TestControllerApi - axios parameter creator
  * @export
  */
 export const TestControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @summary 계정 추가 정보 삭제 (개발용)
+         * @param {number} accountId accountId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAccountAdditionalInfoUsingDELETE: async (accountId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('deleteAccountAdditionalInfoUsingDELETE', 'accountId', accountId)
+            const localVarPath = `/api/test/account/{accountId}/additional-info`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary test2
@@ -107,6 +147,19 @@ export const TestControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary 계정 추가 정보 삭제 (개발용)
+         * @param {number} accountId accountId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAccountAdditionalInfoUsingDELETE(accountId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAccountAdditionalInfoUsingDELETE(accountId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TestControllerApi.deleteAccountAdditionalInfoUsingDELETE']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
          * @summary test2
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -141,6 +194,16 @@ export const TestControllerApiFactory = function (configuration?: Configuration,
     return {
         /**
          * 
+         * @summary 계정 추가 정보 삭제 (개발용)
+         * @param {number} accountId accountId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAccountAdditionalInfoUsingDELETE(accountId: number, options?: any): AxiosPromise<ResponseResult> {
+            return localVarFp.deleteAccountAdditionalInfoUsingDELETE(accountId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary test2
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -167,6 +230,18 @@ export const TestControllerApiFactory = function (configuration?: Configuration,
  * @extends {BaseAPI}
  */
 export class TestControllerApi extends BaseAPI {
+    /**
+     * 
+     * @summary 계정 추가 정보 삭제 (개발용)
+     * @param {number} accountId accountId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TestControllerApi
+     */
+    public deleteAccountAdditionalInfoUsingDELETE(accountId: number, options?: AxiosRequestConfig) {
+        return TestControllerApiFp(this.configuration).deleteAccountAdditionalInfoUsingDELETE(accountId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary test2

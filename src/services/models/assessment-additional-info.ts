@@ -84,6 +84,7 @@ export enum AssessmentAdditionalInfoEmployeeDemographyListEnum {
     Elderly = 'ELDERLY',
     Foreign = 'FOREIGN',
     Handicapped = 'HANDICAPPED',
+    None = 'NONE',
     Rookie = 'ROOKIE',
     Temporary = 'TEMPORARY',
     Women = 'WOMEN'
@@ -94,8 +95,8 @@ export enum AssessmentAdditionalInfoEmployeeDemographyListEnum {
     */
 export enum AssessmentAdditionalInfoEnvironmentMeasurementYnEnum {
     Doing = 'DOING',
-    NotDoing = 'NOT_DOING',
-    NotRequired = 'NOT_REQUIRED'
+    None = 'NONE',
+    NotDoing = 'NOT_DOING'
 }
 /**
     * @export
@@ -103,8 +104,8 @@ export enum AssessmentAdditionalInfoEnvironmentMeasurementYnEnum {
     */
 export enum AssessmentAdditionalInfoHealthScreeningYnEnum {
     Doing = 'DOING',
-    NotDoing = 'NOT_DOING',
-    NotRequired = 'NOT_REQUIRED'
+    None = 'NONE',
+    NotDoing = 'NOT_DOING'
 }
 /**
     * @export
@@ -112,7 +113,8 @@ export enum AssessmentAdditionalInfoHealthScreeningYnEnum {
     */
 export enum AssessmentAdditionalInfoTransportationMethodListEnum {
     Human = 'HUMAN',
-    Machine = 'MACHINE'
+    Machine = 'MACHINE',
+    None = 'NONE'
 }
 
 

@@ -36,8 +36,6 @@ import { GetCompanyAssessmentProgressResponse } from '../models';
 // @ts-ignore
 import { GetCompanyProcessPhotoResponse } from '../models';
 // @ts-ignore
-import { GetMyHomeCompanyAssessmentListResponse } from '../models';
-// @ts-ignore
 import { LoginCompanyAccountRequest } from '../models';
 // @ts-ignore
 import { LoginCompanyAccountResponse } from '../models';
@@ -65,6 +63,8 @@ import { ResponseResultGetCompanyAssessmentReportResponse } from '../models';
 import { ResponseResultGetCompanyDangerFactorPhotoResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyDangerSolutionPhotoResponse } from '../models';
+// @ts-ignore
+import { ResponseResultGetCompanyDocumentDetailInfoResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyProcessPhotoResponse } from '../models';
 // @ts-ignore
@@ -566,12 +566,56 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 안전 위험 평가 목록 조회
-         * @summary 안전 위험 평가 목록 조회
+         * 안전 위험성평가 보고서 내용 조회
+         * @summary 안전 위험성평가 보고서 내용 조회
+         * @param {number} assessmentId assessmentId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMyHomeCompanyAssessmentListUsingGET: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDocumentDetailInfoUsingGET: async (assessmentId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('getDocumentDetailInfoUsingGET', 'assessmentId', assessmentId)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/doc/info`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 목록 조회
+         * @summary 안전 위험 평가 목록 조회
+         * @param {number} [page] page
+         * @param {number} [size] size
+         * @param {GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum} [assessmentType] assessmentType
+         * @param {boolean} [doneYn] doneYn
+         * @param {string} [startDate] startDate
+         * @param {string} [endDate] endDate
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMyHomeCompanyAssessmentListUsingGET: async (page?: number, size?: number, assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum, doneYn?: boolean, startDate?: string, endDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/assessment/v1/company`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -587,6 +631,34 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OAUTH2 required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+            if (assessmentType !== undefined) {
+                localVarQueryParameter['assessmentType'] = assessmentType;
+            }
+
+            if (doneYn !== undefined) {
+                localVarQueryParameter['doneYn'] = doneYn;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString().substring(0,10) :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substring(0,10) :
+                    endDate;
+            }
 
 
     
@@ -887,6 +959,55 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @summary 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyAssessmentRoleStructureUsingPOST: async (assessmentId: number, file: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assessmentId' is not null or undefined
+            assertParamExists('uploadCompanyAssessmentRoleStructureUsingPOST', 'assessmentId', assessmentId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('uploadCompanyAssessmentRoleStructureUsingPOST', 'file', file)
+            const localVarPath = `/api/assessment/v1/company/{assessmentId}/role-structure`
+                .replace(`{${"assessmentId"}}`, encodeURIComponent(String(assessmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication OAUTH2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAUTH2", ["read", "write"], configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1222,13 +1343,32 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
-         * 안전 위험 평가 목록 조회
-         * @summary 안전 위험 평가 목록 조회
+         * 안전 위험성평가 보고서 내용 조회
+         * @summary 안전 위험성평가 보고서 내용 조회
+         * @param {number} assessmentId assessmentId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMyHomeCompanyAssessmentListUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetMyHomeCompanyAssessmentListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMyHomeCompanyAssessmentListUsingGET(options);
+        async getDocumentDetailInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyDocumentDetailInfoResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDocumentDetailInfoUsingGET(assessmentId, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.getDocumentDetailInfoUsingGET']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 안전 위험 평가 목록 조회
+         * @summary 안전 위험 평가 목록 조회
+         * @param {number} [page] page
+         * @param {number} [size] size
+         * @param {GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum} [assessmentType] assessmentType
+         * @param {boolean} [doneYn] doneYn
+         * @param {string} [startDate] startDate
+         * @param {string} [endDate] endDate
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMyHomeCompanyAssessmentListUsingGET(page?: number, size?: number, assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum, doneYn?: boolean, startDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetMyHomeCompanyAssessmentListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMyHomeCompanyAssessmentListUsingGET(page, size, assessmentType, doneYn, startDate, endDate, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getMyHomeCompanyAssessmentListUsingGET']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
@@ -1326,6 +1466,20 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startAssessmentUsingPOST(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.startAssessmentUsingPOST']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @summary 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId, file, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['DefaultApi.uploadCompanyAssessmentRoleStructureUsingPOST']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
@@ -1507,13 +1661,29 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCompanyProcessPhotoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 안전 위험 평가 목록 조회
-         * @summary 안전 위험 평가 목록 조회
+         * 안전 위험성평가 보고서 내용 조회
+         * @summary 안전 위험성평가 보고서 내용 조회
+         * @param {number} assessmentId assessmentId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMyHomeCompanyAssessmentListUsingGET(options?: any): AxiosPromise<GetMyHomeCompanyAssessmentListResponse> {
-            return localVarFp.getMyHomeCompanyAssessmentListUsingGET(options).then((request) => request(axios, basePath));
+        getDocumentDetailInfoUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyDocumentDetailInfoResponse> {
+            return localVarFp.getDocumentDetailInfoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 안전 위험 평가 목록 조회
+         * @summary 안전 위험 평가 목록 조회
+         * @param {number} [page] page
+         * @param {number} [size] size
+         * @param {GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum} [assessmentType] assessmentType
+         * @param {boolean} [doneYn] doneYn
+         * @param {string} [startDate] startDate
+         * @param {string} [endDate] endDate
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMyHomeCompanyAssessmentListUsingGET(page?: number, size?: number, assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum, doneYn?: boolean, startDate?: string, endDate?: string, options?: any): AxiosPromise<ResponseResultGetMyHomeCompanyAssessmentListResponse> {
+            return localVarFp.getMyHomeCompanyAssessmentListUsingGET(page, size, assessmentType, doneYn, startDate, endDate, options).then((request) => request(axios, basePath));
         },
         /**
          * 기업회원이 로그인을 합니다.
@@ -1588,6 +1758,17 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         startAssessmentUsingPOST(options?: any): AxiosPromise<AssessmentStartResponse> {
             return localVarFp.startAssessmentUsingPOST(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @summary 안전 위험 평가 안전 보고 체계 사진 업로드
+         * @param {number} assessmentId assessmentId
+         * @param {File} file file
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId: number, file: File, options?: any): AxiosPromise<ResponseResult> {
+            return localVarFp.uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId, file, options).then((request) => request(axios, basePath));
         },
         /**
          * 유해위험요인 사진 업로드
@@ -1783,14 +1964,32 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
-     * 안전 위험 평가 목록 조회
-     * @summary 안전 위험 평가 목록 조회
+     * 안전 위험성평가 보고서 내용 조회
+     * @summary 안전 위험성평가 보고서 내용 조회
+     * @param {number} assessmentId assessmentId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getMyHomeCompanyAssessmentListUsingGET(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getMyHomeCompanyAssessmentListUsingGET(options).then((request) => request(this.axios, this.basePath));
+    public getDocumentDetailInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getDocumentDetailInfoUsingGET(assessmentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 안전 위험 평가 목록 조회
+     * @summary 안전 위험 평가 목록 조회
+     * @param {number} [page] page
+     * @param {number} [size] size
+     * @param {GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum} [assessmentType] assessmentType
+     * @param {boolean} [doneYn] doneYn
+     * @param {string} [startDate] startDate
+     * @param {string} [endDate] endDate
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getMyHomeCompanyAssessmentListUsingGET(page?: number, size?: number, assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum, doneYn?: boolean, startDate?: string, endDate?: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getMyHomeCompanyAssessmentListUsingGET(page, size, assessmentType, doneYn, startDate, endDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1882,6 +2081,19 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
+     * 안전 위험 평가 안전 보고 체계 사진 업로드
+     * @summary 안전 위험 평가 안전 보고 체계 사진 업로드
+     * @param {number} assessmentId assessmentId
+     * @param {File} file file
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId: number, file: File, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).uploadCompanyAssessmentRoleStructureUsingPOST(assessmentId, file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 유해위험요인 사진 업로드
      * @summary 유해위험요인 사진 업로드
      * @param {number} assessmentId assessmentId
@@ -1924,3 +2136,12 @@ export class DefaultApi extends BaseAPI {
     }
 }
 
+/**
+  * @export
+  * @enum {string}
+  */
+export enum GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum {
+    Continuous = 'CONTINUOUS',
+    Initial = 'INITIAL',
+    Regular = 'REGULAR'
+}

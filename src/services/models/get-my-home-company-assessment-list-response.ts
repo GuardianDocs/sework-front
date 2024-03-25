@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { MyHomeCompanyAssessmentDto } from './my-home-company-assessment-dto';
+import { PageDtoMyHomeCompanyAssessmentDto } from './page-dto-my-home-company-assessment-dto';
 
 /**
  * 
@@ -25,9 +25,9 @@ import { MyHomeCompanyAssessmentDto } from './my-home-company-assessment-dto';
 export interface GetMyHomeCompanyAssessmentListResponse {
     /**
      * 
-     * @type {Array<MyHomeCompanyAssessmentDto>}
+     * @type {PageDtoMyHomeCompanyAssessmentDto}
      * @memberof GetMyHomeCompanyAssessmentListResponse
      */
-    'companyAssessmentList'?: Array<MyHomeCompanyAssessmentDto>;
+    'companyAssessmentPage'?: PageDtoMyHomeCompanyAssessmentDto;
 }
 
