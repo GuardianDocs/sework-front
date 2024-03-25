@@ -1,7 +1,6 @@
 'use client';
 import { CardButton } from '@/components/ui/CardButton/CardButton';
 import { useGetAssessmentList } from '../hooks/useGetAssessmentList';
-import { ReportType } from '../page';
 import { Body, Title } from '@/components/typography';
 import { Popover, Transition } from '@headlessui/react';
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox';
@@ -12,7 +11,7 @@ import dayjs from 'dayjs';
 import Icon from '@/components/ui/Icon/Icon';
 
 type AssessmentListProps = {
-  selectedAssessment: ReportType;
+  disabled?: boolean;
   onClickAssessment: (report?: number) => void;
 };
 
@@ -24,7 +23,7 @@ type FilterType = {
   date: string[] | null;
 };
 
-export const AssessmentList = ({ selectedAssessment, onClickAssessment }: AssessmentListProps) => {
+export const AssessmentList = ({ disabled, onClickAssessment }: AssessmentListProps) => {
   const [filter, setFilter] = useState<FilterType>({
     type: null,
     status: null,
@@ -32,10 +31,6 @@ export const AssessmentList = ({ selectedAssessment, onClickAssessment }: Assess
   });
 
   const { data: assessmentList, isLoading } = useGetAssessmentList();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const handleClickAssessmentType = (type: string) => {
     if (!filter.type || !filter.type?.includes(type)) {
@@ -219,18 +214,24 @@ export const AssessmentList = ({ selectedAssessment, onClickAssessment }: Assess
           />
         </div>
       </div>
-      {assessmentList?.data?.companyAssessmentList?.map(assessment => (
-        <CardButton
-          key={assessment.assessmentId}
-          title={`version ${assessment.title} (${assessment.createdAt}) - ${assessment.assessmentId}`}
-          subContents={`${assessment.type} | ${assessment.supervisor} | ${assessment.sector}`}
-          updatedAt={`최종 수정 ${assessment.updatedAt}`}
-          actived={selectedAssessment === assessment.assessmentId}
-          onClick={() => {
-            onClickAssessment(assessment.assessmentId);
-          }}
-        />
-      ))}
+      <div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          assessmentList?.data?.data?.companyAssessmentPage?.list?.map(assessment => (
+            <CardButton
+              key={assessment.assessmentId}
+              title={`version ${assessment.title} (${assessment.createdAt}) - ${assessment.assessmentId}`}
+              subContents={`${assessment.type} | ${assessment.supervisor} | ${assessment.sector}`}
+              updatedAt={`최종 수정 ${assessment.updatedAt}`}
+              onClick={() => {
+                onClickAssessment(assessment.assessmentId);
+              }}
+              disabled={disabled}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };
