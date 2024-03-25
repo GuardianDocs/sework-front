@@ -17628,6 +17628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"return-fetch@npm:^0.4.5":
+  version: 0.4.5
+  resolution: "return-fetch@npm:0.4.5"
+  checksum: 163d8caaedd2cb005068f5cf5329f316cdbfd8181748257a6c5cd62e4297eba332f50def5cc04a37d6f60d4ed043b271c6eea948c3386f76d05b6cd62bd04343
+  languageName: node
+  linkType: hard
+
 "reusify@npm:^1.0.4":
   version: 1.0.4
   resolution: "reusify@npm:1.0.4"
@@ -18022,6 +18029,7 @@ __metadata:
     react-query: ^3.39.3
     react-select: ^5.7.7
     react-textarea-autosize: ^8.5.3
+    return-fetch: ^0.4.5
     sass: ^1.69.5
     storybook: ^7.6.6
     swr: ^2.2.5
