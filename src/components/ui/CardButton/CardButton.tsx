@@ -27,7 +27,7 @@ export const CardButton = ({ icon, title, subContents, updatedAt, ...props }: Ca
         <Title size="l" color="gray800">
           {title}
         </Title>
-        {subContents && updatedAt && (
+        {(subContents || updatedAt) && (
           <div className="flex flex-col gap-y-1">
             {subContents}
             {updatedAt && (

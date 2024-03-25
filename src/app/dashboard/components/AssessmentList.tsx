@@ -6,9 +6,10 @@ import { Popover, Transition } from '@headlessui/react';
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox';
 import { DatePicker } from 'antd';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import Icon from '@/components/ui/Icon/Icon';
+import { useIntersectionObserver } from '@/hooks';
 
 type AssessmentListProps = {
   disabled?: boolean;
@@ -24,13 +25,22 @@ type FilterType = {
 };
 
 export const AssessmentList = ({ disabled, onClickAssessment }: AssessmentListProps) => {
+  const { isVisible, setRef } = useIntersectionObserver({
+    threshold: 0.5,
+  });
+
   const [filter, setFilter] = useState<FilterType>({
     type: null,
     status: null,
     date: null,
   });
 
-  const { data: assessmentList, isLoading } = useGetAssessmentList();
+  const { data: assessmentListResponse, isLoading, setSize } = useGetAssessmentList();
+
+  const assessmentList = useMemo(
+    () => assessmentListResponse?.flatMap(res => res?.companyAssessmentPage?.list || []) || [],
+    [assessmentListResponse]
+  );
 
   const handleClickAssessmentType = (type: string) => {
     if (!filter.type || !filter.type?.includes(type)) {
@@ -63,6 +73,12 @@ export const AssessmentList = ({ disabled, onClickAssessment }: AssessmentListPr
     e.stopPropagation();
     setFilter({ ...filter, [filterType]: null });
   };
+
+  useEffect(() => {
+    if (isVisible) {
+      setSize(size => size + 1);
+    }
+  }, [isVisible, setSize]);
 
   return (
     <div className="flex flex-col w-full gap-y-3 overflow-auto">
@@ -214,23 +230,21 @@ export const AssessmentList = ({ disabled, onClickAssessment }: AssessmentListPr
           />
         </div>
       </div>
-      <div>
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          assessmentList?.data?.data?.companyAssessmentPage?.list?.map(assessment => (
-            <CardButton
-              key={assessment.assessmentId}
-              title={`version ${assessment.title} (${assessment.createdAt}) - ${assessment.assessmentId}`}
-              subContents={`${assessment.type} | ${assessment.supervisor} | ${assessment.sector}`}
-              updatedAt={`최종 수정 ${assessment.updatedAt}`}
-              onClick={() => {
-                onClickAssessment(assessment.assessmentId);
-              }}
-              disabled={disabled}
-            />
-          ))
-        )}
+      <div className="overflow-auto flex flex-col gap-y-3">
+        {assessmentList?.map(assessment => (
+          <CardButton
+            key={assessment.assessmentId}
+            title={`version ${assessment.title} (${assessment.createdAt}) - ${assessment.assessmentId}`}
+            subContents={assessment.type && `${assessment.type} | ${assessment.supervisor} | ${assessment.sector}`}
+            updatedAt={`최종 수정 ${assessment.updatedAt}`}
+            onClick={() => {
+              onClickAssessment(assessment.assessmentId);
+            }}
+            disabled={disabled}
+          />
+        ))}
+
+        {isLoading ? <div>Loading...</div> : <div ref={setRef} className="flex justify-center w-full h-1" />}
       </div>
     </div>
   );

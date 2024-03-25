@@ -49,19 +49,18 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    const newResponse = {
-      ...response,
-      irasResponse: {
-        code: response?.data?.code,
-        message: response?.data?.message,
-      },
-    };
-    newResponse.data = newResponse.data.data;
+    // const newResponse = {
+    //   ...response,
+    //   irasResponse: {
+    //     code: response?.data?.code,
+    //     message: response?.data?.message,
+    //   },
+    // };
+    // newResponse.data = newResponse.data.data;
 
-    return newResponse;
+    return response;
   },
   error => {
-    console.error('er1111r' + error); // for debug
     return Promise.reject(error);
   }
 );

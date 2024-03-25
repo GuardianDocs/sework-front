@@ -1,5 +1,8 @@
 import { DefaultApi } from '@/lib/axios/oas-axios';
-import { GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum, SearchSectorResponse } from '@/services';
+import {
+  GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum,
+  GetMyHomeCompanyAssessmentListResponse,
+} from '@/services';
 import useSWRInfinite from 'swr/infinite';
 
 type FetcherKey = readonly [
@@ -18,8 +21,8 @@ const getKey =
     startDate?: string,
     endDate?: string
   ) =>
-  (pageIndex: number, previousPageData: SearchSectorResponse): FetcherKey | null => {
-    if (previousPageData && pageIndex > +previousPageData.totalPage) return null;
+  (pageIndex: number, previousPageData: GetMyHomeCompanyAssessmentListResponse): FetcherKey | null => {
+    if (previousPageData && pageIndex > +(previousPageData?.companyAssessmentPage?.totalPage || 0)) return null;
     return [['GET', '/api/assessment/v1/company'], pageIndex, assessmentType, doneYn, startDate, endDate];
   };
 
@@ -31,10 +34,10 @@ const fetcher = async ([, page, assessmentType, doneYn, startDate, endDate]: Fet
     doneYn,
     startDate,
     endDate
-  ).then(res => res.data);
+  ).then(res => res.data.data);
+
   return response;
 };
 
-export const useGetAssessmentCompanySector = (
-  assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum
-) => useSWRInfinite(getKey(assessmentType), fetcher);
+export const useGetAssessmentList = (assessmentType?: GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum) =>
+  useSWRInfinite(getKey(assessmentType), fetcher);
