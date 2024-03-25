@@ -26,11 +26,16 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
     handleSubmit,
     control,
     reset,
-    formState: { isValid },
+    formState: { isValid, errors },
+    watch,
+    trigger,
   } = formMethods;
 
-  const handleSaveManagerStructure = (data: ManagerStructureType) => {
-    nextStep(data);
+  const roloStructure = watch('roloStructure');
+
+  const handleSaveManagerStructure = (data?: ManagerStructureType) => {
+    console.log({ roloStructure, isValid, errors });
+    // nextStep(data);
   };
 
   useEffect(() => {
@@ -41,7 +46,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={handleSubmit(handleSaveManagerStructure)} className="flex-col-center gap-y-12 w-full">
+      <form onSubmit={handleSubmit(handleSaveManagerStructure)} className="flex-col-center gap-y-12 w-full pb-20">
         <div className="flex flex-col gap-y-3 w-full">
           <Title size="l" color="gray800">
             안전보건체계관리
@@ -58,9 +63,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     className="col-start-2 z-10"
                     titleClassName="z-10 bg-red-100 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                     required
                   >
                     <Line.Vertical className="left-0 h-[50%] bottom-0" />
@@ -93,9 +96,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     className="min-h-[80px] col-start-1"
                     titleClassName="bg-blue-200 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -109,9 +110,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     title="안전보건관리책임자"
                     titleClassName="bg-blue-200 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -149,9 +148,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     className="min-h-[80px]"
                     titleClassName="bg-blue-200 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -165,9 +162,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     title="관리감독자"
                     titleClassName="bg-blue-200 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -182,9 +177,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     required
                     titleClassName="bg-blue-100 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -198,9 +191,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     title="보건관리자"
                     titleClassName="bg-blue-100 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -214,9 +205,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     title="산업보건의"
                     titleClassName="bg-blue-100 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>
@@ -230,9 +219,7 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
                     title="안전보건관리담당자"
                     titleClassName="bg-blue-100 rounded-t-small"
                     workers={value?.map(worker => ({ ...worker, id: uuidv4() }))}
-                    onSave={data => {
-                      onChange(data);
-                    }}
+                    onSave={onChange}
                   >
                     <OrgCard.Button />
                   </OrgCard>

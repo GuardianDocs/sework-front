@@ -8,7 +8,6 @@ type CardButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: IconKey;
   subContents?: React.ReactNode;
   updatedAt?: string;
-  actived?: boolean;
 };
 
 export const CardButton = ({ icon, title, subContents, updatedAt, ...props }: CardButtonProps) => {

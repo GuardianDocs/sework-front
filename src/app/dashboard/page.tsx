@@ -6,7 +6,6 @@ import { CardButton } from '@/components/ui/CardButton/CardButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useMutateAssessmentStart } from '../../hooks/useMutateAssessmentStart';
 import { AssessmentList } from './components/AssessmentList';
 
@@ -14,26 +13,18 @@ export type ReportType = 'new-assessment' | number | null;
 
 export default function Page() {
   const router = useRouter();
-  const [selectedAssessment, setSelectedAssessment] = useState<ReportType>(null);
-  const { trigger } = useMutateAssessmentStart();
+  const { trigger, isMutating } = useMutateAssessmentStart();
 
-  const handleCardClick = (report: ReportType = 0) => {
-    setSelectedAssessment(report);
-  };
-
-  const handleSelectReport = async () => {
-    if (!selectedAssessment) return;
-    let assessmentId = selectedAssessment;
-
-    if (selectedAssessment === 'new-assessment') {
+  const handleSelectReport = async (assessmentId?: number) => {
+    if (assessmentId) {
+      router.push(`/dashboard/${assessmentId}`);
+    } else {
       const response = await trigger();
 
       if (response) {
-        assessmentId = response.assessmentId || 0;
+        router.push(`/dashboard/${response.assessmentId}`);
       }
     }
-
-    router.push(`/dashboard/${assessmentId}`);
   };
 
   return (
@@ -53,14 +44,13 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col w-full gap-y-6 h-full overflow-auto">
-          <AssessmentList selectedAssessment={selectedAssessment} onClickAssessment={handleCardClick} />
+          <AssessmentList onClickAssessment={handleSelectReport} disabled={isMutating} />
           <div className="border-t border-gray-200" />
           <CardButton
             title="새로운 평가 만들기"
             icon="lineAdd"
-            onClick={() => {
-              handleCardClick('new-assessment');
-            }}
+            onClick={() => handleSelectReport()}
+            disabled={isMutating}
           />
         </div>
       </div>

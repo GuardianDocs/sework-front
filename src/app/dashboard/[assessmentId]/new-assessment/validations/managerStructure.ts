@@ -21,8 +21,8 @@ const roleStructureValidationObject: Record<CompanyRoleStructureKey, z.ZodTypeAn
   supervisor: companyWorkerValidationSchema.array().optional(),
   safetyManager: companyWorkerValidationSchema.array(),
   healthManager: companyWorkerValidationSchema.array().optional(),
-  industrialHealthOfficer: companyWorkerValidationSchema.array(),
-  safetyHealthManager: companyWorkerValidationSchema.array(),
+  industrialHealthOfficer: companyWorkerValidationSchema.array().optional(),
+  safetyHealthManager: companyWorkerValidationSchema.array().optional(),
 };
 
 const roleStructureValidationSchema = z.object(roleStructureValidationObject);
