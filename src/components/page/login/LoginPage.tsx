@@ -45,12 +45,11 @@ export default function LoginPage() {
     const fingerAgent = await fingerPrintJsLoad();
     const fingerPrintAgentResult = await fingerAgent.get();
     const uid = fingerPrintAgentResult.visitorId;
-    const { data } = await DefaultApi.loginCompanyUsingPOST(uid, loginRequest);
+    const {
+      data: { data },
+    } = await DefaultApi.loginCompanyUsingPOST(uid, loginRequest);
 
     if (data) {
-      console.log('로그인 성공');
-      console.log(data);
-
       // setLoggedInId(data.id);
       // setCompanyName(data.companyName);
       // setAccessToken(data.accessToken);
