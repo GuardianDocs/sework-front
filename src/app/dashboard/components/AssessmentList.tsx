@@ -38,7 +38,7 @@ export const AssessmentList = ({ disabled, onClickAssessment }: AssessmentListPr
   const { data: assessmentListResponse, isLoading, setSize } = useGetAssessmentList();
 
   const assessmentList = useMemo(
-    () => assessmentListResponse?.flatMap(res => res?.companyAssessmentPage?.list || []) || [],
+    () => assessmentListResponse?.flatMap(res => res?.list || []) || [],
     [assessmentListResponse]
   );
 

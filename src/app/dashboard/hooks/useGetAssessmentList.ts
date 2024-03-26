@@ -1,7 +1,7 @@
 import { DefaultApi } from '@/lib/axios/oas-axios';
 import {
   GetMyHomeCompanyAssessmentListUsingGETAssessmentTypeEnum,
-  GetMyHomeCompanyAssessmentListResponse,
+  PageDtoMyHomeCompanyAssessmentDto,
 } from '@/services';
 import useSWRInfinite from 'swr/infinite';
 
@@ -21,8 +21,8 @@ const getKey =
     startDate?: string,
     endDate?: string
   ) =>
-  (pageIndex: number, previousPageData: GetMyHomeCompanyAssessmentListResponse): FetcherKey | null => {
-    if (previousPageData && pageIndex > +(previousPageData?.companyAssessmentPage?.totalPage || 0)) return null;
+  (pageIndex: number, previousPageData: PageDtoMyHomeCompanyAssessmentDto): FetcherKey | null => {
+    if (previousPageData && pageIndex > +(previousPageData?.totalPage || 0)) return null;
     return [['GET', '/api/assessment/v1/company'], pageIndex, assessmentType, doneYn, startDate, endDate];
   };
 
@@ -34,7 +34,7 @@ const fetcher = async ([, page, assessmentType, doneYn, startDate, endDate]: Fet
     doneYn,
     startDate,
     endDate
-  ).then(res => res.data.data);
+  ).then(res => res.data.data?.companyAssessmentPage);
 
   return response;
 };
