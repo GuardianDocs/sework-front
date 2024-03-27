@@ -4,9 +4,8 @@ import { Title } from '@/components/typography';
 import { Line } from '../Line';
 import { OrgCard } from '../OrgCard';
 
-import { ManagerStructureType, managerStructureValidationSchema } from '../../validations';
+import { ManagerStructureType } from '../../validations';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 
@@ -18,7 +17,7 @@ type ManagerStructureProps = {
 
 export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructureProps) => {
   const formMethods = useForm<ManagerStructureType>({
-    resolver: zodResolver(managerStructureValidationSchema),
+    // resolver: zodResolver(managerStructureValidationSchema),
     mode: 'all',
   });
 
@@ -26,16 +25,12 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
     handleSubmit,
     control,
     reset,
-    formState: { isValid, errors },
+    // formState: { isValid, errors },
     watch,
-    trigger,
   } = formMethods;
 
-  const roloStructure = watch('roloStructure');
-
-  const handleSaveManagerStructure = (data?: ManagerStructureType) => {
-    console.log({ roloStructure, isValid, errors });
-    // nextStep(data);
+  const handleSaveManagerStructure = (data: ManagerStructureType) => {
+    nextStep(data);
   };
 
   useEffect(() => {
@@ -242,7 +237,8 @@ export const ManagerStructure = ({ data, nextStep, preventStep }: ManagerStructu
           <ActionButton type="button" variant="tonal-gray" size="l" onClick={preventStep}>
             이전 단계
           </ActionButton>
-          <ActionButton type="submit" variant="filled" size="l" disabled={!isValid}>
+          {/* <ActionButton type="submit" variant="filled" size="l" disabled={!isValid}> */}
+          <ActionButton type="submit" variant="filled" size="l">
             다음 단계
           </ActionButton>
         </div>

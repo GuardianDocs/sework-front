@@ -12,7 +12,7 @@ const getKey =
   };
 
 const fetcher = async ([[, , page], searchKeywords]: FetcherKey) => {
-  const response = await DefaultApi.searchSectorUsingGET(page, 20, searchKeywords).then(res => res.data);
+  const response = await DefaultApi.searchSectorUsingGET(page, 20, searchKeywords).then(res => res.data.data);
   return response;
 };
 

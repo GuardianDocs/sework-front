@@ -1,13 +1,10 @@
 import { Checkbox } from '@/components/ui/Checkbox/Checkbox';
-import { RegisterCompanyAssessmentAdditionalInfoRequest } from '@/services';
-import { useFormContext } from 'react-hook-form';
 import { FormItem } from '../FormItem';
 import { DEMOGRAPHY_LIST } from '../../constants';
 import { Title } from '@/components/typography';
 import { Radio } from '@/components/ui/RadioGroup/RadioGroup';
 
 export const CompanyInfo = () => {
-  const { control } = useFormContext<RegisterCompanyAssessmentAdditionalInfoRequest>();
   return (
     <>
       <FormItem

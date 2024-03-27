@@ -15,7 +15,6 @@ type SectorSelectProps = {
 };
 
 export const SectorSelect = ({ selectedSector, onSectorSelect }: SectorSelectProps) => {
-  // const lastItemRef = useRef<HTMLDivElement>(null);
   const { isVisible, setRef } = useIntersectionObserver({
     threshold: 0.5,
   });
@@ -23,6 +22,7 @@ export const SectorSelect = ({ selectedSector, onSectorSelect }: SectorSelectPro
   const [searchKeyword, setSearchKeyword] = useState('');
   const [sector, setSector] = useState<SelectListOption | undefined>(undefined);
   const { data: sectorResponses, mutate, setSize } = useGetAssessmentCompanySector(searchKeyword);
+
   const sectorList = useMemo(
     () =>
       sectorResponses?.flatMap(
