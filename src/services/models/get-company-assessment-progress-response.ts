@@ -25,30 +25,30 @@ export interface GetCompanyAssessmentProgressResponse {
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
-    'currentDangerSolutionStepDoneYn'?: boolean;
+    'currentDangerSolutionStepDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
-    'dangerFactorStepDoneYn'?: boolean;
+    'dangerFactorStepDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
-    'dangerSolutionExecutionStepDoneYn'?: boolean;
+    'dangerSolutionExecutionStepDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
-    'futureDangerSolutionStepDoneYn'?: boolean;
+    'futureDangerSolutionStepDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof GetCompanyAssessmentProgressResponse
      */
-    'processStepDoneYn'?: boolean;
+    'processStepDoneYn': boolean;
 }
 

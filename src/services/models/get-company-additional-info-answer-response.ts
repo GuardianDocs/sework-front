@@ -28,24 +28,24 @@ export interface GetCompanyAdditionalInfoAnswerResponse {
      * @type {Array<MapVO>}
      * @memberof GetCompanyAdditionalInfoAnswerResponse
      */
-    'employeeDemographyList'?: Array<MapVO>;
+    'employeeDemographyList': Array<MapVO>;
     /**
      * 
      * @type {Array<MapVO>}
      * @memberof GetCompanyAdditionalInfoAnswerResponse
      */
-    'environmentMeasurementAnswerList'?: Array<MapVO>;
+    'environmentMeasurementAnswerList': Array<MapVO>;
     /**
      * 
      * @type {Array<MapVO>}
      * @memberof GetCompanyAdditionalInfoAnswerResponse
      */
-    'transportationMethodList'?: Array<MapVO>;
+    'transportationMethodList': Array<MapVO>;
     /**
      * 
      * @type {Array<MapVO>}
      * @memberof GetCompanyAdditionalInfoAnswerResponse
      */
-    'weightTreatmentList'?: Array<MapVO>;
+    'weightTreatmentList': Array<MapVO>;
 }
 

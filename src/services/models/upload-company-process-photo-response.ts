@@ -25,12 +25,12 @@ export interface UploadCompanyProcessPhotoResponse {
      * @type {number}
      * @memberof UploadCompanyProcessPhotoResponse
      */
-    'companyProcessId'?: number;
+    'companyProcessId': number;
     /**
      * 
      * @type {string}
      * @memberof UploadCompanyProcessPhotoResponse
      */
-    'imageUrl'?: string;
+    'imageUrl': string;
 }
 

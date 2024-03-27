@@ -25,6 +25,6 @@ export interface GetDangerFactorTitleResponse {
      * @type {Array<string>}
      * @memberof GetDangerFactorTitleResponse
      */
-    'dangerFactorTitleList'?: Array<string>;
+    'dangerFactorTitleList': Array<string>;
 }
 

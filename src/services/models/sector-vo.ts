@@ -25,12 +25,12 @@ export interface SectorVO {
      * @type {number}
      * @memberof SectorVO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof SectorVO
      */
-    'title'?: string;
+    'title': string;
 }
 

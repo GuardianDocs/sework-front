@@ -31,7 +31,7 @@ export interface CompanyDangerSolutionVORes {
      * @type {number}
      * @memberof CompanyDangerSolutionVORes
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}

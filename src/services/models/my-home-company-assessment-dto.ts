@@ -25,13 +25,13 @@ export interface MyHomeCompanyAssessmentDto {
      * @type {number}
      * @memberof MyHomeCompanyAssessmentDto
      */
-    'assessmentId'?: number;
+    'assessmentId': number;
     /**
      * 
      * @type {string}
      * @memberof MyHomeCompanyAssessmentDto
      */
-    'createdAt'?: string;
+    'createdAt': string;
     /**
      * 
      * @type {string}
@@ -43,7 +43,7 @@ export interface MyHomeCompanyAssessmentDto {
      * @type {boolean}
      * @memberof MyHomeCompanyAssessmentDto
      */
-    'docGeneratedYn'?: boolean;
+    'docGeneratedYn': boolean;
     /**
      * 
      * @type {string}
@@ -73,7 +73,7 @@ export interface MyHomeCompanyAssessmentDto {
      * @type {string}
      * @memberof MyHomeCompanyAssessmentDto
      */
-    'title'?: string;
+    'title': string;
     /**
      * 
      * @type {string}
@@ -85,7 +85,7 @@ export interface MyHomeCompanyAssessmentDto {
      * @type {string}
      * @memberof MyHomeCompanyAssessmentDto
      */
-    'updatedAt'?: string;
+    'updatedAt': string;
 }
 
 /**

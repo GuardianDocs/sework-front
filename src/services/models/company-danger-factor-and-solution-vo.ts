@@ -28,19 +28,19 @@ export interface CompanyDangerFactorAndSolutionVO {
      * @type {number}
      * @memberof CompanyDangerFactorAndSolutionVO
      */
-    'afterRisk'?: number;
+    'afterRisk': number;
     /**
      * 
      * @type {string}
      * @memberof CompanyDangerFactorAndSolutionVO
      */
-    'companyDangerFactorDescription'?: string;
+    'companyDangerFactorDescription': string;
     /**
      * 
      * @type {number}
      * @memberof CompanyDangerFactorAndSolutionVO
      */
-    'companyDangerFactorId'?: number;
+    'companyDangerFactorId': number;
     /**
      * 
      * @type {Array<CompanyDangerSolutionVORes>}
@@ -52,6 +52,6 @@ export interface CompanyDangerFactorAndSolutionVO {
      * @type {number}
      * @memberof CompanyDangerFactorAndSolutionVO
      */
-    'risk'?: number;
+    'risk': number;
 }
 

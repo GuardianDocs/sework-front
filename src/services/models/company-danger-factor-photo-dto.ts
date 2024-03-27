@@ -25,18 +25,18 @@ export interface CompanyDangerFactorPhotoDto {
      * @type {number}
      * @memberof CompanyDangerFactorPhotoDto
      */
-    'companyDangerFactorId'?: number;
+    'companyDangerFactorId': number;
     /**
      * 
      * @type {string}
      * @memberof CompanyDangerFactorPhotoDto
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {string}
      * @memberof CompanyDangerFactorPhotoDto
      */
-    'imageUrl'?: string;
+    'imageUrl': string;
 }
 

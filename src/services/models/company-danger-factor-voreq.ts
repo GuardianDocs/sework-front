@@ -25,7 +25,7 @@ export interface CompanyDangerFactorVOReq {
      * @type {string}
      * @memberof CompanyDangerFactorVOReq
      */
-    'category'?: CompanyDangerFactorVOReqCategoryEnum;
+    'category': CompanyDangerFactorVOReqCategoryEnum;
     /**
      * 
      * @type {number}
@@ -37,13 +37,13 @@ export interface CompanyDangerFactorVOReq {
      * @type {string}
      * @memberof CompanyDangerFactorVOReq
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {number}
      * @memberof CompanyDangerFactorVOReq
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
@@ -55,7 +55,7 @@ export interface CompanyDangerFactorVOReq {
      * @type {string}
      * @memberof CompanyDangerFactorVOReq
      */
-    'title'?: string;
+    'title': string;
 }
 
 /**

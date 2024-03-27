@@ -25,7 +25,7 @@ export interface CompanyProcessVO {
      * @type {string}
      * @memberof CompanyProcessVO
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {string}
@@ -37,7 +37,7 @@ export interface CompanyProcessVO {
      * @type {number}
      * @memberof CompanyProcessVO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
@@ -49,13 +49,13 @@ export interface CompanyProcessVO {
      * @type {number}
      * @memberof CompanyProcessVO
      */
-    'processId'?: number;
+    'processId': number;
     /**
      * 
      * @type {string}
      * @memberof CompanyProcessVO
      */
-    'title'?: string;
+    'title': string;
     /**
      * 
      * @type {number}

@@ -34,55 +34,55 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
      * @type {AssessmentAdditionalInfoRes}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'additionalInfo'?: AssessmentAdditionalInfoRes;
+    'additionalInfo': AssessmentAdditionalInfoRes;
     /**
      * 
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'assessmentId'?: number;
+    'assessmentId': number;
     /**
      * 사내 협력업체 수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'associatedInternalCorpCount'?: number;
+    'associatedInternalCorpCount': number;
     /**
      * 사내 협력업체 근로자 수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'associatedInternalCorpEmployeeCount'?: number;
+    'associatedInternalCorpEmployeeCount': number;
     /**
      * 
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'employeeNumber'?: number;
+    'employeeNumber': number;
     /**
      * 평가 종료 기준일
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'endAt'?: string;
+    'endAt': string;
     /**
      * 1년 전 재해 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'lastYearAccidentCount'?: number;
+    'lastYearAccidentCount': number;
     /**
      * 1년 전 아차 사고 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'lastYearNearAccidentCount'?: number;
+    'lastYearNearAccidentCount': number;
     /**
      * 
      * @type {CompanyRoleStructure}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'roleStructure'?: CompanyRoleStructure;
+    'roleStructure': CompanyRoleStructure;
     /**
      * 
      * @type {SectorVO}
@@ -94,55 +94,55 @@ export interface GetCompanyAssessmentAdditionalInfoResponse {
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'startAt'?: string;
+    'startAt': string;
     /**
      * 담당자
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'supervisor'?: string;
+    'supervisor': string;
     /**
      * 담당자 직책
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'supervisorPosition'?: GetCompanyAssessmentAdditionalInfoResponseSupervisorPositionEnum;
+    'supervisorPosition': GetCompanyAssessmentAdditionalInfoResponseSupervisorPositionEnum;
     /**
      * 3년 전 재해 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'threeYearsAgoAccidentCount'?: number;
+    'threeYearsAgoAccidentCount': number;
     /**
      * 3년 전 아차 사고 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'threeYearsAgoNearAccidentCount'?: number;
+    'threeYearsAgoNearAccidentCount': number;
     /**
      * 
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'title'?: string;
+    'title': string;
     /**
      * 2년 전 재해 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'twoYearsAgoAccidentCount'?: number;
+    'twoYearsAgoAccidentCount': number;
     /**
      * 2년 전 아차 사고 발생 건수
      * @type {number}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'twoYearsAgoNearAccidentCount'?: number;
+    'twoYearsAgoNearAccidentCount': number;
     /**
      * 보고서 종류
      * @type {string}
      * @memberof GetCompanyAssessmentAdditionalInfoResponse
      */
-    'type'?: GetCompanyAssessmentAdditionalInfoResponseTypeEnum;
+    'type': GetCompanyAssessmentAdditionalInfoResponseTypeEnum;
 }
 
 /**

@@ -28,7 +28,7 @@ export interface UpsertCompanyDangerSolutionResponse {
      * @type {number}
      * @memberof UpsertCompanyDangerSolutionResponse
      */
-    'afterRisk'?: number;
+    'afterRisk': number;
     /**
      * 
      * @type {string}
@@ -40,7 +40,7 @@ export interface UpsertCompanyDangerSolutionResponse {
      * @type {number}
      * @memberof UpsertCompanyDangerSolutionResponse
      */
-    'companyDangerFactorId'?: number;
+    'companyDangerFactorId': number;
     /**
      * 
      * @type {Array<CompanyDangerSolutionVORes>}
@@ -52,6 +52,6 @@ export interface UpsertCompanyDangerSolutionResponse {
      * @type {number}
      * @memberof UpsertCompanyDangerSolutionResponse
      */
-    'risk'?: number;
+    'risk': number;
 }
 

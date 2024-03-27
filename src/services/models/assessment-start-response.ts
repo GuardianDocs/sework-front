@@ -25,12 +25,12 @@ export interface AssessmentStartResponse {
      * @type {number}
      * @memberof AssessmentStartResponse
      */
-    'assessmentId'?: number;
+    'assessmentId': number;
     /**
      * 
      * @type {string}
      * @memberof AssessmentStartResponse
      */
-    'title'?: string;
+    'title': string;
 }
 

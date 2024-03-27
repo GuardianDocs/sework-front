@@ -25,30 +25,30 @@ export interface CompanyProcessTitleVO {
      * @type {boolean}
      * @memberof CompanyProcessTitleVO
      */
-    'currentDangerSolutionDoneYn'?: boolean;
+    'currentDangerSolutionDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof CompanyProcessTitleVO
      */
-    'dangerFactorDoneYn'?: boolean;
+    'dangerFactorDoneYn': boolean;
     /**
      * 
      * @type {boolean}
      * @memberof CompanyProcessTitleVO
      */
-    'futureDangerSolutionDoneYn'?: boolean;
+    'futureDangerSolutionDoneYn': boolean;
     /**
      * 
      * @type {number}
      * @memberof CompanyProcessTitleVO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof CompanyProcessTitleVO
      */
-    'title'?: string;
+    'title': string;
 }
 

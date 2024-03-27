@@ -25,13 +25,13 @@ export interface CompanyDangerSolutionPhotoDto {
      * @type {string}
      * @memberof CompanyDangerSolutionPhotoDto
      */
-    'companyDangerFactorDescription'?: string;
+    'companyDangerFactorDescription': string;
     /**
      * 
      * @type {number}
      * @memberof CompanyDangerSolutionPhotoDto
      */
-    'companyDangerSolutionId'?: number;
+    'companyDangerSolutionId': number;
     /**
      * 
      * @type {string}
@@ -43,6 +43,6 @@ export interface CompanyDangerSolutionPhotoDto {
      * @type {string}
      * @memberof CompanyDangerSolutionPhotoDto
      */
-    'imageUrl'?: string;
+    'imageUrl': string;
 }
 

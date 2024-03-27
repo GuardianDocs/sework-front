@@ -25,12 +25,12 @@ export interface MapVO {
      * @type {string}
      * @memberof MapVO
      */
-    'key'?: string;
+    'key': string;
     /**
      * 
      * @type {string}
      * @memberof MapVO
      */
-    'value'?: string;
+    'value': string;
 }
 

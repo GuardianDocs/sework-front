@@ -37,6 +37,6 @@ export interface GetCompanyProcessResponse {
      * @type {SectorVO}
      * @memberof GetCompanyProcessResponse
      */
-    'sector'?: SectorVO;
+    'sector': SectorVO;
 }
 

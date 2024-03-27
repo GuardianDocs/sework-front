@@ -28,7 +28,7 @@ export interface CompanyDangerFactorDto {
      * @type {number}
      * @memberof CompanyDangerFactorDto
      */
-    'companyDangerFactorId'?: number;
+    'companyDangerFactorId': number;
     /**
      * 
      * @type {Array<CompanyDangerFutureSolutionDto>}
@@ -40,6 +40,6 @@ export interface CompanyDangerFactorDto {
      * @type {string}
      * @memberof CompanyDangerFactorDto
      */
-    'title'?: string;
+    'title': string;
 }
 

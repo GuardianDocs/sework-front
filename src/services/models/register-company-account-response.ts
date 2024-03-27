@@ -25,30 +25,30 @@ export interface RegisterCompanyAccountResponse {
      * @type {string}
      * @memberof RegisterCompanyAccountResponse
      */
-    'accessToken'?: string;
+    'accessToken': string;
     /**
      * 
      * @type {string}
      * @memberof RegisterCompanyAccountResponse
      */
-    'companyName'?: string;
+    'companyName': string;
     /**
      * 
      * @type {number}
      * @memberof RegisterCompanyAccountResponse
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof RegisterCompanyAccountResponse
      */
-    'refreshTokenExpiredAt'?: string;
+    'refreshTokenExpiredAt': string;
     /**
      * 
      * @type {boolean}
      * @memberof RegisterCompanyAccountResponse
      */
-    'requireAdditionalInfoYn'?: boolean;
+    'requireAdditionalInfoYn': boolean;
 }
 

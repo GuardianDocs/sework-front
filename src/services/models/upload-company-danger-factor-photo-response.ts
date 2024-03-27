@@ -25,12 +25,12 @@ export interface UploadCompanyDangerFactorPhotoResponse {
      * @type {number}
      * @memberof UploadCompanyDangerFactorPhotoResponse
      */
-    'companyDangerFactorId'?: number;
+    'companyDangerFactorId': number;
     /**
      * 
      * @type {string}
      * @memberof UploadCompanyDangerFactorPhotoResponse
      */
-    'imageUrl'?: string;
+    'imageUrl': string;
 }
 

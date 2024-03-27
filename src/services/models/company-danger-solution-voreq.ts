@@ -31,7 +31,7 @@ export interface CompanyDangerSolutionVOReq {
      * @type {number}
      * @memberof CompanyDangerSolutionVOReq
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}

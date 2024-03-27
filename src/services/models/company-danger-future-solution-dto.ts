@@ -31,7 +31,7 @@ export interface CompanyDangerFutureSolutionDto {
      * @type {number}
      * @memberof CompanyDangerFutureSolutionDto
      */
-    'companyDangerSolutionId'?: number;
+    'companyDangerSolutionId': number;
     /**
      * 
      * @type {string}
@@ -49,7 +49,7 @@ export interface CompanyDangerFutureSolutionDto {
      * @type {string}
      * @memberof CompanyDangerFutureSolutionDto
      */
-    'method'?: CompanyDangerFutureSolutionDtoMethodEnum;
+    'method': CompanyDangerFutureSolutionDtoMethodEnum;
     /**
      * 
      * @type {string}

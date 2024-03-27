@@ -25,24 +25,24 @@ export interface CompanyProcessPhotoDto {
      * @type {number}
      * @memberof CompanyProcessPhotoDto
      */
-    'companyProcessId'?: number;
+    'companyProcessId': number;
     /**
      * 
      * @type {string}
      * @memberof CompanyProcessPhotoDto
      */
-    'companyProcessTitle'?: string;
+    'companyProcessTitle': string;
     /**
      * 
      * @type {string}
      * @memberof CompanyProcessPhotoDto
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {string}
      * @memberof CompanyProcessPhotoDto
      */
-    'imageUrl'?: string;
+    'imageUrl': string;
 }
 

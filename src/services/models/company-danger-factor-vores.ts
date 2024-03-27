@@ -25,7 +25,7 @@ export interface CompanyDangerFactorVORes {
      * @type {string}
      * @memberof CompanyDangerFactorVORes
      */
-    'category'?: CompanyDangerFactorVOResCategoryEnum;
+    'category': CompanyDangerFactorVOResCategoryEnum;
     /**
      * 
      * @type {number}
@@ -37,13 +37,13 @@ export interface CompanyDangerFactorVORes {
      * @type {string}
      * @memberof CompanyDangerFactorVORes
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {number}
      * @memberof CompanyDangerFactorVORes
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
@@ -55,7 +55,7 @@ export interface CompanyDangerFactorVORes {
      * @type {string}
      * @memberof CompanyDangerFactorVORes
      */
-    'title'?: string;
+    'title': string;
 }
 
 /**
