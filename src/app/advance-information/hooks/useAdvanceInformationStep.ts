@@ -5,13 +5,14 @@ import { STEP, StepType } from '../constants';
 import { BasicInfoType, CompanyInfoType } from '../validations';
 import { AdditionalCompanyAccountInfoRequest } from '@/services';
 import { useMutateCompayAdditionalInfo } from './useMutateCompayAdditionalInfo';
+import { toast } from '@/components/ui/Toast/Toast';
 
 type AdvanceInformationData = AdditionalCompanyAccountInfoRequest;
 
 export const useAdvanceInformationStep = () => {
   const { trigger, isMutating } = useMutateCompayAdditionalInfo();
   const [advanceInformation, setAdvanceInformation] = useState<AdvanceInformationData>();
-  const { Funnel, Step, currentStep, setStep } = useFunnel<StepType>('complete');
+  const { Funnel, Step, currentStep, setStep } = useFunnel<StepType>('basic');
 
   const basicInformationNextStep = (basicInformation: BasicInfoType) => {
     setAdvanceInformation(prev => ({ ...prev, ...basicInformation }));
@@ -25,7 +26,7 @@ export const useAdvanceInformationStep = () => {
       const result = await trigger(newAdvanceInformation);
       setStep('complete');
     } catch (error: any) {
-      alert(error?.response?.data?.message);
+      toast.warning(error?.response?.data?.message);
       console.log(error);
     }
   };
