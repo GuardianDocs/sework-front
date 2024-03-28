@@ -11,6 +11,7 @@ export const ToastExample: StoryFn<ToastProps> = ({ text }: ToastProps) => {
   const handleClick = (type: ToastType) => () => {
     toast[type](text);
   };
+
   return (
     <div>
       <button onClick={handleClick('success')}>SUCCESS TOAST</button>

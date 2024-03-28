@@ -1,7 +1,6 @@
 import { Headline, Label, Title } from '@/components/typography';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 import Header from '@/components/ui/Header/Header';
-import { Toaster } from '@/components/ui/Toast/Toaster';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -123,7 +122,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <Toaster />
     </>
   );
 }
