@@ -14,7 +14,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "chromatic": "npx chromatic --project-token chpt_de3ff51f7f7f14e --auto-accept-changes",
-    "openapi": ".openapi/generate.sh"
+    "build-api": ".openapi/generate.sh"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "3.4.2",

@@ -22,10 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { GetCompanyProcessResponse } from '../models';
-// @ts-ignore
-import { RecommendProcessResponse } from '../models';
-// @ts-ignore
 import { ResponseResultGetCompanyProcessResponse } from '../models';
 // @ts-ignore
 import { ResponseResultRecommendProcessResponse } from '../models';
@@ -33,8 +29,6 @@ import { ResponseResultRecommendProcessResponse } from '../models';
 import { ResponseResultUpsertCompanyProcessResponse } from '../models';
 // @ts-ignore
 import { UpsertCompanyProcessRequest } from '../models';
-// @ts-ignore
-import { UpsertCompanyProcessResponse } from '../models';
 /**
  * Class1Api - axios parameter creator
  * @export
@@ -118,7 +112,7 @@ export const Class1ApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
+         * 
          * @summary 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
          * @param {number} assessmentId assessmentId
          * @param {UpsertCompanyProcessRequest} [upsertCompanyProcessRequest] 
@@ -176,7 +170,7 @@ export const Class1ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyProcessUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessResponse>> {
+        async getCompanyProcessUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyProcessResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyProcessUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class1Api.getCompanyProcessUsingGET']?.[index]?.url;
@@ -189,21 +183,21 @@ export const Class1ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async recommendProcessUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecommendProcessResponse>> {
+        async recommendProcessUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultRecommendProcessResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.recommendProcessUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class1Api.recommendProcessUsingGET']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
-         * 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
+         * 
          * @summary 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
          * @param {number} assessmentId assessmentId
          * @param {UpsertCompanyProcessRequest} [upsertCompanyProcessRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async upsertCompanyProcessUsingPUT(assessmentId: number, upsertCompanyProcessRequest?: UpsertCompanyProcessRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertCompanyProcessResponse>> {
+        async upsertCompanyProcessUsingPUT(assessmentId: number, upsertCompanyProcessRequest?: UpsertCompanyProcessRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultUpsertCompanyProcessResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.upsertCompanyProcessUsingPUT(assessmentId, upsertCompanyProcessRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class1Api.upsertCompanyProcessUsingPUT']?.[index]?.url;
@@ -226,7 +220,7 @@ export const Class1ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyProcessUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyProcessResponse> {
+        getCompanyProcessUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyProcessResponse> {
             return localVarFp.getCompanyProcessUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -236,18 +230,18 @@ export const Class1ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recommendProcessUsingGET(assessmentId: number, options?: any): AxiosPromise<RecommendProcessResponse> {
+        recommendProcessUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultRecommendProcessResponse> {
             return localVarFp.recommendProcessUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
+         * 
          * @summary 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
          * @param {number} assessmentId assessmentId
          * @param {UpsertCompanyProcessRequest} [upsertCompanyProcessRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        upsertCompanyProcessUsingPUT(assessmentId: number, upsertCompanyProcessRequest?: UpsertCompanyProcessRequest, options?: any): AxiosPromise<UpsertCompanyProcessResponse> {
+        upsertCompanyProcessUsingPUT(assessmentId: number, upsertCompanyProcessRequest?: UpsertCompanyProcessRequest, options?: any): AxiosPromise<ResponseResultUpsertCompanyProcessResponse> {
             return localVarFp.upsertCompanyProcessUsingPUT(assessmentId, upsertCompanyProcessRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -285,7 +279,7 @@ export class Class1Api extends BaseAPI {
     }
 
     /**
-     * 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
+     * 
      * @summary 안전 위험 평가 1 단계 (공정) 수정, 입력, 삭제
      * @param {number} assessmentId assessmentId
      * @param {UpsertCompanyProcessRequest} [upsertCompanyProcessRequest] 

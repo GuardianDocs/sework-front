@@ -24,25 +24,9 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, ope
 // @ts-ignore
 import { AdditionalCompanyAccountInfoRequest } from '../models';
 // @ts-ignore
-import { AssessmentStartResponse } from '../models';
-// @ts-ignore
-import { CompanyBusinessLookUpResponse } from '../models';
-// @ts-ignore
-import { GetCompanyAdditionalInfoAnswerResponse } from '../models';
-// @ts-ignore
-import { GetCompanyAssessmentAdditionalInfoResponse } from '../models';
-// @ts-ignore
-import { GetCompanyAssessmentProgressResponse } from '../models';
-// @ts-ignore
-import { GetCompanyProcessPhotoResponse } from '../models';
-// @ts-ignore
 import { LoginCompanyAccountRequest } from '../models';
 // @ts-ignore
-import { LoginCompanyAccountResponse } from '../models';
-// @ts-ignore
 import { RegisterCompanyAccountRequest } from '../models';
-// @ts-ignore
-import { RegisterCompanyAccountResponse } from '../models';
 // @ts-ignore
 import { RegisterCompanyAssessmentAdditionalInfoRequest } from '../models';
 // @ts-ignore
@@ -83,14 +67,6 @@ import { ResponseResultUploadCompanyDangerFactorPhotoResponse } from '../models'
 import { ResponseResultUploadCompanyDangerSolutionPhotoResponse } from '../models';
 // @ts-ignore
 import { ResponseResultUploadCompanyProcessPhotoResponse } from '../models';
-// @ts-ignore
-import { SearchSectorResponse } from '../models';
-// @ts-ignore
-import { TokenRefreshResponse } from '../models';
-// @ts-ignore
-import { UploadCompanyDangerFactorPhotoResponse } from '../models';
-// @ts-ignore
-import { UploadCompanyProcessPhotoResponse } from '../models';
 /**
  * DefaultApi - axios parameter creator
  * @export
@@ -1204,7 +1180,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+        async deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId, companyDangerFactorId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.deleteCompanyDangerFactorPhotoUsingDELETE']?.[index]?.url;
@@ -1218,7 +1194,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+        async deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId, companyDangerSolutionId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.deleteCompanyDangerSolutionPhotoUsingDELETE']?.[index]?.url;
@@ -1232,7 +1208,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+        async deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyProcessPhotoUsingDELETE(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.deleteCompanyProcessPhotoUsingDELETE']?.[index]?.url;
@@ -1244,7 +1220,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAdditionalInfoAnswerUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAdditionalInfoAnswerResponse>> {
+        async getAdditionalInfoAnswerUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyAdditionalInfoAnswerResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAdditionalInfoAnswerUsingGET(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getAdditionalInfoAnswerUsingGET']?.[index]?.url;
@@ -1257,7 +1233,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAssessmentAdditionalInfoResponse>> {
+        async getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyAssessmentAdditionalInfoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyAssessmentAdditionalInfoUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyAssessmentAdditionalInfoUsingGET']?.[index]?.url;
@@ -1270,7 +1246,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyAssessmentProgressUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAssessmentProgressResponse>> {
+        async getCompanyAssessmentProgressUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyAssessmentProgressResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyAssessmentProgressUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyAssessmentProgressUsingGET']?.[index]?.url;
@@ -1283,7 +1259,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyAssessmentReportUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyAssessmentProgressResponse>> {
+        async getCompanyAssessmentReportUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyAssessmentReportResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyAssessmentReportUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyAssessmentReportUsingGET']?.[index]?.url;
@@ -1297,7 +1273,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+        async getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyDangerFactorPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerFactorPhotoUsingGET(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyDangerFactorPhotoUsingGET']?.[index]?.url;
@@ -1311,7 +1287,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+        async getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyDangerSolutionPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerSolutionPhotoUsingGET(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyDangerSolutionPhotoUsingGET']?.[index]?.url;
@@ -1323,7 +1299,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyInfoUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyBusinessLookUpResponse>> {
+        async getCompanyInfoUsingGET(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultCompanyBusinessLookUpResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyInfoUsingGET(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyInfoUsingGET']?.[index]?.url;
@@ -1336,7 +1312,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyProcessPhotoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessPhotoResponse>> {
+        async getCompanyProcessPhotoUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyProcessPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyProcessPhotoUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.getCompanyProcessPhotoUsingGET']?.[index]?.url;
@@ -1381,7 +1357,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async loginCompanyUsingPOST(xSEWORKPID: string, loginCompanyAccountRequest?: LoginCompanyAccountRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginCompanyAccountResponse>> {
+        async loginCompanyUsingPOST(xSEWORKPID: string, loginCompanyAccountRequest?: LoginCompanyAccountRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultLoginCompanyAccountResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.loginCompanyUsingPOST(xSEWORKPID, loginCompanyAccountRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.loginCompanyUsingPOST']?.[index]?.url;
@@ -1394,7 +1370,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async refreshCompanyTokenUsingPOST(xSEWORKPID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenRefreshResponse>> {
+        async refreshCompanyTokenUsingPOST(xSEWORKPID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultTokenRefreshResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.refreshCompanyTokenUsingPOST(xSEWORKPID, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.refreshCompanyTokenUsingPOST']?.[index]?.url;
@@ -1408,7 +1384,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RegisterCompanyAccountResponse>> {
+        async registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultRegisterCompanyAccountResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerCompanyUsingPOST(xSEWORKPID, registerCompanyAccountRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.registerCompanyUsingPOST']?.[index]?.url;
@@ -1450,7 +1426,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchSectorUsingGET(page?: number, size?: number, title?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchSectorResponse>> {
+        async searchSectorUsingGET(page?: number, size?: number, title?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultSearchSectorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchSectorUsingGET(page, size, title, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.searchSectorUsingGET']?.[index]?.url;
@@ -1462,7 +1438,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startAssessmentUsingPOST(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssessmentStartResponse>> {
+        async startAssessmentUsingPOST(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultAssessmentStartResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startAssessmentUsingPOST(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.startAssessmentUsingPOST']?.[index]?.url;
@@ -1491,7 +1467,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyDangerFactorPhotoResponse>> {
+        async uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultUploadCompanyDangerFactorPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyDangerFactorPhotoUsingPOST(assessmentId, companyDangerFactorId, file, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.uploadCompanyDangerFactorPhotoUsingPOST']?.[index]?.url;
@@ -1506,7 +1482,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyDangerFactorPhotoResponse>> {
+        async uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultUploadCompanyDangerSolutionPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId, companyDangerSolutionId, file, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.uploadCompanyDangerSolutionPhotoUsingPOST']?.[index]?.url;
@@ -1521,7 +1497,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadCompanyProcessPhotoResponse>> {
+        async uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultUploadCompanyProcessPhotoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadCompanyProcessPhotoUsingPOST(assessmentId, companyProcessId, file, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['DefaultApi.uploadCompanyProcessPhotoUsingPOST']?.[index]?.url;
@@ -1555,7 +1531,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+        deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId: number, companyDangerFactorId: number, options?: any): AxiosPromise<ResponseResult> {
             return localVarFp.deleteCompanyDangerFactorPhotoUsingDELETE(assessmentId, companyDangerFactorId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1566,7 +1542,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+        deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId: number, companyDangerSolutionId: number, options?: any): AxiosPromise<ResponseResult> {
             return localVarFp.deleteCompanyDangerSolutionPhotoUsingDELETE(assessmentId, companyDangerSolutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1577,7 +1553,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+        deleteCompanyProcessPhotoUsingDELETE(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<ResponseResult> {
             return localVarFp.deleteCompanyProcessPhotoUsingDELETE(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1586,7 +1562,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAdditionalInfoAnswerUsingGET(options?: any): AxiosPromise<GetCompanyAdditionalInfoAnswerResponse> {
+        getAdditionalInfoAnswerUsingGET(options?: any): AxiosPromise<ResponseResultGetCompanyAdditionalInfoAnswerResponse> {
             return localVarFp.getAdditionalInfoAnswerUsingGET(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1596,7 +1572,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyAssessmentAdditionalInfoResponse> {
+        getCompanyAssessmentAdditionalInfoUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyAssessmentAdditionalInfoResponse> {
             return localVarFp.getCompanyAssessmentAdditionalInfoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1606,7 +1582,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyAssessmentProgressUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyAssessmentProgressResponse> {
+        getCompanyAssessmentProgressUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyAssessmentProgressResponse> {
             return localVarFp.getCompanyAssessmentProgressUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1616,7 +1592,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyAssessmentReportUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyAssessmentProgressResponse> {
+        getCompanyAssessmentReportUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyAssessmentReportResponse> {
             return localVarFp.getCompanyAssessmentReportUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1627,7 +1603,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+        getCompanyDangerFactorPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<ResponseResultGetCompanyDangerFactorPhotoResponse> {
             return localVarFp.getCompanyDangerFactorPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1638,7 +1614,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+        getCompanyDangerSolutionPhotoUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<ResponseResultGetCompanyDangerSolutionPhotoResponse> {
             return localVarFp.getCompanyDangerSolutionPhotoUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1647,7 +1623,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyInfoUsingGET(options?: any): AxiosPromise<CompanyBusinessLookUpResponse> {
+        getCompanyInfoUsingGET(options?: any): AxiosPromise<ResponseResultCompanyBusinessLookUpResponse> {
             return localVarFp.getCompanyInfoUsingGET(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1657,7 +1633,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyProcessPhotoUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyProcessPhotoResponse> {
+        getCompanyProcessPhotoUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyProcessPhotoResponse> {
             return localVarFp.getCompanyProcessPhotoUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1693,7 +1669,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        loginCompanyUsingPOST(xSEWORKPID: string, loginCompanyAccountRequest?: LoginCompanyAccountRequest, options?: any): AxiosPromise<LoginCompanyAccountResponse> {
+        loginCompanyUsingPOST(xSEWORKPID: string, loginCompanyAccountRequest?: LoginCompanyAccountRequest, options?: any): AxiosPromise<ResponseResultLoginCompanyAccountResponse> {
             return localVarFp.loginCompanyUsingPOST(xSEWORKPID, loginCompanyAccountRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1703,7 +1679,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refreshCompanyTokenUsingPOST(xSEWORKPID: string, options?: any): AxiosPromise<TokenRefreshResponse> {
+        refreshCompanyTokenUsingPOST(xSEWORKPID: string, options?: any): AxiosPromise<ResponseResultTokenRefreshResponse> {
             return localVarFp.refreshCompanyTokenUsingPOST(xSEWORKPID, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1714,7 +1690,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: any): AxiosPromise<RegisterCompanyAccountResponse> {
+        registerCompanyUsingPOST(xSEWORKPID: string, registerCompanyAccountRequest?: RegisterCompanyAccountRequest, options?: any): AxiosPromise<ResponseResultRegisterCompanyAccountResponse> {
             return localVarFp.registerCompanyUsingPOST(xSEWORKPID, registerCompanyAccountRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1747,7 +1723,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchSectorUsingGET(page?: number, size?: number, title?: string, options?: any): AxiosPromise<SearchSectorResponse> {
+        searchSectorUsingGET(page?: number, size?: number, title?: string, options?: any): AxiosPromise<ResponseResultSearchSectorResponse> {
             return localVarFp.searchSectorUsingGET(page, size, title, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1756,7 +1732,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startAssessmentUsingPOST(options?: any): AxiosPromise<AssessmentStartResponse> {
+        startAssessmentUsingPOST(options?: any): AxiosPromise<ResponseResultAssessmentStartResponse> {
             return localVarFp.startAssessmentUsingPOST(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1779,7 +1755,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: any): AxiosPromise<UploadCompanyDangerFactorPhotoResponse> {
+        uploadCompanyDangerFactorPhotoUsingPOST(assessmentId: number, companyDangerFactorId: number, file: File, options?: any): AxiosPromise<ResponseResultUploadCompanyDangerFactorPhotoResponse> {
             return localVarFp.uploadCompanyDangerFactorPhotoUsingPOST(assessmentId, companyDangerFactorId, file, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1791,7 +1767,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: any): AxiosPromise<UploadCompanyDangerFactorPhotoResponse> {
+        uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId: number, companyDangerSolutionId: number, file: File, options?: any): AxiosPromise<ResponseResultUploadCompanyDangerSolutionPhotoResponse> {
             return localVarFp.uploadCompanyDangerSolutionPhotoUsingPOST(assessmentId, companyDangerSolutionId, file, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1803,7 +1779,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: any): AxiosPromise<UploadCompanyProcessPhotoResponse> {
+        uploadCompanyProcessPhotoUsingPOST(assessmentId: number, companyProcessId: number, file: File, options?: any): AxiosPromise<ResponseResultUploadCompanyProcessPhotoResponse> {
             return localVarFp.uploadCompanyProcessPhotoUsingPOST(assessmentId, companyProcessId, file, options).then((request) => request(axios, basePath));
         },
     };

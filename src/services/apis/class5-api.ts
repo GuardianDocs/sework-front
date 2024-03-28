@@ -22,8 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { GetCompanyDangerSolutionExecutionResponse } from '../models';
-// @ts-ignore
 import { ResponseResult } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyDangerSolutionExecutionResponse } from '../models';
@@ -147,7 +145,7 @@ export const Class5ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyDangerSolutionExecutionUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyDangerSolutionExecutionResponse>> {
+        async getCompanyDangerSolutionExecutionUsingGET(assessmentId: number, companyProcessId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyDangerSolutionExecutionResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerSolutionExecutionUsingGET(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class5Api.getCompanyDangerSolutionExecutionUsingGET']?.[index]?.url;
@@ -186,7 +184,7 @@ export const Class5ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyDangerSolutionExecutionUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<GetCompanyDangerSolutionExecutionResponse> {
+        getCompanyDangerSolutionExecutionUsingGET(assessmentId: number, companyProcessId: number, options?: any): AxiosPromise<ResponseResultGetCompanyDangerSolutionExecutionResponse> {
             return localVarFp.getCompanyDangerSolutionExecutionUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**

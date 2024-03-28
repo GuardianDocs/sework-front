@@ -22,14 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { GetCompanyDangerFactorResponse } from '../models';
-// @ts-ignore
-import { GetCompanyProcessTitleResponse } from '../models';
-// @ts-ignore
-import { GetDangerFactorTitleResponse } from '../models';
-// @ts-ignore
-import { RecommendDangerFactorResponse } from '../models';
-// @ts-ignore
 import { ResponseResultGetCompanyDangerFactorResponse } from '../models';
 // @ts-ignore
 import { ResponseResultGetCompanyProcessTitleResponse } from '../models';
@@ -41,8 +33,6 @@ import { ResponseResultRecommendDangerFactorResponse } from '../models';
 import { ResponseResultUpsertCompanyDangerFactorResponse } from '../models';
 // @ts-ignore
 import { UpsertCompanyDangerFactorRequest } from '../models';
-// @ts-ignore
-import { UpsertCompanyDangerFactorResponse } from '../models';
 /**
  * Class2Api - axios parameter creator
  * @export
@@ -281,7 +271,7 @@ export const Class2ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyDangerFactorResponse>> {
+        async getCompanyDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyDangerFactorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyDangerFactorUsingGET(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class2Api.getCompanyDangerFactorUsingGET']?.[index]?.url;
@@ -294,7 +284,7 @@ export const Class2ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCompanyProcessTitleUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCompanyProcessTitleResponse>> {
+        async getCompanyProcessTitleUsingGET(assessmentId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetCompanyProcessTitleResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyProcessTitleUsingGET(assessmentId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class2Api.getCompanyProcessTitleUsingGET']?.[index]?.url;
@@ -307,7 +297,7 @@ export const Class2ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDangerFactorTitleUsingGET(category: GetDangerFactorTitleUsingGETCategoryEnum, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetDangerFactorTitleResponse>> {
+        async getDangerFactorTitleUsingGET(category: GetDangerFactorTitleUsingGETCategoryEnum, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultGetDangerFactorTitleResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDangerFactorTitleUsingGET(category, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class2Api.getDangerFactorTitleUsingGET']?.[index]?.url;
@@ -321,7 +311,7 @@ export const Class2ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRecommendDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecommendDangerFactorResponse>> {
+        async getRecommendDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultRecommendDangerFactorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRecommendDangerFactorUsingGET(assessmentId, companyProcessId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class2Api.getRecommendDangerFactorUsingGET']?.[index]?.url;
@@ -336,7 +326,7 @@ export const Class2ApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async upsertCompanyDangerFactorUsingPUT(assessmentId: number, companyProcessId: number, upsertCompanyDangerFactorRequest?: UpsertCompanyDangerFactorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertCompanyDangerFactorResponse>> {
+        async upsertCompanyDangerFactorUsingPUT(assessmentId: number, companyProcessId: number, upsertCompanyDangerFactorRequest?: UpsertCompanyDangerFactorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseResultUpsertCompanyDangerFactorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.upsertCompanyDangerFactorUsingPUT(assessmentId, companyProcessId, upsertCompanyDangerFactorRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['Class2Api.upsertCompanyDangerFactorUsingPUT']?.[index]?.url;
@@ -360,7 +350,7 @@ export const Class2ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: any): AxiosPromise<GetCompanyDangerFactorResponse> {
+        getCompanyDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: any): AxiosPromise<ResponseResultGetCompanyDangerFactorResponse> {
             return localVarFp.getCompanyDangerFactorUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -370,7 +360,7 @@ export const Class2ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCompanyProcessTitleUsingGET(assessmentId: number, options?: any): AxiosPromise<GetCompanyProcessTitleResponse> {
+        getCompanyProcessTitleUsingGET(assessmentId: number, options?: any): AxiosPromise<ResponseResultGetCompanyProcessTitleResponse> {
             return localVarFp.getCompanyProcessTitleUsingGET(assessmentId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -380,7 +370,7 @@ export const Class2ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDangerFactorTitleUsingGET(category: GetDangerFactorTitleUsingGETCategoryEnum, options?: any): AxiosPromise<GetDangerFactorTitleResponse> {
+        getDangerFactorTitleUsingGET(category: GetDangerFactorTitleUsingGETCategoryEnum, options?: any): AxiosPromise<ResponseResultGetDangerFactorTitleResponse> {
             return localVarFp.getDangerFactorTitleUsingGET(category, options).then((request) => request(axios, basePath));
         },
         /**
@@ -391,7 +381,7 @@ export const Class2ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRecommendDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: any): AxiosPromise<RecommendDangerFactorResponse> {
+        getRecommendDangerFactorUsingGET(assessmentId: number, companyProcessId?: number, options?: any): AxiosPromise<ResponseResultRecommendDangerFactorResponse> {
             return localVarFp.getRecommendDangerFactorUsingGET(assessmentId, companyProcessId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -403,7 +393,7 @@ export const Class2ApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        upsertCompanyDangerFactorUsingPUT(assessmentId: number, companyProcessId: number, upsertCompanyDangerFactorRequest?: UpsertCompanyDangerFactorRequest, options?: any): AxiosPromise<UpsertCompanyDangerFactorResponse> {
+        upsertCompanyDangerFactorUsingPUT(assessmentId: number, companyProcessId: number, upsertCompanyDangerFactorRequest?: UpsertCompanyDangerFactorRequest, options?: any): AxiosPromise<ResponseResultUpsertCompanyDangerFactorResponse> {
             return localVarFp.upsertCompanyDangerFactorUsingPUT(assessmentId, companyProcessId, upsertCompanyDangerFactorRequest, options).then((request) => request(axios, basePath));
         },
     };
