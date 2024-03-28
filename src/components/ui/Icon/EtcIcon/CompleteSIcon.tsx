@@ -1,14 +1,14 @@
-export default function CompleteSIcon() {
+export const CompleteSIcon = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="10" fill="#00C452" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" fill="#00C452" />
       <path
-        d="M6.25 10.2022L8.7499 12.7021L13.7492 7.70215"
+        d="M8.25 12.2022L10.7499 14.7021L15.7492 9.70215"
         stroke="white"
-        strokeWidth="2"
-        strokeLinecap="square"
-        strokeLinejoin="round"
+        stroke-width="2"
+        stroke-linecap="square"
+        stroke-linejoin="round"
       />
     </svg>
   );
-}
+};

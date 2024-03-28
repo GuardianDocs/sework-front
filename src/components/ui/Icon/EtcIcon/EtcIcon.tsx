@@ -1,4 +1,4 @@
-import CompleteSIcon from './CompleteSIcon';
+import { CompleteSIcon, FailSIcon, WarningSIcon } from '.';
 import DotIcon from './DotIcon';
 import DragAndDropIcon from './DragAndDropIcon';
 import EssentialMarkIcon from './EssentialMarkIcon';
@@ -6,8 +6,10 @@ import EssentialMarkIcon from './EssentialMarkIcon';
 const etcIconMap = {
   'drag-and-drop': <DragAndDropIcon />,
   'essential-mark': <EssentialMarkIcon />,
-  'complete-s': <CompleteSIcon />,
   dot: <DotIcon />,
+  'complete-s': <CompleteSIcon />,
+  'fail-s': <FailSIcon />,
+  'warning-s': <WarningSIcon />,
 };
 
 export type EtcIconType = keyof typeof etcIconMap;
