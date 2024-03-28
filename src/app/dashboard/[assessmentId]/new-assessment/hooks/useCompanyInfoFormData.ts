@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 
 type UseCompanyInfoFormDataType = {
-  data: CompanyInfoType;
+  data?: CompanyInfoType;
   nextStep: (data: CompanyInfoType) => void;
 };
 

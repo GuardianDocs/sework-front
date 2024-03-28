@@ -4,7 +4,7 @@ import useSWRMutation from 'swr/mutation';
 const fetcher = async () => {
   const response = await DefaultApi.startAssessmentUsingPOST();
 
-  return response.data;
+  return response.data.data;
 };
 
 export const useMutateAssessmentStart = () => {

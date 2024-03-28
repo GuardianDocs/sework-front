@@ -29,7 +29,7 @@ const Page = () => {
           />
         </Step>
         <Step name="companyInfo">
-          <CompanyInfo />
+          <CompanyInfo data={newReportData?.companyInfo} nextStep={nextStep['companyInfo']} preventStep={preventStep} />
         </Step>
       </Funnel>
     </div>

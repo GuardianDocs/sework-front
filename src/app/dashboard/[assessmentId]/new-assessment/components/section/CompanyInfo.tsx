@@ -9,7 +9,7 @@ import { FormProvider } from 'react-hook-form';
 import ActionButton from '@/components/ui/ActionButton/ActionButton';
 
 type CompanyInfoProps = {
-  data: CompanyInfoType;
+  data?: CompanyInfoType;
   nextStep: (data: CompanyInfoType) => void;
   preventStep: () => void;
 };

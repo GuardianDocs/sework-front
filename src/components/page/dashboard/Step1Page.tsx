@@ -20,7 +20,6 @@ import {
 } from '@/services';
 import { useMutation, useQuery } from 'react-query';
 import { useStep1Store } from '@/hooks/dashboard/Step1Store';
-import { useToast } from '@/components/ui/Toast/use-toast';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,9 +31,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/AlertDialog/AlertDialog';
 import { useState } from 'react';
+import { toast } from '@/components/ui/Toast/Toast';
 
 export default function Step1Page() {
-  const { toast } = useToast();
   const router = useRouter();
   const { step1, setStep1 } = useStep1Store();
 
@@ -69,7 +68,7 @@ export default function Step1Page() {
       const newStep1 = [...step1];
       data?.companyProcessList?.map(item => {
         newStep1.push({
-          id: undefined,
+          id: 0,
           processId: item.processId,
           title: item.title,
           description: item.description,
@@ -111,30 +110,10 @@ export default function Step1Page() {
     updateCompanyProcess,
     {
       onSuccess: () => {
-        toast({
-          description: (
-            <div className="inline-flex items-center gap-2">
-              <EtcIcon icon="complete-s" />
-              <Label size="s" color="gray100">
-                작성한 내용이 저장되었습니다
-              </Label>
-            </div>
-          ),
-          duration: 1400,
-        });
+        toast.info('작성한 내용이 저장되었습니다');
       },
       onError: () => {
-        toast({
-          description: (
-            <div className="inline-flex items-center gap-2">
-              <EtcIcon icon="complete-s" />
-              <Label size="s" color="gray100">
-                저장에 실패했습니다. 다시 시도해주시기 바랍니다
-              </Label>
-            </div>
-          ),
-          duration: 1400,
-        });
+        toast.danger('저장에 실패했습니다. 다시 시도해주시기 바랍니다');
       },
     }
   );
@@ -298,8 +277,8 @@ export default function Step1Page() {
             onClick={() => {
               const newStep1 = [...step1];
               newStep1.push({
-                id: undefined,
-                processId: undefined,
+                id: 0,
+                processId: 0,
                 title: '',
                 description: '',
                 equipment: '',

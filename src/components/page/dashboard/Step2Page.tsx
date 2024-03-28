@@ -21,8 +21,6 @@ import {
 } from '@/services';
 import { useStep2Store } from '@/hooks/dashboard/Step2Store';
 import { useMutation, useQuery } from 'react-query';
-import { useToast } from '@/components/ui/Toast/use-toast';
-import EtcIcon from '@/components/ui/Icon/EtcIcon/EtcIcon';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,9 +33,9 @@ import {
 } from '@/components/ui/AlertDialog/AlertDialog';
 
 import { useState } from 'react';
+import { toast } from '@/components/ui/Toast/Toast';
 
 export default function Step2Page() {
-  const { toast } = useToast();
   const router = useRouter();
 
   const {
@@ -180,30 +178,10 @@ export default function Step2Page() {
     updateCompanyDangerFactor,
     {
       onSuccess: () => {
-        toast({
-          description: (
-            <div className="inline-flex items-center gap-2">
-              <EtcIcon icon="complete-s" />
-              <Label size="s" color="gray100">
-                작성한 내용이 저장되었습니다
-              </Label>
-            </div>
-          ),
-          duration: 1400,
-        });
+        toast.info('작성한 내용이 저장되었습니다');
       },
       onError: () => {
-        toast({
-          description: (
-            <div className="inline-flex items-center gap-2">
-              <EtcIcon icon="complete-s" />
-              <Label size="s" color="gray100">
-                저장에 실패했습니다. 다시 시도해주시기 바랍니다
-              </Label>
-            </div>
-          ),
-          duration: 1400,
-        });
+        toast.danger('저장에 실패했습니다. 다시 시도해주시기 바랍니다');
       },
     }
   );
@@ -395,14 +373,14 @@ export default function Step2Page() {
             showIcon="left"
             icon={<Icon icon="lineAdd" />}
             onClick={() => {
-              const newCompanyDangerFactorList = [...companyDangerFactorList];
-              newCompanyDangerFactorList.push({
-                id: undefined,
-                category: undefined,
-                description: undefined,
-                legalDescription: undefined,
-              });
-              setCompanyDangerFactorList(newCompanyDangerFactorList);
+              // const newCompanyDangerFactorList = [...companyDangerFactorList];
+              // newCompanyDangerFactorList.push({
+              //   id: 0,
+              //   category: undefined,
+              //   description: '',
+              //   legalDescription: undefined,
+              // });
+              // setCompanyDangerFactorList(newCompanyDangerFactorList);
             }}
           >
             직접 추가
@@ -439,7 +417,7 @@ export default function Step2Page() {
                     onSelected={async selectedOption => {
                       const updatedCompanyDangerFactors = [...companyDangerFactorList];
                       updatedCompanyDangerFactors[index].category = selectedOption.value as any;
-                      updatedCompanyDangerFactors[index].title = undefined;
+                      updatedCompanyDangerFactors[index].title = '';
                       setCompanyDangerFactorList(updatedCompanyDangerFactors);
 
                       const dangerFactorData = await getDangerFactorTitle(selectedOption.value as string);

@@ -14,7 +14,7 @@ export const CompleteNewAssessmentButton = () => {
   const handleClickNewAssessment = async () => {
     const response = await trigger();
 
-    router.push(`/dashboard/${response.assessmentId}`);
+    router.push(`/dashboard/${response?.assessmentId}`);
   };
 
   return (

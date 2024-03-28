@@ -26,7 +26,7 @@ export const SectorSelect = ({ selectedSector, onSectorSelect }: SectorSelectPro
   const sectorList = useMemo(
     () =>
       sectorResponses?.flatMap(
-        res => res.sectorList?.map(el => ({ label: el.title || '', value: el.id || 0 })) || []
+        res => res?.sectorList?.map(el => ({ label: el.title || '', value: el.id || 0 })) || []
       ) || [],
     [sectorResponses]
   );
