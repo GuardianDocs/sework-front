@@ -1,0 +1,7 @@
+@layer components {
+  .toast-animate {
+    animation-fill-mode: both;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+  }
+}

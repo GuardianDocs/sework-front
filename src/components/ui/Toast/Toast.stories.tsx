@@ -1,52 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
+import { ToastContainer } from './ToastContainer';
+import { toast, Toast, ToastType, ToastProps } from './Toast';
 
-import ActionButton from '@/components/ui/ActionButton/ActionButton';
-import { useToast } from '@/components/ui/Toast/use-toast';
-import { Toast } from '@/components/ui/Toast/Toast';
-import { Toaster } from '@/components/ui/Toast/Toaster';
-import EtcIcon from '../Icon/EtcIcon/EtcIcon';
-import Label from '@/components/typography/Label/Label';
-
-const meta: Meta<typeof Toast> = {
+export default {
   title: 'Design System/UI/Toast',
   component: Toast,
 };
 
-export default meta;
-type Story = StoryObj<typeof Toast>;
+export const ToastExample: StoryFn<ToastProps> = ({ text }: ToastProps) => {
+  const handleClick = (type: ToastType) => () => {
+    toast[type](text);
+  };
+  return (
+    <div>
+      <button onClick={handleClick('success')}>SUCCESS TOAST</button>
+      <br />
+      <button onClick={handleClick('warning')}>WARNING TOAST</button>
+      <br />
+      <button onClick={handleClick('danger')}>DANGER TOAST</button>
+      <br />
+      <button onClick={handleClick('info')}>INFO TOAST</button>
+      <ToastContainer />
+    </div>
+  );
+};
 
-export const SimpleToast: Story = {
-  decorators: [
-    Story => (
-      <div>
-        <Story />
-        <Toaster />
-      </div>
-    ),
-  ],
-  render: function SimpleToast() {
-    const { toast } = useToast();
-
-    return (
-      <ActionButton
-        variant="filled"
-        size="l"
-        onClick={() => {
-          toast({
-            description: (
-              <div className="inline-flex items-center gap-2">
-                <EtcIcon icon="complete-s" />
-                <Label size="s" color="gray100">
-                  작성한 내용이 저장되었습니다
-                </Label>
-              </div>
-            ),
-            duration: 1400,
-          });
-        }}
-      >
-        Show Toast
-      </ActionButton>
-    );
-  },
+ToastExample.args = {
+  text: '이것은 글씨',
 };
