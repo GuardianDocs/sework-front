@@ -4,6 +4,7 @@ import imgTry from '../../../assets/images/try.svg';
 import { Headline, Label, Title } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { CompleteNewAssessmentButton } from './CompleteNewAssessmentButton';
+import { toast } from '@/components/ui/Toast/Toast';
 
 export const Complete = () => {
   return (
@@ -26,7 +27,7 @@ export const Complete = () => {
             'border w-full p-8 rounded-xl bg-blue-800 flex gap-x-6 items-center transition-all ease-out duration-100 text-start',
             'hover:-translate-y-1 hover:shadow-[0_8px_24px_0px_rgba(0,0,0,0.3)]'
           )}
-          onClick={() => alert('준비중입니다!')}
+          onClick={() => toast.info('준비중입니다!')}
         >
           <Image src={imgTry} alt="welcome" width={72} height={72} />
           <div className="flex-1 self-stretch flex flex-col gap-y-1 justify-center">
