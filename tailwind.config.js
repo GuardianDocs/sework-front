@@ -41,6 +41,12 @@ module.exports = {
           alignItems: 'center',
           justifyContent: 'center',
         },
+        '.fixed-top-center': {
+          position: 'fixed',
+          top: '16px',
+          left: '50%',
+          transform: 'translate(-50%, 0)',
+        },
       });
     },
   ],

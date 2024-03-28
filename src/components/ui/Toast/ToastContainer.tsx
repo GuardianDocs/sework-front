@@ -28,12 +28,7 @@ export const ToastContainer = ({ className, ...props }: ToastContainerProps) => 
       closeOnClick={false}
       limit={4}
       transition={toastAnimate}
-      className={() =>
-        classNames(
-          'mobile:top-48 mobile:w-[calc(100%-32px)] fixed top-16 right-16 z-[10000] box-border w-[343px] p-4',
-          className
-        )
-      }
+      className={() => classNames('fixed-top-center z-[10000] box-border w-[343px] p-4', className)}
       toastClassName={context => classNames('bg-gray-700 rounded-lg relative mb-2 cursor-pointer p-1 flex')}
       bodyClassName={() => 'my-auto mx-0 flex flex-1 items-center [&_div]:flex [&_div]:items-center'}
       enableMultiContainer

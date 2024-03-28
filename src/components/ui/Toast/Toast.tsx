@@ -18,7 +18,7 @@ const toastIcon = {
 
 export const Toast = ({ type, text }: ToastProps) => {
   return (
-    <div className="flex gap-x-1 pl-[14px]">
+    <div className="flex gap-x-1 pl-[14px] min-h-[40px]">
       {type !== 'info' && toastIcon[type]}
       <Body size="m" color="white">
         {text}
@@ -33,24 +33,28 @@ export const toast = {
   success: (text?: string, options?: ToastOptions) => {
     toastOrg.success(<Toast type="success" text={text} />, {
       containerId: 'root_container',
+      closeButton: false,
       ...(options || {}),
     });
   },
   warning: (text?: string, options?: ToastOptions) => {
     toastOrg.warning(<Toast type="warning" text={text} />, {
       containerId: 'root_container',
+      closeButton: false,
       ...(options || {}),
     });
   },
   danger: (text?: string, options?: ToastOptions) => {
     toastOrg.error(<Toast type="danger" text={text} />, {
       containerId: 'root_container',
+      closeButton: false,
       ...(options || {}),
     });
   },
   info: (text?: string, options?: ToastOptions) => {
     toastOrg.info(<Toast type="info" text={text} />, {
       containerId: 'root_container',
+      closeButton: false,
       ...(options || {}),
     });
   },
